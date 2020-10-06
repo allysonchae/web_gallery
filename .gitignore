@@ -1,4 +1,6 @@
 secret-board.jsp
+.project
+.classpath
 target/
 
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse
