@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    
+    <style type="text/css">
+    	#member_info{
+    		color:white;	
+    	}
+    
+    </style>
 </head>
 
 <body>
@@ -69,7 +76,15 @@
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/login">Login</a></li>
+                                <c:choose>
+									<c:when test="${sessionScope.loginID != null }">
+										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
+										<li><a href="logout">로그아웃</a></li>
+									</c:when>
+									<c:otherwise>
+		                                <li><a href="member/memberLoginPage">Login</a></li>
+									</c:otherwise>
+								</c:choose>
                             </ul>
                         </nav>
                     </div>

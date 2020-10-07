@@ -1,0 +1,13 @@
+create table member(
+    member_id               varchar2(15)    primary key
+    ,member_pw              varchar2(15)    not null
+    ,member_phone           varchar2(15)    not null
+    ,member_name            varchar2(10)    not null
+    ,member_nickname        varchar2(50)    unique
+    ,member_indate          date            default sysdate
+);
+
+create table userAuth(
+    userEmail   varchar2(100) primary key
+    ,authKey    varchar2(100)
+);

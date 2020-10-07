@@ -29,16 +29,12 @@
     <script src="/resources/js/kakao.min.js"></script>
     
     <style type="text/css">
-   	 	#login_st{
-    		margin-left: auto;
-    		margin-right: auto;
-    		margin: 0px auto;
-    	}
-    	
-    	#member_info{
-    		color:white;	
-    	}
+    	#login_st{
+    	margin-left: auto;
+    	margin-right: auto;
+    	margin: 0px auto;
     </style>
+    
 </head>
 
 <body>
@@ -83,16 +79,7 @@
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <c:choose>
-									<c:when test="${sessionScope.loginID != null }">
-										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
-									</c:when>
-									<c:otherwise>
-		                                <li><a href="member/memberLoginPage">Login</a></li>
-									</c:otherwise>
-								</c:choose>
-
+                                <li class="active"><a href="member/memberJoinForm">Login</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -118,7 +105,7 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Login Section Begin -->
+    <!-- Video Section Begin -->
     <section class="videos spad">
         <div class="container">
             <div class="row">
@@ -128,7 +115,7 @@
                         <h1>Welcome!</h1>
                     </div>
                     <div>
-                        <form action="/member/Login" method="post">
+                    	<form action="/member/Login" method="post">
                         	<table id="login_st">
                         		<tr>
                         			<td>
@@ -143,14 +130,18 @@
 										<input type="password" name="member_pw" placeholder="비밀번호" >
                         			</td>
                         		</tr>
+                        		<tr>
+                        			<td>
+										<a>ID/PW찾기</a> | <a href="/member/memberJoinForm">회원가입</a>
+									</td>
+								</tr>
                         	</table>
 						</form>
 						<br>
 						<!-- 네이버 로그인 창으로 이동 -->
 						<div id="naver_id_login" style="text-align:center"><a href="${url}">
 						<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
-						<a id="kakao-login-btn" ></a>
-						</div>
+						<a id="kakao-login-btn"></a></div>
 						<a href="http://developers.kakao.com/logout"></a>
 						<script type='text/javascript'>
 						  //<![CDATA[
@@ -191,12 +182,88 @@
 						  //]]>
 						</script>
 						<br><br>
-					</div>
+                        <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
+                    </div>
+                    <!-- 이 밑은 아직 지우지 말아주세요! -->
+                    <div class="row">
+                        <div class="videos__slider owl-carousel">
+                            <div class="col-lg-3">
+                                <div class="videos__item">
+                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-1.jpg">
+                                        <a href="https://www.youtube.com/watch?v=yJg-Y5byMMw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="videos__item__text">
+                                        <h5>Electric Love Festival 2019 - The Opening Ceremony</h5>
+                                        <ul>
+                                            <li>02:35:18</li>
+                                            <li>Dec 17, 2019</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="videos__item">
+                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-2.jpg">
+                                        <a href="https://www.youtube.com/watch?v=K4DyBUG242c?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="videos__item__text">
+                                        <h5>TiÃ«sto - Live Electric Daisy Carnival Las Vegas 2019</h5>
+                                        <ul>
+                                            <li>02:35:18</li>
+                                            <li>Dec 17, 2019</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="videos__item">
+                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-3.jpg">
+                                        <a href="https://www.youtube.com/watch?v=3nQNiWdeH2Q?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="videos__item__text">
+                                        <h5>Martin Garrix - Live @ Ultra Music Festival Miami 2019</h5>
+                                        <ul>
+                                            <li>02:35:18</li>
+                                            <li>Dec 17, 2019</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="videos__item">
+                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-4.jpg">
+                                        <a href="https://www.youtube.com/watch?v=Srqs4CitU2U?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="videos__item__text">
+                                        <h5>Armin van Buuren live at Tomorrowland 2019</h5>
+                                        <ul>
+                                            <li>02:35:18</li>
+                                            <li>Dec 17, 2019</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="videos__item">
+                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-3.jpg">
+                                        <a href="https://www.youtube.com/watch?v=vBGiFtb8Rpw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="videos__item__text">
+                                        <h5>Martin Garrix - Live @ Ultra Music Festival Miami 2019</h5>
+                                        <ul>
+                                            <li>02:35:18</li>
+                                            <li>Dec 17, 2019</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Login Section End -->
+    <!-- Video Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
