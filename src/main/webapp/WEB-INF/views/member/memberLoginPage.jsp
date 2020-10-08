@@ -33,6 +33,10 @@
     	margin-left: auto;
     	margin-right: auto;
     	margin: 0px auto;
+    	}
+    	a:hover{
+    		color:blue;
+    	}
     </style>
     
 </head>
@@ -122,7 +126,7 @@
 										<input type="text" name="member_id" placeholder="아이디">
                         			</td>
                         			<td rowspan="2">
-                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;">
+                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
                         			</td>
                         		</tr>
                         		<tr>
