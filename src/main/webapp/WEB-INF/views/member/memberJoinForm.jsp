@@ -67,7 +67,7 @@
 			
 	    });// 이메일 인증 버튼 end
 	    
-		$("#id_check").click(function(){
+		$("#email_check").click(function(){
 			var chk = 0;
 	        var user_authNum = document.getElementById("user_authNum").value;
 
@@ -144,6 +144,28 @@
 		
 		document.getElementById("joinForm").submit();
 		
+	}
+
+	function checkNickname(){
+		$.ajax({
+			url:"/member/checkNickname",
+			data:{
+				member_nickname:$("#member_nickname").val()
+				},
+			success:function(data){
+				if(data==1){
+					$("#nicknameCheck").text("사용중인 아이디입니다");
+					$("#nicknameCheck").css("color","red");
+				}else{
+					$("#nicknameCheck").text("사용가능한 아이디입니다");
+					$("#nicknameCheck").css("color","green");
+				}
+			},
+			error:function(e){
+				alert("통신 실패");
+				console.log(e);
+				}
+		});
 	}
     </script>
     <style type="text/css">
@@ -296,7 +318,9 @@
 							
 							<tr>
 								<td>닉네임<span class="important">(*)</span></td>
-								<td><input type="text" name="member_nickname" id="member_nickname" placeholder="닉네임을 입력해주세요"></td>
+								<td><input type="text" name="member_nickname" id="member_nickname" placeholder="닉네임을 입력해주세요">
+									<button onclick="checkNickname()">중복 검사</button><div id="nicknameCheck"></div>
+								</td>
 							</tr>
 						</table><br>
 						<div class="join_st" style="text-align:center;">

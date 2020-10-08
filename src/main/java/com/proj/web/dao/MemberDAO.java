@@ -58,5 +58,27 @@ public class MemberDAO {
 		}
 		return member;
 	}
+
+	public int memberSelectOneNickname(String member_nickname) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		int cnt = 0;
+		try {
+			cnt = mapper.memberSelectOneNickname(member_nickname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	public String memberFind(MemberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		String member_id = "";
+		try {
+			member_id = mapper.memberFind(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return member_id;
+	}
 	
 }
