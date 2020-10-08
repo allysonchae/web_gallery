@@ -28,29 +28,51 @@
     <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.css' rel='stylesheet' />
 	<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.js'></script>
 	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style type="text/css">
+
+	#calendar{
+		margin:0 auto;
+		width:800px;
+		color: black;
+	}
+	
+	#header{
+		text-align: center;
+	}
+	
+	a{
+		color: black;
+	}
+	
+	a:hover{
+		text-decoration: none;
+		color: black;
+	}
+	
+</style>
+
+<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
-		  var calendarEl = document.getElementById('calendar');
-	
-		  var calendar = new FullCalendar.Calendar(calendarEl, {
-			  
-		    googleCalendarApiKey: 'AIzaSyBXB9w_xXAH84sg0TOzSD2z9-PFl2vsA18',
-	
-	  	});
-	
-	
-	  	calendar.render();
+	  var calendarEl = document.getElementById('calendar');
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+			  events: [
+				    {
+				      title: 'test',
+				      start: '2020-10-12',
+				      end: '2020-10-14'
+				    }
+			  ],
+			  eventClick: function(event){
+				    $('#modalTitle').html(event.title);
+		            $('#modalBody').html(event.description);
+		            $('#eventUrl').attr('href',event.url);
+		            $('#calendarModal').modal();
+			  }
+	  });
+	  calendar.render();
 	});
-	
-	
-	</script>
-	
-	<style>
-		#calendar{
-		   width:60%;
-		   margin:20px auto;
-		}
-	</style>
+</script>
 	
 </head>
 
@@ -144,6 +166,26 @@
         </div>
     </div>
     <!-- 달력 섹션 Section End -->
+    
+    <!-- 달력 일정 Modal Begin  -->
+    <div id="calendarModal" class="modal fade">
+		<div class="modal-dialog">
+		    <div class="modal-content">
+		        <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+		            <h4 id="modalTitle" class="modal-title"></h4>
+		        </div>
+		        <div id="modalBody" class="modal-body"></div>
+		        <div class="modal-footer">
+		            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		    </div>
+		</div>
+	</div>
+    <!-- 달력 일정 Modal End  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <!-- Blank Section Begin -->
     <section class="about about--page spad">
