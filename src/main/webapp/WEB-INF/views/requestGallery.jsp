@@ -79,7 +79,7 @@
         </div>
     </header>
     <!-- Header Section End -->
-
+    
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -94,7 +94,34 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-
+	
+	<table border="1">
+		<tr>
+			<td>전시회 이름</td>
+			<td><input type="text"></td>
+		</tr>
+		<tr>
+			<td>전시회 기간</td>
+			<td><input type="date">~<input type="date"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	
     <!-- Map Begin -->
     <div class="map">
         <div class="container">
