@@ -90,4 +90,21 @@ public class PageController {
 	public String contact() {
 		return "/myPage";
 	}
+	
+	@RequestMapping(value = "/viewOpenCover", method = RequestMethod.GET)
+	public String openCube() {
+		return "viewOpenCover";
+	}
+	
+	@RequestMapping(value = "/viewOpenCube", method = RequestMethod.GET)
+	public String viewOpenCube() {
+		return "viewOpenCube";
+	}
+	
+	@RequestMapping(value = "/viewOpenFlip", method = RequestMethod.GET)
+	public String viewOpenFlip() {
+		return "viewOpenFlip";
+	}
+	
+	
 }

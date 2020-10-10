@@ -25,6 +25,20 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style type="text/css">
+    	table{
+    		width: 1000px;
+    		height: 500px;
+			margin: auto;  
+    	}
+		
+		.templeteView:hover{
+			color: blue;
+			cursor: pointer;
+		}
+    </style>
+    
 </head>
 
 <body>
@@ -95,36 +109,89 @@
     </div>
     <!-- Breadcrumb End -->
 	
-	<table border="1">
+	<div style="text-align: center; margin-top: 100px;">
+		<h1>Gallery Information</h1>
+	</div>
+	
+	<table id="galleryTable" border="1" style=" margin-top: 100px;">
 		<tr>
-			<td>전시회 이름</td>
-			<td><input type="text"></td>
+			<td style="text-align: center">gallery name</td>
+			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
 		</tr>
 		<tr>
-			<td>전시회 기간</td>
-			<td><input type="date">~<input type="date"></td>
+			<td style="text-align: center">gallery period</td>
+			<td style="text-align: center" colspan="2">
+				<input type="date" style="block; width:400px; height:50px;">
+				~
+				<input type="date" style="block; width:400px; height:50px;">
+			</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
+			<td style="text-align: center">gallery templete</td>
+			<td style="text-align: center" colspan="2">
+				<input type="radio" name="templete">
+				<span class="templeteView" onclick="viewOpenCube();">3D Cube Effect</span> 
+				<input type="radio" name="templete">
+				<span class="templeteView" onclick="viewOpenCover();">3D Coverflow Effect</span>
+				<input type="radio" name="templete">
+				<span class="templeteView" onclick="viewOpenFlip();">3D Flip Effect</span>
+			</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
+			<td colspan="3" style="text-align: center;">
+				<button type="button" class="btn btn-primary"><i class='fa fa-plus' onclick="addTd();"></i></button>
+			</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
+			<td style="text-align: center;">gallery work</td>	
+			<td style="text-align: center"><input type="file"></td>	
+			<td style="text-align: center;">
+				<input type="text" style="width: 500px;" placeholder="please enter the title">
+				<br><br>
+				<textarea style="width: 500px; height: 200px" placeholder="please enter the description"></textarea>
+			</td>
 		</tr>
 	</table>
+	<div style="text-align: center; margin-top: 50px;">
+		<button type="button" class="btn btn-outline-secondary">신청하기</button>
+	</div>
+	
+	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+		function viewOpenCover(){
+			window.open("/viewOpenCover","popUp","width=1000,height=400");
+		}
+		function viewOpenCube(){
+			window.open("/viewOpenCube","popUp","width=1000,height=400");
+		}
+		function viewOpenFlip(){
+			window.open("/viewOpenFlip","popUp","width=1000,height=400");
+		}
+
+		function addTd(){
+			var rowItem = "<tr>"
+				rowItem += "<td style='text-align: center;'>gallery work</td>"
+				rowItem += "<td style='text-align: center'><input type='file'></td>"
+				rowItem += "<td style='text-align: center;'>"
+				rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
+				rowItem += "<br><br>"
+				rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+				rowItem += "<td style='border-right: hidden; border-top: hidden; border-bottom: hidden;'> <button type='button' class='btn btn-danger' onclick='minusTd();'> <i class='fa fa-minus'></i> </button> </td>"
+				rowItem += "</tr>"
+				$('#galleryTable').append(rowItem)
+		}
+
+		function minusTd(){
+			$('#galleryTable').on("click", "button", function() {
+			    $(this).closest("tr").remove()
+			});
+		}
+	</script>
+	
 	
     <!-- Map Begin -->
     <div class="map">
-        <div class="container">
+        <div class="co	ntainer">
            <!-- 개인갤러리 신청 폼 -->
         </div>
     </div>
