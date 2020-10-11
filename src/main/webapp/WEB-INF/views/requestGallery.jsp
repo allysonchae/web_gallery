@@ -113,7 +113,7 @@
 		<h1>Gallery Information</h1>
 	</div>
 	
-	<table id="galleryTable" border="1" style=" margin-top: 100px;">
+	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px;">
 		<tr>
 			<td style="text-align: center">gallery name</td>
 			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
@@ -144,7 +144,9 @@
 		</tr>
 		<tr>
 			<td style="text-align: center;">gallery work</td>	
-			<td style="text-align: center"><input type="file"></td>	
+			<td style="text-align: center">
+				<input type="file">
+			</td>	
 			<td style="text-align: center;">
 				<input type="text" style="width: 500px;" placeholder="please enter the title">
 				<br><br>
@@ -176,7 +178,8 @@
 				rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
 				rowItem += "<br><br>"
 				rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
-				rowItem += "<td style='border-right: hidden; border-top: hidden; border-bottom: hidden;'> <button type='button' class='btn btn-danger' onclick='minusTd();'> <i class='fa fa-minus'></i> </button> </td>"
+				rowItem += "<br><br>"
+				rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 				rowItem += "</tr>"
 				$('#galleryTable').append(rowItem)
 		}
@@ -188,15 +191,6 @@
 		}
 	</script>
 	
-	
-    <!-- Map Begin -->
-    <div class="map">
-        <div class="co	ntainer">
-           <!-- 개인갤러리 신청 폼 -->
-        </div>
-    </div>
-    <!-- Map End -->
-
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">
