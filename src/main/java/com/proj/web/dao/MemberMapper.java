@@ -15,5 +15,9 @@ public interface MemberMapper {
 	public int memberSelectOneNickname(String member_nickname);
 
 	public String memberFind(MemberVO member);
+
+	public String pwFind(MemberVO member);
+
+	public void pwChange(MemberVO member);
 	
 }

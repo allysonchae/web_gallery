@@ -80,5 +80,25 @@ public class MemberDAO {
 		}
 		return member_id;
 	}
+
+	public String pwFind(MemberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		String str = "";
+		try {
+			str = mapper.pwFind(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
+
+	public void pwChange(MemberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		try {
+			mapper.pwChange(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

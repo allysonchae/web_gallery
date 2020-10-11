@@ -170,6 +170,27 @@ public class MemberController {
 		//모델에 담아서 올리기
 		return "member/findResult";
 	}
+
+	@RequestMapping(value = "/pwFindForm", method = RequestMethod.GET)
+	public String pwFindForm() {
+		return "member/pwFindForm";
+	}
+	
+	@RequestMapping(value = "/pwFind", method = RequestMethod.POST)
+	public String pwFind(MemberVO member, Model model) {
+		String member_id = service.pwFind(member);
+		if(member_id!=null) {
+			model.addAttribute("member_id", member_id);
+		}
+		return "member/pwFindResult";
+	}
+	
+	@RequestMapping(value = "/pwChange", method = RequestMethod.POST)
+	public String pwChange(MemberVO member) {
+		System.out.println("컨트롤러 : "+member);
+		service.pwChange(member);
+		return "redirect:/member/memberLoginPage";
+	}
 	
 	private String randomNum() {
 	    StringBuffer buffer = new StringBuffer();

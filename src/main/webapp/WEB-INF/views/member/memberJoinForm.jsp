@@ -45,18 +45,17 @@
 						$("#lab1").text("사용중인 이메일입니다");
 						$("#lab1").css("color","red");
 					}else{
-						$("#auth_btn").click(function () {
-					        $.ajax({
-					            url : "/member/emailAuth.do",
-					            data : {"member_id": $("#member_id").val()},
-					            success : function (data) {
-					                authNum = data;
-					                alert("인증번호 전송완료.");
-					            }
-					            
-					        });
-
-						});
+					    $("#lab1").text("인증번호 전송중");
+						$("#lab1").css("color","blue");
+					    $.ajax({
+					        url : "/member/emailAuth.do",
+					        data : {"member_id": $("#member_id").val()},
+					        success : function (data) {
+					            authNum = data;
+					            alert("인증번호 전송완료.");
+					            $("#lab1").text("");
+					        }
+					    });
 					}
 				},
 				error:function(e){
@@ -85,6 +84,7 @@
             }else{
                 alert("인증실패");
                 $("#lab1").html("<label>인증실패</label>");
+                $("#lab1").css("color","red");
             }
 
 		});

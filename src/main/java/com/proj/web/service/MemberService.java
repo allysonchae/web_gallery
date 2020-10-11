@@ -56,4 +56,13 @@ public class MemberService {
 		return member_id;
 	}
 
+	public String pwFind(MemberVO member) {
+		String member_id = dao.pwFind(member);
+		return member_id;
+	}
+
+	public void pwChange(MemberVO member) {
+		dao.pwChange(member);
+	}
+
 }

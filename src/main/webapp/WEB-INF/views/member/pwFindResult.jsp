@@ -26,19 +26,47 @@
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
     
-    <script src="/resources/js/kakao.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+	    function join_cancel(){
+	    	location.href = "/member/memberLoginPage";
+	    }
+
+	    function pwCheck() {
+	    	var member_pw = document.getElementById("member_pw").value;
+			var member_pwck = document.getElementById("member_pwck").value;
+
+			if(member_pw==''||member_pw.length==0){
+				alert("비밀번호를 입력해 주세요");
+				return false;
+			}else if(member_pw.length<=2||member_pw.length>=11){
+				alert("비밀번호는 3~10글자 입니다");
+				return false;
+			}
+			
+			if(member_pw!=member_pwck){
+				alert("동일한 비밀번호를 입력해 주세요");
+				return false;
+			}
+
+			return true;
+		}
+
+    </script>
+    
     
     <style type="text/css">
-    	#login_st{
-    	margin-left: auto;
-    	margin-right: auto;
-    	margin: 0px auto;
+    	#member_info{
+    		color:white;	
     	}
-    	a:hover{
-    		color:blue;
+    	
+    	#tb{
+    		margin-left: auto;
+    		margin-right: auto;
+    		margin: 0px auto;
     	}
-    </style>
     
+    </style>
 </head>
 
 <body>
@@ -83,7 +111,7 @@
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="member/memberJoinForm">Login</a></li>
+                                <li class="active"><a href="/member/memberLoginPage">Login</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -119,75 +147,55 @@
                         <h1>Welcome!</h1>
                     </div>
                     <div>
-                    	<form action="/member/Login" method="post">
-                        	<table id="login_st">
-                        		<tr>
-                        			<td>
-										<input type="text" name="member_id" placeholder="아이디">
-                        			</td>
-                        			<td rowspan="2">
-                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
-                        			</td>
-                        		</tr>
-                        		<tr>
-                        			<td>
-										<input type="password" name="member_pw" placeholder="비밀번호" >
-                        			</td>
-                        		</tr>
-                        		<tr>
-                        			<td colspan="2">
-										<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a> | <a href="/member/memberFindForm">아이디 찾기</a>|<a href="/member/pwFindForm">비밀번호 찾기</a> 
-									</td>
-								</tr>
-                        	</table>
-						</form>
-						<br>
-						<!-- 네이버 로그인 창으로 이동 -->
-						<div id="naver_id_login" style="text-align:center"><a href="${url}">
-						<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
-						<a id="kakao-login-btn"></a></div>
-						<a href="http://developers.kakao.com/logout"></a>
-						<script type='text/javascript'>
-						  //<![CDATA[
-						    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-						    Kakao.init('64ee8ae4ffd93e00255b26611c1fec74');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
-						    // 카카오 로그인 버튼을 생성합니다.
-						    Kakao.Auth.createLoginButton({
-						      container: '#kakao-login-btn',
-						      success: function(authObj) {
-						    	  Kakao.API.request({
-				
-						    	       url: '/v2/user/me',
-				
-						    	       success: function(res) {
-				
-						    	             /*alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
-						    	             
-						    	             alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-				
-						    	             console.log(res);
-						    	             console.log(authObj);
-				
-						    	             console.log(res.kakao_account.profile.nickname);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
-				
-						    	             console.log(res.kakao_account.email);//<---- 콘솔 로그에 email 정보 출력
-				
-						    	             console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력 */
-				
-						    	             location.href="/member/memberJoinForm?kakaoName=" + res.kakao_account.profile.nickname + "&kakaoEmail=" + res.kakao_account.email;
-						    	    	}
-				
-									})
-						      },
-						      fail: function(err) {
-						         alert(JSON.stringify(err));
-						      }
-						    });
-						  //]]>
-						</script>
-						<br><br>
+                    		<c:choose>
+                    			<c:when test="${member_id!=null}">
+                    			<form action="/member/pwChange" method="post" onsubmit="return pwCheck();">
+                    				<table border="1" id="tb">
+	                    				<tr>
+	                    					<td>
+	                    						새로운 비밀번호
+	                    					</td>
+	                    					<td>
+	                    						<input type="password" name="member_pw" id="member_pw">
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>
+	                    						비밀번호 확인
+	                    					</td>
+	                    					<td>
+	                    						<input type="password" id="member_pwck">
+	                    					</td>
+	                    				</tr>
+                    				</table>
+                    				<br>
+                    				<div class="tb" style="text-align:center;">
+				                    	<input type="hidden" value="${member_id }" name="member_id">
+				                    	<input type="button" value="취소" onclick="join_cancel()">
+				                    	<input type="submit" value="변경">
+			                    	</div>
+                    			</form>
+                    			</c:when>
+                    			<c:otherwise>
+                    				<table id="tb">
+	                    				<tr>
+	                    					<td>
+	                    						일치하는 회원정보가 없습니다
+	                    					</td>
+	                    				</tr>
+                    				</table>
+                    				<br>
+                    				<div class="tb" style="text-align:center;">
+					                    <input type="button" value="돌아가기" onclick="join_cancel()">
+                    				</div>
+                    			</c:otherwise>
+                    		</c:choose>
+                    	<br>
+                    	
                         <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
+                        
                     </div>
+                    <br><br>
                     <!-- 이 밑은 아직 지우지 말아주세요! -->
                     <div class="row">
                         <div class="videos__slider owl-carousel">
