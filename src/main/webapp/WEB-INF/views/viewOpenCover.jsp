@@ -43,16 +43,11 @@
   <!-- Swiper -->
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-      </div>
-      <div class="swiper-slide">
-      </div>
-      <div class="swiper-slide">
-      </div>
-      <div class="swiper-slide">
-      </div>
-      <div class="swiper-slide">
-      </div>
+    	<div class="swiper-slide"><img src="/resources/images/image1.jpg" style="width:300px; height: 300px"></div>
+    	<div class="swiper-slide"><img src="/resources/images/image2.jpg" style="width:300px; height: 300px"></div>
+    	<div class="swiper-slide"><img src="/resources/images/image3.jpg" style="width:300px; height: 300px"></div>
+    	<div class="swiper-slide"><img src="/resources/images/image4.jpg" style="width:300px; height: 300px"></div>
+    	<div class="swiper-slide"><img src="/resources/images/image5.jpg" style="width:300px; height: 300px"></div>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>

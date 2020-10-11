@@ -161,13 +161,13 @@
 	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		function viewOpenCover(){
-			window.open("/viewOpenCover","popUp","width=1000,height=400");
+			window.open("/viewOpenCover","popUp","width=1000,height=500");
 		}
 		function viewOpenCube(){
-			window.open("/viewOpenCube","popUp","width=1000,height=400");
+			window.open("/viewOpenCube","popUp","width=1000,height=500");
 		}
 		function viewOpenFlip(){
-			window.open("/viewOpenFlip","popUp","width=1000,height=400");
+			window.open("/viewOpenFlip","popUp","width=1000,height=500");
 		}
 
 		function addTd(){
