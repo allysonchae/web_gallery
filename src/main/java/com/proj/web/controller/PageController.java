@@ -67,11 +67,12 @@ public class PageController {
 		return "/calender";
 	}
 	
-	//로그인
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String login() {
-		return "/login";
-	}
+	/*
+	 * //로그인
+	 * 
+	 * @RequestMapping(value="/login",method=RequestMethod.GET) public String
+	 * login() { return "/login"; }
+	 */
 	
 	//내 블로그
 	@RequestMapping(value="/blog",method=RequestMethod.GET)
