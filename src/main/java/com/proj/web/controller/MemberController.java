@@ -6,6 +6,7 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,7 +64,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public String memberLogin(MemberVO member, Model model, HttpSession session) {
-		System.out.println(member);
 		String page = service.memberLogin(member);
 		return page;
 	}
@@ -75,8 +76,12 @@ public class MemberController {
 		String name = "";
 		String email = "";
 		String str = "";
-		
-		int cnt = service.emailCheck(kakaoEmail);
+		int cnt = 0;
+		if(kakaoEmail!=null) {
+			cnt = service.emailCheck(kakaoEmail);
+		}else {
+			str = "member/memberJoinForm";
+		}
 		if(cnt!=1) {	
 			if (kakaoName == null) {
 				// 네이버로 회원가입 시도한 상황
@@ -114,6 +119,15 @@ public class MemberController {
 	}
 	
 	@ResponseBody			//ajax를 사용하기위해 붙여줘야함 
+	@RequestMapping(value = "/checkNickname", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
+	public String checkNickname(String member_nickname) {
+		logger.info(member_nickname);
+		int cnt = service.nicknameCheck(member_nickname);
+		String str = Integer.toString(cnt);
+		return str;
+	}
+	
+	@ResponseBody			//ajax를 사용하기위해 붙여줘야함 
 	@RequestMapping(value = "/idCheck", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
 	public String idCheck(String member_id) {
 		logger.info(member_id);
@@ -142,6 +156,40 @@ public class MemberController {
 	    String str = authNum;
 	    
 	    return str;
+	}
+	
+	@RequestMapping(value = "/memberFindForm", method = RequestMethod.GET)
+	public String memberFindForm() {
+		return "member/memberFindForm";
+	}
+	
+	@RequestMapping(value = "/memberFind", method = RequestMethod.POST)
+	public String memberFind(MemberVO member, Model model) {
+		String member_id = service.memberFind(member);
+		model.addAttribute("member_id",member_id);
+		//모델에 담아서 올리기
+		return "member/findResult";
+	}
+
+	@RequestMapping(value = "/pwFindForm", method = RequestMethod.GET)
+	public String pwFindForm() {
+		return "member/pwFindForm";
+	}
+	
+	@RequestMapping(value = "/pwFind", method = RequestMethod.POST)
+	public String pwFind(MemberVO member, Model model) {
+		String member_id = service.pwFind(member);
+		if(member_id!=null) {
+			model.addAttribute("member_id", member_id);
+		}
+		return "member/pwFindResult";
+	}
+	
+	@RequestMapping(value = "/pwChange", method = RequestMethod.POST)
+	public String pwChange(MemberVO member) {
+		System.out.println("컨트롤러 : "+member);
+		service.pwChange(member);
+		return "redirect:/member/memberLoginPage";
 	}
 	
 	private String randomNum() {

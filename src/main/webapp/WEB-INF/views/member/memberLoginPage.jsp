@@ -33,6 +33,10 @@
     	margin-left: auto;
     	margin-right: auto;
     	margin: 0px auto;
+    	}
+    	a:hover{
+    		color:blue;
+    	}
     </style>
     
 </head>
@@ -122,7 +126,7 @@
 										<input type="text" name="member_id" placeholder="아이디">
                         			</td>
                         			<td rowspan="2">
-                        				<input type="submit" value="로그인" style="width:150px; height:80px;">
+                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
                         			</td>
                         		</tr>
                         		<tr>
@@ -131,8 +135,8 @@
                         			</td>
                         		</tr>
                         		<tr>
-                        			<td>
-										<a>ID/PW찾기</a> | <a href="/member/memberJoinForm">회원가입</a>
+                        			<td colspan="2">
+										<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a> | <a href="/member/memberFindForm">아이디 찾기</a>|<a href="/member/pwFindForm">비밀번호 찾기</a> 
 									</td>
 								</tr>
                         	</table>

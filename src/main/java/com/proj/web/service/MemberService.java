@@ -35,14 +35,34 @@ public class MemberService {
 
 	public String memberLogin(MemberVO member) {
 		MemberVO loginCheck = dao.memberSelectOne(member.getMember_id());
+		System.out.println("서비스까지 받아온 데이터 : " + loginCheck);
 		String page = "";
 		if(loginCheck != null && member.getMember_pw().equals(loginCheck.getMember_pw())){
-			session.setAttribute("loginID", member.getMember_id());
+			session.setAttribute("loginID", loginCheck.getMember_nickname());
 			page = "redirect:/";
 		}else {
 			page = "redirect:/member/memberLoginPage";
 		}
 		return page;
+	}
+
+	public int nicknameCheck(String member_nickname) {
+		int cnt = dao.memberSelectOneNickname(member_nickname);
+		return cnt;
+	}
+
+	public String memberFind(MemberVO member) {
+		String member_id = dao.memberFind(member);
+		return member_id;
+	}
+
+	public String pwFind(MemberVO member) {
+		String member_id = dao.pwFind(member);
+		return member_id;
+	}
+
+	public void pwChange(MemberVO member) {
+		dao.pwChange(member);
 	}
 
 }
