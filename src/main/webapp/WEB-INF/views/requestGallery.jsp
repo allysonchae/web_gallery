@@ -115,11 +115,11 @@
 	
 	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px;">
 		<tr>
-			<td style="text-align: center">gallery name</td>
+			<td style="text-align: center">전시회명</td>
 			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
 		</tr>
 		<tr>
-			<td style="text-align: center">gallery period</td>
+			<td style="text-align: center">전시 기간</td>
 			<td style="text-align: center" colspan="2">
 				<input type="date" style="block; width:400px; height:50px;">
 				~
@@ -127,7 +127,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: center">gallery templete</td>
+			<td style="text-align: center">전시회 템플릿</td>
 			<td style="text-align: center" colspan="2">
 				<input type="radio" name="templete">
 				<span class="templeteView" onclick="viewOpenCube();">3D Cube Effect</span> 
@@ -138,12 +138,23 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3" style="text-align: center;">
-				<button type="button" class="btn btn-primary"><i class='fa fa-plus' onclick="addTd();"></i></button>
+			<td style="text-align: center;">작품 개수</td>
+			<td colspan="2" style="text-align: center;">
+				<select onchange="addTd2(value);">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;">gallery work</td>	
+			<td style="text-align: center;">작품명 및 설명</td>	
 			<td style="text-align: center">
 				<input type="file">
 			</td>	
@@ -170,24 +181,26 @@
 			window.open("/viewOpenFlip","popUp","width=1000,height=500");
 		}
 
-		function addTd(){
-			var rowItem = "<tr>"
-				rowItem += "<td style='text-align: center;'>gallery work</td>"
-				rowItem += "<td style='text-align: center'><input type='file'></td>"
-				rowItem += "<td style='text-align: center;'>"
-				rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
-				rowItem += "<br><br>"
-				rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
-				rowItem += "<br><br>"
-				rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
-				rowItem += "</tr>"
-				$('#galleryTable').append(rowItem)
-		}
-
 		function minusTd(){
 			$('#galleryTable').on("click", "button", function() {
 			    $(this).closest("tr").remove()
 			});
+		}
+
+		function addTd2(value){
+			for(var i = 1 ; i < value ; i++){
+				var rowItem = "<tr>"
+					rowItem += "<td style='text-align: center;'>gallery work</td>"
+					rowItem += "<td style='text-align: center'><input type='file'></td>"
+					rowItem += "<td style='text-align: center;'>"
+					rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
+					rowItem += "<br><br>"
+					rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+					rowItem += "<br><br>"
+					rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
+					rowItem += "</tr>"
+					$("#galleryTable").append(rowItem);
+			}
 		}
 	</script>
 	
