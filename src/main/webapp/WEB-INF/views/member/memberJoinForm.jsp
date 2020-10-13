@@ -187,7 +187,7 @@
     	}
     	
     	#div{
-    		width:450px;
+    		width:550px;
     		margin:0 auto;
     	}
     </style>
@@ -228,7 +228,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
@@ -272,7 +272,7 @@
                     </div>
                     <div id="div">
                         <span id="span"><span class="important">(*)</span>부분은 필수 입력사항입니다.</span><br>
-						<table border="1" class="join_st">
+						<table border="1" class="table table-bordered">
 							<tr>
 								<td>아이디<span class="important">(*)</span></td>
 								<c:choose>
@@ -280,8 +280,8 @@
 										<td><input type="text" name="member_id" id="member_id" value="${map.email }" readonly="readonly"></td>
 									</c:when>
 									<c:otherwise>
-										<td><input type="text" name="member_id" id="member_id" placeholder="이메일 형식"><input type="button" id="auth_btn" value="이메일 인증"><br>
-										인증번호:<input type="text" id="user_authNum" name="user_authNum"><input type="button" id="email_check" value="확인"><div id="lab1"></div></td>
+										<td><input type="text" name="member_id" id="member_id" placeholder="이메일 형식">  <input type="button" id="auth_btn" value="이메일 인증" class="btn btn-outline-secondary"><br>
+										<div id="auth_hide"><input type="text" id="user_authNum" name="user_authNum" placeholder="인증번호">  <input type="button" id="email_check" value="확인" class="btn btn-outline-secondary"><div id="lab1"></div></div></td>
 									</c:otherwise>
 								</c:choose>
 								
@@ -289,13 +289,13 @@
 							
 							<tr>
 								<td>비밀번호<span class="important">(*)</span></td>
-								<td><input type="password" name="member_pw" id="member_pw"><div id="pwCheck"></div>	
+								<td><input type="password" name="member_pw" id="member_pw" placeholder="비밀번호"><div id="pwCheck"></div>	
 								</td>
 							</tr>
 							
 							<tr>
 								<td>비밀번호 확인<span class="important">(*)</span></td>
-								<td><input type="password" id="member_pwck">	
+								<td><input type="password" id="member_pwck" placeholder="비밀번호 확인">	
 								</td>
 							</tr>
 							
@@ -308,24 +308,24 @@
 								<td>이름<span class="important">(*)</span></td>
 									<c:choose>
 										<c:when test="${map.name!=null }">
-											<td><input type="text" name="member_name" id="member_name" value="${map.name }" readonly="readonly"></td>
+											<td><input type="text" name="member_name" id="member_name" placeholder="이름" value="${map.name }" readonly="readonly"></td>
 										</c:when>
 										<c:otherwise>
-											<td><input type="text" name="member_name" id="member_name"></td>
+											<td><input type="text" name="member_name" id="member_name" placeholder="이름"></td>
 										</c:otherwise>
 									</c:choose>
 							</tr>
 							
 							<tr>
 								<td>닉네임<span class="important">(*)</span></td>
-								<td><input type="text" name="member_nickname" id="member_nickname" placeholder="닉네임을 입력해주세요">
-									<button onclick="checkNickname()">중복 검사</button><div id="nicknameCheck"></div>
+								<td><input type="text" name="member_nickname" id="member_nickname" placeholder="닉네임" >
+									<button onclick="checkNickname()" class="btn btn-outline-secondary">중복 검사</button><div id="nicknameCheck"></div>
 								</td>
 							</tr>
 						</table><br>
 						<div class="join_st" style="text-align:center;">
-							<input type="button" value="취소" onclick="join_cancel()">
-							<input type="button" id="join_submit" onclick="join_submit()" value="가입">
+							<input type="button" value="취소" onclick="join_cancel()" class="btn btn-outline-secondary">
+							<input type="button" id="join_submit" onclick="join_submit()" value="가입" class="btn btn-outline-secondary">
 						</div>
 						<form action="/member/join" method="post" id="joinForm">
 							<input type="hidden" name="member_id" id="user_id">

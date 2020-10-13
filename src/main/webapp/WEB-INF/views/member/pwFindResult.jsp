@@ -104,7 +104,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
@@ -150,7 +150,7 @@
                     		<c:choose>
                     			<c:when test="${member_id!=null}">
                     			<form action="/member/pwChange" method="post" onsubmit="return pwCheck();">
-                    				<table border="1" id="tb">
+                    				<table border="1" id="tb" class="table table-bordered">
 	                    				<tr>
 	                    					<td>
 	                    						새로운 비밀번호
@@ -171,8 +171,8 @@
                     				<br>
                     				<div class="tb" style="text-align:center;">
 				                    	<input type="hidden" value="${member_id }" name="member_id">
-				                    	<input type="button" value="취소" onclick="join_cancel()">
-				                    	<input type="submit" value="변경">
+				                    	<input type="button" value="취소" onclick="join_cancel()" class="btn btn-outline-secondary">
+				                    	<input type="submit" value="변경" class="btn btn-outline-secondary">
 			                    	</div>
                     			</form>
                     			</c:when>

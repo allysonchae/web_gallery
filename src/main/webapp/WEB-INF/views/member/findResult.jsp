@@ -84,7 +84,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
@@ -127,7 +127,7 @@
                         <h1>Welcome!</h1>
                     </div>
                     <div>
-                    	<table border="1" id="tb">
+                    	<table border="1" id="tb" class="table table-bordered">
                     		<tr>
                     			<td>
                     				아이디
@@ -139,7 +139,7 @@
                     	</table>
                     	<br>
                     	<div style="text-align:center;">
-	                        <input type="button" onclick="login()" value="로그인">
+	                        <input type="button" onclick="login()" value="로그인" class="btn btn-outline-secondary">
                     	</div>
                         <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
                         
