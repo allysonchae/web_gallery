@@ -69,11 +69,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="/myPage">My Pages</a>
+                                <li><a href="#">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
@@ -253,32 +253,6 @@
         </div>
     </section>
     <!-- Event Section End -->
-
-    <!-- About Section Begin -->
-    <section class="about spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="about__pic">
-                        <img src="/resources/img/about/about.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="about__text">
-                        <div class="section-title">
-                            <h2>DJ Alexandra Rud</h2>
-                            <h1>About me</h1>
-                        </div>
-                        <p>DJ Rainflow knows how to move your mind, body and soul by delivering tracks that stand out
-                            from the norm. As if this impressive succession of high impact, floor-filling bombs wasnât
-                            enough to sustain.</p>
-                        <a href="#" class="primary-btn">CONTACT ME</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About Section End -->
 
     <!-- Services Section Begin -->
     <section class="services">

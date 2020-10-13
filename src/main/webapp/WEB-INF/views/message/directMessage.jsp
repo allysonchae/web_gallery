@@ -46,14 +46,14 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="/"><img src="/resources/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-10">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li><a href="/">Home</a></li>
+                                <li><a href="/index">Home</a></li>
                                 <li><a href="/info">Info</a>
                                 	<ul class="dropdown">
                                         <li><a href="/info">공지사항</a></li>
@@ -69,6 +69,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
+                                <li class="active"><a href="#">My Pages</a>
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
@@ -76,7 +77,15 @@
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="/login">Login</a></li>
+                                <c:choose>
+									<c:when test="${sessionScope.loginID != null }">
+										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
+										<li><a href="logout">로그아웃</a></li>
+									</c:when>
+									<c:otherwise>
+		                                <li><a href="member/memberLoginPage">Login</a></li>
+									</c:otherwise>
+								</c:choose>
                             </ul>
                         </nav>
                     </div>
@@ -94,7 +103,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Login</span>
+                        <a href="#">Direct Message</a>
                     </div>
                 </div>
             </div>
@@ -102,106 +111,41 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Video Section Begin -->
-    <section class="videos spad">
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title center-title">
-                        <h2>Login</h2>
-                        <h1>Welcome!</h1>
+            <div class="col-lg-4">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__item">
+                            <div class="blog__sidebar__title">
+                                <h4>쪽지</h4>
+                            </div>
+                            <table border="1">
+                            
+                            </table>
+                        </div>
                     </div>
-                    <div class="videos__large__item set-bg" style="background-color: blue;">
+                </div>
+                <div class="col-lg-8">
+                    <div class="blog__details__content">                     
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
-                        
-                    </div>
-                    <!-- 이 밑은 아직 지우지 말아주세요! -->
-                    <div class="row">
-                        <div class="videos__slider owl-carousel">
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-1.jpg">
-                                        <a href="https://www.youtube.com/watch?v=yJg-Y5byMMw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Electric Love Festival 2019 - The Opening Ceremony</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="blog__details__form">
+                            <div class="blog__details__form__title">
+                                <h4>Chat Log</h4>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-2.jpg">
-                                        <a href="https://www.youtube.com/watch?v=K4DyBUG242c?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>TiÃ«sto - Live Electric Daisy Carnival Las Vegas 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-3.jpg">
-                                        <a href="https://www.youtube.com/watch?v=3nQNiWdeH2Q?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Martin Garrix - Live @ Ultra Music Festival Miami 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-4.jpg">
-                                        <a href="https://www.youtube.com/watch?v=Srqs4CitU2U?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Armin van Buuren live at Tomorrowland 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-3.jpg">
-                                        <a href="https://www.youtube.com/watch?v=vBGiFtb8Rpw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Martin Garrix - Live @ Ultra Music Festival Miami 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <form action="#"><!-- 채팅 대화 입력창 -->
+                                <textarea placeholder="Comment"></textarea>
+                                <button type="submit" class="site-btn">SEND MESSAGE</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Video Section End -->
+    <!-- Blog Details Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">

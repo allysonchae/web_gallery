@@ -232,7 +232,7 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <li class="active"><a href="/member/memberLoginPage">Login</a></li>
@@ -335,84 +335,6 @@
 							<input type="hidden" name="member_nickname" id="user_nickname">
 						</form>
 						<br><br>
-                        
-                        <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
-                        
-                    </div>
-                    <!-- 이 밑은 아직 지우지 말아주세요! -->
-                    <div class="row">
-                        <div class="videos__slider owl-carousel">
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-1.jpg">
-                                        <a href="https://www.youtube.com/watch?v=yJg-Y5byMMw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Electric Love Festival 2019 - The Opening Ceremony</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-2.jpg">
-                                        <a href="https://www.youtube.com/watch?v=K4DyBUG242c?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>TiÃ«sto - Live Electric Daisy Carnival Las Vegas 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-3.jpg">
-                                        <a href="https://www.youtube.com/watch?v=3nQNiWdeH2Q?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Martin Garrix - Live @ Ultra Music Festival Miami 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-4.jpg">
-                                        <a href="https://www.youtube.com/watch?v=Srqs4CitU2U?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Armin van Buuren live at Tomorrowland 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="videos__item">
-                                    <div class="videos__item__pic set-bg" data-setbg="/resources/img/videos/videos-3.jpg">
-                                        <a href="https://www.youtube.com/watch?v=vBGiFtb8Rpw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                    </div>
-                                    <div class="videos__item__text">
-                                        <h5>Martin Garrix - Live @ Ultra Music Festival Miami 2019</h5>
-                                        <ul>
-                                            <li>02:35:18</li>
-                                            <li>Dec 17, 2019</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

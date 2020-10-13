@@ -79,11 +79,12 @@ public class PageController {
 		return "/calender";
 	}
 	
-	//로그인
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String login() {
-		return "/login";
-	}
+	/*
+	 * //로그인
+	 * 
+	 * @RequestMapping(value="/login",method=RequestMethod.GET) public String
+	 * login() { return "/login"; }
+	 */
 	
 	//내 블로그
 	@RequestMapping(value="/blog",method=RequestMethod.GET)
@@ -91,11 +92,12 @@ public class PageController {
 		return "/blog";
 	}
 	
-	//쪽지함
-	@RequestMapping(value="/directMessage",method=RequestMethod.GET)
-	public String blog_details() {
-		return "/directMessage";
-	}
+	/*
+	 * //쪽지함
+	 * 
+	 * @RequestMapping(value="/directMessage",method=RequestMethod.GET) public
+	 * String blog_details() { return "/directMessage"; }
+	 */
 	
 	//내 정보
 	@RequestMapping(value="/myPage",method=RequestMethod.GET)
@@ -107,4 +109,21 @@ public class PageController {
 		
 		return "/myPage";
 	}
+	
+	@RequestMapping(value = "/viewOpenCover", method = RequestMethod.GET)
+	public String openCube() {
+		return "viewOpenCover";
+	}
+	
+	@RequestMapping(value = "/viewOpenCube", method = RequestMethod.GET)
+	public String viewOpenCube() {
+		return "viewOpenCube";
+	}
+	
+	@RequestMapping(value = "/viewOpenFlip", method = RequestMethod.GET)
+	public String viewOpenFlip() {
+		return "viewOpenFlip";
+	}
+	
+	
 }

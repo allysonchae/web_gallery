@@ -25,13 +25,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-    
-    <style type="text/css">
-    	#member_info{
-    		color:white;	
-    	}
-    
-    </style>
+
 </head>
 
 <body>
@@ -73,7 +67,7 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
@@ -94,7 +88,7 @@
         </div>
     </header>
     <!-- Header Section End -->
-
+    
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -109,15 +103,102 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
+	
+	<div style="text-align: center; margin-top: 100px;">
+		<h1>Gallery Information</h1>
+	</div>
+	
+	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px;">
+		<tr>
+			<td style="text-align: center">전시회명</td>
+			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">전시 기간</td>
+			<td style="text-align: center" colspan="2">
+				<input type="date" style="block; width:400px; height:50px;">
+				~
+				<input type="date" style="block; width:400px; height:50px;">
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center">전시회 템플릿</td>
+			<td style="text-align: center" colspan="2">
+				<input type="radio" name="templete">
+				<span class="templeteView" onclick="viewOpenCube();">3D Cube Effect</span> 
+				<input type="radio" name="templete">
+				<span class="templeteView" onclick="viewOpenCover();">3D Coverflow Effect</span>
+				<input type="radio" name="templete">
+				<span class="templeteView" onclick="viewOpenFlip();">3D Flip Effect</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">작품 개수</td>
+			<td colspan="2" style="text-align: center;">
+				<select onchange="addTd2(value);">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">작품명 및 설명</td>	
+			<td style="text-align: center">
+				<input type="file">
+			</td>	
+			<td style="text-align: center;">
+				<input type="text" style="width: 500px;" placeholder="please enter the title">
+				<br><br>
+				<textarea style="width: 500px; height: 200px" placeholder="please enter the description"></textarea>
+			</td>
+		</tr>
+	</table>
+	<div style="text-align: center; margin-top: 50px;">
+		<button type="button" class="btn btn-outline-secondary">신청하기</button>
+	</div>
+	
+	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+		function viewOpenCover(){
+			window.open("/viewOpenCover","popUp","width=1000,height=500");
+		}
+		function viewOpenCube(){
+			window.open("/viewOpenCube","popUp","width=1000,height=500");
+		}
+		function viewOpenFlip(){
+			window.open("/viewOpenFlip","popUp","width=1000,height=500");
+		}
 
-    <!-- Map Begin -->
-    <div class="map">
-        <div class="container">
-           <!-- 개인갤러리 신청 폼 -->
-        </div>
-    </div>
-    <!-- Map End -->
+		function minusTd(){
+			$('#galleryTable').on("click", "button", function() {
+			    $(this).closest("tr").remove()
+			});
+		}
 
+		function addTd2(value){
+			for(var i = 1 ; i < value ; i++){
+				var rowItem = "<tr>"
+					rowItem += "<td style='text-align: center;'>gallery work</td>"
+					rowItem += "<td style='text-align: center'><input type='file'></td>"
+					rowItem += "<td style='text-align: center;'>"
+					rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
+					rowItem += "<br><br>"
+					rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+					rowItem += "<br><br>"
+					rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
+					rowItem += "</tr>"
+					$("#galleryTable").append(rowItem);
+			}
+		}
+	</script>
+	
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">
