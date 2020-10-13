@@ -110,93 +110,34 @@
     </div>
     <!-- Breadcrumb End -->
 
+
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
         <div class="container">
             <div class="row">
+            <div class="col-lg-4">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__item">
+                            <div class="blog__sidebar__title">
+                                <h4>쪽지</h4>
+                            </div>
+                            <table border="1">
+                            
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-8">
                     <div class="blog__details__content">                     
                         
                         <div class="blog__details__form">
                             <div class="blog__details__form__title">
-                                <h4>Leave a comment</h4>
+                                <h4>Chat Log</h4>
                             </div>
-                            <form action="#">
-                                <div class="input__list">
-                                    <input type="text" placeholder="Name">
-                                    <input type="text" placeholder="Email">
-                                    <input type="text" placeholder="Website">
-                                </div>
+                            <form action="#"><!-- 채팅 대화 입력창 -->
                                 <textarea placeholder="Comment"></textarea>
                                 <button type="submit" class="site-btn">SEND MESSAGE</button>
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__item">
-                            <div class="blog__sidebar__title">
-                                <h4>Subscribe newsletter</h4>
-                            </div>
-                            <p>Ipsum dolor sit amet, adipiscing elit, sed eiusmod </p>
-                            <form action="#">
-                                <input type="text" placeholder="Name">
-                                <input type="text" placeholder="Email">
-                                <button type="submit" class="site-btn">Subscribe</button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <div class="blog__sidebar__title">
-                                <h4>Social media</h4>
-                            </div>
-                            <div class="blog__sidebar__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                            </div>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <div class="blog__sidebar__title">
-                                <h4>Recent posts</h4>
-                            </div>
-                            <a href="#" class="recent__item">
-                                <div class="recent__item__pic">
-                                    <img src="/resources/img/blog/br-1.jpg" alt="">
-                                </div>
-                                <div class="recent__item__text">
-                                    <h6>2020 Bendigo Blues and Roots Music Festivalâ¦</h6>
-                                    <span>Dec 17, 2019</span>
-                                </div>
-                            </a>
-                            <a href="#" class="recent__item">
-                                <div class="recent__item__pic">
-                                    <img src="/resources/img/blog/br-2.jpg" alt="">
-                                </div>
-                                <div class="recent__item__text">
-                                    <h6>2020 Bendigo Blues and Roots Music Festivalâ¦</h6>
-                                    <span>Dec 17, 2019</span>
-                                </div>
-                            </a>
-                            <a href="#" class="recent__item">
-                                <div class="recent__item__pic">
-                                    <img src="/resources/img/blog/br-3.jpg" alt="">
-                                </div>
-                                <div class="recent__item__text">
-                                    <h6>2020 Bendigo Blues and Roots Music Festivalâ¦</h6>
-                                    <span>Dec 17, 2019</span>
-                                </div>
-                            </a>
-                            <a href="#" class="recent__item">
-                                <div class="recent__item__pic">
-                                    <img src="/resources/img/blog/br-4.jpg" alt="">
-                                </div>
-                                <div class="recent__item__text">
-                                    <h6>2020 Bendigo Blues and Roots Music Festivalâ¦</h6>
-                                    <span>Dec 17, 2019</span>
-                                </div>
-                            </a>
                         </div>
                     </div>
                 </div>
