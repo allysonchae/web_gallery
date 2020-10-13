@@ -84,7 +84,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
@@ -128,13 +128,13 @@
                     </div>
                     <div>
                     	<form action="/member/memberFind" method="post">
-	                    	<table border="1" class="tb">
+	                    	<table border="1" class="table table-bordered">
 	                    		<tr>
 	                    			<td>
 										이름 
 	                    			</td>
 	                    			<td>
-										<input type="text" name="member_name">
+										<input type="text" name="member_name" placeholder="이름">
 	                    			</td>
 	                    		</tr>
 	                    		<tr>
@@ -148,8 +148,8 @@
 	                    	</table>
 	                    	<br>
 	                    	<div class="tb" style="text-align:center;">
-		                    	<input type="button" value="취소" onclick="join_cancel()">
-		                    	<input type="submit" value="찾기">
+		                    	<input type="button" value="취소" onclick="join_cancel()" class="btn btn-outline-secondary">
+		                    	<input type="submit" value="찾기" class="btn btn-outline-secondary">
 	                    	</div>
                     	</form>
                         <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->

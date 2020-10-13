@@ -192,6 +192,11 @@ public class MemberController {
 		return "redirect:/member/memberLoginPage";
 	}
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		return "member/test";
+	}
+	
 	private String randomNum() {
 	    StringBuffer buffer = new StringBuffer();
 	        
