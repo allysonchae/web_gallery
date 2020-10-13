@@ -83,7 +83,7 @@
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="member/memberJoinForm">Login</a></li>
+                                <li class="active"><a href="/member/memberJoinForm">Login</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -115,6 +115,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title center-title">
+                    <br>
                         <h2>Login</h2>
                         <h1>Welcome!</h1>
                     </div>

@@ -72,25 +72,7 @@
 	  });
 	  calendar.render();
 	});
-<<<<<<< HEAD
 </script>
-=======
-	
-	
-	</script>
-	
-	<style>
-		#calendar{
-		   width:60%;
-		   margin:20px auto;
-		}
-		
-		#member_info{
-    		color:white;	
-    	}
-	</style>
->>>>>>> origin/HS
-	
 </head>
 
 <body>

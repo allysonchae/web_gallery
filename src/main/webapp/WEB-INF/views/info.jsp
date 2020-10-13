@@ -25,27 +25,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-<<<<<<< HEAD
-    <style type="text/css">
-    	table{
-    		width: 1000px;
-    		height: 500px;
-			margin: auto;  
-    	}
-		
-		.templeteView:hover{
-			color: blue;
-			cursor: pointer;
-		}
-=======
-    
-    <style type="text/css">
-    	#member_info{
-    		color:white;	
-    	}
-    
->>>>>>> origin/HS
-    </style>
+
 </head>
 
 <body>
