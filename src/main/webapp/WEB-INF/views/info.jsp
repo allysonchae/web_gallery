@@ -26,6 +26,12 @@
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
 
+	<style type="text/css">
+	#member_info{
+    		color:white;	
+    	}
+    
+	</style>
 </head>
 
 <body>
