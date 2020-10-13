@@ -30,7 +30,16 @@
 	#member_info{
     		color:white;	
     	}
+    table{
+        width: 1000px;
+        height: 500px;
+        margin: auto;  
+    }
     
+    .templeteView:hover{
+        color: blue;
+        cursor: pointer;
+    }
 	</style>
 </head>
 
