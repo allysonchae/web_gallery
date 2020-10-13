@@ -1,5 +1,7 @@
 package com.proj.web.service;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,12 @@ public class MemberService {
 
 	public void pwChange(MemberVO member) {
 		dao.pwChange(member);
+	}
+
+	public HashMap<String, String> memberSelectOneAll(String member_id) {
+		HashMap<String, String> hash = new HashMap<String, String>();
+		hash = dao.memberSelectOneAll(member_id);
+		return hash;
 	}
 
 }

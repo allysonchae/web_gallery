@@ -19,6 +19,20 @@
 			)
 	</insert>
 	
+	<select id="memberSelectOneAll" parameterType="string" resultType="hash">
+		select
+			member_id
+			,member_pw
+			,member_name
+			,member_phone
+			,member_nickname
+			,member_indate
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
+	
 	<select id="memberSelectOneId" parameterType="string" resultType="int">
 		select
 			count(*)

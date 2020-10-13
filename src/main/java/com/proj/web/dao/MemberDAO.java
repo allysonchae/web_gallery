@@ -1,5 +1,7 @@
 package com.proj.web.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -99,6 +101,17 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public HashMap<String, String> memberSelectOneAll(String member_id) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		HashMap<String, String> hash = new HashMap<String, String>();
+		try {
+			hash = mapper.memberSelectOneAll(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hash;
 	}
 	
 }

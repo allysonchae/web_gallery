@@ -116,13 +116,69 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact__address">
-                    
-                    
-                    
-						<!-- 여기에 mypage 폼 넣을 거 -->
-						
-						
-						
+						<table border="1" class="table table-bordered">
+							<tr>
+								<td>아이디<span class="important">(*)</span></td>
+								<c:choose>
+									<c:when test="${map.email!=null }">
+										<td><input type="text" name="member_id" id="member_id" value="${map.email }" readonly="readonly"></td>
+									</c:when>
+									<c:otherwise>
+										<td><input type="text" name="member_id" id="member_id" placeholder="이메일 형식">  <input type="button" id="auth_btn" value="이메일 인증" class="btn btn-outline-secondary"><br>
+										<div id="auth_hide"><input type="text" id="user_authNum" name="user_authNum" placeholder="인증번호">  <input type="button" id="email_check" value="확인" class="btn btn-outline-secondary"><div id="lab1"></div></div></td>
+									</c:otherwise>
+								</c:choose>
+								
+							</tr>
+							
+							<tr>
+								<td>비밀번호<span class="important">(*)</span></td>
+								<td><input type="password" name="member_pw" id="member_pw" placeholder="비밀번호"><div id="pwCheck"></div>	
+								</td>
+							</tr>
+							
+							<tr>
+								<td>비밀번호 확인<span class="important">(*)</span></td>
+								<td><input type="password" id="member_pwck" placeholder="비밀번호 확인">	
+								</td>
+							</tr>
+							
+							<tr>
+								<td>연락처<span class="important">(*)</span></td>
+								<td><input type="text" name="member_phone"  id="member_phone" placeholder="'-'없이 입력"></td>
+							</tr>
+					
+							<tr>
+								<td>이름<span class="important">(*)</span></td>
+									<c:choose>
+										<c:when test="${map.name!=null }">
+											<td><input type="text" name="member_name" id="member_name" placeholder="이름" value="${map.name }" readonly="readonly"></td>
+										</c:when>
+										<c:otherwise>
+											<td><input type="text" name="member_name" id="member_name" placeholder="이름"></td>
+										</c:otherwise>
+									</c:choose>
+							</tr>
+							
+							<tr>
+								<td>닉네임<span class="important">(*)</span></td>
+								<td><input type="text" name="member_nickname" id="member_nickname" placeholder="닉네임" >
+									<button onclick="checkNickname()" class="btn btn-outline-secondary">중복 검사</button><div id="nicknameCheck"></div>
+								</td>
+							</tr>
+						</table><br>
+						<div class="join_st" style="text-align:center;">
+							<input type="button" value="취소" onclick="join_cancel()" class="btn btn-outline-secondary">
+							<input type="button" id="join_submit" onclick="join_submit()" value="가입" class="btn btn-outline-secondary">
+						</div>
+						<form action="/member/join" method="post" id="joinForm">
+							<input type="hidden" name="member_id" id="user_id">
+							<input type="hidden" name="member_pw" id="user_pw">
+							<input type="hidden" name="member_phone" id="user_phone">
+							<input type="hidden" name="member_name" id="user_name">
+							<input type="hidden" name="member_nickname" id="user_nickname">
+						</form>
+						<br><br>
                     </div>
                 </div>
             </div>
