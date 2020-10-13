@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.web.dao.CalendarMapper">
+
+<select id="gallerySelectAll" resultType="gallery">
+   	select
+		gallery_seq
+		,member_id
+		,title
+		,to_char("start",'yyyy-mm-dd') as "start"
+		,to_char("end",'yyyy-mm-dd') as "end"
+		,to_char(gallery_indate,'yyyy-mm-dd') as gallery_indate
+		,gallery_like
+		,gallery_template
+	from
+		gallery
+</select>
+
+
+</mapper>

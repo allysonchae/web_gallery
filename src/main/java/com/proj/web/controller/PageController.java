@@ -1,23 +1,33 @@
 package com.proj.web.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.proj.web.service.CalendarService;
+import com.proj.web.vo.GalleryVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class PageController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+
+	@Autowired
+	private CalendarService cs;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -64,7 +74,18 @@ public class PageController {
 	//이벤트 예정달력확인
 	@RequestMapping(value="/calender",method=RequestMethod.GET)
 	public String tours() {
+		
 		return "/calender";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/gallerySchedule", method = RequestMethod.POST)
+	public ArrayList<GalleryVO> gallerySchedule(){
+		
+		ArrayList<GalleryVO> list = cs.gallerySelectAll();
+
+		return list;
+		
 	}
 	
 	/*

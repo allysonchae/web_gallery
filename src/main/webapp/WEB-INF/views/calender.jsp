@@ -58,16 +58,29 @@
 </style>
 
 <script type="text/javascript">
+function getCalendarDataInDB(){
+    var arr;
+    
+    $.ajax({
+        contentType:'application/json',
+        dataType:'json',
+        url:'/gallerySchedule',
+        type:'post',
+        async: false,
+        success:function(resp){
+			console.log(resp);
+        	arr = resp;
+        },
+        error:function(){
+            alert('저장 중 에러가 발생했습니다. 다시 시도해 주세요.');
+        }
+    });
+    return arr;
+}
+
 	document.addEventListener('DOMContentLoaded', function() {
 	  var calendarEl = document.getElementById('calendar');
 	  var calendar = new FullCalendar.Calendar(calendarEl, {
-			  events: [
-				    {
-				      title: 'test',
-				      start: '2020-10-12',
-				      end: '2020-10-14'
-				    }
-			  ],
 			  eventClick: function(event){
 				    $('#modalTitle').html(event.title);
 		            $('#modalBody').html(event.description);
@@ -75,6 +88,12 @@
 		            $('#calendarModal').modal();
 			  }
 	  });
+
+	  var arr = getCalendarDataInDB();
+	  $.each(arr, function(index, item){
+	   calendar.addEvent( item );
+	  });
+	  
 	  calendar.render();
 	});
 </script>
