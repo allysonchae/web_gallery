@@ -80,11 +80,12 @@ public class PageController {
 		return "/blog";
 	}
 	
-	//쪽지함
-	@RequestMapping(value="/directMessage",method=RequestMethod.GET)
-	public String blog_details() {
-		return "/directMessage";
-	}
+	/*
+	 * //쪽지함
+	 * 
+	 * @RequestMapping(value="/directMessage",method=RequestMethod.GET) public
+	 * String blog_details() { return "/directMessage"; }
+	 */
 	
 	//내 정보
 	@RequestMapping(value="/myPage",method=RequestMethod.GET)
