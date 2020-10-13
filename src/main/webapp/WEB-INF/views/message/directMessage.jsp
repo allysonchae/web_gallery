@@ -25,26 +25,12 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-<<<<<<< HEAD
-    <style type="text/css">
-    	table{
-    		width: 1000px;
-    		height: 500px;
-			margin: auto;  
-    	}
-		
-		.templeteView:hover{
-			color: blue;
-			cursor: pointer;
-		}
-=======
     
     <style type="text/css">
     	#member_info{
     		color:white;	
     	}
     
->>>>>>> origin/HS
     </style>
 </head>
 
@@ -67,8 +53,8 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li><a href="/">Home</a></li>
-                                <li class="active"><a href="/info">Info</a>
+                                <li><a href="/index">Home</a></li>
+                                <li><a href="/info">Info</a>
                                 	<ul class="dropdown">
                                         <li><a href="/info">공지사항</a></li>
                                         <li><a href="/service">이용안내</a></li>
@@ -83,11 +69,15 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/message/directMessage.jsp
+                                <li class="active"><a href="#">My Pages</a>
+=======
                                 <li><a href="/myPage">My Pages</a>
+>>>>>>> origin/kkw:src/main/webapp/WEB-INF/views/login.jsp
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/message/directMessage">쪽지함</a></li>
+                                        <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
@@ -116,7 +106,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>공지사항</span>
+                        <a href="#">Direct Message</a>
                     </div>
                 </div>
             </div>
@@ -124,54 +114,41 @@
     </div>
     <!-- Breadcrumb End -->
 
-	<div style="text-align: center; margin-top: 100px;">
-		<h1>Information</h1>
-	</div>
-	
-	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px;">
-		<tr>
-			<td style="text-align: center">전시회명</td>
-			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
-		</tr>
-	</table>
-	
-	<!-- About Pic Begin -->
-    <div class="about-pic">
-        <div class="container-fluid">
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-1.jpg" alt="">
-                            <img src="/resources/img/about/ap-2.jpg" alt="">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-3.jpg" alt="">
+            <div class="col-lg-4">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__item">
+                            <div class="blog__sidebar__title">
+                                <h4>쪽지</h4>
+                            </div>
+                            <table border="1">
+                            
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-4.jpg" alt="">
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-5.jpg" alt="">
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-6.jpg" alt="">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-7.jpg" alt="">
+                <div class="col-lg-8">
+                    <div class="blog__details__content">                     
+                        
+                        <div class="blog__details__form">
+                            <div class="blog__details__form__title">
+                                <h4>Chat Log</h4>
+                            </div>
+                            <form action="#"><!-- 채팅 대화 입력창 -->
+                                <textarea placeholder="Comment"></textarea>
+                                <button type="submit" class="site-btn">SEND MESSAGE</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- About Pic End -->
-	
-	
+    </section>
+    <!-- Blog Details Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">

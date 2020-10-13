@@ -25,6 +25,111 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    
+    <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+    	var chk = -1;
+	    function join_cancel(){
+	    	location.href = "/member/memberLoginPage";
+	    } 
+
+	    $(function () {
+		    var data = {"member_id": $("#member_id").val()};
+	        var authNum = "";
+		    
+		    $("#auth_btn").click(function () {
+
+		        $.ajax({
+					url:"/member/idCheck",
+					data:{
+						member_id:$("#member_id").val()
+						},
+					success:function(data){
+						if(data==1){
+							$("#lab1").text("인증번호 전송중");
+							$("#lab1").css("color","blue");
+						    $.ajax({
+						        url : "/member/emailAuth.do",
+						        data : {"member_id": $("#member_id").val()},
+						        success : function (data) {
+						            authNum = data;
+						            alert("인증번호 전송완료.");
+						            $("#lab1").text("");
+						        }
+						        
+						    });
+						}else{
+							$("#lab1").text("존재하지 않는 이메일입니다");
+							$("#lab1").css("color","red");
+						}
+					},
+					error:function(e){
+						alert("통신 실패");
+						console.log(e);
+						}
+				});
+				
+		    });// 이메일 인증 버튼 end
+
+		    $("#email_check").click(function(){
+		        var user_authNum = document.getElementById("user_authNum").value;
+
+		    	// 인증번호 비교
+		        if (authNum == user_authNum) {
+		            chk = 1;
+		        } else {
+		            chk = -1;
+		        }
+
+		        if( chk > 0){
+	                alert("인증완료");
+	                chk = 1;
+	                $("#lab1").html("<label>인증완료</label>");
+	            }else{
+	                alert("인증실패");
+	                chk = -1;
+	                $("#lab1").html("<label>인증실패</label>");
+	                $("#lab1").css("color","red");
+	            }
+
+			});
+			
+
+	    });
+
+	    function emailCheck(){
+	    	var member_phone = document.getElementById("member_phone").value;
+	    	
+			if(chk > 0){
+				if(member_phone==''){
+					alert("연락처를 입력해 주세요")
+					return false;
+				}else{
+					return true;
+				}
+			}else{
+				alert("이메일 인증을 해주세요");
+				return false;
+			}
+			
+		}
+
+
+    </script>
+    
+    
+    <style type="text/css">
+    	#member_info{
+    		color:white;	
+    	}
+    	
+    	.tb{
+    		margin-left: auto;
+    		margin-right: auto;
+    		margin: 0px auto;
+    	}
+    
+    </style>
 </head>
 
 <body>
@@ -39,7 +144,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <!-- <a href="./index.html"><img src="img/logo.png" alt=""></a> -->
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-10">
@@ -62,14 +167,14 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="/login">Login</a></li>
+                                <li class="active"><a href="/member/memberLoginPage">Login</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -104,11 +209,36 @@
                         <h2>Login</h2>
                         <h1>Welcome!</h1>
                     </div>
-                    <div class="videos__large__item set-bg" style="background-color: blue;">
-                        
+                    <div>
+                    	<form action="/member/pwFind" method="post" onsubmit="return emailCheck();">
+	                    	<table border="1" class="table table-bordered">
+	                    		<tr>
+	                    			<td>
+										아이디 
+	                    			</td>
+	                    			<td>
+										<input type="text" name="member_id" id="member_id" placeholder="이메일 형식"><input type="button" id="auth_btn" value="이메일 인증" class="btn btn-outline-secondary"><br>
+										<input type="text" id="user_authNum" name="user_authNum" placeholder="인증번호"><input type="button" id="email_check" value="확인" class="btn btn-outline-secondary"><div id="lab1"></div>
+	                    			</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>
+										연락처
+	                    			</td>
+	                    			<td>
+										<input type="text" name="member_phone" id="member_phone" placeholder="'-'없이 입력">
+	                    			</td>
+	                    		</tr>
+	                    	</table>
+	                    	<br>
+	                    	<div class="tb" style="text-align:center;">
+		                    	<input type="button" value="취소" onclick="join_cancel()" class="btn btn-outline-secondary">
+		                    	<input type="submit" value="찾기" class="btn btn-outline-secondary">
+	                    	</div>
+                    	</form>
                         <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
-                        
                     </div>
+                    <br><br>
                     <!-- 이 밑은 아직 지우지 말아주세요! -->
                     <div class="row">
                         <div class="videos__slider owl-carousel">

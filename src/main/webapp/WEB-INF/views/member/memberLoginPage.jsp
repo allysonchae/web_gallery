@@ -25,27 +25,20 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-<<<<<<< HEAD
-    <style type="text/css">
-    	table{
-    		width: 1000px;
-    		height: 500px;
-			margin: auto;  
-    	}
-		
-		.templeteView:hover{
-			color: blue;
-			cursor: pointer;
-		}
-=======
+    
+    <script src="/resources/js/kakao.min.js"></script>
     
     <style type="text/css">
-    	#member_info{
-    		color:white;	
+    	#login_st{
+    	margin-left: auto;
+    	margin-right: auto;
+    	margin: 0px auto;
     	}
-    
->>>>>>> origin/HS
+    	a:hover{
+    		color:blue;
+    	}
     </style>
+    
 </head>
 
 <body>
@@ -60,7 +53,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="header__logo">
-                        <a href="/"><img src="/resources/img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-10">
@@ -68,7 +61,7 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li><a href="/">Home</a></li>
-                                <li class="active"><a href="/info">Info</a>
+                                <li><a href="/info">Info</a>
                                 	<ul class="dropdown">
                                         <li><a href="/info">공지사항</a></li>
                                         <li><a href="/service">이용안내</a></li>
@@ -90,15 +83,7 @@
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <c:choose>
-									<c:when test="${sessionScope.loginID != null }">
-										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
-									</c:when>
-									<c:otherwise>
-		                                <li><a href="member/memberLoginPage">Login</a></li>
-									</c:otherwise>
-								</c:choose>
+                                <li class="active"><a href="member/memberJoinForm">Login</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -116,7 +101,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>공지사항</span>
+                        <span>Login</span>
                     </div>
                 </div>
             </div>
@@ -124,54 +109,90 @@
     </div>
     <!-- Breadcrumb End -->
 
-	<div style="text-align: center; margin-top: 100px;">
-		<h1>Information</h1>
-	</div>
-	
-	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px;">
-		<tr>
-			<td style="text-align: center">전시회명</td>
-			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
-		</tr>
-	</table>
-	
-	<!-- About Pic Begin -->
-    <div class="about-pic">
-        <div class="container-fluid">
+    <!-- Video Section Begin -->
+    <section class="videos spad">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-1.jpg" alt="">
-                            <img src="/resources/img/about/ap-2.jpg" alt="">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-3.jpg" alt="">
-                        </div>
+                <div class="col-lg-12">
+                    <div class="section-title center-title">
+                        <h2>Login</h2>
+                        <h1>Welcome!</h1>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-4.jpg" alt="">
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-5.jpg" alt="">
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-6.jpg" alt="">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-7.jpg" alt="">
-                        </div>
+                    <div>
+                    	<form action="/member/Login" method="post">
+                        	<table id="login_st">
+                        		<tr>
+                        			<td>
+										<input type="text" name="member_id" placeholder="아이디">
+                        			</td>
+                        			<td rowspan="2">
+                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
+                        			</td>
+                        		</tr>
+                        		<tr>
+                        			<td>
+										<input type="password" name="member_pw" placeholder="비밀번호" >
+                        			</td>
+                        		</tr>
+                        		<tr>
+                        			<td colspan="2">
+										<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a> | <a href="/member/memberFindForm">아이디 찾기</a>|<a href="/member/pwFindForm">비밀번호 찾기</a> 
+									</td>
+								</tr>
+                        	</table>
+						</form>
+						<br>
+						<!-- 네이버 로그인 창으로 이동 -->
+						<div id="naver_id_login" style="text-align:center"><a href="${url}">
+						<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+						<a id="kakao-login-btn"></a></div>
+						<a href="http://developers.kakao.com/logout"></a>
+						<script type='text/javascript'>
+						  //<![CDATA[
+						    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+						    Kakao.init('64ee8ae4ffd93e00255b26611c1fec74');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
+						    // 카카오 로그인 버튼을 생성합니다.
+						    Kakao.Auth.createLoginButton({
+						      container: '#kakao-login-btn',
+						      success: function(authObj) {
+						    	  Kakao.API.request({
+				
+						    	       url: '/v2/user/me',
+				
+						    	       success: function(res) {
+				
+						    	             /*alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
+						    	             
+						    	             alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+				
+						    	             console.log(res);
+						    	             console.log(authObj);
+				
+						    	             console.log(res.kakao_account.profile.nickname);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+				
+						    	             console.log(res.kakao_account.email);//<---- 콘솔 로그에 email 정보 출력
+				
+						    	             console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력 */
+				
+						    	             location.href="/member/memberJoinForm?kakaoName=" + res.kakao_account.profile.nickname + "&kakaoEmail=" + res.kakao_account.email;
+						    	    	}
+				
+									})
+						      },
+						      fail: function(err) {
+						         alert(JSON.stringify(err));
+						      }
+						    });
+						  //]]>
+						</script>
+						<br><br>
+                        <!-- 로그인 화면 섹션 -> 이부분 지우고 입력 -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- About Pic End -->
-	
-	
+    </section>
+    <!-- Video Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">

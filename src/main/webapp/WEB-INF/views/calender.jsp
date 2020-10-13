@@ -72,7 +72,24 @@
 	  });
 	  calendar.render();
 	});
+<<<<<<< HEAD
 </script>
+=======
+	
+	
+	</script>
+	
+	<style>
+		#calendar{
+		   width:60%;
+		   margin:20px auto;
+		}
+		
+		#member_info{
+    		color:white;	
+    	}
+	</style>
+>>>>>>> origin/HS
 	
 </head>
 
@@ -111,14 +128,22 @@
                                     </ul>
                                 </li>
                                 <li class="active"><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/login">Login</a></li>
+                                <c:choose>
+									<c:when test="${sessionScope.loginID != null }">
+										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
+										<li><a href="logout">로그아웃</a></li>
+									</c:when>
+									<c:otherwise>
+		                                <li><a href="member/memberLoginPage">Login</a></li>
+									</c:otherwise>
+								</c:choose>
                             </ul>
                         </nav>
                     </div>

@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style type="text/css">
     	table{
@@ -39,6 +40,15 @@
 		}
     </style>
     
+=======
+    
+    <style type="text/css">
+    	#member_info{
+    		color:white;	
+    	}
+    
+    </style>
+>>>>>>> origin/HS
 </head>
 
 <body>
@@ -76,14 +86,22 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/login">Login</a></li>
+                                <c:choose>
+									<c:when test="${sessionScope.loginID != null }">
+										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
+										<li><a href="logout">로그아웃</a></li>
+									</c:when>
+									<c:otherwise>
+		                                <li><a href="member/memberLoginPage">Login</a></li>
+									</c:otherwise>
+								</c:choose>
                             </ul>
                         </nav>
                     </div>
