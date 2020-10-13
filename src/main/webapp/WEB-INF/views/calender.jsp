@@ -50,6 +50,11 @@
 		color: black;
 	}
 	
+	#member_info{
+    		color:white;	
+    	}
+    
+	
 </style>
 
 <script type="text/javascript">
