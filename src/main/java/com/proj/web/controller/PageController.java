@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.web.service.CalendarService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
@@ -78,14 +80,32 @@ public class PageController {
 		return "/calender";
 	}
 	
+	//캘린더에 모든 일정 전송
 	@ResponseBody
 	@RequestMapping(value = "/gallerySchedule", method = RequestMethod.POST)
 	public ArrayList<GalleryVO> gallerySchedule(){
-		
 		ArrayList<GalleryVO> list = cs.gallerySelectAll();
 
 		return list;
+	}
+	
+	//캘린더에서 특정 이밴트 클리 시 닉네임 캘린더jsp로 전송
+	@ResponseBody
+	@RequestMapping(value = "/getSchedule", method = RequestMethod.POST)
+	public String getSchedule(String info) {
 		
+		logger.info(info);
+		
+		int id = Integer.parseInt(info);
+		GalleryVO gallery = cs.gallerySelectOne(id);
+		
+		MemberVO member = cs.nickNameFind(gallery.getMember_id());
+		
+		logger.info("member: {}", member);
+		
+		String nickName = member.getMember_nickname();
+		
+		return nickName;
 	}
 	
 	/*

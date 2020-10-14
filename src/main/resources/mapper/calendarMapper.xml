@@ -4,7 +4,7 @@
 
 <select id="gallerySelectAll" resultType="gallery">
    	select
-		gallery_seq
+		gallery_seq as id
 		,member_id
 		,title
 		,to_char("start",'yyyy-mm-dd') as "start"
@@ -14,6 +14,35 @@
 		,gallery_template
 	from
 		gallery
+</select>
+
+<select id="gallerySelectOne" parameterType="int" resultType="gallery">
+	select
+        gallery_seq as id
+        ,member_id
+        ,title
+        ,"start"
+        ,"end"
+        ,gallery_indate
+        ,gallery_like
+        ,gallery_template
+	from
+    	gallery
+	where
+    	gallery_seq = #{id}
+</select>
+
+<select id="nickNameFind" parameterType="String" resultType="member">
+	select
+		member_id
+		,member_pw
+		,member_phone
+		,member_name
+	    ,member_nickname
+	from
+	    member
+	where
+	    member_id = #{member_id}
 </select>
 
 
