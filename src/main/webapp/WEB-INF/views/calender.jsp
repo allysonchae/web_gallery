@@ -109,11 +109,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
 		  eventClick: function(info){
-			  var nickName = "작가 : "+getNickname(info.event.id);
+			  var nickName = "○  작가 : "+getNickname(info.event.id);
 			  var title = "전시회명 : "+info.event.title;
 			  var start = moment(info.event.start).format('YYYY/MM/DD');
 			  var end = moment(info.event.end).format('YYYY/MM/DD');
-			  var schedule = "전시회 기간 : "+ start + "~" + end; 
+			  var schedule = "○  전시회 기간 : "+ start + "~" + end; 
 			  $('#modalTitle').html(title);
 			  $('#modalName').html(nickName);
 			  $('#modalSchedule').html(schedule);
@@ -235,12 +235,18 @@ document.addEventListener('DOMContentLoaded', function() {
 		<div class="modal-dialog">
 		    <div class="modal-content">
 		        <div class="modal-header">
-	            	<h4 id="modalTitle" class="modal-title"></h4>
+	            	<div style="border-bottom: 5px double #48BAE4; height: auto; padding: 10px;">
+	            		<h4 id="modalTitle" class="modal-title"></h4>
+	            	</div>
 		            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
 		        </div>
 		        <div id="modalBody" class="modal-body">
-	            	<h4 id="modalName" class="modal-title"></h4>
-	            	<h4 id="modalSchedule" class="modal-title"></h4>
+	            	<div style="border-bottom: 1px solid #48BAE4; height: auto; padding:10px;">	
+	            		<h4 id="modalName" class="modal-title"></h4>
+	            	</div>
+	            	<div style="border-bottom: 1px solid #48BAE4; height: auto; padding:10px;">	
+		            	<h4 id="modalSchedule" class="modal-title"></h4>
+	            	</div>
 		        </div>
 		        <div class="modal-footer">
 		            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

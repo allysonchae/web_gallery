@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.web.service.CalendarService;
+import com.proj.web.service.InformationService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MemberVO;
 
 /**
@@ -30,6 +32,8 @@ public class PageController {
 
 	@Autowired
 	private CalendarService cs;
+	@Autowired
+	private InformationService is;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -41,7 +45,14 @@ public class PageController {
 	
 	//공지사항
 	@RequestMapping(value="/info",method=RequestMethod.GET)
-	public String info() {
+	public String info(Model model) {
+		
+		ArrayList<InformationVO> list = is.selectAllInformation();
+
+		logger.info("list: {}", list);
+		
+		model.addAttribute("list", list);
+		
 		return "/info";
 	}
 	
@@ -100,9 +111,6 @@ public class PageController {
 		GalleryVO gallery = cs.gallerySelectOne(id);
 		
 		MemberVO member = cs.nickNameFind(gallery.getMember_id());
-		
-		logger.info("member: {}", member);
-		
 		String nickName = member.getMember_nickname();
 		
 		return nickName;

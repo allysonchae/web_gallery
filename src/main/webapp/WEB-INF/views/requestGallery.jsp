@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-        <style type="text/css">
+    <style type="text/css">
         table{
             width: 1000px;
             height: 500px;
