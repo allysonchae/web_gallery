@@ -113,5 +113,14 @@ public class MemberDAO {
 		}
 		return hash;
 	}
+
+	public void memberUpdate(MemberVO member) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		try {
+			mapper.memberUpdate(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

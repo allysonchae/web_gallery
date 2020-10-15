@@ -103,9 +103,12 @@ public class PageController {
 	@RequestMapping(value="/myPage",method=RequestMethod.GET)
 	public String contact(HttpSession session, Model model) {
 		String member_id = (String)session.getAttribute("loginID");
+		String member_nickname = (String)session.getAttribute("loginNickName");
 		HashMap<String, String> hash = new HashMap<String, String>();
+		
 		hash = service.memberSelectOneAll(member_id);
 		model.addAttribute("hash", hash);
+		model.addAttribute("loginNickName", member_nickname);
 		
 		return "/myPage";
 	}

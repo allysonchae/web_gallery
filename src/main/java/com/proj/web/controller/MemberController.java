@@ -197,6 +197,12 @@ public class MemberController {
 		return "member/test";
 	}
 	
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
+	public String memberUpdate(MemberVO member) {
+		service.memberUpdate(member);
+		return "redirect:/";
+	}
+	
 	private String randomNum() {
 	    StringBuffer buffer = new StringBuffer();
 	        

@@ -23,5 +23,7 @@ public interface MemberMapper {
 	public void pwChange(MemberVO member);
 
 	public HashMap<String, String> memberSelectOneAll(String member_id);
+
+	public void memberUpdate(MemberVO member);
 	
 }

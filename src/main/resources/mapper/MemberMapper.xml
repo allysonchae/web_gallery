@@ -19,7 +19,7 @@
 			)
 	</insert>
 	
-	<!-- <select id="memberSelectOneAll" parameterType="string" resultType="hash">
+	<select id="memberSelectOneAll" parameterType="string" resultType="hashmap">
 		select
 			member_id
 			,member_pw
@@ -31,7 +31,7 @@
 			member
 		where
 			member_id = #{member_id}
-	</select> -->
+	</select>
 	
 	<select id="memberSelectOneId" parameterType="string" resultType="int">
 		select
@@ -100,6 +100,18 @@
 				member_pw = #{member_pw}
 			where
 				member_id = #{member_id}
+	</update>
+	
+	<update id="memberUpdate" parameterType="member">
+		update
+			member
+		set
+			member_pw = #{member_pw}
+			,member_phone = #{member_phone}
+			,member_name = #{member_name}
+			,member_nickname = #{member_nickname}
+		where
+			member_id = #{member_id}
 	</update>
 
 </mapper>
