@@ -29,16 +29,15 @@
 	<style type="text/css">
 	#member_info{
     		color:white;	
-    	}
-    table{
-        width: 1000px;
-        height: 500px;
-        margin: auto;  
     }
     
-    .templeteView:hover{
-        color: blue;
-        cursor: pointer;
+    table{
+    	margin: auto;
+    }
+    
+    #informationDetail:hover{
+    	color:blue;
+    	cursor: pointer;
     }
 	</style>
 </head>
@@ -123,12 +122,59 @@
 		<h1>Information</h1>
 	</div>
 	
-	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px;">
+	<table class="table table-bordered" style="width: 1200px; margin-top: 100px; margin-bottom: 200px;">
 		<tr>
-			<td style="text-align: center">전시회명</td>
-			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
+			<td style="text-align: center">NO</td>
+			<td style="text-align: center">제목</td>
+			<td style="text-align: center">담당자</td>
+			<td style="text-align: center">등록일</td>
 		</tr>
+		<c:forEach items="${list }" var="list" varStatus="status">
+			<tr>
+				<td>${status.count }</td>
+				<td id="informationDetail">
+					<a onclick="informationDetail('${list.information_title  }','${list.information_detail }','${list.information_writer }');">${list.information_title  }</a>
+				</td>
+				<td>${list.information_writer  }</td>
+				<td>${list.information_indate  }</td>
+			</tr>
+		</c:forEach>
 	</table>
+	
+	<!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 id="modal-title"></h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        <div class="modal-body">
+	          <h5 id="modal-detail"></h5>
+	          <br><br>
+	          <h5 id="modal-writer"></h5>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	<!-- Modal end -->
+		
+	<script type="text/javascript">
+		function informationDetail(title,detail,writer){
+			var writer = "-"+writer+"-";
+			$("#modal-title").html(title);
+			$("#modal-detail").html(detail);
+			$("#modal-writer").html(writer);
+	        $("#myModal").modal();
+		}
+	</script>
+	
 	
 	<!-- About Pic Begin -->
     <div class="about-pic">

@@ -1,23 +1,39 @@
 package com.proj.web.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.proj.web.service.CalendarService;
+import com.proj.web.service.InformationService;
+import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.InformationVO;
+import com.proj.web.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class PageController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+
+	@Autowired
+	private CalendarService cs;
+	@Autowired
+	private InformationService is;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -29,7 +45,14 @@ public class PageController {
 	
 	//공지사항
 	@RequestMapping(value="/info",method=RequestMethod.GET)
-	public String info() {
+	public String info(Model model) {
+		
+		ArrayList<InformationVO> list = is.selectAllInformation();
+
+		logger.info("list: {}", list);
+		
+		model.addAttribute("list", list);
+		
 		return "/info";
 	}
 	
@@ -64,7 +87,33 @@ public class PageController {
 	//이벤트 예정달력확인
 	@RequestMapping(value="/calender",method=RequestMethod.GET)
 	public String tours() {
+		
 		return "/calender";
+	}
+	
+	//캘린더에 모든 일정 전송
+	@ResponseBody
+	@RequestMapping(value = "/gallerySchedule", method = RequestMethod.POST)
+	public ArrayList<GalleryVO> gallerySchedule(){
+		ArrayList<GalleryVO> list = cs.gallerySelectAll();
+
+		return list;
+	}
+	
+	//캘린더에서 특정 이밴트 클리 시 닉네임 캘린더jsp로 전송
+	@ResponseBody
+	@RequestMapping(value = "/getSchedule", method = RequestMethod.POST)
+	public String getSchedule(String info) {
+		
+		logger.info(info);
+		
+		int id = Integer.parseInt(info);
+		GalleryVO gallery = cs.gallerySelectOne(id);
+		
+		MemberVO member = cs.nickNameFind(gallery.getMember_id());
+		String nickName = member.getMember_nickname();
+		
+		return nickName;
 	}
 	
 	/*
