@@ -7,10 +7,12 @@
 		<typeAlias type="com.proj.web.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.proj.web.vo.GalleryVO" alias="gallery"/>
 		<typeAlias type="com.proj.web.vo.InformationVO" alias="information"/>
+		<typeAlias type="com.proj.web.vo.WorkVO" alias="work"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/calendarMapper.xml"/>
 		<mapper resource="mapper/informationMapper.xml"/>
+		<mapper resource="mapper/workMapper.xml"/>
 	</mappers>
 </configuration>
