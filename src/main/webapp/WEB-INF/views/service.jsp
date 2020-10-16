@@ -169,10 +169,7 @@
                         <div class="section-title">
                             <h2>나의 모든 재능을 선보이다</h2>
                         </div>
-                        <p>At vero eos et accusamus et iusto odi odgnissimos ducimus qui blanditiis praesentium volup
-                            tatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi quod
-                            justo pro an.</p>
+                        <p>아무튼 좋은 말</p>
                     </div>
                 </div>
             </div>
