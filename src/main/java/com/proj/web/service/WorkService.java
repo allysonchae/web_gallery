@@ -67,6 +67,20 @@ public class WorkService {
 		return list;
 	}
 	
+	//전시회 하나 가져오기
+	public ArrayList<HashMap<String, Object>> selectGalleryOne(int gallery_seq) {
+		
+		return dao.selectGalleryOne(gallery_seq);
+		
+	}
+	
+	//작품하나 가져오기
+	public WorkVO selectWorkOne(HashMap<String , Object> map) {
+		
+		return dao.selectWorkOne(map);
+		
+	}
+	
 	
 	//현재 진행중인 작품 파일 가져오기
 	public ArrayList<WorkVO> workPresent(){

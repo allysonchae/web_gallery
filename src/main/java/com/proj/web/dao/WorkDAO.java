@@ -136,6 +136,36 @@ public class WorkDAO {
 		return map;
 		
 	}
+	
+	public ArrayList<HashMap<String, Object>> selectGalleryOne(int gallery_seq){
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<HashMap<String, Object>> list = null;
+		
+		try {
+			list = wm.selectGalleryOne(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	public WorkVO selectWorkOne(HashMap<String , Object> map){
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		WorkVO work = null;
+		
+		try {
+			work = wm.selectWorkOne(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return work;
+		
+	}
 
 
 }

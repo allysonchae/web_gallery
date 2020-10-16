@@ -122,14 +122,20 @@
                 </div>
             </div>
             
+            <script type="text/javascript">
+				$(function{
+					$("#insertImage").attr("data-setbg","/resources/imagesTemp/image1.jpg");
+				});
+            </script>
+            
             <div class="row">
                 <div class="event__slider owl-carousel">
 					<c:forEach items="${pList }" var="pList" varStatus="status">
 	                    <div class="col-lg-4">
 	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">${pList.WORK_ORIGINALFILENAME }
+                            	<div id="insertImage" class="event__item__pic set-bg">${pList.WORK_ORIGINALFILENAME }
 	                                <div class="tag-date">
-	                                    <a href="">
+	                                    <a href="/galleryDetail?gallery_seq=${pList.GALLERY_SEQ }">
 	                                    	<span>${pList.TITLE }</span>
 	                                    </a>
 	                                </div>
@@ -160,9 +166,9 @@
 					<c:forEach items="${fList }" var="fList" varStatus="status">
 	                    <div class="col-lg-4">
 	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">${fList.WORK_ORIGINALFILENAME }
+                            	<div class="event__item__pic set-bg" data-setbg="">${fList.WORK_ORIGINALFILENAME }
 	                                <div class="tag-date">
-	                                    <a href="">
+	                                    <a href="/galleryDetail?gallery_seq=${fList.GALLERY_SEQ }">
 	                                    	<span>${fList.TITLE }</span>
 	                                    </a>
 	                                </div>

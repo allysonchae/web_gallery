@@ -82,6 +82,44 @@ public class PageController {
 		return "/gallery";
 	}
 	
+	//갤러리 페이지
+	@RequestMapping(value = "/galleryDetail", method = RequestMethod.GET)
+	public String galleryDetail(int gallery_seq, Model model) {
+		
+		logger.info("gallery_seq : {}", gallery_seq);
+		
+		ArrayList<HashMap<String, Object>> list = ws.selectGalleryOne(gallery_seq);
+		logger.info("list : {}",list);
+		
+		HashMap<String, Object> map = list.get(0);
+		logger.info("map : {}",map);
+		
+		
+		model.addAttribute("map", map);
+		model.addAttribute("list", list);
+		
+		return "/galleryDetail";
+	}
+	
+	@RequestMapping(value = "/workDescription", method = RequestMethod.GET)
+	public String workDescription(int work_seq, int id, Model model) {
+		
+		logger.info("work_seq : {}", work_seq);
+		logger.info("id : {}" , id);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("work_seq", work_seq);
+		
+		WorkVO work = ws.selectWorkOne(map);
+		
+		logger.info("work : {}", work);
+		
+		model.addAttribute("work", work);
+		
+		return "/workDescription";
+	}
+	
 	//오픈예정 갤러리
 	@RequestMapping(value="/expectedGallery",method=RequestMethod.GET)
 	public String expectedGallery() {
@@ -108,6 +146,7 @@ public class PageController {
 	@ResponseBody
 	@RequestMapping(value = "/gallerySchedule", method = RequestMethod.POST)
 	public ArrayList<GalleryVO> gallerySchedule(){
+		
 		ArrayList<GalleryVO> list = cs.gallerySelectAll();
 
 		return list;

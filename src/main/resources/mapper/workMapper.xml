@@ -116,6 +116,36 @@
 		    g.gallery_seq = #{id}
 	</select>
 	
+	<select id="selectGalleryOne" parameterType="int" resultType="hashmap">
+		select
+    		g.gallery_seq as id
+   		 	,g.title as title
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_seq as work_seq
+		from
+		    gallery g, work w
+		where
+			 g.gallery_seq = w.gallery_seq
+    	and
+            g.gallery_seq = #{gallery_seq}
+	</select>
+	
+	
+	<select id="selectWorkOne" parameterType="hashmap" resultType="work">
+		select
+    		work_description
+    		,work_name
+    		,work_originalfilename
+    		,work_savedfilename
+		from
+    		work
+		where
+    		gallery_seq = #{id}
+		and
+    		work_seq = #{work_seq}
+	</select>
+	
 
 
 </mapper>

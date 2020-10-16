@@ -26,4 +26,7 @@ public interface WorkMapper {
 	
 	public HashMap<String, Object> informationGalleryJsp(int id);
 	
+	public ArrayList<HashMap<String, Object>> selectGalleryOne(int gallery_seq);
+	
+	public WorkVO selectWorkOne(HashMap<String , Object> map);
 }
