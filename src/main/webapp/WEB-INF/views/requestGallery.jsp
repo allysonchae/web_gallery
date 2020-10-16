@@ -119,52 +119,54 @@
 		<h1>Gallery Information</h1>
 	</div>
 	
-	<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px; height: 100px;">
-		<tr>
-			<td style="text-align: center">전시회명</td>
-			<td colspan="2"><input type="text" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
-		</tr>
-		<tr>
-			<td style="text-align: center">전시 기간</td>
-			<td style="text-align: center" colspan="2">
-				<input type="date" style="block; width:400px; height:50px;">
-				~
-				<input type="date" style="block; width:400px; height:50px;">
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: center">전시회 템플릿</td>
-			<td style="text-align: center" colspan="2">
-				<input type="radio" name="templete">
-				<span class="templeteView" onclick="viewOpenCube();">3D Cube Effect</span> 
-				<input type="radio" name="templete">
-				<span class="templeteView" onclick="viewOpenCover();">3D Coverflow Effect</span>
-				<input type="radio" name="templete">
-				<span class="templeteView" onclick="viewOpenFlip();">3D Flip Effect</span>
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: center;">작품 개수</td>
-			<td colspan="2" style="text-align: center;">
-				<select onchange="addTd(value);">
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select>
-			</td>
-		</tr>
-	</table>
-	<div style="text-align: center; margin-top: 50px;">
-		<button type="button" class="btn btn-outline-secondary">신청하기</button>
-	</div>
+	<form action="/workWrite" method="post" enctype="multipart/form-data">
+		<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px; height: 100px;">
+			<tr>
+				<td style="text-align: center">전시회명</td>
+				<td colspan="2"><input type="text" name="title" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">전시 기간</td>
+				<td style="text-align: center" colspan="2">
+					<input type="date" name="start" style="block; width:400px; height:50px;">
+					~
+					<input type="date" name="end" style="block; width:400px; height:50px;">
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center">전시회 템플릿</td>
+				<td style="text-align: center" colspan="2">
+					<input type="radio" name="gallery_template" value="1">
+					<span class="templeteView" onclick="viewOpenCube();">3D Cube Effect</span> 
+					<input type="radio" name="gallery_template" value="2">
+					<span class="templeteView" onclick="viewOpenCover();">3D Coverflow Effect</span>
+					<input type="radio" name="gallery_template" value="3">
+					<span class="templeteView" onclick="viewOpenFlip();">3D Flip Effect</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;">작품 개수</td>
+				<td colspan="2" style="text-align: center;">
+					<select onchange="addTd(value);">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<div style="text-align: center; margin-top: 50px;">
+			<button type="submit" class="btn btn-outline-secondary">신청하기</button>
+		</div>
+	</form>
 	
 	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
@@ -193,11 +195,11 @@
 						rowItem += "<td style='text-align: center;'>작품명 및 설명</td>"
 						rowItem += "<td style='text-align: center;'>"
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
-						rowItem += "<input type='file'  name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
+						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
-						rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
 						rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 						rowItem += "</tr>"
@@ -211,11 +213,11 @@
 						rowItem += "<td style='text-align: center;'>작품명 및 설명</td>"
 						rowItem += "<td style='text-align: center;'>"
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
-						rowItem += "<input type='file'  name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
+						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text'name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
-						rowItem += "<textarea style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
 						rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 						rowItem += "</tr>"

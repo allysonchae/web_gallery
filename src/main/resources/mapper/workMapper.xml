@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.web.dao.WorkMapper">
+
+	<insert id="galleryWrite" parameterType="gallery">
+		insert into gallery(
+			gallery_seq
+			,title
+			,"start"
+			,"end"
+			,gallery_template
+		)
+		values(
+			gallery_seq.nextval
+			,#{title}
+			,#{start}
+			,#{end}
+			,#{gallery_template}
+		)
+	</insert>
+
+	<insert id="workWrite" parameterType="work">
+		insert into work(
+		    work_seq
+		    ,gallery_seq
+		    ,work_originalFileName
+		    ,work_savedFileName
+		    ,work_name
+		    ,work_description
+		)values(
+		    #{work_seq}
+		    ,#{gallery_seq}
+		    ,#{work_originalFileName}
+		    ,#{work_savedFileName}
+		    ,#{work_name}
+		    ,#{work_description}
+		)
+	</insert>
+
+	<select id="gallery_Seq" resultType="int">
+		select
+    		gallery_seq.nextval
+    	from
+    		dual
+	</select>
+
+
+</mapper>
