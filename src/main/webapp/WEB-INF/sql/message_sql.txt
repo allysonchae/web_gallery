@@ -1,0 +1,17 @@
+create chatroom_seq;
+
+create table room_lists(
+	room_no number not null
+	,constraint chatid_fk foreign key(member_id)
+	 references member(member_id) on delete cascade
+	,room_date date default sysdate
+	 );
+	 
+create message_room(
+	constraint room_fk foreign key(room_no)
+	references room_lists(room_no) on delete cascade
+	,
+	,constraint chatid_fk foreign key(member_id)
+	references member(member_id) on delete cascade
+	,chat_date date default sysdate
+	);

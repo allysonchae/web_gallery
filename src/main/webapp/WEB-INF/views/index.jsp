@@ -10,7 +10,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Web Art Portal</title>
+    <title>Onex</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -102,7 +102,7 @@
                 <div class="col-lg-12">
                     <div class="hero__text">
                         <span></span>
-                        <h1>Web Art Portal</h1>
+                        <h1>Onex</h1>
                         <p>Web Portal for online exhibition</p>
                     </div>
                 </div>
@@ -323,7 +323,7 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>Onex@gmail.com</h6>
                             </li>
                         </ul>
                     </div>

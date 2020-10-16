@@ -10,7 +10,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Web Art Portal</title>
+    <title>Onex</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/resources/css/message.css" type="text/css">
     
     <style type="text/css">
     	#member_info{
@@ -32,6 +33,16 @@
     	}
     
     </style>
+   <!-- 채팅 웹 소켓 --> 
+    <script type="text/javascript">
+	var webSocket;
+	var member_id = document.getElementByID("member_info").value;
+	
+	function openSocket() {
+		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + "/" + member_id);
+		}
+
+    </script>
 </head>
 
 <body>
@@ -39,7 +50,6 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
     <!-- Header Section Begin -->
     <header class="header header--normal">
         <div class="container">
@@ -95,7 +105,7 @@
         </div>
     </header>
     <!-- Header Section End -->
-
+    
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -111,41 +121,81 @@
     </div>
     <!-- Breadcrumb End -->
 
+<div class="container py-5 px-4">
 
-    <!-- Blog Details Section Begin -->
-    <section class="blog-details spad">
-        <div class="container">
-            <div class="row">
-            <div class="col-lg-4">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__item">
-                            <div class="blog__sidebar__title">
-                                <h4>쪽지</h4>
-                            </div>
-                            <table border="1">
-                            
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="blog__details__content">                     
-                        
-                        <div class="blog__details__form">
-                            <div class="blog__details__form__title">
-                                <h4>Chat Log</h4>
-                            </div>
-                            <form action="#"><!-- 채팅 대화 입력창 -->
-                                <textarea placeholder="Comment"></textarea>
-                                <button type="submit" class="site-btn">SEND MESSAGE</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="row rounded-lg overflow-hidden shadow">
+    <!-- Users box-->
+    <div class="col-5 px-0">
+      <div class="bg-white">
+
+        <div class="bg-gray px-4 py-2 bg-light">
+          <p class="h5 mb-0 py-1">Recent Messages</p>
         </div>
-    </section>
-    <!-- Blog Details Section End -->
+
+        <div class="messages-box">
+          <div class="list-group rounded-0">
+            <a class="list-group-item list-group-item-action active text-white rounded-0">
+              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                <div class="media-body ml-4">
+                  <div class="d-flex align-items-center justify-content-between mb-1">
+                    <h6 class="mb-0">JasonD</h6><small class="small font-weight-bold">25 Dec</small>
+                  </div>
+                  </div>
+              </div>
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                <div class="media-body ml-4">
+                  <div class="d-flex align-items-center justify-content-between mb-1">
+                    <h6 class="mb-0">Joe</h6><small class="small font-weight-bold">14 Dec</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Chat Box-->
+    <div class="col-7 px-0">
+      <div class="px-4 py-5 chat-box bg-white">
+        <!-- Sender Message-->
+        <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+          <div class="media-body ml-3">
+            <div class="bg-light rounded py-2 px-3 mb-2">
+              <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>
+
+        <!-- Reciever Message-->
+        <div class="media w-50 ml-auto mb-3">
+          <div class="media-body">
+            <div class="bg-primary rounded py-2 px-3 mb-2">
+              <p class="text-small mb-0 text-white">Test which is a new approach to have all solutions</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- Typing area -->
+      <form action="#" class="bg-light">
+        <div class="input-group">
+          <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+          <div class="input-group-append">
+            <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
@@ -162,7 +212,7 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>Onex@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
@@ -201,6 +251,7 @@
     <script src="/resources/js/jquery.slicknav.js"></script>
     <script src="/resources/js/owl.carousel.min.js"></script>
     <script src="/resources/js/main.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <!-- Music Plugin -->
     <script src="/resources/js/jquery.jplayer.min.js"></script>
