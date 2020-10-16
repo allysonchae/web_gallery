@@ -1,5 +1,7 @@
 package com.proj.web.dao;
 
+import java.util.HashMap;
+
 import com.proj.web.vo.MemberVO;
 
 public interface MemberMapper {
@@ -19,5 +21,9 @@ public interface MemberMapper {
 	public String pwFind(MemberVO member);
 
 	public void pwChange(MemberVO member);
+
+	public HashMap<String, String> memberSelectOneAll(String member_id);
+
+	public void memberUpdate(MemberVO member);
 	
 }

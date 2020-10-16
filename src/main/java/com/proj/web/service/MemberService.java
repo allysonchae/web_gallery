@@ -1,5 +1,7 @@
 package com.proj.web.service;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,8 @@ public class MemberService {
 		System.out.println("서비스까지 받아온 데이터 : " + loginCheck);
 		String page = "";
 		if(loginCheck != null && member.getMember_pw().equals(loginCheck.getMember_pw())){
-			session.setAttribute("loginID", loginCheck.getMember_nickname());
+			session.setAttribute("loginNickName", loginCheck.getMember_nickname());
+			session.setAttribute("loginID", loginCheck.getMember_id());
 			page = "redirect:/";
 		}else {
 			page = "redirect:/member/memberLoginPage";
@@ -63,6 +66,16 @@ public class MemberService {
 
 	public void pwChange(MemberVO member) {
 		dao.pwChange(member);
+	}
+
+	public HashMap<String, String> memberSelectOneAll(String member_id) {
+		HashMap<String, String> hash = new HashMap<String, String>();
+		hash = dao.memberSelectOneAll(member_id);
+		return hash;
+	}
+
+	public void memberUpdate(MemberVO member) {
+		dao.memberUpdate(member);
 	}
 
 }

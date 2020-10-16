@@ -156,6 +156,7 @@
 				if(data==1){
 					$("#nicknameCheck").text("사용중인 아이디입니다");
 					$("#nicknameCheck").css("color","red");
+					$("#join_submit").attr("disabled", true);
 				}else{
 					$("#nicknameCheck").text("사용가능한 아이디입니다");
 					$("#nicknameCheck").css("color","green");

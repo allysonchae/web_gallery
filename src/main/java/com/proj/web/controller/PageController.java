@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MemberVO;
 
+import com.proj.web.service.MemberService;
+import com.proj.web.vo.MemberVO;
+
 /**
  * Handles requests for the application home page.
  */
@@ -35,9 +41,13 @@ public class PageController {
 	@Autowired
 	private InformationService is;
 	
+	@Autowired
+	private MemberService service;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "/index";
@@ -138,7 +148,15 @@ public class PageController {
 	
 	//내 정보
 	@RequestMapping(value="/myPage",method=RequestMethod.GET)
-	public String contact() {
+	public String contact(HttpSession session, Model model) {
+		String member_id = (String)session.getAttribute("loginID");
+		String member_nickname = (String)session.getAttribute("loginNickName");
+		HashMap<String, String> hash = new HashMap<String, String>();
+		
+		hash = service.memberSelectOneAll(member_id);
+		model.addAttribute("hash", hash);
+		model.addAttribute("loginNickName", member_nickname);
+		
 		return "/myPage";
 	}
 	

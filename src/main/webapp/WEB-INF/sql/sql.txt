@@ -7,7 +7,50 @@ create table member(
     ,member_indate          date            default sysdate
 );
 
-create table userAuth(
-    userEmail   varchar2(100) primary key
-    ,authKey    varchar2(100)
+create table gallery(
+	gallery_seq number primary key
+	,member_id varchar2(50)
+	,title varchar2(1000) not null
+	,"start" date not null
+	,"end" date not null
+	,gallery_indate date default sysdate
+	,gallery_like number default 0
+	,gallery_template number not null
+	,constraint gallery_fk foreign key(member_id)
+		references member(member_id) on delete cascade
 );
+
+create table work(
+	gallery_seq number not null
+	,work_originalFileName varchar2(1000) not null
+	,work_savedFileName varchar2(1000) not null
+	,work_name varchar2(1000) not null
+	,work_description varchar2(4000) not null
+	,constraint work_fk foreign key(gallery_seq)
+		references gallery(gallery_seq) on delete cascade
+);
+
+create table reply(
+	reply_seq number primary key
+	,gallery_seq number not null
+	,reply_text varchar2(2000) not null
+	,member_id varchar2(50) not null
+	,reply_indate date default sysdate
+	,constraint reply_fk foreign key(gallery_seq)
+		references gallery(gallery_seq) on delete cascade
+);
+
+create table information(
+	information_title varchar2(1000) not null
+	,information_detail varchar2(3000) not null
+	,information_indate date default sysdate
+	,information_writer varchar2(50) not null
+);
+
+
+create sequence gallery_seq;
+
+create sequence reply_seq;
+
+commit;
+
