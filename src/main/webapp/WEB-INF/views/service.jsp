@@ -118,13 +118,12 @@
                 <div class="col-lg-6 p-0">
                     <div class="skills__content">
                         <div class="section-title">
-                            <h2>DJ Alexandra Rud</h2>
-                            <h1>DJâs skill</h1>
+                            <h2>Our Service</h2>
+                            <h1>This is what we do</h1>
                         </div>
-                        <p>DJ Rainflow knows how to move your mind, body and soul by delivering tracks that stand out
-                            from the norm.</p>
+                        <p>전문가와 취미 상관없이 ~~~</p>
                         <div class="skill__bar__item">
-                            <p>Perform</p>
+                            <p>For Everyone</p>
                             <div id="bar1" class="barfiller">
                                 <span class="tip"></span>
                                 <span class="fill" data-percentage="95"></span>
@@ -168,13 +167,12 @@
                 <div class="col-lg-6">
                     <div class="about__text">
                         <div class="section-title">
-                            <h2>He heard something that he knew to be music</h2>
+                            <h2>나의 모든 재능을 선보이다</h2>
                         </div>
                         <p>At vero eos et accusamus et iusto odi odgnissimos ducimus qui blanditiis praesentium volup
                             tatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
                             cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi quod
                             justo pro an.</p>
-                        <img src="/resources/img/about/signature.png" alt="">
                     </div>
                 </div>
             </div>

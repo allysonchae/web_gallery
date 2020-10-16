@@ -103,7 +103,7 @@
                     <div class="hero__text">
                         <span></span>
                         <h1>Onex</h1>
-                        <p>Web Portal for online exhibition</p>
+                        <p>Web Portal for ONline EXhibition</p>
                     </div>
                 </div>
             </div>
@@ -254,51 +254,41 @@
     </section>
     <!-- Event Section End -->
 
-    <!-- Services Section Begin -->
-    <section class="services">
+    <!-- About Pic Begin(하단에 사진 왕창 들어가는곳) -->
+    <div class="about-pic">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 p-0">
-                    <div class="services__left set-bg" data-setbg="/resources/img/services/service-left.jpg">
-                        <a href="https://www.youtube.com/watch?v=JGwWNGJdvx8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
+                            <img src="/resources/img/about/ap-1.jpg" alt="">
+                            <img src="/resources/img/about/ap-2.jpg" alt="">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
+                            <img src="/resources/img/about/ap-3.jpg" alt="">
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 p-0">
-                    <div class="row services__list">
-                        <div class="col-lg-6 p-0 order-lg-1 col-md-6 order-md-1">
-                            <div class="service__item deep-bg">
-                                <img src="/resources/img/services/service-1.png" alt="">
-                                <h4>Wedding</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                            </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
+                            <img src="/resources/img/about/ap-4.jpg" alt="">
                         </div>
-                        <div class="col-lg-6 p-0 order-lg-2 col-md-6 order-md-2">
-                            <div class="service__item">
-                                <img src="/resources/img/services/service-2.png" alt="">
-                                <h4>Clubs and bar</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                            </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
+                            <img src="/resources/img/about/ap-5.jpg" alt="">
                         </div>
-                        <div class="col-lg-6 p-0 order-lg-4 col-md-6 order-md-4">
-                            <div class="service__item deep-bg">
-                                <img src="/resources/img/services/service-4.png" alt="">
-                                <h4>DJ lessons</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                            </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
+                            <img src="/resources/img/about/ap-6.jpg" alt="">
                         </div>
-                        <div class="col-lg-6 p-0 order-lg-3 col-md-6 order-md-3">
-                            <div class="service__item">
-                                <img src="/resources/img/services/service-3.png" alt="">
-                                <h4>Corporate events</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                            </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
+                            <img src="/resources/img/about/ap-7.jpg" alt="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Services Section End -->
+    </div>
+    <!-- About Pic End -->
 
     <!-- Countdown Section Begin -->
     <section class="countdown spad set-bg" data-setbg="">

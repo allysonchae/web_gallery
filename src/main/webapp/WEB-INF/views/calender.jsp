@@ -271,42 +271,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </section>
     <!-- Blank Section End -->
 
-    <!-- About Pic Begin(하단에 사진 왕창 들어가는곳) -->
-    <div class="about-pic">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-1.jpg" alt="">
-                            <img src="/resources/img/about/ap-2.jpg" alt="">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-3.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-4.jpg" alt="">
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-5.jpg" alt="">
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-6.jpg" alt="">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-7.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About Pic End -->
-
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
         <div class="container">
