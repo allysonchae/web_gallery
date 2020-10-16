@@ -113,6 +113,7 @@
 	<!-- Event Section Begin 1-->
     <section class="event spad">
         <div class="container">
+        <!--  -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
@@ -120,60 +121,22 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="event__slider owl-carousel">
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-3.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
+					<c:forEach items="${pList }" var="pList" varStatus="status">
+	                    <div class="col-lg-4">
+	                        <div class="event__item">
+                            	<div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">${pList.WORK_ORIGINALFILENAME }
+	                                <div class="tag-date">
+	                                    <a href="">
+	                                    	<span>${pList.TITLE }</span>
+	                                    </a>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+           			</c:forEach>
                 </div>
             </div>
         </div>
@@ -183,6 +146,7 @@
     <!-- Event Section Begin 2-->
     <section class="event spad">
         <div class="container">
+        <!--  -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
@@ -190,168 +154,28 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="event__slider owl-carousel">
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-3.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
+					<c:forEach items="${fList }" var="fList" varStatus="status">
+	                    <div class="col-lg-4">
+	                        <div class="event__item">
+                            	<div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">${fList.WORK_ORIGINALFILENAME }
+	                                <div class="tag-date">
+	                                    <a href="">
+	                                    	<span>${fList.TITLE }</span>
+	                                    </a>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+           			</c:forEach>
                 </div>
             </div>
         </div>
     </section>
     <!-- Event Section End -->
 
-    <!-- Discography Section Begin -->
-    <section class="discography spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title center-title">
-                        <h2>Popular</h2>
-                        <h1>Popular</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/resources/img/discography/disco-1.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text">
-                            <span>$ 52.00</span>
-                            <h4>EDM Party Electro House</h4>
-                            <a href="#"><img src="/resources/img/discography/link-1.jpg" alt=""></a>
-                            <a href="#"><img src="/resources/img/discography/link-2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/resources/img/discography/disco-2.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text">
-                            <span>$ 52.00</span>
-                            <h4>EDM Party Electro House</h4>
-                            <a href="#"><img src="/resources/img/discography/link-1.jpg" alt=""></a>
-                            <a href="#"><img src="/resources/img/discography/link-2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/resources/img/discography/disco-3.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text">
-                            <span>$ 52.00</span>
-                            <h4>EDM Party Electro House</h4>
-                            <a href="#"><img src="/resources/img/discography/link-1.jpg" alt=""></a>
-                            <a href="#"><img src="/resources/img/discography/link-2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/resources/img/discography/disco-4.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text">
-                            <span>$ 52.00</span>
-                            <h4>EDM Party Electro House</h4>
-                            <a href="#"><img src="/resources/img/discography/link-1.jpg" alt=""></a>
-                            <a href="#"><img src="/resources/img/discography/link-2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/resources/img/discography/disco-5.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text">
-                            <span>$ 52.00</span>
-                            <h4>EDM Party Electro House</h4>
-                            <a href="#"><img src="/resources/img/discography/link-1.jpg" alt=""></a>
-                            <a href="#"><img src="/resources/img/discography/link-2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/resources/img/discography/disco-6.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text">
-                            <span>$ 52.00</span>
-                            <h4>EDM Party Electro House</h4>
-                            <a href="#"><img src="/resources/img/discography/link-1.jpg" alt=""></a>
-                            <a href="#"><img src="/resources/img/discography/link-2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="pagination__links">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">Next</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Discography Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">

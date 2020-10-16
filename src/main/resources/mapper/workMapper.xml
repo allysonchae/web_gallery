@@ -30,7 +30,7 @@
 		    ,work_description
 		)values(
 		    #{work_seq}
-		    ,#{gallery_seq}
+		    ,#{id}
 		    ,#{work_originalFileName}
 		    ,#{work_savedFileName}
 		    ,#{work_name}
@@ -44,6 +44,78 @@
     	from
     		dual
 	</select>
+	
+	<select id="workRead" resultType="hashmap">
+		select
+    		g.gallery_seq as id
+    		,g.member_id as member_id
+   		 	,g.title as title
+   		 	,g.gallery_template as gallery_template
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_seq as work_seq
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+		    ,to_char(g."end",'yyyy-mm-dd') as "end"
+		from
+		    gallery g, work w
+		where
+            w.work_seq = 0
+	</select>
+	
+	<select id="gallerySelectAll" resultType="gallery">
+		select
+    		gallery_seq as id
+    		,member_id 
+    		,title 
+    		,"start" 
+   			,"end" 
+		from
+    		gallery
+	</select>	
+	
+	<select id="presentWork" parameterType="int" resultType="work">
+		select
+    		work_originalFileName
+    		,work_savedFileName 
+		from
+    		work
+		where
+    		work_seq = 0
+		and
+    		gallery_seq = #{id}
+	</select>
+	
+	<select id="presentGallery" parameterType="int" resultType="gallery">
+		select
+    		gallery_seq as id
+    		,member_id 
+    		,title 
+    		,"start" 
+   			,"end" 
+		from
+    		gallery
+		where
+			gallery_seq = #{id}
+	</select>
+	
+	<select id="informationGalleryJsp" parameterType="int" resultType="hashmap">
+		select
+		    g.gallery_seq
+		    ,g.member_id
+		    ,g.title
+		    ,w.work_originalFileName
+		    ,w.work_savedFileName
+		from
+		    gallery g
+		    ,work w
+		where
+		    g.gallery_seq = w.gallery_seq
+		and
+		    w.work_seq = 0
+		and
+		    g.gallery_seq = #{id}
+	</select>
+	
 
 
 </mapper>

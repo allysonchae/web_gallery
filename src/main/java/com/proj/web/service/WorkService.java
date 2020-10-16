@@ -1,6 +1,12 @@
 package com.proj.web.service;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +26,8 @@ public class WorkService {
 
 	@Autowired
 	private WorkDAO dao;
+	@Autowired
+	private WorkService se;
 	
 	private String uploadPath = "/boardTest";
 	
@@ -40,7 +48,7 @@ public class WorkService {
 					work.setWork_savedFileName(savedfile);
 					work.setWork_originalFileName(upload[i].getOriginalFilename());
 				
-					work.setGallery_seq(cnt);
+					work.setId(cnt);
 					System.out.println(i+1 +"번째 서비스 저장 : work"+ work);
 					dao.workWrite(work);
 				} 
@@ -49,6 +57,160 @@ public class WorkService {
 		
 		return "redirect:/";
 		
+	}
+	
+	//모든 전시회 가저오기
+	public ArrayList<HashMap<String, Object>> workRead(){
+
+		ArrayList<HashMap<String, Object>> list = dao.workRead();
+
+		return list;
+	}
+	
+	
+	//현재 진행중인 작품 파일 가져오기
+	public ArrayList<WorkVO> workPresent(){
+		
+		ArrayList<WorkVO> persentWork = new ArrayList<WorkVO>();
+		ArrayList<Integer> list = se.presentGallerySeqNum();
+		
+		for(int i = 0 ; i < list.size() ; i++) {
+			int id = list.get(i);
+			WorkVO work = dao.presentWork(id);
+			persentWork.add(work);
+		}
+		
+		return persentWork;
+		
+	}
+	
+	
+	//현재 진행중인 갤러리 가져오기
+	public ArrayList<GalleryVO> presentGallery(){
+		
+		ArrayList<GalleryVO> presentGallery = new ArrayList<GalleryVO>();
+		ArrayList<Integer> list = se.presentGallerySeqNum();
+		
+		for(int i = 0 ; i < list.size() ; i++) {
+			presentGallery.add(dao.presentGallery(list.get(i)));
+		}
+		
+		return presentGallery;
+		
+	}
+	
+	//갤러리 jsp에서 사용할 현재 진행중인 전시 정보 가져오기
+	public ArrayList<HashMap<String, Object>> presentGalleryJsp(){
+		
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		ArrayList<Integer> idList = se.presentGallerySeqNum();
+		
+		for(int i = 0 ; i < idList.size() ; i++) {
+			list.add(dao.informationGalleryJsp(idList.get(i)));
+		}
+		
+		return list;
+		
+	}
+	
+	//갤러리 jsp에서 사용할 전시 예정중인 정보 가져오기
+	public ArrayList<HashMap<String, Object>> futureGalleryJsp(){
+		
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		ArrayList<Integer> idList = se.futureGallerySeqNum();
+		
+		for(int i = 0 ; i < idList.size() ; i++) {
+			list.add(dao.informationGalleryJsp(idList.get(i)));
+		}
+		
+		return list;
+		
+	}
+	
+	//전시예정 중인 갤러리 시퀀스 번호 가져오기
+	public ArrayList<Integer> futureGallerySeqNum(){
+		
+		ArrayList<GalleryVO> tempList = dao.gallerySelectAll();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Calendar time = Calendar.getInstance();
+		String presentDateTemp = sdf.format(time.getTime());
+		
+		for(int i = 0 ; i < tempList.size() ; i++) {
+			
+			GalleryVO g = tempList.get(i);
+			
+			String startDateTemp = g.getStart();
+			System.out.println("시작날짜 : "+startDateTemp);
+			String endDateTemp = g.getEnd();
+			System.out.println("끝나는날짜 : "+endDateTemp);
+			
+			java.util.Date startDate = null;
+			java.util.Date endDate = null;
+			java.util.Date presentDate = null;
+			
+			try {
+				startDate = sdf.parse(startDateTemp);
+				endDate = sdf.parse(endDateTemp);
+				presentDate = sdf.parse(presentDateTemp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if(startDate.after(presentDate)) {
+				System.out.println("전시 예정 중인 갤러리 시퀀스 :"+g.getId());
+				list.add(g.getId());
+			}
+		}
+			
+			return list;
+		
+	}
+	
+	
+	//현재 진행 중인 갤러리 시퀀스 가져오기
+	public ArrayList<Integer> presentGallerySeqNum(){
+		
+		ArrayList<GalleryVO> tempList = dao.gallerySelectAll();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Calendar time = Calendar.getInstance();
+		String presentDateTemp = sdf.format(time.getTime());
+		
+		for(int i = 0 ; i < tempList.size() ; i++) {
+			
+			GalleryVO g = tempList.get(i);
+			
+			String startDateTemp = g.getStart();
+			System.out.println("시작날짜 : "+startDateTemp);
+			String endDateTemp = g.getEnd();
+			System.out.println("끝나는날짜 : "+endDateTemp);
+			
+			java.util.Date startDate = null;
+			java.util.Date endDate = null;
+			java.util.Date presentDate = null;
+			
+			try {
+				startDate = sdf.parse(startDateTemp);
+				endDate = sdf.parse(endDateTemp);
+				presentDate = sdf.parse(presentDateTemp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if(startDate.before(presentDate)) {
+				if(endDate.after(presentDate)) {
+					System.out.println("현재 전시중인 갤러리 시퀀스 :"+g.getId());
+					list.add(g.getId());
+				}
+			}
+		}
+		
+		return list;
 	}
 	
 }

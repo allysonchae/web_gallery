@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.web.service.CalendarService;
 import com.proj.web.service.InformationService;
+import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.WorkVO;
 
 /**
  * Handles requests for the application home page.
@@ -34,6 +36,8 @@ public class PageController {
 	private CalendarService cs;
 	@Autowired
 	private InformationService is;
+	@Autowired
+	private WorkService ws;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -64,7 +68,17 @@ public class PageController {
 	
 	//현재 오픈된 갤러리
 	@RequestMapping(value="/gallery",method=RequestMethod.GET)
-	public String gallery() {
+	public String gallery(Model model) {
+		
+		ArrayList<HashMap<String, Object>> pList = ws.presentGalleryJsp();
+		ArrayList<HashMap<String, Object>> fList = ws.futureGalleryJsp();
+		
+		logger.info("pList : {}",pList);
+		logger.info("fList : {}",fList);
+		
+		model.addAttribute("pList",pList);
+		model.addAttribute("fList",fList);
+		
 		return "/gallery";
 	}
 	
@@ -87,7 +101,6 @@ public class PageController {
 	//이벤트 예정달력확인
 	@RequestMapping(value="/calender",method=RequestMethod.GET)
 	public String tours() {
-		
 		return "/calender";
 	}
 	
