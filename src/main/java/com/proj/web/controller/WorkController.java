@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -57,33 +58,39 @@ public class WorkController {
 		return page;
 	}
 	
-//	@RequestMapping(value = "/download", method = RequestMethod.GET)
-//	public void download(int board_no, HttpServletResponse response) {
-//		
-//		String originalFile = board.getOriginalfile();
-//		
-//		try {
-//			response.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(originalFile, "utf-8"));
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		FileInputStream filein = null;
-//		ServletOutputStream fileout = null;
-//		
-//		String fullPath = uploadPath+"/"+board.getSavedfile();
-//		
-//		try {
-//			filein = new FileInputStream(fullPath);
-//			fileout = response.getOutputStream();
-//			
-//			FileCopyUtils.copy(filein, fileout);
-//			
-//			filein.close();
-//			fileout.close();
-//		}catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	public void download(String id, String work_seq, HttpServletResponse response) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("work_seq", work_seq);
+		
+		WorkVO work = ws.selectWorkOne(map);
+		
+		String originalFile = work.getWork_originalFileName();
+		
+		try {
+			response.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(originalFile, "utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		FileInputStream filein = null;
+		ServletOutputStream fileout = null;
+		
+		String fullPath = uploadPath+"/"+work.getWork_savedFileName();
+		
+		try {
+			filein = new FileInputStream(fullPath);
+			fileout = response.getOutputStream();
+			
+			FileCopyUtils.copy(filein, fileout);
+			
+			filein.close();
+			fileout.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

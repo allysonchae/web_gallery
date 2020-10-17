@@ -25,12 +25,16 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     
     <style type="text/css">
     	#member_info{
     		color:white;	
     	}
-    
+    	
+    	a:hover{
+    		color:blue;
+    	}
     </style>
 </head>
 
@@ -122,30 +126,25 @@
                 </div>
             </div>
             
-            <script type="text/javascript">
-				$(function{
-					$("#insertImage").attr("data-setbg","/resources/imagesTemp/image1.jpg");
-				});
-            </script>
-            
+			
             <div class="row">
                 <div class="event__slider owl-carousel">
 					<c:forEach items="${pList }" var="pList" varStatus="status">
 	                    <div class="col-lg-4">
 	                        <div class="event__item">
-                            	<div id="insertImage" class="event__item__pic set-bg">${pList.WORK_ORIGINALFILENAME }
+                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${pList.WORK_SEQ }&id=${pList.GALLERY_SEQ }">
 	                                <div class="tag-date">
 	                                    <a href="/galleryDetail?gallery_seq=${pList.GALLERY_SEQ }">
 	                                    	<span>${pList.TITLE }</span>
 	                                    </a>
 	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-           			</c:forEach>
-                </div>
+                                </div>
+                            </div>
+                        </div>
+         			</c:forEach>
+                  </div>
+               </div>
             </div>
-        </div>
     </section>
     <!-- Event Section End -->
     
@@ -166,7 +165,7 @@
 					<c:forEach items="${fList }" var="fList" varStatus="status">
 	                    <div class="col-lg-4">
 	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="">${fList.WORK_ORIGINALFILENAME }
+                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${fList.WORK_SEQ }&id=${fList.GALLERY_SEQ }">
 	                                <div class="tag-date">
 	                                    <a href="/galleryDetail?gallery_seq=${fList.GALLERY_SEQ }">
 	                                    	<span>${fList.TITLE }</span>
@@ -229,7 +228,6 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script src="/resources/js/jquery.nicescroll.min.js"></script>

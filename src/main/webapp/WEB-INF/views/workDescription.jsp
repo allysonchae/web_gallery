@@ -31,11 +31,10 @@
 </script>
 </head>
 <body>
-	${work }
 	<div class="wrap">
 		<table id="tb">
 			<tr>
-				<td><img src="/resources/images/image1.jpg">${work.work_originalFileName }</td>
+				<td><img src="/download?work_seq=${work_seq }&id=${id }"></td>
 				<td>
 					<div class="title"><h1>${work.work_name }</h1></div>
 			     	<div class="contents">

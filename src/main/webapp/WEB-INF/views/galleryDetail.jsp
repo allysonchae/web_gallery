@@ -22,7 +22,7 @@
     <c:forEach items="${list }" var="list" varStatus="status">
       <div class="swiper-slide">
       	<a href="/workDescription?work_seq=${list.WORK_SEQ}&id=${list.ID }">
-      		<img src="">${list.WORK_ORIGINALFILENAME }
+      		<img src="/download?work_seq=${list.WORK_SEQ }&id=${list.ID }" style="width:300px; height: 300px">
       	</a>
       </div>
     </c:forEach>
@@ -30,8 +30,6 @@
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
   </div>
-  
-  ${list }
 
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -50,6 +48,9 @@
         modifier: 1,
         slideShadows: true,
       },
+      pagination: {
+          el: '.swiper-pagination',
+        },
     });
   </script>
 </body>

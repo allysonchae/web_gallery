@@ -105,6 +105,7 @@
 		    ,g.title
 		    ,w.work_originalFileName
 		    ,w.work_savedFileName
+		    ,w.work_seq
 		from
 		    gallery g
 		    ,work w

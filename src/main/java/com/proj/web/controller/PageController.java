@@ -1,16 +1,24 @@
 package com.proj.web.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +40,8 @@ public class PageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 
+	private String uploadPath = "/boardTest";
+	
 	@Autowired
 	private CalendarService cs;
 	@Autowired
@@ -68,13 +78,14 @@ public class PageController {
 	
 	//현재 오픈된 갤러리
 	@RequestMapping(value="/gallery",method=RequestMethod.GET)
-	public String gallery(Model model) {
+	public String gallery(Model model, HttpServletResponse response) {
 		
 		ArrayList<HashMap<String, Object>> pList = ws.presentGalleryJsp();
 		ArrayList<HashMap<String, Object>> fList = ws.futureGalleryJsp();
 		
 		logger.info("pList : {}",pList);
 		logger.info("fList : {}",fList);
+		
 		
 		model.addAttribute("pList",pList);
 		model.addAttribute("fList",fList);
@@ -93,7 +104,6 @@ public class PageController {
 		
 		HashMap<String, Object> map = list.get(0);
 		logger.info("map : {}",map);
-		
 		
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
@@ -116,6 +126,8 @@ public class PageController {
 		logger.info("work : {}", work);
 		
 		model.addAttribute("work", work);
+		model.addAttribute("work_seq", work_seq);
+		model.addAttribute("id", id);
 		
 		return "/workDescription";
 	}
