@@ -105,10 +105,16 @@ public class PageController {
 		HashMap<String, Object> map = list.get(0);
 		logger.info("map : {}",map);
 		
+		logger.info("gallery_templete : {}", map.get("GALLERY_TEMPLATE"));
+		String templeteNum = String.valueOf(map.get("GALLERY_TEMPLATE"));
+		
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
 		
-		return "/galleryDetail";
+		if(templeteNum.equals("1")) return "/cubeEffect";
+		else if(templeteNum.equals("2")) return "/coverflowEffect";
+		
+		return "/FlipEffect";
 	}
 	
 	@RequestMapping(value = "/workDescription", method = RequestMethod.GET)

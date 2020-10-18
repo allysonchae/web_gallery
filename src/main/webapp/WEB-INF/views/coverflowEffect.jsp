@@ -19,13 +19,13 @@
   <!-- Swiper -->
   <div class="swiper-container">
     <div class="swiper-wrapper">
-    <c:forEach items="${list }" var="list" varStatus="status">
-      <div class="swiper-slide">
-      	<a href="/workDescription?work_seq=${list.WORK_SEQ}&id=${list.ID }">
-      		<img src="/download?work_seq=${list.WORK_SEQ }&id=${list.ID }" style="width:300px; height: 300px">
-      	</a>
-      </div>
-    </c:forEach>
+	    <c:forEach items="${list }" var="list" varStatus="status">
+	      <div class="swiper-slide">
+	      	<a href="/workDescription?work_seq=${list.WORK_SEQ}&id=${list.ID }">
+	      		<img src="/download?work_seq=${list.WORK_SEQ }&id=${list.ID }" style="width:300px; height: 300px">
+	      	</a>
+	      </div>
+	    </c:forEach>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>

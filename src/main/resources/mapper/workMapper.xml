@@ -124,6 +124,7 @@
 		    ,w.work_savedFileName as work_savedFileName
 		    ,w.work_originalFileName as work_originalFileName
 		    ,w.work_seq as work_seq
+		    ,g.gallery_template  as gallery_template 
 		from
 		    gallery g, work w
 		where
