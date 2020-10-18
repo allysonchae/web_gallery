@@ -1,15 +1,23 @@
-package com.proj.web;
+package com.proj.web.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.proj.web.service.MemberService;
+import com.proj.web.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
@@ -19,9 +27,13 @@ public class PageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 	
+	@Autowired
+	private MemberService service;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "/index";
@@ -67,11 +79,12 @@ public class PageController {
 		return "/calender";
 	}
 	
-	//로그인
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String login() {
-		return "/login";
-	}
+	/*
+	 * //로그인
+	 * 
+	 * @RequestMapping(value="/login",method=RequestMethod.GET) public String
+	 * login() { return "/login"; }
+	 */
 	
 	//내 블로그
 	@RequestMapping(value="/blog",method=RequestMethod.GET)
@@ -79,15 +92,41 @@ public class PageController {
 		return "/blog";
 	}
 	
-	//쪽지함
-	@RequestMapping(value="/directMessage",method=RequestMethod.GET)
-	public String blog_details() {
-		return "/directMessage";
-	}
+	/*
+	 * //쪽지함
+	 * 
+	 * @RequestMapping(value="/directMessage",method=RequestMethod.GET) public
+	 * String blog_details() { return "/directMessage"; }
+	 */
 	
 	//내 정보
 	@RequestMapping(value="/myPage",method=RequestMethod.GET)
-	public String contact() {
+	public String contact(HttpSession session, Model model) {
+		String member_id = (String)session.getAttribute("loginID");
+		String member_nickname = (String)session.getAttribute("loginNickName");
+		HashMap<String, String> hash = new HashMap<String, String>();
+		
+		hash = service.memberSelectOneAll(member_id);
+		model.addAttribute("hash", hash);
+		model.addAttribute("loginNickName", member_nickname);
+		
 		return "/myPage";
 	}
+	
+	@RequestMapping(value = "/viewOpenCover", method = RequestMethod.GET)
+	public String openCube() {
+		return "viewOpenCover";
+	}
+	
+	@RequestMapping(value = "/viewOpenCube", method = RequestMethod.GET)
+	public String viewOpenCube() {
+		return "viewOpenCube";
+	}
+	
+	@RequestMapping(value = "/viewOpenFlip", method = RequestMethod.GET)
+	public String viewOpenFlip() {
+		return "viewOpenFlip";
+	}
+	
+	
 }

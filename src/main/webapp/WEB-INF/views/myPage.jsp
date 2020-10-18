@@ -25,6 +25,109 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    
+    <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+	    function update_cancel(){
+	    	location.href = "/member/memberLoginPage";
+	    }
+
+	    function update_submit(){
+			var member_id = document.getElementById("member_id").value;
+			var member_pw = document.getElementById("member_pw").value;
+			var member_pwck = document.getElementById("member_pwck").value;
+			var member_phone = document.getElementById("member_phone").value;
+			var member_name = document.getElementById("member_name").value;
+			var member_nickname = document.getElementById("member_nickname").value;
+
+			document.getElementById("user_id").value = member_id;
+			document.getElementById("user_pw").value = member_pw;
+			document.getElementById("user_phone").value = member_phone;
+			document.getElementById("user_name").value = member_name;
+			document.getElementById("user_nickname").value = member_nickname;
+			
+			if(member_pw==''||member_pw.length==0){
+				alert("비밀번호를 입력해 주세요");
+				return false;
+			}else if(member_pw.length<=2||member_pw.length>=11){
+				alert("비밀번호는 3~10글자 입니다");
+				return false;
+			}
+			
+			if(member_pw!=member_pwck){
+				alert("동일한 비밀번호를 입력해 주세요");
+				return false;
+				}
+			
+			if(member_phone==''||member_phone.length==0){
+				alert("전화번호를 입력해 주세요");
+				return false;
+				}
+
+			if(member_name==''||member_name.length==0){
+				alert("이름을 입력해 주세요");
+				return false;
+				}
+
+			if(member_nickname==''||member_nickname.length==0){
+				alert("닉네임을 입력해 주세요");
+				return false;
+			}else if(member_nickname.length<=2||member_nickname.length>=9){
+				alert("닉네임은 3~8글자 입니다");
+				return false;
+			}
+			
+			document.getElementById("updateForm").submit();
+			
+		}
+
+	    function checkNickname(){
+			$.ajax({
+				url:"/member/checkNickname",
+				data:{
+					member_nickname:$("#member_nickname").val()
+					},
+				success:function(data){
+					if(data==1){
+						$("#nicknameCheck").text("사용중인 아이디입니다");
+						$("#nicknameCheck").css("color","red");
+						$("#join_submit").attr("disabled", true);
+					}else{
+						$("#nicknameCheck").text("사용가능한 아이디입니다");
+						$("#nicknameCheck").css("color","green");
+						$("#join_submit").attr("disabled", false);
+					}
+				},
+				error:function(e){
+					alert("통신 실패");
+					console.log(e);
+					}
+			});
+		}
+
+	    $(function(){
+	    	$("#check_bt").attr("disabled", true);
+			
+			$("#member_nickname").on("keyup", function(e){
+				var txt = $(this).val();
+				var txt2= $("#loginNickName").val();
+				if(txt==txt2){
+					$("#check_bt").attr("disabled", true);
+				}else{
+					$("#check_bt").attr("disabled", false);
+				}
+				
+			});
+	
+		});
+    </script>
+    
+    <style type="text/css">
+    	#member_info{
+    		color:white;	
+    	}
+    	
+    </style>
 </head>
 
 <body>
@@ -62,14 +165,22 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="#">My Pages</a>
+                                <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/login">Login</a></li>
+                                <c:choose>
+									<c:when test="${sessionScope.loginNickName != null }">
+										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
+										<li><a href="logout">로그아웃</a></li>
+									</c:when>
+									<c:otherwise>
+		                                <li><a href="member/memberLoginPage">Login</a></li>
+									</c:otherwise>
+								</c:choose>
                             </ul>
                         </nav>
                     </div>
@@ -95,69 +206,86 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Map Begin -->
-    <div class="map">
-        <div class="container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.5524090066037!2d-71.10245469994108!3d42.47980730490846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3748250c43a43%3A0xe1b9879a5e9b6657!2sWinter%20Street%20Public%20Parking%20Lot!5e0!3m2!1sen!2sbd!4v1577299251173!5m2!1sen!2sbd"
-                height="585" style="border:0;" allowfullscreen=""></iframe>
-        </div>
-    </div>
-    <!-- Map End -->
-
     <!-- Contact Section Begin -->
     <section class="contact spad">
-        <div class="container">
-            <div class="row">
+        <div class="container" style="text-align: -webkit-center;">
                 <div class="col-lg-4">
-                    <div class="contact__address">
-                        <div class="section-title">
-                            <h2>Contact info</h2>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore.</p>
-                        <ul>
-                            <li>
-                                <i class="fa fa-map-marker"></i>
-                                <h5>Address</h5>
-                                <p>Los Angeles Gournadi, 1230 Bariasl</p>
-                            </li>
-                            <li>
-                                <i class="fa fa-phone"></i>
-                                <h5>Hotline</h5>
-                                <span>1-677-124-44227</span>
-                                <span>1-688-356-66889</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope"></i>
-                                <h5>Email</h5>
-                                <p>Support@gamail.com</p>
-                            </li>
-                        </ul>
-                    </div>
+	                    <div class="section-title center-title">
+	                        <h2>Member</h2>
+	                        <h1>Welcome!</h1>
+	                    </div>
+	                    <div id="div">
+							<table border="1" class="table table-bordered">
+								<tr>
+									<td>
+										아이디
+									</td>
+									<td>
+										<input type="text" name="member_id" id="member_id" value="${hash.MEMBER_ID }" readonly="readonly">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										비밀번호
+									</td>
+									<td>
+										<input type="password" name="member_pw" id="member_pw" placeholder="비밀번호"><div id="pwCheck"></div>	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										비밀번호 확인
+									</td>
+									<td>
+										<input type="password" id="member_pwck" placeholder="비밀번호 확인">	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										연락처
+									</td>
+									<td>
+										<input type="text" name="member_phone"  id="member_phone" value="${hash.MEMBER_PHONE }" placeholder="'-'없이 입력">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										이름
+									</td>
+									<td>
+										<input type="text" name="member_name" id="member_name" placeholder="이름" value="${hash.MEMBER_NAME }" readonly="readonly">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										닉네임
+									</td>
+									<td>
+										<input type="text" name="member_nickname" id="member_nickname" value="${hash.MEMBER_NICKNAME }" placeholder="닉네임" >
+										<input type="hidden" id="loginNickName" value="${hash.MEMBER_NICKNAME }">
+										<button onclick="checkNickname()" id="check_bt" class="btn btn-outline-secondary">중복 검사</button><div id="nicknameCheck"></div>
+									</td>
+								</tr>
+							</table><br>
+							<div class="join_st" style="text-align:center;">
+								<input type="button" value="취소" onclick="update_cancel()" class="btn btn-outline-secondary">
+								<input type="button" id="update_submit" onclick="update_submit()" value="수정" class="btn btn-outline-secondary">
+							</div>
+							<form action="/member/memberUpdate" method="post" id="updateForm">
+								<input type="hidden" name="member_id" id="user_id">
+								<input type="hidden" name="member_pw" id="user_pw">
+								<input type="hidden" name="member_phone" id="user_phone">
+								<input type="hidden" name="member_name" id="user_name">
+								<input type="hidden" name="member_nickname" id="user_nickname">
+							</form>
+							<br><br>
+	                    
+	                    </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="contact__form">
-                        <div class="section-title">
-                            <h2>Get in touch</h2>
-                        </div>
-                        <p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                            gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                        <form action="#">
-                            <div class="input__list">
-                                <input type="text" placeholder="Name">
-                                <input type="text" placeholder="Email">
-                                <input type="text" placeholder="Website">
-                            </div>
-                            <textarea placeholder="Comment"></textarea>
-                            <button type="submit" class="site-btn">SEND MESSAGE</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Contact Section End -->
+    
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">

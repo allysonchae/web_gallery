@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    
+    <style type="text/css">
+    	#member_info{
+    		color:white;	
+    	}
+    
+    </style>
 </head>
 
 <body>
@@ -62,14 +69,22 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li class="active"><a href="#">My Pages</a>
+                                <li class="active"><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/login">Login</a></li>
+                                <c:choose>
+									<c:when test="${sessionScope.loginNickName != null }">
+										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
+										<li><a href="logout">로그아웃</a></li>
+									</c:when>
+									<c:otherwise>
+		                                <li><a href="member/memberLoginPage">Login</a></li>
+									</c:otherwise>
+								</c:choose>
                             </ul>
                         </nav>
                     </div>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.web.dao.MemberMapper">
+	<insert id="memberJoin" parameterType="member">
+		insert into
+			member(
+				member_id
+				,member_pw
+				,member_phone
+				,member_name
+				,member_nickname
+			)values(
+				#{member_id}
+				,#{member_pw}
+				,#{member_phone}
+				,#{member_name}
+				,#{member_nickname}
+			)
+	</insert>
+	
+	<select id="memberSelectOneAll" parameterType="string" resultType="hashmap">
+		select
+			member_id
+			,member_pw
+			,member_name
+			,member_phone
+			,member_nickname
+			,member_indate
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
+	
+	<select id="memberSelectOneId" parameterType="string" resultType="int">
+		select
+			count(*)
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
+	
+	<select id="memberSelectOneNickname" parameterType="string" resultType="int">
+		select
+			count(*)
+		from
+			member
+		where
+			member_nickname = #{member_nickname}
+	</select>
+	
+	<select id="memberSelectOne" parameterType="string" resultType="member">
+		select
+			member_id
+			,member_pw
+			,member_name
+			,member_phone
+			,member_nickname
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
+	
+	<select id="memberSelectOneEm" parameterType="string" resultType="int">
+		select
+			count(*)
+		from
+			member
+		where
+			member_id = #{member_id}
+	</select>
+	
+	<select id="memberFind" parameterType="member" resultType="string">
+		select
+			member_id
+		from
+			member
+		where
+			member_name = #{member_name}
+			and member_phone = #{member_phone}
+	</select>
+	
+	<select id="pwFind" parameterType="member" resultType="string">
+		select
+			member_id
+		from
+			member
+		where
+			member_id = #{member_id}
+			and member_phone = #{member_phone}
+	</select>
+	
+	<update id="pwChange" parameterType="member">
+		update
+				member
+			set
+				member_pw = #{member_pw}
+			where
+				member_id = #{member_id}
+	</update>
+	
+	<update id="memberUpdate" parameterType="member">
+		update
+			member
+		set
+			member_pw = #{member_pw}
+			,member_phone = #{member_phone}
+			,member_name = #{member_name}
+			,member_nickname = #{member_nickname}
+		where
+			member_id = #{member_id}
+	</update>
+
+</mapper>
