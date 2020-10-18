@@ -86,7 +86,6 @@ public class PageController {
 		logger.info("pList : {}",pList);
 		logger.info("fList : {}",fList);
 		
-		
 		model.addAttribute("pList",pList);
 		model.addAttribute("fList",fList);
 		
@@ -136,6 +135,26 @@ public class PageController {
 		model.addAttribute("id", id);
 		
 		return "/workDescription";
+	}
+	
+	@RequestMapping(value = "/presentGallery", method = RequestMethod.GET)
+	public String presentGallery(Model model) {
+		
+		ArrayList<HashMap<String, Object>> pList = ws.presentGalleryJsp();
+		logger.info("pList : {}",pList);
+		model.addAttribute("pList",pList);
+		
+		return "/presentGallery";
+	}
+	
+	@RequestMapping(value = "/futureGallery", method = RequestMethod.GET)
+	public String futureGallery(Model model) {
+		
+		ArrayList<HashMap<String, Object>> fList = ws.futureGalleryJsp();
+		logger.info("fList : {}",fList);
+		model.addAttribute("fList",fList);
+		
+		return "/futureGallery";
 	}
 	
 	//오픈예정 갤러리
@@ -193,11 +212,6 @@ public class PageController {
 	 * login() { return "/login"; }
 	 */
 	
-	//내 블로그
-	@RequestMapping(value="/blog",method=RequestMethod.GET)
-	public String blog() {
-		return "/blog";
-	}
 	
 	/*
 	 * //쪽지함
