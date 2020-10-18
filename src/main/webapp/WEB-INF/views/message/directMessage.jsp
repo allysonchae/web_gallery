@@ -93,7 +93,7 @@
 										<li><a href="logout">로그아웃</a></li>
 									</c:when>
 									<c:otherwise>
-		                                <li><a href="member/memberLoginPage">Login</a></li>
+		                                <li><a href="/member/memberLoginPage">Login</a></li>
 									</c:otherwise>
 								</c:choose>
                             </ul>
