@@ -47,6 +47,7 @@ create table information(
 	,information_writer varchar2(50) not null
 );
 
+create sequence information_seq;
 
 create sequence gallery_seq;
 

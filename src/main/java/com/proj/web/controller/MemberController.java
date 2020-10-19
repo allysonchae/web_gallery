@@ -77,6 +77,7 @@ public class MemberController {
 		String email = "";
 		String str = "";
 		int cnt = 0;
+		int cnt2 = 0;
 		if(kakaoEmail!=null) {
 			cnt = service.emailCheck(kakaoEmail);
 		}else {
@@ -94,16 +95,28 @@ public class MemberController {
 				// 카카오로 회원가입 시도한 상황
 				name = kakaoName;
 				email = kakaoEmail;
-				hash.put("name", name);
-				hash.put("email", email);
-				model.addAttribute("map", hash);
+				cnt2 = service.emailCheck(email);
+				if(cnt2!=0) {
+					hash = service.memberSelectOneAll(email);
+					logger.info("컨트롤러 : {}", hash);
+					String nickName = hash.get("MEMBER_NICKNAME");
+					
+					session.setAttribute("loginID", email);
+					session.setAttribute("loginNickName", nickName);
+				}else {
+					hash.put("name", name);
+					hash.put("email", email);
+					model.addAttribute("map", hash);
+				}
 				return "member/memberJoinForm";
 			}
 			str = "member/memberJoinForm";
 		}else {
 			if(kakaoName!=null) {
-				session.setAttribute("loginID", kakaoName);
-				session.setAttribute("sessionEmail", kakaoEmail);
+				session.setAttribute("loginID", kakaoEmail);
+				hash = service.memberSelectOneAll(kakaoEmail);
+				String nickName = hash.get("MEMBER_NICKNAME");
+				session.setAttribute("loginNickName", nickName);
 			}
 			str = "redirect:/";
 		}

@@ -27,6 +27,42 @@
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
     
     <script src="/resources/js/kakao.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+    function loginCheck(){
+    	var member_id = document.getElementById("member_id").value;
+    	var member_pw = document.getElementById("member_pw").value;
+
+    	if(member_id==''||member_id.length==0){
+			alert("아이디를 입력해 주세요");
+			return false;
+			}else if(member_pw.length<=2||member_pw.length>=11){
+				alert("아이디는 3~10글자 입니다");
+				return false;
+			}
+
+    	if(member_pw==''||member_pw.length==0){
+			alert("비밀번호를 입력해 주세요");
+			return false;
+			}else if(member_pw.length<=2||member_pw.length>=11){
+				alert("비밀번호는 3~10글자 입니다");
+				return false;
+			}
+		/* 여기서 부터 하자자자자자자자자자ㅏ */
+		/* $("submit").click(function(){
+			var chk = 0;
+			$.ajax({
+				url:"/member/Login",
+				data:{
+					member_id:	
+				}
+
+				})
+			}) */
+    	return true;
+    }
+    
+    </script>
     
     <style type="text/css">
     	#login_st{
@@ -120,19 +156,19 @@
                         <h1>Welcome!</h1>
                     </div>
                     <div>
-                    	<form action="/member/Login" method="post">
+                    	<form action="/member/Login" method="post" onsubmit="return loginCheck();">
                         	<table id="login_st">
                         		<tr>
                         			<td>
-										<input type="text" name="member_id" placeholder="아이디">
+										<input type="text" name="member_id" id="memmber_id" placeholder="아이디">
                         			</td>
                         			<td rowspan="2">
-                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
+                        				<input type="submit" value="로그인" id="submit" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
                         			</td>
                         		</tr>
                         		<tr>
                         			<td>
-										<input type="password" name="member_pw" placeholder="비밀번호" >
+										<input type="password" name="member_pw" id="memmber_pw" placeholder="비밀번호" >
                         			</td>
                         		</tr>
                         		<tr>
