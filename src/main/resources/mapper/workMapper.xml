@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.web.dao.WorkMapper">
+
+	<insert id="galleryWrite" parameterType="gallery">
+		insert into gallery(
+			gallery_seq
+			,title
+			,"start"
+			,"end"
+			,gallery_template
+		)
+		values(
+			gallery_seq.nextval
+			,#{title}
+			,#{start}
+			,#{end}
+			,#{gallery_template}
+		)
+	</insert>
+
+	<insert id="workWrite" parameterType="work">
+		insert into work(
+		    work_seq
+		    ,gallery_seq
+		    ,work_originalFileName
+		    ,work_savedFileName
+		    ,work_name
+		    ,work_description
+		)values(
+		    #{work_seq}
+		    ,#{id}
+		    ,#{work_originalFileName}
+		    ,#{work_savedFileName}
+		    ,#{work_name}
+		    ,#{work_description}
+		)
+	</insert>
+
+	<select id="gallery_Seq" resultType="int">
+		select
+    		gallery_seq.nextval
+    	from
+    		dual
+	</select>
+	
+	<select id="workRead" resultType="hashmap">
+		select
+    		g.gallery_seq as id
+    		,g.member_id as member_id
+   		 	,g.title as title
+   		 	,g.gallery_template as gallery_template
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_seq as work_seq
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+		    ,to_char(g."end",'yyyy-mm-dd') as "end"
+		from
+		    gallery g, work w
+		where
+            w.work_seq = 0
+	</select>
+	
+	<select id="gallerySelectAll" resultType="gallery">
+		select
+    		gallery_seq as id
+    		,member_id 
+    		,title 
+    		,"start" 
+   			,"end" 
+		from
+    		gallery
+	</select>	
+	
+	<select id="presentWork" parameterType="int" resultType="work">
+		select
+    		work_originalFileName
+    		,work_savedFileName 
+		from
+    		work
+		where
+    		work_seq = 0
+		and
+    		gallery_seq = #{id}
+	</select>
+	
+	<select id="presentGallery" parameterType="int" resultType="gallery">
+		select
+    		gallery_seq as id
+    		,member_id 
+    		,title 
+    		,"start" 
+   			,"end" 
+		from
+    		gallery
+		where
+			gallery_seq = #{id}
+	</select>
+	
+	<select id="informationGalleryJsp" parameterType="int" resultType="hashmap">
+		select
+		    g.gallery_seq
+		    ,g.member_id
+		    ,g.title
+		    ,w.work_originalFileName
+		    ,w.work_savedFileName
+		    ,w.work_seq
+		from
+		    gallery g
+		    ,work w
+		where
+		    g.gallery_seq = w.gallery_seq
+		and
+		    w.work_seq = 0
+		and
+		    g.gallery_seq = #{id}
+	</select>
+	
+	<select id="selectGalleryOne" parameterType="int" resultType="hashmap">
+		select
+    		g.gallery_seq as id
+   		 	,g.title as title
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_seq as work_seq
+		    ,g.gallery_template as gallery_template 
+		from
+		    gallery g, work w
+		where
+			 g.gallery_seq = w.gallery_seq
+    	and
+            g.gallery_seq = #{gallery_seq}
+	</select>
+	
+	
+	<select id="selectWorkOne" parameterType="hashmap" resultType="work">
+		select
+    		work_description
+    		,work_name
+    		,work_originalfilename
+    		,work_savedfilename
+		from
+    		work
+		where
+    		gallery_seq = #{id}
+		and
+    		work_seq = #{work_seq}
+	</select>
+	
+
+
+</mapper>
