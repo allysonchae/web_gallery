@@ -235,4 +235,13 @@ public class WorkService {
 		return list;
 	}
 	
+	
+	public ArrayList<HashMap<String, Object>> selectMyGallery(){
+		
+		String member_id = (String) session.getAttribute("loginID");
+		
+		return dao.selectMyGallery(member_id);
+		
+	}
+	
 }

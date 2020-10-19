@@ -29,4 +29,6 @@ public interface WorkMapper {
 	public ArrayList<HashMap<String, Object>> selectGalleryOne(int gallery_seq);
 	
 	public WorkVO selectWorkOne(HashMap<String , Object> map);
+	
+	public ArrayList<HashMap<String, Object>> selectMyGallery(String member_id);
 }

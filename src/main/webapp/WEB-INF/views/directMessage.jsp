@@ -71,7 +71,7 @@
                                 <li class="active"><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/blog">내 블로그</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>

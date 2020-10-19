@@ -247,7 +247,12 @@ public class PageController {
 	}
 	
 	@RequestMapping(value = "/blog", method = RequestMethod.GET)
-	public String blog() {
+	public String blog(Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ws.selectMyGallery();
+		
+		logger.info("mygallery list : {} ", list);
+		model.addAttribute("list", list);
 		
 		return "/blog";
 	}
