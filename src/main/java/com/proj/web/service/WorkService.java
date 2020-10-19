@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.print.attribute.HashAttributeSet;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.proj.web.dao.WorkDAO;
 import com.proj.web.util.FileService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.WorkVO;
 
 @Service
@@ -24,6 +26,9 @@ public class WorkService {
 	
 	final static Logger logger = LoggerFactory.getLogger(WorkService.class);
 
+	@Autowired
+	private HttpSession session;
+	
 	@Autowired
 	private WorkDAO dao;
 	@Autowired
@@ -34,6 +39,8 @@ public class WorkService {
 	public String galleryWrite(GalleryVO gallery, ArrayList<WorkVO> workList, MultipartFile[] upload) {
 
 		logger.info("gallery : {}", gallery);
+		String memberID = (String) session.getAttribute("loginID");
+		gallery.setMember_id(memberID);
 		
 		int result = dao.galleryWrite(gallery);
 		int cnt = dao.gallery_Seq()-1;
@@ -58,6 +65,7 @@ public class WorkService {
 		return "redirect:/";
 		
 	}
+	
 	
 	//모든 전시회 가저오기
 	public ArrayList<HashMap<String, Object>> workRead(){

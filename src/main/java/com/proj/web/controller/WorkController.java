@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.proj.web.service.CalendarService;
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.WorkVO;
 
 @Controller

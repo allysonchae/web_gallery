@@ -150,7 +150,9 @@ public class PageController {
 	public String presentGallery(Model model) {
 		
 		ArrayList<HashMap<String, Object>> pList = ws.presentGalleryJsp();
+		
 		logger.info("pList : {}",pList);
+		
 		model.addAttribute("pList",pList);
 		
 		return "/presentGallery";
@@ -160,6 +162,7 @@ public class PageController {
 	public String futureGallery(Model model) {
 		
 		ArrayList<HashMap<String, Object>> fList = ws.futureGalleryJsp();
+		
 		logger.info("fList : {}",fList);
 		model.addAttribute("fList",fList);
 		
@@ -241,6 +244,12 @@ public class PageController {
 		model.addAttribute("loginNickName", member_nickname);
 		
 		return "/myPage";
+	}
+	
+	@RequestMapping(value = "/blog", method = RequestMethod.GET)
+	public String blog() {
+		
+		return "/blog";
 	}
 	
 	@RequestMapping(value = "/viewOpenCover", method = RequestMethod.GET)
