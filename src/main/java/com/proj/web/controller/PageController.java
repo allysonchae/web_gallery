@@ -243,6 +243,12 @@ public class PageController {
 		return "/myPage";
 	}
 	
+	@RequestMapping(value = "/blog", method = RequestMethod.GET)
+	public String blog() {
+		
+		return "/blog";
+	}
+	
 	@RequestMapping(value = "/viewOpenCover", method = RequestMethod.GET)
 	public String openCube() {
 		return "viewOpenCover";
