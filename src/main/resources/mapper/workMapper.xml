@@ -153,6 +153,25 @@
     		work_seq = #{work_seq}
 	</select>
 	
+	<select id="selectMyGallery" parameterType="String" resultType="hashmap">
+		select
+		    g.gallery_seq
+		    ,g.member_id
+		    ,g.title
+		    ,w.work_seq
+		from
+    		gallery g
+    		,work w
+    		,member m
+		where
+    		g.gallery_seq = w.gallery_seq
+		and
+		    w.work_seq = 0
+		and
+		    m.member_id = #{member_id}
+	</select>
+	
+	
 
 
 </mapper>

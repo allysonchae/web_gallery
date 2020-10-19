@@ -166,6 +166,21 @@ public class WorkDAO {
 		return work;
 		
 	}
+	
+	public ArrayList<HashMap<String, Object>> selectMyGallery(String member_id){
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<HashMap<String, Object>> list = null;
+		
+		try {
+			list = wm.selectMyGallery(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
 
 
 }
