@@ -8,11 +8,13 @@
 		<typeAlias type="com.proj.web.vo.GalleryVO" alias="gallery"/>
 		<typeAlias type="com.proj.web.vo.InformationVO" alias="information"/>
 		<typeAlias type="com.proj.web.vo.WorkVO" alias="work"/>
+		<typeAlias type="com.proj.web.vo.ChatVO" alias="chat"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/calendarMapper.xml"/>
 		<mapper resource="mapper/informationMapper.xml"/>
 		<mapper resource="mapper/workMapper.xml"/>
+		<mapper resource="mapper/chatMapper.xml"/>
 	</mappers>
 </configuration>

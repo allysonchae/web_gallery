@@ -42,10 +42,11 @@
 		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
 		var member_nickname = document.getElementById("member_info").value;
 		var room_id = member_nickname + '_' + friend_id;
-		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname);
+		webSocket = new WebSocket("ws://10.10.12.126:8888/multiChat.do/" + room_id + "/" + member_nickname);
 
 		webSocket.onopen;
 		webSocket.onmessage = function(event) {output(event.data);};
+		webSocket.onclose;
 		}
 
 	function output(txt){
@@ -102,12 +103,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li class="active"><a href="#">My Pages</a>
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 
@@ -116,7 +116,7 @@
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
 											<li style="color : white;">'${sessionScope.loginNickName }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
+										<li><a href="/logout">로그아웃</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="/member/memberLoginPage">Login</a></li>
