@@ -5,17 +5,20 @@
 
 	<insert id="galleryWrite" parameterType="gallery">
 		insert into gallery(
-			gallery_seq
-			,title
-			,"start"
-			,"end"
-			,gallery_template
-		)
-		values(
+			 gallery_seq
+        	,member_id
+        	,title
+        	,"start"
+        	,"end"
+        	,gallery_indate
+        	,gallery_template
+		)values(
 			gallery_seq.nextval
+			,#{member_id}
 			,#{title}
 			,#{start}
 			,#{end}
+			,sysdate
 			,#{gallery_template}
 		)
 	</insert>
