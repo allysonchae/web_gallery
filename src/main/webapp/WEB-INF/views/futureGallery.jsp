@@ -1,4 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Onex</title>
+    <title>DJoz | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,21 +26,17 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     
     <style type="text/css">
     	#member_info{
     		color:white;	
     	}
-    	
-    	a:hover{
-    		color:blue;
-    	}
+    
     </style>
 </head>
 
 <body>
-    <!-- Page Preloder -->
+	 <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -76,13 +73,13 @@
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/">내 전시회</a></li>
+                                        <li><a href="/allGallery">내 전시회</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
-									<c:when test="${sessionScope.loginNickName != null }">
-										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
+									<c:when test="${sessionScope.loginID != null }">
+										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
 										<li><a href="logout">로그아웃</a></li>
 									</c:when>
 									<c:otherwise>
@@ -113,76 +110,47 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-
-	<!-- Event Section Begin 1-->
-    <section class="event spad">
+    <!-- Discography Section Begin -->
+    <section class="discography spad">
         <div class="container">
-        <!--  -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <a href="/presentGallery">
-                        	<h4>현재 전시중</h4>
-                        </a>
+                    <div class="section-title center-title">
+                        <h2>Gallery</h2>
+                        <h1>Gallery</h1>
+                        <h4>전시 예정</h4>
                     </div>
                 </div>
             </div>
             
-			
+         		
             <div class="row">
-                <div class="event__slider owl-carousel">
-					<c:forEach items="${pList }" var="pList" varStatus="status">
-	                    <div class="col-lg-4">
-	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${pList.WORK_SEQ }&id=${pList.GALLERY_SEQ }">
-	                                <div class="tag-date">
-	                                    <a href="/galleryDetail?gallery_seq=${pList.GALLERY_SEQ }" >
-	                                    	<span>${pList.TITLE }</span>
-	                                    </a>
-	                                </div>
-                                </div>
-                            </div>
-                        </div>
-         			</c:forEach>
-                  </div>
-               </div>
-            </div>
-    </section>
-    <!-- Event Section End -->
-    
-    <!-- Event Section Begin 2-->
-    <section class="event spad">
-        <div class="container">
-        <!--  -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                    	<a href="/futureGallery">
-                        	<h4>전시 예정</h4>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="event__slider owl-carousel">
-					<c:forEach items="${fList }" var="fList" varStatus="status">
-	                    <div class="col-lg-4">
-	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${fList.WORK_SEQ }&id=${fList.GALLERY_SEQ }">
-	                                <div class="tag-date">
-	                                    	<span>${fList.TITLE }</span>
-	                                </div>
-	                            </div>
+            	<c:forEach items="${fList }" var="fList" varStatus="status">
+	                <div class="col-lg-4 col-md-6 col-sm-6">
+	                    <div class="discography__item">
+	                        <div class="discography__item__pic">
+	                            <img src="/download?work_seq=${fList.WORK_SEQ }&id=${fList.GALLERY_SEQ }" style="width: 100px; height: 300px;">
+	                        </div>
+	                        <div class="discography__item__text">
+	                            <h4>${fList.TITLE }</h4>
+	                            <h4>${fList.MEMBER_ID }</h4>
 	                        </div>
 	                    </div>
-           			</c:forEach>
+	                </div>
+                </c:forEach>
+               
+                <div class="col-lg-12">
+                    <div class="pagination__links">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">Next</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Event Section End -->
-
+    <!-- Discography Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
@@ -199,13 +167,14 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>Onex@gmail.com</h6>
+                                <h6>DJ.Music@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 col-md-6">
                     <div class="footer__social">
+                        <h2>DJoz</h2>
                         <div class="footer__social__links">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -216,7 +185,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6">
                     <div class="footer__newslatter">
-                        <h4>Contact Us</h4>
+                        <h4>Stay With me</h4>
                         <form action="#">
                             <input type="text" placeholder="Email">
                             <button type="submit"><i class="fa fa-send-o"></i></button>
@@ -229,6 +198,7 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
+    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script src="/resources/js/jquery.nicescroll.min.js"></script>

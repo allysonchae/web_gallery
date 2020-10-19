@@ -141,6 +141,15 @@
 		</c:forEach>
 	</table>
 	
+	<div class="col-lg-12">
+        <div class="pagination__links">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">Next</a>
+        </div>
+    </div>
+	
 	<!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
