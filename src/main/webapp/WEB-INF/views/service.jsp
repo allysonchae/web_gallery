@@ -10,7 +10,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DJoz | Template</title>
+    <title>Onex</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -118,13 +118,12 @@
                 <div class="col-lg-6 p-0">
                     <div class="skills__content">
                         <div class="section-title">
-                            <h2>DJ Alexandra Rud</h2>
-                            <h1>DJâs skill</h1>
+                            <h2>Our Service</h2>
+                            <h1>This is what we do</h1>
                         </div>
-                        <p>DJ Rainflow knows how to move your mind, body and soul by delivering tracks that stand out
-                            from the norm.</p>
+                        <p>전문가와 취미 상관없이 ~~~</p>
                         <div class="skill__bar__item">
-                            <p>Perform</p>
+                            <p>For Everyone</p>
                             <div id="bar1" class="barfiller">
                                 <span class="tip"></span>
                                 <span class="fill" data-percentage="95"></span>
@@ -168,13 +167,9 @@
                 <div class="col-lg-6">
                     <div class="about__text">
                         <div class="section-title">
-                            <h2>He heard something that he knew to be music</h2>
+                            <h2>나의 모든 재능을 선보이다</h2>
                         </div>
-                        <p>At vero eos et accusamus et iusto odi odgnissimos ducimus qui blanditiis praesentium volup
-                            tatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi quod
-                            justo pro an.</p>
-                        <img src="/resources/img/about/signature.png" alt="">
+                        <p>아무튼 좋은 말</p>
                     </div>
                 </div>
             </div>
@@ -289,14 +284,13 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>Onex@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 col-md-6">
                     <div class="footer__social">
-                        <h2>DJoz</h2>
                         <div class="footer__social__links">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -307,7 +301,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6">
                     <div class="footer__newslatter">
-                        <h4>Stay With me</h4>
+                        <h4>Contact Us</h4>
                         <form action="#">
                             <input type="text" placeholder="Email">
                             <button type="submit"><i class="fa fa-send-o"></i></button>
