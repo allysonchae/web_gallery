@@ -132,7 +132,7 @@
 	                        </div>
 	                        <div class="discography__item__text">
 	                            <h4>${fList.TITLE }</h4>
-	                            <h4>${fList.MEMBER_ID }</h4>
+	                            <h4>${fList.MEMBER_NICKNAME }</h4>
 	                        </div>
 	                    </div>
 	                </div>

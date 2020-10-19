@@ -109,9 +109,11 @@
 		    ,w.work_originalFileName
 		    ,w.work_savedFileName
 		    ,w.work_seq
+		    ,m.member_nickname
 		from
 		    gallery g
 		    ,work w
+		    ,member m
 		where
 		    g.gallery_seq = w.gallery_seq
 		and

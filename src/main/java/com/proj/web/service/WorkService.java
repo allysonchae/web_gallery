@@ -40,6 +40,7 @@ public class WorkService {
 
 		logger.info("gallery : {}", gallery);
 		String memberID = (String) session.getAttribute("loginID");
+		gallery.setMember_id(memberID);
 		
 		int result = dao.galleryWrite(gallery);
 		int cnt = dao.gallery_Seq()-1;
@@ -64,6 +65,7 @@ public class WorkService {
 		return "redirect:/";
 		
 	}
+	
 	
 	//모든 전시회 가저오기
 	public ArrayList<HashMap<String, Object>> workRead(){
