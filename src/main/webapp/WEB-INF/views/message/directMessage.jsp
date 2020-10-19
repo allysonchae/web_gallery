@@ -36,11 +36,15 @@
    <!-- 채팅 웹 소켓 --> 
     <script type="text/javascript">
 	var webSocket;
-	var member_id = document.getElementByID("member_info").value;
 	
 	function openSocket() {
-		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + "/" + member_id);
+		var friend_id = document.getElementById("user_1").value;
+		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
+		var user_id = document.getElementById("member_info").value;
+		alert(user_id + "/" + friend_id);
 		}
+
+	
 
     </script>
 </head>
@@ -87,9 +91,12 @@
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
+                                
+                                <input type="hidden" id="member_info" value="${sessionScope.loginNickName }">
+                                
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
-										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
+											<li>'${sessionScope.loginNickName }'님 환영합니다</li>
 										<li><a href="logout">로그아웃</a></li>
 									</c:when>
 									<c:otherwise>
@@ -138,7 +145,7 @@
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">JasonD</h6><small class="small font-weight-bold">25 Dec</small>
+                    <h6 class="mb-0" id="user_1" value="JasonD">JasonD</h6><small class="small font-weight-bold">25 Dec</small>
                   </div>
                   </div>
               </div>
@@ -160,7 +167,7 @@
     </div>
     <!-- Chat Box-->
     <div class="col-7 px-0">
-      <div class="px-4 py-5 chat-box bg-white">
+      <div class="px-4 py-5 chat-box bg-white" id="messages">
         <!-- Sender Message-->
         <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
           <div class="media-body ml-3">
@@ -180,19 +187,18 @@
             <p class="small text-muted">12:00 PM | Aug 13</p>
           </div>
         </div>
-
-
       </div>
+
       <!-- Typing area -->
       <form action="#" class="bg-light">
         <div class="input-group">
           <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
           <div class="input-group-append">
-            <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+            <button id="send_message" type="submit" class="btn btn-link" onclick=""> <i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
       </form>
-
+		<input type="button" value="test" onclick="openSocket()">
     </div>
   </div>
 </div>
