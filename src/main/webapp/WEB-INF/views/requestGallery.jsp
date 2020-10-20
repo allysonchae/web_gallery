@@ -287,7 +287,7 @@
 			alert(description);
 
 
-			return false;
+			return true;
 		}
 	</script>
 	

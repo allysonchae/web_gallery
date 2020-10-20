@@ -175,7 +175,46 @@
 		    m.member_id = #{member_id}
 	</select>
 	
+	<insert id="insertReply" parameterType="reply">
+		insert into
+			reply(
+				reply_seq
+				,gallery_seq
+				,member_id
+				,member_nickname
+				,reply_text
+			)values(
+				reply_seq.nextval
+				, #{id}
+				, #{member_id}
+				, #{member_nickname}
+				, #{reply_text}
+			)
+	</insert>
 	
+	<select id="getReplyList" resultType="reply" parameterType="int">
+		select
+			reply_seq
+			,gallery_seq
+			,member_nickname
+			,to_char(reply_indate, 'YYYY-MM-DD') as reply_indate
+			,reply_text
+		from
+			reply
+		where
+			gallery_seq = #{id}
+		order by
+			reply_seq desc
+	</select>
+	
+	<!-- <delete id="deleteReply" parameterType="reply">
+		delete
+		from
+			reply
+		where
+			reply_seq = #{reply_seq}
+			and member_id = #{member_id}
+	</delete> -->
 
 
 </mapper>

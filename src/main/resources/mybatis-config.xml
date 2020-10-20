@@ -9,6 +9,7 @@
 		<typeAlias type="com.proj.web.vo.InformationVO" alias="information"/>
 		<typeAlias type="com.proj.web.vo.WorkVO" alias="work"/>
 		<typeAlias type="com.proj.web.vo.ChatVO" alias="chat"/>
+		<typeAlias type="com.proj.web.vo.ReplyVO" alias="reply"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
