@@ -96,8 +96,8 @@
                                 
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
-											<li>'${sessionScope.loginNickName }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
+											<li>'${sessionScope.loginNickName }'님</li>
+										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="/member/memberLoginPage">Login</a></li>

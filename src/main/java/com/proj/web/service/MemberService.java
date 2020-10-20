@@ -37,7 +37,6 @@ public class MemberService {
 
 	public String memberLogin(MemberVO member) {
 		MemberVO loginCheck = dao.memberSelectOne(member.getMember_id());
-		System.out.println("서비스까지 받아온 데이터 : " + loginCheck);
 		String page = "";
 		if(loginCheck != null && member.getMember_pw().equals(loginCheck.getMember_pw())){
 			session.setAttribute("loginNickName", loginCheck.getMember_nickname());
