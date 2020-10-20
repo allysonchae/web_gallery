@@ -113,9 +113,22 @@ public class PageController {
 		HashMap<String, Object> map = list.get(0);
 		logger.info("map : {}",map);
 		
+		
+		HashMap<String, Object> forWorkMap = new HashMap<String, Object>();
+		forWorkMap.put("id", gallery_seq);
+		forWorkMap.put("work_seq", 0);
+		WorkVO work = ws.selectWorkOne(forWorkMap);
+		logger.info("forWork : {}" , work);
+		
+		String workName = work.getWork_name();
+		
 		logger.info("gallery_templete : {}", map.get("GALLERY_TEMPLATE"));
 		String templeteNum = String.valueOf(map.get("GALLERY_TEMPLATE"));
 		
+		String memberNickname = ws.searchNickname();
+		
+		model.addAttribute("workName", workName);
+		model.addAttribute("memberNickname", memberNickname);
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
 		

@@ -35,6 +35,10 @@
     	a:hover{
     		color:blue;
     	}
+    	
+    	.event__item__pic .tag-date span {
+    		background: #5c00ce5c;
+		}
     </style>
 </head>
 
@@ -75,7 +79,7 @@
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/">내 전시회</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
@@ -133,10 +137,11 @@
 					<c:forEach items="${pList }" var="pList" varStatus="status">
 	                    <div class="col-lg-4">
 	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${pList.WORK_SEQ }&id=${pList.GALLERY_SEQ }">
+                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${pList.WORK_SEQ }&id=${pList.GALLERY_SEQ }" style="width:350px;">
 	                                <div class="tag-date">
 	                                    <a href="/galleryDetail?gallery_seq=${pList.GALLERY_SEQ }" >
-	                                    	<span>${pList.TITLE }</span>
+	                                    	<span style="width:150px;">${pList.TITLE }</span>
+	                                    	<span style="width:150px;"> ~ ${pList.end }</span>
 	                                    </a>
 	                                </div>
                                 </div>
@@ -168,9 +173,10 @@
 					<c:forEach items="${fList }" var="fList" varStatus="status">
 	                    <div class="col-lg-4">
 	                        <div class="event__item">
-                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${fList.WORK_SEQ }&id=${fList.GALLERY_SEQ }">
+                            	<div class="event__item__pic set-bg" data-setbg="/download?work_seq=${fList.WORK_SEQ }&id=${fList.GALLERY_SEQ }" style="width:350px;">
 	                                <div class="tag-date">
-	                                    	<span>${fList.TITLE }</span>
+	                                    	<span style="width:150px;">${fList.TITLE }</span>
+	                                    	<span style="width:250px;"> ${fList.start } ~ ${fList.end }</span>
 	                                </div>
 	                            </div>
 	                        </div>

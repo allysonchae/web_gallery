@@ -103,13 +103,15 @@
 	
 	<select id="informationGalleryJsp" parameterType="int" resultType="hashmap">
 		select
-		    g.gallery_seq
-		    ,g.member_id
-		    ,g.title
-		    ,w.work_originalFileName
-		    ,w.work_savedFileName
-		    ,w.work_seq
-		    ,m.member_nickname
+		    g.gallery_seq as gallery_seq
+		    ,g.member_id as member_id
+		    ,g.title as title
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_seq as work_seq
+		    ,m.member_nickname as member_nickname
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+    		,to_char(g."end",'yyyy-mm-dd') as "end"
 		from
 		    gallery g
 		    ,work w
@@ -155,10 +157,12 @@
 	
 	<select id="selectMyGallery" parameterType="String" resultType="hashmap">
 		select
-		    g.gallery_seq
-		    ,g.member_id
-		    ,g.title
-		    ,w.work_seq
+		    g.gallery_seq as gallery_seq
+		    ,g.member_id as member_id
+		    ,g.title as title
+		    ,w.work_seq as work_seq
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+    		,to_char(g."end",'yyyy-mm-dd') as "end"
 		from
     		gallery g
     		,work w
