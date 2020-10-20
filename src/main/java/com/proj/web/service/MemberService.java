@@ -47,6 +47,25 @@ public class MemberService {
 		}
 		return page;
 	}
+	
+	public boolean loginCheck(String id, String pw) {
+		
+		System.out.println("login체크들어옴");
+		
+		MemberVO loginCheck = dao.memberSelectOne(id);
+		boolean flag = false;
+		
+		if(loginCheck != null && pw.equals(loginCheck.getMember_pw())){
+			System.out.println("로그인 성공");
+			flag = true;
+		}
+		
+		if(!flag) {
+			System.out.println("로그인 실패");
+		}
+		
+		return flag;
+	}
 
 	public int nicknameCheck(String member_nickname) {
 		int cnt = dao.memberSelectOneNickname(member_nickname);
