@@ -72,7 +72,7 @@
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/allGallery">내 전시회</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
@@ -133,6 +133,7 @@
 	                        <div class="discography__item__text">
 	                            <h4>${fList.TITLE }</h4>
 	                            <h4>${fList.MEMBER_NICKNAME }</h4>
+	                            <h4>${fList.start } ~ ${fList.end }</h4>
 	                        </div>
 	                    </div>
 	                </div>

@@ -122,18 +122,18 @@
 		<h1>Gallery Information</h1>
 	</div>
 	
-	<form action="/workWrite" method="post" enctype="multipart/form-data">
+	<form action="/workWrite" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
 		<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px; height: 100px;">
 			<tr>
 				<td style="text-align: center">전시회명</td>
-				<td colspan="2"><input type="text" name="title" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
+				<td colspan="2"><input type="text" id="checkTitle" name="title" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
 			</tr>
 			<tr>
 				<td style="text-align: center">전시 기간</td>
 				<td style="text-align: center" colspan="2">
-					<input type="date" name="start" style="block; width:400px; height:50px;">
+					<input type="date" id="checkStart" name="start" style="block; width:400px; height:50px;">
 					~
-					<input type="date" name="end" style="block; width:400px; height:50px;">
+					<input type="date" id="checkEnd" name="end" style="block; width:400px; height:50px;">
 				</td>
 			</tr>
 			<tr>
@@ -174,7 +174,7 @@
 	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		var flag = true;
-	
+
 		function viewOpenCover(){
 			window.open("/viewOpenCover","popUp","width=1000,height=500");
 		}
@@ -200,9 +200,9 @@
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
 						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text' id='checkName' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
-						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+						rowItem += "<textarea id='checkDescription' name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
 						rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 						rowItem += "</tr>"
@@ -218,9 +218,9 @@
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
 						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text'name='work_name' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text' id='checkName' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
-						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+						rowItem += "<textarea id='checkDescription' name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
 						rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 						rowItem += "</tr>"
@@ -257,6 +257,37 @@
 				reader.readAsDataURL(file[0]);
 
 			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function formCheck(){
+			var title = document.getElementById('checkTitle').value;
+			var start = document.getElementById('checkStart').value;
+			var end = document.getElementById('checkEnd').value;
+			var chkRadio = document.getElementsByName('gallery_template');
+			var name = document.getElementsByName('work_name');
+			var description = document.getElementsByName('work_description');
+			var cnt = 0;
+			
+			for(var i=0 ; i<chkRadio.length ; i++){
+				if(chkRadio[i].checked == true){ 
+					cnt++;
+				}
+			}
+
+			if(cnt<1){
+				alert("전시회 템플릿을 선택해주세요.");
+			}
+
+			alert(title);
+			alert(start);
+			alert(end);
+			alert(name);
+			alert(description);
+
+
+			return false;
 		}
 	</script>
 	

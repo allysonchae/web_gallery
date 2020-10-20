@@ -33,6 +33,8 @@ public class WorkService {
 	private WorkDAO dao;
 	@Autowired
 	private WorkService se;
+	@Autowired
+	private CalendarService cs;
 	
 	private String uploadPath = "/boardTest";
 	
@@ -63,6 +65,16 @@ public class WorkService {
 		}
 		
 		return "redirect:/";
+		
+	}
+	
+	public String searchNickname() {
+		
+		String member_id = (String) session.getAttribute("loginID");
+		
+		MemberVO member = cs.nickNameFind(member_id);
+		
+		return member.getMember_nickname(); 
 		
 	}
 	
@@ -224,7 +236,7 @@ public class WorkService {
 				e.printStackTrace();
 			}
 			
-			if(startDate.before(presentDate)) {
+			if(startDate.before(presentDate) || startDate.equals(presentDate)) {
 				if(endDate.after(presentDate)) {
 					System.out.println("현재 전시중인 갤러리 시퀀스 :"+g.getId());
 					list.add(g.getId());

@@ -73,7 +73,8 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/message/directMessage">쪽지함</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
+										<li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
@@ -248,6 +249,7 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="col-lg-4">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__item">
@@ -313,6 +315,35 @@
                                 </div>
                             </a>
                         </div>
+=======
+            </div>
+            
+         		
+            <div class="row">
+            	<c:forEach items="${list }" var="list" varStatus="status">
+	                <div class="col-lg-4 col-md-6 col-sm-6">
+	                    <div class="discography__item">
+	                        <div class="discography__item__pic">
+	                        	<a href="/galleryDetail?gallery_seq=${list.GALLERY_SEQ }" >
+		                            <img src="/download?work_seq=${list.WORK_SEQ }&id=${list.GALLERY_SEQ }" style="width: 100px; height: 300px;">
+		                    	</a>    
+		                    </div>
+		                    
+	                        <div class="discography__item__text">
+	                            <h4>${list.TITLE }</h4>
+	                            <h4>${list.start } ~ ${list.end }</h4>
+	                        </div>
+	                    </div>
+	                </div>
+                </c:forEach>
+               
+                <div class="col-lg-12">
+                    <div class="pagination__links">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">Next</a>
+>>>>>>> master
                     </div>
                 </div>
             </div>

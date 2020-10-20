@@ -38,12 +38,32 @@
 	var webSocket;
 	
 	function openSocket() {
-		var friend_id = document.getElementById("user_1").value;
+		var friend_id = document.getElementById("friend_id").value;
 		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
-		var user_id = document.getElementById("member_info").value;
-		alert(user_id + "/" + friend_id);
+		var member_nickname = document.getElementById("member_info").value;
+		var room_id = member_nickname + '_' + friend_id;
+		webSocket = new WebSocket("ws://10.10.12.126:8888/multiChat.do/" + room_id + "/" + member_nickname);
+
+		webSocket.onopen;
+		webSocket.onmessage = function(event) {output(event.data);};
+		webSocket.onclose;
 		}
 
+	function output(txt){
+		document.getElementById("messages").innerHTML += '<div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">'
+			+'<div class="media-body ml-3"><div class="bg-light rounded py-2 px-3 mb-2">'
+			+'<p class="text-small mb-0 text-muted">' + txt + '</p></div><p class="small text-muted">12:00 PM | Aug 13</p>'
+			+'</div></div>'+"<br>";
+		}
+	
+	function sendMessage() {
+		var txt = document.getElementById("msg").value;
+		var send_msg = '<div class="media w-50 ml-auto mb-3"><div class="media-body">'
+		+'<div class="bg-primary rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">'
+		+ txt
+		+'</p></div><p class="small text-muted">12:00 PM | Aug 13</p></div></div></div>';
+		webSocket.send(send_msg);
+		}
 	
 
     </script>
@@ -83,12 +103,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li class="active"><a href="#">My Pages</a>
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/blog">내 블로그</a></li>
-                                        <li><a href="/directMessage">쪽지함</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
+                                        <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 
@@ -96,8 +115,13 @@
                                 
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
+<<<<<<< HEAD
 											<li>'${sessionScope.loginNickName }'님</li>
 										<li><a href="/logout">LOGOUT</a></li>
+=======
+											<li style="color : white;">'${sessionScope.loginNickName }'님 환영합니다</li>
+										<li><a href="/logout">로그아웃</a></li>
+>>>>>>> master
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="/member/memberLoginPage">Login</a></li>
@@ -141,15 +165,17 @@
 
         <div class="messages-box">
           <div class="list-group rounded-0">
+          <button class="btn btn-link">
             <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+              <div class="media" onclick="openSocket()"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0" id="user_1" value="JasonD">JasonD</h6><small class="small font-weight-bold">25 Dec</small>
+                    <h6 class="mb-0">JasonD<input type="hidden" id="friend_id" value="JasonD"></h6><small class="small font-weight-bold">25 Dec</small>
                   </div>
-                  </div>
+                 </div>
               </div>
             </a>
+            </button>
 
             <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
@@ -167,38 +193,17 @@
     </div>
     <!-- Chat Box-->
     <div class="col-7 px-0">
-      <div class="px-4 py-5 chat-box bg-white" id="messages">
-        <!-- Sender Message-->
-        <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
-          <div class="media-body ml-3">
-            <div class="bg-light rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
-            </div>
-            <p class="small text-muted">12:00 PM | Aug 13</p>
-          </div>
-        </div>
-
-        <!-- Reciever Message-->
-        <div class="media w-50 ml-auto mb-3">
-          <div class="media-body">
-            <div class="bg-primary rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-white">Test which is a new approach to have all solutions</p>
-            </div>
-            <p class="small text-muted">12:00 PM | Aug 13</p>
-          </div>
-        </div>
-      </div>
-
+      <div class="px-4 py-5 chat-box bg-white" id="messages"></div>
+      
       <!-- Typing area -->
       <form action="#" class="bg-light">
         <div class="input-group">
-          <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+          <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" id="msg">
           <div class="input-group-append">
-            <button id="send_message" type="submit" class="btn btn-link" onclick=""> <i class="fa fa-paper-plane"></i></button>
+            <button id="send_message" type="submit" class="btn btn-link" onclick="sendMessage()"> <i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
       </form>
-		<input type="button" value="test" onclick="openSocket()">
     </div>
   </div>
 </div>
