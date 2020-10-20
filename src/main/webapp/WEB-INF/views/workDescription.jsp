@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>description1</title>
+<style type="text/css">
+	#con{
+		width:300px;	
+	}
+</style>
 </head>
 <body>
 	<div class="wrap">
@@ -12,7 +17,7 @@
 			<tr>
 				<td><img src="/download?work_seq=${work_seq }&id=${id }" style="width: 800px; height: 550px;"></td>
 				<td>
-			     	<div class="contents">
+			     	<div class="contents" id="con">
 			     		<h3 style="text-align: center; width:700px;">${work.work_description }</h3>	
 			     	</div>
 	        	</td>

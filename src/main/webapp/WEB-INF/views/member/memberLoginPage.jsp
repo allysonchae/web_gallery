@@ -180,7 +180,9 @@
                         		</tr>
                         		<tr>
                         			<td colspan="2">
-										<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a> | <a href="/member/memberFindForm">아이디 찾기</a>|<a href="/member/pwFindForm">비밀번호 찾기</a> 
+										&nbsp<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+										<a href="/member/memberFindForm" style="font-weight:bold">아이디 찾기</a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+										<a href="/member/pwFindForm" style="font-weight:bold">비밀번호 찾기</a> 
 									</td>
 								</tr>
                         	</table>
