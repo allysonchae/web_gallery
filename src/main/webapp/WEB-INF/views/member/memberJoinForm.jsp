@@ -154,12 +154,19 @@
 				},
 			success:function(data){
 				if(data==1){
-					$("#nicknameCheck").text("사용중인 아이디입니다");
+					$("#nicknameCheck").text("사용중인 닉네임입니다");
 					$("#nicknameCheck").css("color","red");
 					$("#join_submit").attr("disabled", true);
 				}else{
-					$("#nicknameCheck").text("사용가능한 아이디입니다");
-					$("#nicknameCheck").css("color","green");
+					if($("#member_nickname").val().length<=2||$("#member_nickname").val().length>=9){
+						$("#nicknameCheck").text("닉네임은 3~8글자 입니다");
+						$("#nicknameCheck").css("color","red");
+						$("#join_submit").attr("disabled", true);
+					}else{
+						$("#nicknameCheck").text("사용가능한 닉네임입니다");
+						$("#nicknameCheck").css("color","green");
+						$("#join_submit").attr("disabled", false);
+					}
 				}
 			},
 			error:function(e){

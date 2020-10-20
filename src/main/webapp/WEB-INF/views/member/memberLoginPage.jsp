@@ -32,13 +32,11 @@
     function loginCheck(){
     	var member_id = document.getElementById("member_id").value;
     	var member_pw = document.getElementById("member_pw").value;
+    	/* var param = "member_id=" + $("#member_id").val() + "&member_pw="+ $("#member_pw").val(); */
 
     	if(member_id==''||member_id.length==0){
 			alert("아이디를 입력해 주세요");
 			return false;
-			}else if(member_pw.length<=2||member_pw.length>=11){
-				alert("아이디는 3~10글자 입니다");
-				return false;
 			}
 
     	if(member_pw==''||member_pw.length==0){
@@ -48,19 +46,28 @@
 				alert("비밀번호는 3~10글자 입니다");
 				return false;
 			}
-		/* 여기서 부터 하자자자자자자자자자ㅏ */
-		/* $("submit").click(function(){
-			var chk = 0;
-			$.ajax({
-				url:"/member/Login",
-				data:{
-					member_id:	
+    	/* $.ajax({
+			url:"/member/Login_Ck",
+			type:"post",
+			data:$("form").serialize(),
+			success:function(response){
+				alert(response);
+				/* if(response==1){
+					alert("로그인 성공");
+				}else{
+					alert("로그인 실패");
+					return false;	
+				} */
+				},
+			error:function(e){
+				alert("로그인 실패");
+				return false;
 				}
-
-				})
-			}) */
+			}); */
+		
     	return true;
     }
+	
     
     </script>
     
@@ -160,15 +167,15 @@
                         	<table id="login_st">
                         		<tr>
                         			<td>
-										<input type="text" name="member_id" id="memmber_id" placeholder="아이디">
+										<input type="text" name="member_id" id="member_id" placeholder="아이디">
                         			</td>
                         			<td rowspan="2">
-                        				<input type="submit" value="로그인" id="submit" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
+                        				<input type="submit" value="로그인" style="width:150px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
                         			</td>
                         		</tr>
                         		<tr>
                         			<td>
-										<input type="password" name="member_pw" id="memmber_pw" placeholder="비밀번호" >
+										<input type="password" name="member_pw" id="member_pw" placeholder="비밀번호" >
                         			</td>
                         		</tr>
                         		<tr>
