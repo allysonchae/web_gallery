@@ -130,7 +130,6 @@
                     </div>
                 </div>
             </div>
-            
 			
             <div class="row">
                 <div class="event__slider owl-carousel">
@@ -230,6 +229,7 @@
                 </div>
             </div>
         </div>
+        
     </footer>
     <!-- Footer Section End -->
 

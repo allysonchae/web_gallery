@@ -96,4 +96,15 @@ public class WorkController {
 		}
 	}
 	
+	@RequestMapping(value = "/deleteGallery", method = RequestMethod.GET)
+	public String deleteGallery(int gallery_seq) {
+		
+		logger.info("삭제할 갤러리 : {}", gallery_seq);
+		
+		ws.deleteGallery(gallery_seq);
+		
+		return "redirect:/";
+		
+	}
+	
 }

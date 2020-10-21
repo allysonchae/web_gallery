@@ -256,4 +256,10 @@ public class WorkService {
 		
 	}
 	
+	public int deleteGallery(int gallery_seq) {
+		
+		return dao.deleteGallery(gallery_seq);
+		
+	}
+	
 }

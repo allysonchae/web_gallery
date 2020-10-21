@@ -181,6 +181,22 @@ public class WorkDAO {
 		return list;
 		
 	}
+	
+	public int deleteGallery(int gallery_seq) {
+		
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = wm.deleteGallery(gallery_seq);
+		
+		try {
+			cnt = wm.deleteGallery(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return cnt;
+		
+	}
 
 
 }

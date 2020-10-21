@@ -131,9 +131,12 @@
 		    ,w.work_savedFileName as work_savedFileName
 		    ,w.work_originalFileName as work_originalFileName
 		    ,w.work_seq as work_seq
-		    ,g.gallery_template as gallery_template 
+		    ,g.gallery_template as gallery_template
+		    ,m.member_id as member_id
+		    ,w.work_name as work_name
+    		,m.member_nickname as member_nickname
 		from
-		    gallery g, work w
+		    gallery g, work w, member m
 		where
 			 g.gallery_seq = w.gallery_seq
     	and
@@ -174,6 +177,13 @@
 		and
 		    m.member_id = #{member_id}
 	</select>
+	
+	<delete id="deleteGallery" parameterType="int">
+		delete from
+    		gallery
+		where
+    		gallery_seq = #{gallery_seq}
+	</delete>
 	
 	
 
