@@ -68,6 +68,27 @@ public class MemberController {
 		return page;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/Login_Ck", method = RequestMethod.POST)
+	public String loginCheck(String id, String pw) {
+		
+		logger.info("id : {}",id);
+		logger.info("pw : {}",pw);
+		
+		boolean flag = service.loginCheck(id, pw);
+		String result = "";
+		
+		if(flag) {
+			result = "S";
+		}else {
+			result = "F";
+		}
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
 	//회원가입 화면으로 이동
 	@RequestMapping(value = "/memberJoinForm", method = RequestMethod.GET)
 	public String memberJoinForm(Model model, HttpSession session, String kakaoName, String kakaoEmail) {
@@ -77,6 +98,7 @@ public class MemberController {
 		String email = "";
 		String str = "";
 		int cnt = 0;
+		int cnt2 = 0;
 		if(kakaoEmail!=null) {
 			cnt = service.emailCheck(kakaoEmail);
 		}else {
@@ -94,16 +116,28 @@ public class MemberController {
 				// 카카오로 회원가입 시도한 상황
 				name = kakaoName;
 				email = kakaoEmail;
-				hash.put("name", name);
-				hash.put("email", email);
-				model.addAttribute("map", hash);
+				cnt2 = service.emailCheck(email);
+				if(cnt2!=0) {
+					hash = service.memberSelectOneAll(email);
+					logger.info("컨트롤러 : {}", hash);
+					String nickName = hash.get("MEMBER_NICKNAME");
+					
+					session.setAttribute("loginID", email);
+					session.setAttribute("loginNickName", nickName);
+				}else {
+					hash.put("name", name);
+					hash.put("email", email);
+					model.addAttribute("map", hash);
+				}
 				return "member/memberJoinForm";
 			}
 			str = "member/memberJoinForm";
 		}else {
 			if(kakaoName!=null) {
-				session.setAttribute("loginID", kakaoName);
-				session.setAttribute("sessionEmail", kakaoEmail);
+				session.setAttribute("loginID", kakaoEmail);
+				hash = service.memberSelectOneAll(kakaoEmail);
+				String nickName = hash.get("MEMBER_NICKNAME");
+				session.setAttribute("loginNickName", nickName);
 			}
 			str = "redirect:/";
 		}

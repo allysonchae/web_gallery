@@ -37,7 +37,6 @@ public class MemberService {
 
 	public String memberLogin(MemberVO member) {
 		MemberVO loginCheck = dao.memberSelectOne(member.getMember_id());
-		System.out.println("서비스까지 받아온 데이터 : " + loginCheck);
 		String page = "";
 		if(loginCheck != null && member.getMember_pw().equals(loginCheck.getMember_pw())){
 			session.setAttribute("loginNickName", loginCheck.getMember_nickname());
@@ -47,6 +46,25 @@ public class MemberService {
 			page = "redirect:/member/memberLoginPage";
 		}
 		return page;
+	}
+	
+	public boolean loginCheck(String id, String pw) {
+		
+		System.out.println("login체크들어옴");
+		
+		MemberVO loginCheck = dao.memberSelectOne(id);
+		boolean flag = false;
+		
+		if(loginCheck != null && pw.equals(loginCheck.getMember_pw())){
+			System.out.println("로그인 성공");
+			flag = true;
+		}
+		
+		if(!flag) {
+			System.out.println("로그인 실패");
+		}
+		
+		return flag;
 	}
 
 	public int nicknameCheck(String member_nickname) {

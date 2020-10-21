@@ -64,6 +64,9 @@
 </head>
 
 <body>
+
+	<input type="hidden" id="member_info" value="${sessionScope.loginNickName }">
+	
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -81,7 +84,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li><a href="/index">Home</a></li>
+                                <li><a href="/">Home</a></li>
                                 <li><a href="/info">Info</a>
                                 	<ul class="dropdown">
                                         <li><a href="/info">공지사항</a></li>
@@ -100,17 +103,15 @@
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/blog">내 블로그</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 
-                                <input type="hidden" id="member_info" value="${sessionScope.loginNickName }">
-                                
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
-											<li style="color : white;">'${sessionScope.loginNickName }'님 환영합니다</li>
-										<li><a href="/logout">로그아웃</a></li>
+											<li id="member_info">'${sessionScope.loginNickName }'님</li>
+										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="/member/memberLoginPage">Login</a></li>

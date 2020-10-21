@@ -6,39 +6,19 @@
 <meta charset="UTF-8">
 <title>description1</title>
 <style type="text/css">
-	body{
-	 position: relative;
-	}
-
-	.title{
-		text-align: center;		
+	#con{
+		width:300px;	
 	}
 </style>
-<script type="text/javascript">
-	window.onload = function() {
-		var innerHeight = window.outerHeight;
-		var table = document.getElementById("tb");
-
-		var margin = (innerHeight - table.offsetHeight) / 3.5;
-
-		table.style.marginTop = margin + "px";
-		console.log(table.style.marginTop);
-
-		/* console.log(innerHeight);
-		console.log(table.offsetHeight);
-		console.log(margin); */
-	}
-</script>
 </head>
 <body>
 	<div class="wrap">
-		<table id="tb">
+		<table>
 			<tr>
-				<td><img src="/download?work_seq=${work_seq }&id=${id }"></td>
+				<td><img src="/download?work_seq=${work_seq }&id=${id }" style="width: 800px; height: 550px;"></td>
 				<td>
-					<div class="title"><h1>${work.work_name }</h1></div>
-			     	<div class="contents">
-			     		${work.work_description }
+			     	<div class="contents" id="con">
+			     		<h3 style="text-align: center; width:700px;">${work.work_description }</h3>	
 			     	</div>
 	        	</td>
 			</tr>

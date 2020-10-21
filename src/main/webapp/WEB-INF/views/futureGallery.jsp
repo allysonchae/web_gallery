@@ -1,4 +1,4 @@
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -72,14 +72,14 @@
                                 <li><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/allGallery">내 전시회</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
 									<c:when test="${sessionScope.loginID != null }">
-										<li id="member_info">'${sessionScope.loginID }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
+										<li id="member_info">'${sessionScope.loginID }'님</li>
+										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="member/memberLoginPage">Login</a></li>
@@ -133,6 +133,7 @@
 	                        <div class="discography__item__text">
 	                            <h4>${fList.TITLE }</h4>
 	                            <h4>${fList.MEMBER_NICKNAME }</h4>
+	                            <h4>${fList.start } ~ ${fList.end }</h4>
 	                        </div>
 	                    </div>
 	                </div>

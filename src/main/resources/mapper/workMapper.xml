@@ -103,13 +103,15 @@
 	
 	<select id="informationGalleryJsp" parameterType="int" resultType="hashmap">
 		select
-		    g.gallery_seq
-		    ,g.member_id
-		    ,g.title
-		    ,w.work_originalFileName
-		    ,w.work_savedFileName
-		    ,w.work_seq
-		    ,m.member_nickname
+		    g.gallery_seq as gallery_seq
+		    ,g.member_id as member_id
+		    ,g.title as title
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_seq as work_seq
+		    ,m.member_nickname as member_nickname
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+    		,to_char(g."end",'yyyy-mm-dd') as "end"
 		from
 		    gallery g
 		    ,work w
@@ -129,9 +131,12 @@
 		    ,w.work_savedFileName as work_savedFileName
 		    ,w.work_originalFileName as work_originalFileName
 		    ,w.work_seq as work_seq
-		    ,g.gallery_template as gallery_template 
+		    ,g.gallery_template as gallery_template
+		    ,m.member_id as member_id
+		    ,w.work_name as work_name
+    		,m.member_nickname as member_nickname
 		from
-		    gallery g, work w
+		    gallery g, work w, member m
 		where
 			 g.gallery_seq = w.gallery_seq
     	and
@@ -152,6 +157,34 @@
 		and
     		work_seq = #{work_seq}
 	</select>
+	
+	<select id="selectMyGallery" parameterType="String" resultType="hashmap">
+		select
+		    g.gallery_seq as gallery_seq
+		    ,g.member_id as member_id
+		    ,g.title as title
+		    ,w.work_seq as work_seq
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+    		,to_char(g."end",'yyyy-mm-dd') as "end"
+		from
+    		gallery g
+    		,work w
+    		,member m
+		where
+    		g.gallery_seq = w.gallery_seq
+		and
+		    w.work_seq = 0
+		and
+		    m.member_id = #{member_id}
+	</select>
+	
+	<delete id="deleteGallery" parameterType="int">
+		delete from
+    		gallery
+		where
+    		gallery_seq = #{gallery_seq}
+	</delete>
+	
 	
 
 

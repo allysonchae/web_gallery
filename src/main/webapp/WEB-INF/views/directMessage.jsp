@@ -30,12 +30,11 @@
     	#member_info{
     		color:white;	
     	}
-    
     </style>
 </head>
 
 <body>
-    <!-- Page Preloder -->
+
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -71,14 +70,14 @@
                                 <li class="active"><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
-                                        <li><a href="/blog">내 블로그</a></li>
+                                        <li><a href="/blog">내 전시회</a></li>
                                         <li><a href="/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
-										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
+										<li id="member_info">'${sessionScope.loginNickName }'님</li>
+										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="member/memberLoginPage">Login</a></li>

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ import com.proj.web.util.NaverLoginBO;
 
 @Controller
 public class NaverController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(NaverController.class);
 
 	/* NaverLoginBO */
 	@Autowired
@@ -90,12 +94,14 @@ public class NaverController {
 		if(cnt!=0) {
 			//4.파싱 닉네임 세션으로 저장
 			model.addAttribute("result", apiResult);
-			session.setAttribute("loginID", name); //세션 생성
-			session.setAttribute("sessionEmail", email); //세션 생성
+			hash = service.memberSelectOneAll(email);
+			String nickname = hash.get("MEMBER_NICKNAME");
+			session.setAttribute("loginID", email); //세션 생성
+			session.setAttribute("loginNickName", nickname); //세션 생성
 			str = "redirect:/";
 		}else {
-			session.setAttribute("loginID", name); //세션 생성
 			session.setAttribute("sessionEmail", email); //세션 생성
+			session.setAttribute("sessionName", name); //세션 생성
 			str = "redirect:/member/memberJoinForm";
 		}
 		

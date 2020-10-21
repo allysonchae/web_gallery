@@ -127,6 +127,18 @@
     		color:white;	
     	}
     	
+    	.join_st{
+    		width:450px;
+    		margin-left: auto;
+    		margin-right: auto;
+    		margin: 0px auto;
+    	}
+    	
+    	#div{
+    		width:550px;
+    		margin:0 auto;
+    	}
+    	
     </style>
 </head>
 
@@ -173,8 +185,8 @@
                                 </li>
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
-										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
+										<li id="member_info">'${sessionScope.loginNickName }'님</li>
+										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="member/memberLoginPage">Login</a></li>
@@ -206,81 +218,82 @@
     <!-- Breadcrumb End -->
 
     <!-- Contact Section Begin -->
-    <section class="contact spad">
-        <div class="container" style="text-align: -webkit-center;">
-                <div class="col-lg-4">
-	                    <div class="section-title center-title">
-	                        <h2>Member</h2>
-	                        <h1>Welcome!</h1>
-	                    </div>
-	                    <div id="div">
-							<table border="1" class="table table-bordered">
-								<tr>
-									<td>
-										아이디
-									</td>
-									<td>
-										<input type="text" name="member_id" id="member_id" value="${hash.MEMBER_ID }" readonly="readonly">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										비밀번호
-									</td>
-									<td>
-										<input type="password" name="member_pw" id="member_pw" placeholder="비밀번호"><div id="pwCheck"></div>	
-									</td>
-								</tr>
-								<tr>
-									<td>
-										비밀번호 확인
-									</td>
-									<td>
-										<input type="password" id="member_pwck" placeholder="비밀번호 확인">	
-									</td>
-								</tr>
-								<tr>
-									<td>
-										연락처
-									</td>
-									<td>
-										<input type="text" name="member_phone"  id="member_phone" value="${hash.MEMBER_PHONE }" placeholder="'-'없이 입력">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										이름
-									</td>
-									<td>
-										<input type="text" name="member_name" id="member_name" placeholder="이름" value="${hash.MEMBER_NAME }" readonly="readonly">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										닉네임
-									</td>
-									<td>
-										<input type="text" name="member_nickname" id="member_nickname" value="${hash.MEMBER_NICKNAME }" placeholder="닉네임" >
-										<input type="hidden" id="loginNickName" value="${hash.MEMBER_NICKNAME }">
-										<button onclick="checkNickname()" id="check_bt" class="btn btn-outline-secondary">중복 검사</button><div id="nicknameCheck"></div>
-									</td>
-								</tr>
-							</table><br>
-							<div class="join_st" style="text-align:center;">
-								<input type="button" value="취소" onclick="update_cancel()" class="btn btn-outline-secondary">
-								<input type="button" id="update_submit" onclick="update_submit()" value="수정" class="btn btn-outline-secondary">
-							</div>
-							<form action="/member/memberUpdate" method="post" id="updateForm">
-								<input type="hidden" name="member_id" id="user_id">
-								<input type="hidden" name="member_pw" id="user_pw">
-								<input type="hidden" name="member_phone" id="user_phone">
-								<input type="hidden" name="member_name" id="user_name">
-								<input type="hidden" name="member_nickname" id="user_nickname">
-							</form>
-							<br><br>
-	                    
-	                    </div>
-                </div>
+    <section class="videos spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-title">
+			        	<h2>Member</h2>
+			            <h1>Welcome!</h1>
+			        </div>
+			        <div id="div">
+						<table border="1" class="table table-bordered">
+							<tr>
+								<td>
+									아이디
+								</td>
+								<td>
+									<input type="text" name="member_id" id="member_id" value="${hash.MEMBER_ID }" readonly="readonly">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									비밀번호
+								</td>
+								<td>
+									<input type="password" name="member_pw" id="member_pw" placeholder="비밀번호"><div id="pwCheck"></div>	
+								</td>
+							</tr>
+							<tr>
+								<td>
+									비밀번호 확인
+								</td>
+								<td>
+									<input type="password" id="member_pwck" placeholder="비밀번호 확인">	
+								</td>
+							</tr>
+							<tr>
+								<td>
+									연락처
+								</td>
+								<td>
+									<input type="text" name="member_phone"  id="member_phone" value="${hash.MEMBER_PHONE }" placeholder="'-'없이 입력">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									이름
+								</td>
+								<td>
+									<input type="text" name="member_name" id="member_name" placeholder="이름" value="${hash.MEMBER_NAME }" readonly="readonly">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									닉네임
+								</td>
+								<td>
+									<input type="text" name="member_nickname" id="member_nickname" value="${hash.MEMBER_NICKNAME }" placeholder="닉네임" >
+									<input type="hidden" id="loginNickName" value="${hash.MEMBER_NICKNAME }">
+									<button onclick="checkNickname()" id="check_bt" class="btn btn-outline-secondary">중복 검사</button><div id="nicknameCheck"></div>
+								</td>
+							</tr>
+						</table><br>
+						<div class="join_st" style="text-align:center;">
+							<input type="button" value="취소" onclick="update_cancel()" class="btn btn-outline-secondary">
+							<input type="button" id="update_submit" onclick="update_submit()" value="수정" class="btn btn-outline-secondary">
+						</div>
+						<form action="/member/memberUpdate" method="post" id="updateForm">
+							<input type="hidden" name="member_id" id="user_id">
+							<input type="hidden" name="member_pw" id="user_pw">
+							<input type="hidden" name="member_phone" id="user_phone">
+							<input type="hidden" name="member_name" id="user_name">
+							<input type="hidden" name="member_nickname" id="user_nickname">
+						</form>
+						<br><br>
+					</div>
+	        	</div>
+        	</div>
         </div>
     </section>
     <!-- Contact Section End -->

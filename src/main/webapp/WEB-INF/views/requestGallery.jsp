@@ -36,6 +36,10 @@
             color: blue;
             cursor: pointer;
         }
+        
+        #member_info{
+        	color: white;
+        }
     </style>
 </head>
 
@@ -82,8 +86,8 @@
                                 </li>
                                 <c:choose>
 									<c:when test="${sessionScope.loginNickName != null }">
-										<li id="member_info">'${sessionScope.loginNickName }'님 환영합니다</li>
-										<li><a href="logout">로그아웃</a></li>
+										<li id="member_info">'${sessionScope.loginNickName }'님</li>
+										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
 									<c:otherwise>
 		                                <li><a href="member/memberLoginPage">Login</a></li>
@@ -118,18 +122,18 @@
 		<h1>Gallery Information</h1>
 	</div>
 	
-	<form action="/workWrite" method="post" enctype="multipart/form-data">
+	<form action="/workWrite" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
 		<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px; height: 100px;">
 			<tr>
 				<td style="text-align: center">전시회명</td>
-				<td colspan="2"><input type="text" name="title" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
+				<td colspan="2"><input type="text" id="checkTitle" name="title" style="display: block; margin : 0 auto; width:820px; height:50px;"></td>
 			</tr>
 			<tr>
 				<td style="text-align: center">전시 기간</td>
 				<td style="text-align: center" colspan="2">
-					<input type="date" name="start" style="block; width:400px; height:50px;">
+					<input type="date" id="checkStart" name="start" style="block; width:400px; height:50px;">
 					~
-					<input type="date" name="end" style="block; width:400px; height:50px;">
+					<input type="date" id="checkEnd" name="end" style="block; width:400px; height:50px;">
 				</td>
 			</tr>
 			<tr>
@@ -146,7 +150,7 @@
 			<tr>
 				<td style="text-align: center;">작품 개수</td>
 				<td colspan="2" style="text-align: center;">
-					<select onchange="addTd(value);">
+					<select id="countCheck" onchange="addTd(value);">
 						<option value="0">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -170,7 +174,7 @@
 	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		var flag = true;
-	
+
 		function viewOpenCover(){
 			window.open("/viewOpenCover","popUp","width=1000,height=500");
 		}
@@ -214,7 +218,7 @@
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
 						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text'name='work_name' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
 						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
@@ -253,6 +257,104 @@
 				reader.readAsDataURL(file[0]);
 
 			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function formCheck(){
+			var title = document.getElementById('checkTitle').value;
+			var start = document.getElementById('checkStart').value;
+			var end = document.getElementById('checkEnd').value;
+			var count = document.getElementById('countCheck').value;
+			var chkRadio = document.getElementsByName('gallery_template');
+			var name = document.getElementsByName('work_name');
+			var description = document.getElementsByName('work_description');
+			var image = document.getElementsByName('upload');
+
+			var date = new Date(); 
+			var year = date.getFullYear(); 
+			var month = new String(date.getMonth()+1); 
+			var day = new String(date.getDate()); 
+
+			var yearS = Number(start.substr(0,4)); // 입력한 값의 0~4자리까지 (연) 
+			var monthS = Number(start.substr(5,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월) 
+			var dayS = Number(start.substr(8)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+
+			var yearE = Number(end.substr(0,4)); // 입력한 값의 0~4자리까지 (연) 
+			var monthE = Number(end.substr(5,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월) 
+			var dayE = Number(end.substr(8)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+			
+			var cnt = 0;
+
+			//전시회명 입력 여부
+			if(title==""){
+				alert("전시회명을 입력해주세요.");
+				return false;
+			}
+
+			//날짜 유효성 검사
+			var flag = false;
+
+			if(yearS<year || yearE<year){
+				flag = true;
+			}else if(monthS<month || monthE<month){
+				flag = true;
+			}else if(dayS<day || dayE<day){
+				flag = true;
+			}else if(yearE<yearS){
+				flag = true;
+			}
+			
+			if(flag){
+				alert("입력한 날짜 형식이 틀렸습니다.");
+				return false;
+			}
+
+			//템플릿 선택 여부
+			for(var i=0 ; i<chkRadio.length ; i++){
+				if(chkRadio[i].checked == true){ 
+					cnt++;
+				}
+			}
+			
+			if(cnt<1){
+				alert("전시회 템플릿을 선택해주세요.");
+				return false;
+			}
+
+			//작품 여부 검사
+			if(count==0){
+				alert("작품 등록을 해주세요.");
+				return false;
+			}
+
+			//작품명 입력 여부
+			for(var i=0 ; i<name.length ; i++){
+				if(name[i].value==""){
+					alert(i+1+"번째 작품의 작품명을 입력해주세요.");
+					return false;
+				}
+			}
+
+			//작품내용 입력 여부
+			for(var i=0 ; i<description.length ; i++){
+				if(description[i].value==""){
+					alert(i+1+"번째 작품의 작품내용을 입력해주세요.");
+					return false;
+				}
+			}
+
+			//사진 여부 검사
+			for(var i=0 ; i<image.length ; i++){
+				if(image[i].value==""){
+					alert(i+1+"번째 작품 사진을 등록해주세요.");
+					return false;
+				}
+			}
+
+			alert("성공적으로 등록이 되었습니다.");
+			
+			return true;
 		}
 	</script>
 	

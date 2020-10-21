@@ -166,6 +166,37 @@ public class WorkDAO {
 		return work;
 		
 	}
+	
+	public ArrayList<HashMap<String, Object>> selectMyGallery(String member_id){
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<HashMap<String, Object>> list = null;
+		
+		try {
+			list = wm.selectMyGallery(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	public int deleteGallery(int gallery_seq) {
+		
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = wm.deleteGallery(gallery_seq);
+		
+		try {
+			cnt = wm.deleteGallery(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return cnt;
+		
+	}
 
 
 }
