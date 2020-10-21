@@ -85,7 +85,9 @@ public class MultiChatController {
 		logger.info("메시지 실행. 세션 ID / 메시지: " + session.getId() + " / " + message);
 
 		try {
-			session.getBasicRemote().sendText("나: " + message);
+			
+			System.out.println("트라이 안에 들어옴");
+			session.getBasicRemote().sendText("나 : " + message);
 
 			// 메시지를 보낸 사람의 채팅방 번호와 사용자 이름을 가져온다.
 			String senderRoom_id = (String) session.getUserProperties().get("room_id");
@@ -100,7 +102,15 @@ public class MultiChatController {
 				// 다른 세션의 채팅방 번호와 보낸 세션의 채팅방 번호가 일치하면, 같은 방에 있는 세션을 의미하니 메시지 전송을 진행한다.
 				if (!anotherSession.getId().equals(session.getId()) && anotherRoom_id.equals(senderRoom_id)) {
 					// 보내는 사람의 이름과 메시지를 전송한다.
-					anotherSession.getBasicRemote().sendText(senderMember_nickname + ": " + message);
+					anotherSession.getBasicRemote().sendText(
+					/*
+					 * "<div class='media w-50 mb-3'><img src='https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg' alt='user' width='50' class='rounded-circle'>"
+					 * +"<div class='media-body ml-3'><div class='bg-light rounded py-2 px-3 mb-2'>"
+					 * +"<p class='text-small mb-0 text-muted'>" + message + "</p></div>" +
+					 * senderMember_nickname + "<p class='small text-muted'>12:00 PM | Aug 13</p>"
+					 * +"</div></div>"
+					 */
+							senderMember_nickname + ":" + message);
 				}
 			}
 

@@ -42,27 +42,21 @@
 		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
 		var member_nickname = document.getElementById("member_info").value;
 		var room_id = member_nickname + '_' + friend_id;
-		webSocket = new WebSocket("ws://10.10.12.126:8888/multiChat.do/" + room_id + "/" + member_nickname);
+		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname);
 
-		webSocket.onopen;
 		webSocket.onmessage = function(event) {output(event.data);};
-		webSocket.onclose;
+		document.getElementById("msg").innerHTML = ' ';
 		}
 
+	/* 컨트롤러에서 출력해주는 메세지 */
 	function output(txt){
-		document.getElementById("messages").innerHTML += '<div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">'
-			+'<div class="media-body ml-3"><div class="bg-light rounded py-2 px-3 mb-2">'
-			+'<p class="text-small mb-0 text-muted">' + txt + '</p></div><p class="small text-muted">12:00 PM | Aug 13</p>'
-			+'</div></div>'+"<br>";
+		document.getElementById("messages").innerHTML += "<br>";
 		}
-	
+
+	/* 컨트롤러 쪽으로 보내는 메세지 */
 	function sendMessage() {
 		var txt = document.getElementById("msg").value;
-		var send_msg = '<div class="media w-50 ml-auto mb-3"><div class="media-body">'
-		+'<div class="bg-primary rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">'
-		+ txt
-		+'</p></div><p class="small text-muted">12:00 PM | Aug 13</p></div></div></div>';
-		webSocket.send(send_msg);
+		webSocket.send(txt);
 		}
 	
 
@@ -162,7 +156,7 @@
           <div class="list-group rounded-0">
           <button class="btn btn-link">
             <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media" onclick="openSocket()"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+              <div class="media" onclick="openSocket();" id="JasonD_chat"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
                     <h6 class="mb-0">JasonD<input type="hidden" id="friend_id" value="JasonD"></h6><small class="small font-weight-bold">25 Dec</small>
@@ -188,7 +182,24 @@
     </div>
     <!-- Chat Box-->
     <div class="col-7 px-0">
-      <div class="px-4 py-5 chat-box bg-white" id="messages"></div>
+      <div class="px-4 py-5 chat-box bg-white" id="messages">
+      
+      <!-- 나 -->
+      <div class='media w-50 ml-auto mb-3'>
+      	<div class='media-body'>
+			<div class='bg-primary rounded py-2 px-3 mb-2'>
+				<p class='text-small mb-0 text-white'>
+					message
+				</p>
+			</div>
+				<p class='small text-muted'>
+					12:00 PM | Aug 13
+				</p>
+			</div>
+		</div>
+		
+		</div>
+     </div>
       
       <!-- Typing area -->
       <form action="#" class="bg-light">
