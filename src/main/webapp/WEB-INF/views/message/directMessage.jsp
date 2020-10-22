@@ -44,19 +44,20 @@
 		var room_id = member_nickname + '_' + friend_id;
 		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname);
 
+		webSocket.onopen = function(event) {alert("웹소켓 연결/ 채팅시작" + " : " + room_id);};
 		webSocket.onmessage = function(event) {output(event.data);};
-		document.getElementById("msg").innerHTML = ' ';
+		webSocket.onclose = function(event) {alert("웹소켓 닫힘/ 채팅 종료");};
 		}
 
 	/* 컨트롤러에서 출력해주는 메세지 */
-	function output(txt){
-		document.getElementById("messages").innerHTML += "<br>";
+	function output(message){
+		document.getElementById("chat_logs").innerHTML += message + "<br>";
 		}
 
 	/* 컨트롤러 쪽으로 보내는 메세지 */
 	function sendMessage() {
-		var txt = document.getElementById("msg").value;
-		webSocket.send(txt);
+		var message = document.getElementById("message").value;
+		webSocket.send(message);
 		}
 	
 
@@ -155,23 +156,31 @@
 
         <div class="messages-box">
           <div class="list-group rounded-0">
-          <button class="btn btn-link">
-            <a class="list-group-item list-group-item-action active text-white rounded-0">
-              <div class="media" onclick="openSocket();" id="JasonD_chat"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+            <div class="list-group-item list-group-item-action active text-white rounded-0" onclick="openSocket()" id="friend_id">
+              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">JasonD<input type="hidden" id="friend_id" value="JasonD"></h6><small class="small font-weight-bold">25 Dec</small>
+                    <h6 class="mb-0">Jason.D</h6><small class="small font-weight-bold">25 Dec</small>
                   </div>
-                 </div>
+                </div>
               </div>
-            </a>
-            </button>
+            </div>
 
             <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Joe</h6><small class="small font-weight-bold">14 Dec</small>
+                    <h6 class="mb-0">Oliver</h6><small class="small font-weight-bold">14 Dec</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                <div class="media-body ml-4">
+                  <div class="d-flex align-items-center justify-content-between mb-1">
+                    <h6 class="mb-0">Mack</h6><small class="small font-weight-bold">9 Nov</small>
                   </div>
                 </div>
               </div>
@@ -183,52 +192,47 @@
     </div>
     <!-- Chat Box-->
     <div class="col-7 px-0">
-      <div class="px-4 py-5 chat-box bg-white" id="messages">
-      
-      <!-- 상대 -->
-      <div class='media w-50 mb-3'>
-      	<img src='https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg' alt='user' width='50' class='rounded-circle'>
-			<div class='media-body ml-3'>
-				<div class='bg-light rounded py-2 px-3 mb-2'>
-					<p class='text-small mb-0 text-muted'>
-						message
-					</p>
-				</div>
-				<p class='small text-muted'>
-					12:00 PM | Aug 13
-				</p>
-			</div>
-		</div>
-      
-      
-      <!-- 나 -->
-      <div class='media w-50 ml-auto mb-3'>
-      	<div class='media-body'>
-			<div class='bg-primary rounded py-2 px-3 mb-2'>
-				<p class='text-small mb-0 text-white'>
-					message
-				</p>
-			</div>
-				<p class='small text-muted'>
-					12:00 PM | Aug 13
-				</p>
-			</div>
-		</div>
-		
-		</div>
-     </div>
-      
+      <div class="px-4 py-5 chat-box bg-white" id="chat_logs">
+        <!-- 남이 보낸거-->
+        <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+          <div class="media-body ml-3">
+            <div class="bg-light rounded py-2 px-3 mb-2">
+              <p class="text-small mb-0 text-muted">받은 메세지</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>
+
+        <!-- 내가 보낸거 -->
+        <div class="media w-50 ml-auto mb-3">
+          <div class="media-body">
+            <div class="bg-primary rounded py-2 px-3 mb-2">
+              <p class="text-small mb-0 text-white">보낸 메세지</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>
+
+        
+
+      </div>
+      <!-- 여기까지 채팅 영역  -->
+
       <!-- Typing area -->
-      <form action="#" class="bg-light">
+      <form action="#" class="bg-light" onsubmit="sendMessage()">
         <div class="input-group">
-          <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" id="msg">
+          <input type="text" placeholder="새 쪽지" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" id="message">
           <div class="input-group-append">
-            <button id="send_message" type="submit" class="btn btn-link" onclick="sendMessage()"> <i class="fa fa-paper-plane"></i></button>
+            <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
       </form>
+
     </div>
   </div>
+ 
+<!-- 여기까지 채팅 영역 --> 
+ 
 </div>
 
     <!-- Footer Section Begin -->

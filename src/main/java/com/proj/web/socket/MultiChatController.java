@@ -15,7 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 @Controller
-
+// 스크립트에서 웹 소켓 객체를 만들 때, 사용자가 입력한 채팅방 번호와 사용자 이름을 주소에 붙여서 전달받는다.
+// 사용자가 입력한 채팅방 번호와 사용자 이름에 따라 주소가 유동적으로 바뀔 것이다.
+// '/multiChat.do'를 제외한, 채팅방 번호와 사용자 이름에 해당하는 뒤쪽 주소는 onOpen 메서드의 매개변수로 전달된다.
+// 동적 주소와 매개변수는 필요에 따라 개수를 늘리거나 줄일 수 있다.
+// 예를 들어, 채팅방 번호 정보가 필요 없으면 주소의 형태는 '/multiChat.do/{member_nickname}'이 되고 onOpen 메서드의 매개변수도 한 개만 작성하면 된다.
 @ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}")
 public class MultiChatController {
 
@@ -23,32 +27,18 @@ public class MultiChatController {
 	private static final Logger logger = LoggerFactory.getLogger(MultiChatController.class);
 
 	@OnOpen
-	// 사용자의 닉네임 + 상대방의 닉네임 => room_id(고유 번호)
-	// @PathParam 어노테이션 소괄호 안의 문자열("room_id"와 "member_id")이
-	// 21번째 줄, @ServerEndpoint 어노테이션의 값 뒷 부분에 해당하는 동적 url 부분의 이름({room_id}와 {member_id})과 일치해야 한다.
+	// 페이지에서 사용자가 입력한 방 번호를 매개변수로 받는다.
+	// @PathParam 어노테이션 소괄호 안의 문자열("room_id"와 "member_nickname")이
+	// 21번째 줄, @ServerEndpoint 어노테이션의 값 뒷 부분에 해당하는 동적 url 부분의 이름({room_id}와 {member_nickname})과 일치해야 한다.
 	// @PathParam 어노테이션 없이 매개변수만 작성하면 에러가 발생한다.
 	public void onOpen(Session session, @PathParam("room_id") String room_id, @PathParam("member_nickname") String member_nickname) {
 		logger.info("소켓 열기 실행. 생성된 세션 ID: " + session.getId() + ", 채팅방 번호: " + room_id + ", 사용자 이름: " + member_nickname);
-		
-		/*
-		 * // 누군가가 소켓을 열고 방에 접속하면, 같은 방에 이미 접속하고 있던 다른 모든 사람들에게 알림을 주는 코드. try { // 반복문을
-		 * 통해 현재 세션을 제외한 다른 모든 세션에 대해 확인을 진행한다. for (Session anotherSession :
-		 * sessionList) { // 각각의 세션에 등록되어 있는 채팅방 번호를 가져온다. 채팅방 번호를 가져오는 메서드와 관련 사용 방법은
-		 * 하단에 기술한다. String anotherRoom_id = (String)
-		 * anotherSession.getUserProperties().get("room_id");
-		 * 
-		 * // 기존에 있던 세션의 채팅방 번호와 현재 막 접속을 시도한 세션의 채팅방 번호가 일치하는지 확인한다. // 일치한다면 같은 방에 있는
-		 * 세션을 의미하므로, 메시지를 전송함으로써 현재 접속자에 대한 이름을 다른 사람들에게 알린다. if
-		 * (anotherRoom_id.equals(room_id)) {
-		 * anotherSession.getBasicRemote().sendText(member_id + " 님이 접속하셨습니다."); } } }
-		 * catch (Exception e) { e.printStackTrace(); }
-		 */
 
 		// 지금 접속을 시도하는 세션 객체에 사용자 정의 속성을 작성한다.
 		// 사용자 정의 속성은 getUserProperties() 메서드로 사용하며 Map 구조로 되어있다.
 		// 이 Map에 채팅방 번호와 사용자 이름을 입력한다.
 		session.getUserProperties().put("room_id", room_id);
-		session.getUserProperties().put("member_id", member_nickname);
+		session.getUserProperties().put("member_nickname", member_nickname);
 
 		// 사용자 정의 속성의 입력이 끝난 세션 객체를 세션 목록에 저장한다.
 		sessionList.add(session);
@@ -61,23 +51,6 @@ public class MultiChatController {
 		// 종료를 요청한 세션 객체를 세션 목록에서 제거한다.
 		sessionList.remove(session);
 		
-		// 소켓을 닫은 세션에 대해, 같은 방에 있던 사용자들에게 해당 세션이 채팅을 종료했음을 알리는 코드.
-		// 세션 목록에서 종료된 세션을 먼저 제거(69번째 줄)해야 익셉션이 발생하지 않는다.
-		// 종료된 세션에 대해 작업을 진행하려고 하면 익셉션이 발생하기 때문이다.
-		/*
-		 * try { // 종료된 세션에 대한 채팅방 번호와 사용자 이름을 가져온다. String closerRoom_id = (String)
-		 * session.getUserProperties().get("room_id"); String closerMember_id = (String)
-		 * session.getUserProperties().get("member_nickname");
-		 * 
-		 * // 반복문을 통해 다른 모든 세션에 대해 확인을 진행한다. for (Session anotherSession : sessionList)
-		 * { // 각각의 세션에 등록되어 있는 채팅방 번호를 가져온다. String anotherRoom_id = (String)
-		 * anotherSession.getUserProperties().get("room_id");
-		 * 
-		 * // 기존에 있던 세션의 채팅방 번호와 종료된 세션의 채팅방 번호가 일치하는지 확인한다. // 일치하면 누가 종료했는지 메시지를
-		 * 전송함으로써 이름을 표시해준다. if (anotherRoom_id.equals(closerRoom_id)) {
-		 * anotherSession.getBasicRemote().sendText(closerMember_id + " 님이 종료하셨습니다."); }
-		 * } } catch (Exception e) { e.printStackTrace(); }
-		 */
 	}
 
 	@OnMessage
@@ -85,9 +58,8 @@ public class MultiChatController {
 		logger.info("메시지 실행. 세션 ID / 메시지: " + session.getId() + " / " + message);
 
 		try {
-			
-			System.out.println("트라이 안에 들어옴");
-			session.getBasicRemote().sendText("나 : " + message);
+			logger.info("전달받은 메세지 : " + message);
+			session.getBasicRemote().sendText("나: " + message);
 
 			// 메시지를 보낸 사람의 채팅방 번호와 사용자 이름을 가져온다.
 			String senderRoom_id = (String) session.getUserProperties().get("room_id");
@@ -102,7 +74,7 @@ public class MultiChatController {
 				// 다른 세션의 채팅방 번호와 보낸 세션의 채팅방 번호가 일치하면, 같은 방에 있는 세션을 의미하니 메시지 전송을 진행한다.
 				if (!anotherSession.getId().equals(session.getId()) && anotherRoom_id.equals(senderRoom_id)) {
 					// 보내는 사람의 이름과 메시지를 전송한다.
-					anotherSession.getBasicRemote().sendText(senderMember_nickname + ":" + message);
+					anotherSession.getBasicRemote().sendText(senderMember_nickname + ": " + message);
 				}
 			}
 
