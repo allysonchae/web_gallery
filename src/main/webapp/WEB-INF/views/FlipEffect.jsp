@@ -55,6 +55,10 @@
 	#trash:hover{
 		cursor:pointer;
 	}
+	
+	#replyTable{
+		margin: 0 auto;
+	}
   </style>
   
   <script type="text/javascript">

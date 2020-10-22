@@ -29,10 +29,36 @@
     <script src="/resources/js/kakao.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript">
+	function jquryCheck(){
+		var flag = true;
+		
+		$.ajax({ 
+            type : 'POST'
+           , url : '/member/Login_Ck'
+           , data : {
+        	   			id:$('#member_id').val() 
+        	   			,pw:$('#member_pw').val()	
+					}
+		   , async: false
+		   , dataType : "text"
+           , success : function(data) { 
+               				if (data == 'F') { 
+                       			flag = false; 
+                       		} 
+               			}
+		   , error : function(error) {
+			   			console.log("통신 실패");
+			   		} 
+	 	}); 
+
+		return flag;
+	}
+
+
+    
     function loginCheck(){
     	var member_id = document.getElementById("member_id").value;
     	var member_pw = document.getElementById("member_pw").value;
-    	/* var param = "member_id=" + $("#member_id").val() + "&member_pw="+ $("#member_pw").val(); */
 
     	if(member_id==''||member_id.length==0){
 			alert("아이디를 입력해 주세요");
@@ -46,25 +72,15 @@
 				alert("비밀번호는 3~10글자 입니다");
 				return false;
 			}
-    	/* $.ajax({
-			url:"/member/Login_Ck",
-			type:"post",
-			data:$("form").serialize(),
-			success:function(response){
-				alert(response);
-				/* if(response==1){
-					alert("로그인 성공");
-				}else{
-					alert("로그인 실패");
-					return false;	
-				} */
-				},
-			error:function(e){
-				alert("로그인 실패");
-				return false;
-				}
-			}); */
-		
+
+    	var flag = jquryCheck();
+
+		if(!flag){
+			alert("존재하지 않은 아이디 혹은 잘못된 비밀번호 입니다.");
+			$("#member_pw").val("");
+			return false;
+		}
+    	
     	return true;
     }
 	
@@ -180,7 +196,9 @@
                         		</tr>
                         		<tr>
                         			<td colspan="2">
-										<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a> | <a href="/member/memberFindForm">아이디 찾기</a>|<a href="/member/pwFindForm">비밀번호 찾기</a> 
+										&nbsp<a href="/member/memberJoinForm" style="font-weight:bold">회원가입</a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+										<a href="/member/memberFindForm" style="font-weight:bold">아이디 찾기</a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+										<a href="/member/pwFindForm" style="font-weight:bold">비밀번호 찾기</a> 
 									</td>
 								</tr>
                         	</table>

@@ -1,5 +1,6 @@
 package com.proj.web.dao;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,8 +18,6 @@ public interface WorkMapper {
 	
 	public int gallery_Seq();
 	
-	public ArrayList<HashMap<String, Object>> workRead();
-	
 	public ArrayList<GalleryVO> gallerySelectAll();
 	
 	public WorkVO presentWork(int id);
@@ -32,6 +31,8 @@ public interface WorkMapper {
 	public WorkVO selectWorkOne(HashMap<String , Object> map);
 	
 	public ArrayList<HashMap<String, Object>> selectMyGallery(String member_id);
+	
+	public int deleteGallery(int gallery_seq);
 
 	public int insertReply(ReplyVO reply);
 

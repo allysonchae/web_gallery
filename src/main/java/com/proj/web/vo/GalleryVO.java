@@ -13,5 +13,6 @@ public class GalleryVO {
 	private int gallery_like;
 	private int gallery_template;
 	private int id;
+	private String member_nickname;
 	
 }

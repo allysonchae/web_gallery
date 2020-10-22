@@ -61,19 +61,6 @@ public class WorkDAO {
 		return cnt;
 	}
 	
-	public ArrayList<HashMap<String, Object>> workRead(){
-		WorkMapper wm = ss.getMapper(WorkMapper.class);
-		ArrayList<HashMap<String, Object>> list = null;
-
-		try {
-			list = wm.workRead();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
-	
 	public ArrayList<GalleryVO> gallerySelectAll(){
 		
 		WorkMapper wm = ss.getMapper(WorkMapper.class);
@@ -134,6 +121,8 @@ public class WorkDAO {
 			e.printStackTrace();
 		}
 		
+		logger.info("테스트 가져온 map : {}",map);
+		
 		return map;
 		
 	}
@@ -180,6 +169,22 @@ public class WorkDAO {
 		}
 		
 		return list;
+		
+	}
+	
+	public int deleteGallery(int gallery_seq) {
+		
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = wm.deleteGallery(gallery_seq);
+		
+		try {
+			cnt = wm.deleteGallery(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return cnt;
 		
 	}
 

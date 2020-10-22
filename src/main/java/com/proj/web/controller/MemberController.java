@@ -68,6 +68,27 @@ public class MemberController {
 		return page;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/Login_Ck", method = RequestMethod.POST)
+	public String loginCheck(String id, String pw) {
+		
+		logger.info("id : {}",id);
+		logger.info("pw : {}",pw);
+		
+		boolean flag = service.loginCheck(id, pw);
+		String result = "";
+		
+		if(flag) {
+			result = "S";
+		}else {
+			result = "F";
+		}
+		
+		System.out.println(result);
+		
+		return result;
+	}
+	
 	//회원가입 화면으로 이동
 	@RequestMapping(value = "/memberJoinForm", method = RequestMethod.GET)
 	public String memberJoinForm(Model model, HttpSession session, String kakaoName, String kakaoEmail) {
