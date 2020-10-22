@@ -32,15 +32,12 @@ public interface WorkMapper {
 	public WorkVO selectWorkOne(HashMap<String , Object> map);
 	
 	public ArrayList<HashMap<String, Object>> selectMyGallery(String member_id);
-<<<<<<< HEAD
 	
 	public int deleteGallery(int gallery_seq);
-=======
 
 	public int insertReply(ReplyVO reply);
 
 	public ArrayList<ReplyVO> getReplyList(int gallery_seq);
 	
 	/*public int deleteReply(ReplyVO reply);*/
->>>>>>> origin/kkw
 }
