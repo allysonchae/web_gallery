@@ -242,11 +242,11 @@ public class WorkService {
 		dao.insertReply(reply);
 	}
 
-	/*public void deleteReply(ReplyVO reply) {
+	public void deleteReply(ReplyVO reply) {
 		String member_id = (String)session.getAttribute("loginID");
 		reply.setMember_id(member_id);
 		dao.deleteReply(reply);
-	}*/
+	}
 	
 	public ArrayList<ReplyVO> listReply(int gallery_seq) {
 		ArrayList<ReplyVO> list = dao.getReplyList(gallery_seq);
@@ -254,9 +254,11 @@ public class WorkService {
 	}
 	
 	public int deleteGallery(int gallery_seq) {
-		
 		return dao.deleteGallery(gallery_seq);
-		
+	}
+
+	public void updateReply(ReplyVO reply) {
+		dao.updateReply(reply);
 	}
 	
 }
