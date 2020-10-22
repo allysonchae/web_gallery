@@ -42,11 +42,10 @@
 		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
 		var member_nickname = document.getElementById("member_info").value;
 		var room_id = member_nickname + '_' + friend_id;
-		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname);
+		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname + "/" + friend_id);
 
 		webSocket.onopen = function(event) {alert("웹소켓 연결/ 채팅시작" + " : " + room_id);};
 		webSocket.onmessage = function(event) {output(event.data);};
-		webSocket.onclose = function(event) {alert("웹소켓 닫힘/ 채팅 종료");};
 		}
 
 	/* 컨트롤러에서 출력해주는 메세지 */
@@ -219,7 +218,7 @@
       <!-- 여기까지 채팅 영역  -->
 
       <!-- Typing area -->
-      <form action="#" class="bg-light" onsubmit="sendMessage()">
+      <form action="#" class="bg-light" onsubmit="sendMessage();">
         <div class="input-group">
           <input type="text" placeholder="새 쪽지" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" id="message">
           <div class="input-group-append">

@@ -20,20 +20,19 @@ import org.springframework.stereotype.Controller;
 // '/multiChat.do'를 제외한, 채팅방 번호와 사용자 이름에 해당하는 뒤쪽 주소는 onOpen 메서드의 매개변수로 전달된다.
 // 동적 주소와 매개변수는 필요에 따라 개수를 늘리거나 줄일 수 있다.
 // 예를 들어, 채팅방 번호 정보가 필요 없으면 주소의 형태는 '/multiChat.do/{member_nickname}'이 되고 onOpen 메서드의 매개변수도 한 개만 작성하면 된다.
-@ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}")
+@ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}/{friend_id}")
 public class MultiChatController {
 
 	private static final ArrayList<Session> sessionList = new ArrayList<>();
 	private static final Logger logger = LoggerFactory.getLogger(MultiChatController.class);
 
 	@OnOpen
-	// 페이지에서 사용자가 입력한 방 번호를 매개변수로 받는다.
-	// @PathParam 어노테이션 소괄호 안의 문자열("room_id"와 "member_nickname")이
-	// 21번째 줄, @ServerEndpoint 어노테이션의 값 뒷 부분에 해당하는 동적 url 부분의 이름({room_id}와 {member_nickname})과 일치해야 한다.
 	// @PathParam 어노테이션 없이 매개변수만 작성하면 에러가 발생한다.
-	public void onOpen(Session session, @PathParam("room_id") String room_id, @PathParam("member_nickname") String member_nickname) {
+	public void onOpen(Session session, @PathParam("room_id") String room_id, @PathParam("member_nickname") String member_nickname
+										,@PathParam("friend_id") String friend_id) {
 		logger.info("소켓 열기 실행. 생성된 세션 ID: " + session.getId() + ", 채팅방 번호: " + room_id + ", 사용자 이름: " + member_nickname);
-
+		
+			
 		// 지금 접속을 시도하는 세션 객체에 사용자 정의 속성을 작성한다.
 		// 사용자 정의 속성은 getUserProperties() 메서드로 사용하며 Map 구조로 되어있다.
 		// 이 Map에 채팅방 번호와 사용자 이름을 입력한다.
@@ -44,14 +43,12 @@ public class MultiChatController {
 		sessionList.add(session);
 	}
 
-	@OnClose
-	public void onClose(Session session) {
-		logger.info("소켓 닫기 실행. 종료된 세션 ID: " + session.getId());
-		
-		// 종료를 요청한 세션 객체를 세션 목록에서 제거한다.
-		sessionList.remove(session);
-		
-	}
+	/*
+	 * @OnClose public void onClose(Session session) {
+	 * logger.info("소켓 닫기 실행. 종료된 세션 ID: " + session.getId());
+	 * 
+	 * // 종료를 요청한 세션 객체를 세션 목록에서 제거한다. sessionList.remove(session); }
+	 */
 
 	@OnMessage
 	public void onMessage(Session session, String message) {
@@ -59,7 +56,11 @@ public class MultiChatController {
 
 		try {
 			logger.info("전달받은 메세지 : " + message);
-			session.getBasicRemote().sendText("나: " + message);
+			//사용자가 보낸 메세지(내쪽에서 뜨는거 SEND)
+			session.getBasicRemote().sendText(
+					"<div class='media w-50 ml-auto mb-3'><div class='media-body'><div class='bg-primary rounded py-2 px-3 mb-2'>"+
+					"<p class='text-small mb-0 text-white'>" + message + "</p></div><p class='small text-muted'>" +
+						"날짜 같은거 " + "</p></div>	</div>");
 
 			// 메시지를 보낸 사람의 채팅방 번호와 사용자 이름을 가져온다.
 			String senderRoom_id = (String) session.getUserProperties().get("room_id");
@@ -74,7 +75,12 @@ public class MultiChatController {
 				// 다른 세션의 채팅방 번호와 보낸 세션의 채팅방 번호가 일치하면, 같은 방에 있는 세션을 의미하니 메시지 전송을 진행한다.
 				if (!anotherSession.getId().equals(session.getId()) && anotherRoom_id.equals(senderRoom_id)) {
 					// 보내는 사람의 이름과 메시지를 전송한다.
-					anotherSession.getBasicRemote().sendText(senderMember_nickname + ": " + message);
+					//RECIEVED
+					anotherSession.getBasicRemote().sendText(
+							"<div class='media w-50 mb-3'><img src='https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg' alt='user' width='50' class='rounded-circle'>"+
+							"<div class='media-body ml-3'><div class='bg-light rounded py-2 px-3 mb-2'>"+
+							"<p class='text-small mb-0 text-muted'>" + message +
+							"</p></div><p class='small text-muted'>" + senderMember_nickname + "|" + "얘도 날짜 같은거" + "</p></div></div>");
 				}
 			}
 
