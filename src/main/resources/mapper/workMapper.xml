@@ -12,6 +12,7 @@
         	,"end"
         	,gallery_indate
         	,gallery_template
+        	,member_nickname
 		)values(
 			gallery_seq.nextval
 			,#{member_id}
@@ -20,6 +21,7 @@
 			,#{end}
 			,sysdate
 			,#{gallery_template}
+			,#{member_nickname}
 		)
 	</insert>
 
@@ -48,23 +50,6 @@
     		dual
 	</select>
 	
-	<select id="workRead" resultType="hashmap">
-		select
-    		g.gallery_seq as id
-    		,g.member_id as member_id
-   		 	,g.title as title
-   		 	,g.gallery_template as gallery_template
-		    ,w.work_savedFileName as work_savedFileName
-		    ,w.work_originalFileName as work_originalFileName
-		    ,w.work_seq as work_seq
-		    ,to_char(g."start",'yyyy-mm-dd') as "start"
-		    ,to_char(g."end",'yyyy-mm-dd') as "end"
-		from
-		    gallery g, work w
-		where
-            w.work_seq = 0
-	</select>
-	
 	<select id="gallerySelectAll" resultType="gallery">
 		select
     		gallery_seq as id
@@ -75,18 +60,6 @@
 		from
     		gallery
 	</select>	
-	
-	<select id="presentWork" parameterType="int" resultType="work">
-		select
-    		work_originalFileName
-    		,work_savedFileName 
-		from
-    		work
-		where
-    		work_seq = 0
-		and
-    		gallery_seq = #{id}
-	</select>
 	
 	<select id="presentGallery" parameterType="int" resultType="gallery">
 		select
@@ -109,13 +82,12 @@
 		    ,w.work_originalFileName as work_originalFileName
 		    ,w.work_savedFileName as work_savedFileName
 		    ,w.work_seq as work_seq
-		    ,m.member_nickname as member_nickname
 		    ,to_char(g."start",'yyyy-mm-dd') as "start"
     		,to_char(g."end",'yyyy-mm-dd') as "end"
+    		,g.member_nickname as member_nickname
 		from
 		    gallery g
 		    ,work w
-		    ,member m
 		where
 		    g.gallery_seq = w.gallery_seq
 		and
@@ -132,11 +104,11 @@
 		    ,w.work_originalFileName as work_originalFileName
 		    ,w.work_seq as work_seq
 		    ,g.gallery_template as gallery_template
-		    ,m.member_id as member_id
+		    ,g.member_id as member_id
 		    ,w.work_name as work_name
-    		,m.member_nickname as member_nickname
+		    ,g.member_nickname as member_nickname
 		from
-		    gallery g, work w, member m
+		    gallery g, work w
 		where
 			 g.gallery_seq = w.gallery_seq
     	and

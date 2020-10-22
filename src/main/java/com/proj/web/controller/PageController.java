@@ -117,9 +117,9 @@ public class PageController {
 		logger.info("gallery_templete : {}", map.get("GALLERY_TEMPLATE"));
 		String templeteNum = String.valueOf(map.get("GALLERY_TEMPLATE"));
 
-		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
-		
-		model.addAttribute("replylist", replylist);
+//		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
+//		
+//		model.addAttribute("replylist", replylist);
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
 
