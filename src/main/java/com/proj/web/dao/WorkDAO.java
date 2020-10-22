@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
 @Repository
@@ -198,5 +199,40 @@ public class WorkDAO {
 		
 	}
 
+	public int insertReply(ReplyVO reply) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = 0;
+		try {
+			cnt = wm.insertReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	public ArrayList<ReplyVO> getReplyList(int gallery_seq) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<ReplyVO> list = null;		
+		try {
+			list = wm.getReplyList(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	
+	/*public int deleteReply(ReplyVO reply) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt =0;
+		try {
+			cnt = wm.deleteReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}*/
+	
 
 }

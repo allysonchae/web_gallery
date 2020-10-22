@@ -353,7 +353,6 @@
 			}
 
 			alert("성공적으로 등록이 되었습니다.");
-			
 			return true;
 		}
 	</script>

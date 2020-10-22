@@ -19,6 +19,7 @@ import com.proj.web.dao.WorkDAO;
 import com.proj.web.util.FileService;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
 @Service
@@ -254,6 +255,24 @@ public class WorkService {
 		
 		return dao.selectMyGallery(member_id);
 		
+	}
+
+	public void insertReply(ReplyVO reply) {
+		String member_id = (String)session.getAttribute("loginID");
+		reply.setMember_id(member_id); 
+		logger.info("서비스 reply:{}", reply);
+		dao.insertReply(reply);
+	}
+
+	/*public void deleteReply(ReplyVO reply) {
+		String member_id = (String)session.getAttribute("loginID");
+		reply.setMember_id(member_id);
+		dao.deleteReply(reply);
+	}*/
+	
+	public ArrayList<ReplyVO> listReply(int gallery_seq) {
+		ArrayList<ReplyVO> list = dao.getReplyList(gallery_seq);
+		return list;
 	}
 	
 	public int deleteGallery(int gallery_seq) {
