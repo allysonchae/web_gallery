@@ -198,7 +198,7 @@
 						rowItem += "<td style='text-align: center;'>작품명 및 설명</td>"
 						rowItem += "<td style='text-align: center;'>"
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
-						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
+						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;'/></td>"
 						rowItem += "<td style='text-align: center;'>"
 						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"

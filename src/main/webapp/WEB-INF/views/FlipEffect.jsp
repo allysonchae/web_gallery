@@ -91,15 +91,38 @@
 		cursor:pointer;
 	}
 	
+	#x:hover{
+		cursor:pointer;
+	}
+	
+	#x{
+		float: right;
+		color:black;
+	}
+	
 	#replyTable{
 		margin: 0 auto;
+	}
+	
+	#trash{
+		position: relative;
+		top:730px;
+		left:1650px;
 	}
   </style>
   
   <script type="text/javascript">
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
-  	  	
+
+		  $('#x').mouseenter(function () {
+				$(this).css("color","red");
+	      });
+
+		  $('#x').mouseleave(function () {
+				$(this).css("color","black");
+	      });
+	        	  	
 	      $('#trash').mouseenter(function () {
 				$(this).css("color","red");
 	      });
@@ -119,13 +142,11 @@
 		  });
   	});
   </script>
+  
 </head>
 
 <body>
-
-  <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
-	  <input type="hidden" value="${map.ID }" name="gallery_seq">
-  </form>
+  
   
   <c:if test="${sessionScope.loginID==map.MEMBER_ID }">
 	  <svg id="trash" width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top: 15px;">
@@ -133,9 +154,16 @@
 			<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 	  </svg>
   </c:if>
+	
+	<a href="/gallery">
+	  <svg id="x" width="60px" height="60px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  		<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+	  </svg>
+	</a>  
  
   <div class="header">
   	<h1>${map.TITLE }</h1>
+  	<h4>${map.MEMBER_NICKNAME }</h4>
   </div>
   
   <!-- Swiper -->
