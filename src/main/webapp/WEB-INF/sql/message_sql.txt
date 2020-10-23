@@ -1,17 +1,18 @@
-create chatroom_seq;
+create table message_room(
+	member_nickname varchar2(50) not null
+	,chat_context varchar2(4000) not null
+	,chat_date date default sysdate
+    ,room_id varchar2(50)
+	,constraint room_fk foreign key(room_id)
+	references room_lists(room_id) on delete cascade
+	,constraint room_fk2 foreign key(member_nickname)
+	references member(member_nickname) on delete cascade
+);
 
 create table room_lists(
-	room_id varchar2(30) not null
-	,constraint chatid_fk foreign key(member_nickname)
-	 references member(member_id) on delete cascade
+	room_id varchar2(50) primary key
+	,member_nickname varchar2(50) not null
 	,room_date date default sysdate
-	 );
-	 
-create message_room(
-	constraint room_fk foreign key(room_id)
-	references room_lists(room_id) on delete cascade
-	,chat_context varchar2(5000) not null
-	,constraint chatid_fk foreign key(member_nickname)
-	references member(member_id) on delete cascade
-	,chat_date date default sysdate
-	);
+	,constraint room_lists_fk foreign key(member_nickname)
+	 references member(member_nickname) on delete cascade
+ );
