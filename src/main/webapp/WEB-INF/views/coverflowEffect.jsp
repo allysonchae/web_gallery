@@ -95,6 +95,7 @@
 	
   <div class="header">
   	<h1>${map.TITLE }</h1>
+  	<h4>${map.MEMBER_NICKNAME }</h4>
   </div>
   
   <!-- Swiper -->
