@@ -19,6 +19,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 <style type="text/css">
+	body {
+      background: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 300px;
+      height: 300px;
+      padding: 50px;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+    }
+     
+     .header{
+		text-align: center;
+		padding-top: 50px;
+	} 
+	
+	*, ::after, ::before {
+     box-sizing: content-box;
+	}
+
 	#trash:hover{
 		cursor:pointer;
 	}
@@ -46,7 +77,6 @@
 	table.type05 td {
 	    width: 350px;
 	    padding: 10px;
-	    vertical-align: top;
 	    border-bottom: 1px solid #ccc;
 	}
 	.replybutton{
@@ -55,9 +85,142 @@
 	.container{
 		text-align:-webkit-center;
 	}
+	
+	html {
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	body {
+	  margin: 0;
+	  padding: 0;
+	  font-family: Helvetica Neue, Arial, sans-serif;
+	  overflow: hidden;
+	}
+	
+	/* ------------- */
+	.menu {
+	  position: absolute;
+	  top: 20px;
+	  left: 20px;
+	  height: 46px;
+	  width: 46px;
+	}
+	
+	.menu-link {
+	  width: 100%;
+	  height: 100%;
+	  position: absolute;
+	  z-index: 1002;
+	}
+	
+	.menu-icon {
+	  position: absolute;
+	  width: 20px;
+	  height: 14px;
+	  margin: auto;
+	  left: 0;
+	  top: 0;
+	  right: 0;
+	  bottom: 1px;
+	}
+	
+	/* ------------- */
+	.menu-line {
+	  background-color: #333;
+	  height: 2px;
+	  width: 100%;
+	  border-radius: 2px;
+	  position: absolute;
+	  left: 0;
+	  transition: all 0.25s ease-in-out;
+	}
+	.menu-line-2 {
+	  top: 0;
+	  bottom: 0;
+	  margin: auto;
+	}
+	.menu-line-3 {
+	  bottom: 0;
+	}
+	.menu.open .menu-line-1 {
+	  transform: translateY(7px) translateY(-50%) rotate(-45deg);
+	}
+	.menu.open .menu-line-2 {
+	  opacity: 0;
+	}
+	.menu.open .menu-line-3 {
+	  transform: translateY(-7px) translateY(50%) rotate(45deg);
+	}
+	
+	/* ------------- */
+	.menu-circle {
+	  background-color: #fff;
+	  width: 100%;
+	  height: 100%;
+	  position: absolute;
+	  border-radius: 50%;
+	  transform: scale(1);
+	  z-index: 1000;
+	  transition: transform 0.3s ease-in-out;
+	}
+	.menu:hover .menu-circle {
+	  transform: scale(1.5);
+	}
+	.menu.open .menu-circle {
+	  transform: scale(60);
+	}
+	
+	/* ------------- */
+	.menu-overlay {
+	  background-color: #fff;
+	  color: #333;
+	  height: 100%;
+	  width: 100%;
+	  position: fixed;
+	  text-align: center;
+	  transition: opacity 0.2s ease-in-out;
+	  z-index: 1001;
+	  opacity: 0;
+	  visibility: hidden;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	}
+	.menu-overlay.open {
+	  opacity: 1;
+	  visibility: visible;
+	  background: #EEEEEE;
+	}
+	
+	/* ------------- */
+	.info {
+	  text-align: center;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	}
+	.overlay-info {
+	  text-align: center;
+	  color: #111825;
+	}
 </style>
 
 <script type="text/javascript">
+	$(function() {
+	  
+		$(".menu-link").click(function(e) {
+	    	e.preventDefault();
+	    
+	    	$(".menu-overlay").toggleClass("open");
+	    	$(".menu").toggleClass("open");
+
+	  	});
+	    
+	});
+
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
   	  	
@@ -83,8 +246,8 @@
   //리플 쓰기 폼 체크
 	function replyFormCheck() {
 		var reply_text = document.getElementById('reply_text');
-		if (reply_text.value.length < 5) {
-			alert('5자 이상 입력해 주세요');
+		if (reply_text.value.length == 0) {
+			alert("댓글을 입력해 주세요");
 			return false;
 		}
 		return true;			
@@ -131,6 +294,23 @@
 
 <body>
 
+<div class="menu">
+  <span class="menu-circle"></span>
+  <a href="#" class="menu-link">
+    <span class="menu-icon">
+      <span class="menu-line menu-line-1"></span>
+      <span class="menu-line menu-line-2"></span>
+      <span class="menu-line menu-line-3"></span>
+    </span>
+  </a>
+</div>
+
+<div class="menu-overlay">
+  <h1 class="overlay-info">
+  	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
+  </h1>
+</div>
+
   <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
 	  <input type="hidden" value="${map.ID }" name="gallery_seq">
   </form>
@@ -165,61 +345,64 @@
    <br><br>
   
   <section class="event spad" style="text-align: -webkit-center;">
-  	<div class="container">
-  	
-  		<table class="type05">
-  			<c:forEach var="reply" items="${replylist}">
-			    <tr>
-			        <th scope="row" class="replyid">
-			        	<b>${reply.member_nickname}</b>
-			        </th>
-	
-			        <td scope="row" class="replytext">
-						${reply.reply_text}
-					</td>
-					
-					<td class="replybutton">
-						${reply.reply_indate }
-					</td>
-					
-					<td class="replybutton">
-						<c:if test="${sessionScope.loginID == reply.member_id}">
-							[<a href="javascript:replyEditForm(${reply.reply_seq}, ${gallery_seq}, '${reply.reply_text}')">수정</a>]
-							[<a href="javascript:replyDelete(${reply.reply_seq}, ${gallery_seq})">삭제</a>]
-						</c:if>
-					</td>
-			    </tr>
-			    
-			    <tr>
-					<!-- 리플 수정 폼이 나타날 위치 -->
-					<td class="white" colspan="4"><div id="div${reply.reply_seq}"></div></td>
-				</tr>
-		    </c:forEach>
-		    <!-- 리플 작성 폼 시작 -->
-			<c:if test="${loginID != null}">
-				<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
-					<tr>
-						<th scope="row" class="replyid">
-							${nickname }
-						</th>
-						<td scope="row" class="replytext" colspan="2">
-							<input type="hidden" name="id" value="${gallery_seq}">
-							<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+  	<c:if test="${replylist.isEmpty()!=true }">
+	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px;">
+	  		<table class="type05">
+	  			<c:forEach var="reply" items="${replylist}">
+				    <tr>
+				        <th scope="row" class="replyid">
+				        	<b>${reply.member_nickname}</b>
+				        </th>
+		
+				        <td scope="row" class="replytext">
+							${reply.reply_text}
 						</td>
-						<td>
-							<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
+						
+						<td class="replybutton">
+							${reply.reply_indate }
 						</td>
+						
+						<td class="replybutton">
+							<c:if test="${sessionScope.loginID == reply.member_id}">
+								[<a href="javascript:replyEditForm(${reply.reply_seq}, ${gallery_seq}, '${reply.reply_text}')">수정</a>]
+								[<a href="javascript:replyDelete(${reply.reply_seq}, ${gallery_seq})">삭제</a>]
+							</c:if>
+						</td>
+				    </tr>
+				    
+				    <tr>
+						<!-- 리플 수정 폼이 나타날 위치 -->
+						<td class="white" colspan="4"><div id="div${reply.reply_seq}"></div></td>
 					</tr>
-				</form>
-				
-			</c:if>
-			<!-- /리플 작성 폼 끝 -->
-		    
+			    </c:forEach>
+			</table>
+	  	</div>
+  	</c:if>
+  	<div style="padding: 15px; width: 1123px;">
+  	<table class="container">
+   		<!-- 리플 작성 폼 시작 -->
+		<c:if test="${loginID != null}">
+			<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
+				<tr>
+					<th scope="row" class="replyid" style="font-size: x-large;">
+						${nickname }
+					</th>
+						<td scope="row" class="replytext" colspan="2" style="text-align: -webkit-center;">
+						<input type="hidden" name="id" value="${gallery_seq}">
+						<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+					</td>
+					<td>
+						<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
+					</td>
+				</tr>
+			</form>
+		</c:if>
+		<!-- /리플 작성 폼 끝 -->
 		</table>
+	</div>
   		
-  	</div>
-  </section>
-  <br><br><br>
+	</section>
+	<br><br><br>
   
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
