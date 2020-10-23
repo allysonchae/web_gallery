@@ -178,7 +178,7 @@
 						${reply.reply_text}
 					</td>
 					
-					<td scope="row">
+					<td class="replybutton">
 						${reply.reply_indate }
 					</td>
 					
@@ -202,11 +202,12 @@
 						<th scope="row" class="replyid">
 							${nickname }
 						</th>
-						<td scope="row" class="replytext">
+						<td scope="row" class="replytext" colspan="2">
 							<input type="hidden" name="id" value="${gallery_seq}">
-							<input type="text" name="reply_text" id="reply_text" style="width:700px; height:100px;" />
-						
-							<input type="submit" value="확인" />
+							<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+						</td>
+						<td>
+							<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
 						</td>
 					</tr>
 				</form>

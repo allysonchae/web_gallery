@@ -87,9 +87,145 @@
 	.container{
 		text-align:-webkit-center;
 	}
+	
+	html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica Neue, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ------------- */
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 46px;
+  width: 46px;
+}
+
+.menu-link {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1002;
+}
+
+.menu-icon {
+  position: absolute;
+  width: 20px;
+  height: 14px;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 1px;
+}
+
+/* ------------- */
+.menu-line {
+  background-color: #333;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  transition: all 0.25s ease-in-out;
+}
+.menu-line-2 {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.menu-line-3 {
+  bottom: 0;
+}
+.menu.open .menu-line-1 {
+  transform: translateY(7px) translateY(-50%) rotate(-45deg);
+}
+.menu.open .menu-line-2 {
+  opacity: 0;
+}
+.menu.open .menu-line-3 {
+  transform: translateY(-7px) translateY(50%) rotate(45deg);
+}
+
+/* ------------- */
+.menu-circle {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(1);
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+.menu:hover .menu-circle {
+  transform: scale(1.5);
+}
+.menu.open .menu-circle {
+  transform: scale(60);
+}
+
+/* ------------- */
+.menu-overlay {
+  background-color: #fff;
+  color: #333;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  background: #EEEEEE;
+}
+
+/* ------------- */
+.info {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.overlay-info {
+  text-align: center;
+  color: #111825;
+}
+	
+	
   </style>
   
   <script type="text/javascript">
+
+  $(function() {
+	  
+	  $(".menu-link").click(function(e) {
+	    e.preventDefault();
+	    
+	    $(".menu-overlay").toggleClass("open");
+	    $(".menu").toggleClass("open");
+
+	  });
+	    
+	});
+	
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
   	  	
@@ -158,21 +294,30 @@
 		}
 	}
   </script>
+  
+  
+  
 </head>
 
 <body>
 
-  <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
-	  <input type="hidden" value="${map.ID }" name="gallery_seq">
-  </form>
-  
-  <c:if test="${sessionScope.loginID==map.MEMBER_ID }">
-	  <svg id="trash" width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top: 15px;">
-			<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-			<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-	  </svg>
-  </c:if>
- 
+<div class="menu">
+  <span class="menu-circle"></span>
+  <a href="#" class="menu-link">
+    <span class="menu-icon">
+      <span class="menu-line menu-line-1"></span>
+      <span class="menu-line menu-line-2"></span>
+      <span class="menu-line menu-line-3"></span>
+    </span>
+  </a>
+</div>
+
+<div class="menu-overlay">
+  <h1 class="overlay-info">
+  	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
+  </h1>
+</div>
+
   <div class="header">
   	<h1>${map.TITLE }</h1>
   </div>
@@ -213,7 +358,7 @@
 						${reply.reply_text}
 					</td>
 					
-					<td scope="row">
+					<td class="replybutton">
 						${reply.reply_indate }
 					</td>
 					
@@ -237,11 +382,12 @@
 						<th scope="row" class="replyid">
 							${nickname }
 						</th>
-						<td scope="row" class="replytext">
+						<td scope="row" class="replytext" colspan="2">
 							<input type="hidden" name="id" value="${gallery_seq}">
-							<input type="text" name="reply_text" id="reply_text" style="width:700px; height:100px;" />
-						
-							<input type="submit" value="확인" />
+							<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+						</td>
+						<td>
+							<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
 						</td>
 					</tr>
 				</form>
