@@ -8,7 +8,7 @@
 		<typeAlias type="com.proj.web.vo.GalleryVO" alias="gallery"/>
 		<typeAlias type="com.proj.web.vo.InformationVO" alias="information"/>
 		<typeAlias type="com.proj.web.vo.WorkVO" alias="work"/>
-		<typeAlias type="com.proj.web.vo.ChatVO" alias="chat"/>
+		<typeAlias type="com.proj.web.vo.ChatroomVO" alias="chat"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>

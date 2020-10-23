@@ -1,4 +1,4 @@
-package com.proj.web.socket;
+package com.proj.web.controller;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,11 @@ import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.proj.web.service.ChatroomService;
+import com.proj.web.vo.ChatroomVO;
 
 @Controller
 // 스크립트에서 웹 소켓 객체를 만들 때, 사용자가 입력한 채팅방 번호와 사용자 이름을 주소에 붙여서 전달받는다.
@@ -20,11 +24,17 @@ import org.springframework.stereotype.Controller;
 // '/multiChat.do'를 제외한, 채팅방 번호와 사용자 이름에 해당하는 뒤쪽 주소는 onOpen 메서드의 매개변수로 전달된다.
 // 동적 주소와 매개변수는 필요에 따라 개수를 늘리거나 줄일 수 있다.
 // 예를 들어, 채팅방 번호 정보가 필요 없으면 주소의 형태는 '/multiChat.do/{member_nickname}'이 되고 onOpen 메서드의 매개변수도 한 개만 작성하면 된다.
-@ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}/{friend_id}")
+@ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}/{friend_id}", configurator = SpringConfigurator.class)
 public class MultiChatController {
 
 	private static final ArrayList<Session> sessionList = new ArrayList<>();
 	private static final Logger logger = LoggerFactory.getLogger(MultiChatController.class);
+	@Autowired
+	private MultiChatController multi;
+	
+	@Autowired
+	private ChatroomService service;
+	//private ChatroomService service = new ChatroomService();
 
 	@OnOpen
 	// @PathParam 어노테이션 없이 매개변수만 작성하면 에러가 발생한다.
@@ -32,23 +42,60 @@ public class MultiChatController {
 										,@PathParam("friend_id") String friend_id) {
 		logger.info("소켓 열기 실행. 생성된 세션 ID: " + session.getId() + ", 채팅방 번호: " + room_id + ", 사용자 이름: " + member_nickname);
 		
-			
-		// 지금 접속을 시도하는 세션 객체에 사용자 정의 속성을 작성한다.
-		// 사용자 정의 속성은 getUserProperties() 메서드로 사용하며 Map 구조로 되어있다.
-		// 이 Map에 채팅방 번호와 사용자 이름을 입력한다.
-		session.getUserProperties().put("room_id", room_id);
-		session.getUserProperties().put("member_nickname", member_nickname);
-
-		// 사용자 정의 속성의 입력이 끝난 세션 객체를 세션 목록에 저장한다.
-		sessionList.add(session);
+		int action = 0;
+		
+		String[] temp = room_id.split("_");
+		String line = "";
+		
+		line = temp[1] + "_" + temp[0];
+		logger.info("temp : " + temp);
+		
+		ChatroomVO room = null;
+		
+		try {
+			System.out.println("service가 null이니?" + service);
+			room = service.searchRoom(room_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("채팅룸이 있는지 찾기");
+		//가져온 정보가 없으면,
+		if(room == null) {
+			room = service.searchRoom(line);
+			logger.info("이름순서 바꿔서 또 찾기");
+			//이름 순서바꿔서 찾았는데도 없으면
+			if(room == null) {
+				ChatroomVO r = new ChatroomVO();
+				r.setRoom_id(room_id);
+				r.setMember_nickname(member_nickname);
+				action = service.createRoom(r);
+				logger.info("채팅방 새로 생성");
+				multi.setSession(session, r);
+				logger.info("세션에도 저장");
+			} else {
+				//방이 있으면?
+				multi.setSession(session, room);
+				logger.info("이름바꿔서 찾았으니 세션에 담아서 열기");
+			}
+		} else {
+			//방이 있으면?
+			multi.setSession(session, room);
+			logger.info("방이 있었으니 세션에 담아서 열기");
+		}
 	}
 
-	/*
-	 * @OnClose public void onClose(Session session) {
-	 * logger.info("소켓 닫기 실행. 종료된 세션 ID: " + session.getId());
-	 * 
-	 * // 종료를 요청한 세션 객체를 세션 목록에서 제거한다. sessionList.remove(session); }
-	 */
+	public void setSession(Session session, ChatroomVO room) {
+		session.getUserProperties().put("room_id", room.getRoom_id());
+		session.getUserProperties().put("member_nickname", room.getMember_nickname());
+
+		sessionList.add(session);
+	}
+	
+	  @OnClose public void onClose(Session session) {
+	logger.info("소켓 닫기 실행. 종료된 세션 ID: " + session.getId());
+	
+	  // 종료를 요청한 세션 객체를 세션 목록에서 제거한다. 
+	 sessionList.remove(session); }
 
 	@OnMessage
 	public void onMessage(Session session, String message) {

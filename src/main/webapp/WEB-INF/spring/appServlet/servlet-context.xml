@@ -25,6 +25,8 @@
 	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
 	<beans:bean id="naverLoginBO" class="com.proj.web.util.NaverLoginBO" />
 	
+	<beans:bean id="chatroomService" class="com.proj.web.service.ChatroomService" />
+	
 		<!-- 로그인 인터셉터 정의 -->
 	<beans:bean id="loginInterceptor" class="com.proj.web.util.LoginInterceptor"></beans:bean>
 	

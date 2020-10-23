@@ -36,13 +36,14 @@
    <!-- 채팅 웹 소켓 --> 
     <script type="text/javascript">
 	var webSocket;
+
 	
 	function openSocket() {
 		var friend_id = document.getElementById("friend_id").value;
 		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
 		var member_nickname = document.getElementById("member_info").value;
 		var room_id = member_nickname + '_' + friend_id;
-		webSocket = new WebSocket("ws://10.10.2.159:8888/multiChat.do/" + room_id + "/" + member_nickname + "/" + friend_id);
+		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname + "/" + friend_id);
 
 		webSocket.onopen = function(event) {alert("웹소켓 연결/ 채팅시작" + " : " + room_id);};
 		webSocket.onmessage = function(event) {output(event.data);};

@@ -16,3 +16,4 @@ create table room_lists(
 	,constraint room_lists_fk foreign key(member_nickname)
 	 references member(member_nickname) on delete cascade
  );
+ 
