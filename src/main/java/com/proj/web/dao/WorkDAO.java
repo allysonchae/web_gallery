@@ -212,7 +212,7 @@ public class WorkDAO {
 	}
 	
 	
-	/*public int deleteReply(ReplyVO reply) {
+	public int deleteReply(ReplyVO reply) {
 		WorkMapper wm = ss.getMapper(WorkMapper.class);
 		int cnt =0;
 		try {
@@ -221,7 +221,16 @@ public class WorkDAO {
 			e.printStackTrace();
 		}
 		return cnt;
-	}*/
+	}
+
+	public void updateReply(ReplyVO reply) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		try {
+			wm.updateReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 
 }
