@@ -51,7 +51,7 @@
      box-sizing: content-box;
 	}
 	
-	#trash:hover{
+	#delete:hover{
 		cursor:pointer;
 	}
 	
@@ -69,11 +69,6 @@
 	}
 	
 
-	#trash{
-		position: relative;
-		top:730px;
-		left:1650px;
-	}
 	
 	table.type05 {
 	    border-collapse: separate;
@@ -225,7 +220,6 @@ body {
   color: #111825;
 }
 	
-	
   </style>
   
   <script type="text/javascript">
@@ -245,6 +239,22 @@ body {
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
 
+		  $('#overMenu1').mouseenter(function () {
+				$(this).css("color","white");
+	      });
+
+		  $('#overMenu1').mouseleave(function () {
+				$(this).css("color","black");
+	      });
+	      
+		  $('#overMenu2').mouseenter(function () {
+				$(this).css("color","white");
+	      });
+
+		  $('#overMenu2').mouseleave(function () {
+				$(this).css("color","black");
+	      });
+		  
 		  $('#x').mouseenter(function () {
 				$(this).css("color","red");
 	      });
@@ -253,15 +263,15 @@ body {
 				$(this).css("color","black");
 	      });
 	        	  	
-	      $('#trash').mouseenter(function () {
+	      $('#delete').mouseenter(function () {
 				$(this).css("color","red");
 	      });
 
-	      $('#trash').mouseleave(function () {
+	      $('#delete').mouseleave(function () {
 				$(this).css("color","black");
 	      });
 
-	      $('#trash').click(function () {
+	      $('#delete').click(function () {
 	    	  if(confirm("정말 삭제하시겠습니까 ?") == true){
 		   	  		deleteForm.submit();				
 	    	        alert("성공적으로 삭제되었습니다");
@@ -321,14 +331,9 @@ body {
 </head>
 
 <body>
-  
-  
-  <%-- <c:if test="${sessionScope.loginID==map.MEMBER_ID }">
-	  <svg id="trash" width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top: 15px;">
-			<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-			<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-	  </svg>
-  </c:if> --%>
+  <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
+	  <input type="hidden" value="${map.ID }" name="gallery_seq">
+  </form>
 	
 	<a href="/gallery">
 	  <svg id="x" width="60px" height="60px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -352,11 +357,19 @@ body {
 <div class="menu-overlay">
   <h1 class="overlay-info">
   	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
+  	<div>
+	  	<c:if test="${sessionScope.loginID!=null }">
+	  		<a href="/message/directMessage?member_nickname=${map.MEMBER_NICKNAME }" id="overMenu1" style="color:black;text-decoration:none;">쪽지보내기</a><br>
+	  	</c:if>
+	  	<a href="/memberGallery?member_id=${map.MEMBER_ID }" id="overMenu2" style="color:black;text-decoration:none;">${map.MEMBER_NICKNAME }님의 전시회</a><br>
+  	</div>
+  	<c:if test="${sessionScope.loginID==map.MEMBER_ID }">
+  		<div id="delete">삭제하기</div>
+  	</c:if>
   </h1>
 </div>
   <div class="header">
   	<h1>${map.TITLE }</h1>
-  	<h4>${map.MEMBER_NICKNAME }</h4>
   </div>
   
   <!-- Swiper -->

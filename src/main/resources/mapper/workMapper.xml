@@ -96,6 +96,28 @@
 		    g.gallery_seq = #{id}
 	</select>
 	
+	<select id="onlyMemberInformationGalleryJsp" parameterType="String" resultType="hashmap">
+		select
+		    g.gallery_seq as gallery_seq
+		    ,g.member_id as member_id
+		    ,g.title as title
+		    ,w.work_originalFileName as work_originalFileName
+		    ,w.work_savedFileName as work_savedFileName
+		    ,w.work_seq as work_seq
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+    		,to_char(g."end",'yyyy-mm-dd') as "end"
+    		,g.member_nickname as member_nickname
+		from
+		    gallery g
+		    ,work w
+		where
+		    g.gallery_seq = w.gallery_seq
+		and
+		    w.work_seq = 0
+		and
+    		g.member_id = #{member_id}
+	</select>
+	
 	<select id="selectGalleryOne" parameterType="int" resultType="hashmap">
 		select
     		g.gallery_seq as id

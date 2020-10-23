@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Param;
 
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
@@ -41,4 +42,6 @@ public interface WorkMapper {
 	public int deleteReply(ReplyVO reply);
 
 	public void updateReply(ReplyVO reply);
+	
+	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id);
 }

@@ -58,7 +58,7 @@
 		left:1650px;
 	}
 	
-	#trash:hover{
+	#delete:hover{
 		cursor:pointer;
 	}
 	
@@ -104,11 +104,161 @@
 		text-align:-webkit-center;
 	}
 	
+		html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica Neue, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ------------- */
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 46px;
+  width: 46px;
+}
+
+.menu-link {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1002;
+}
+
+.menu-icon {
+  position: absolute;
+  width: 20px;
+  height: 14px;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 1px;
+}
+
+/* ------------- */
+.menu-line {
+  background-color: #333;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  transition: all 0.25s ease-in-out;
+}
+.menu-line-2 {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.menu-line-3 {
+  bottom: 0;
+}
+.menu.open .menu-line-1 {
+  transform: translateY(7px) translateY(-50%) rotate(-45deg);
+}
+.menu.open .menu-line-2 {
+  opacity: 0;
+}
+.menu.open .menu-line-3 {
+  transform: translateY(-7px) translateY(50%) rotate(45deg);
+}
+
+/* ------------- */
+.menu-circle {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(1);
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+.menu:hover .menu-circle {
+  transform: scale(1.5);
+}
+.menu.open .menu-circle {
+  transform: scale(60);
+}
+
+/* ------------- */
+.menu-overlay {
+  background-color: #fff;
+  color: #333;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  background: #EEEEEE;
+}
+
+/* ------------- */
+.info {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.overlay-info {
+  text-align: center;
+  color: #111825;
+}
+	
+	
   </style>
 
   <script type="text/javascript">
+	$(function() {
+	  
+	  $(".menu-link").click(function(e) {
+	    e.preventDefault();
+	    
+	    $(".menu-overlay").toggleClass("open");
+	    $(".menu").toggleClass("open");
+
+	  });
+	    
+	});
+  
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
+
+		  $('#overMenu1').mouseenter(function () {
+				$(this).css("color","white");
+	      });
+
+		  $('#overMenu1').mouseleave(function () {
+				$(this).css("color","black");
+	      });
+	      
+		  $('#overMenu2').mouseenter(function () {
+				$(this).css("color","white");
+	      });
+
+		  $('#overMenu2').mouseleave(function () {
+				$(this).css("color","black");
+	      });
 
 		  $('#x').mouseenter(function () {
 				$(this).css("color","red");
@@ -118,15 +268,15 @@
 				$(this).css("color","black");
 	      });
 	  		
-	      $('#trash').mouseenter(function () {
+	      $('#delete').mouseenter(function () {
 				$(this).css("color","red");
 	      });
 
-	      $('#trash').mouseleave(function () {
+	      $('#delete').mouseleave(function () {
 				$(this).css("color","black");
 	      });
 
-	      $('#trash').click(function () {
+	      $('#delete').click(function () {
 	    	  if(confirm("정말 삭제하시겠습니까 ?") == true){
 		   	  		deleteForm.submit();				
 	    	        alert("성공적으로 삭제되었습니다");
@@ -205,11 +355,36 @@
 			<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 		</svg>
 	</a>
+	
+	<div class="menu">
+  <span class="menu-circle"></span>
+  <a href="#" class="menu-link">
+    <span class="menu-icon">
+      <span class="menu-line menu-line-1"></span>
+      <span class="menu-line menu-line-2"></span>
+      <span class="menu-line menu-line-3"></span>
+    </span>
+  </a>
+</div>
+
+<div class="menu-overlay">
+  <h1 class="overlay-info">
+  	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
+  	<div>
+	  	<c:if test="${sessionScope.loginID!=null }">
+		  	<a href="/message/directMessage?member_nickname=${map.MEMBER_NICKNAME }" id="overMenu1" style="color:black;text-decoration:none;">쪽지보내기</a><br>
+	  	</c:if>
+	 	<a href="/memberGallery?member_id=${map.MEMBER_ID }" id="overMenu2" style="color:black;text-decoration:none;">${map.MEMBER_NICKNAME }님의 전시회</a><br>
+  	</div>
+  	<c:if test="${sessionScope.loginID==map.MEMBER_ID }">
+  		<div id="delete">삭제하기</div>
+  	</c:if>
+  </h1>
+</div>
 
 
   <div id="header">
   	<h1>${map.TITLE }</h1>
-  	<h4>${map.MEMBER_NICKNAME }</h4>
   </div>
   
   

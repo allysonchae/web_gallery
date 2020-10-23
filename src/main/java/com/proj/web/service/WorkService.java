@@ -261,4 +261,12 @@ public class WorkService {
 		dao.updateReply(reply);
 	}
 	
+	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id){
+		
+		ArrayList<HashMap<String, Object>> list = dao.onlyMemberInformationGalleryJsp(member_id);
+		
+		return list;
+		
+	}
+	
 }

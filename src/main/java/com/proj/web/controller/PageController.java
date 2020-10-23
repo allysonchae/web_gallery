@@ -179,6 +179,22 @@ public class PageController {
 		return "/futureGallery";
 	}
 
+	@RequestMapping(value = "/memberGallery", method = RequestMethod.GET)
+	public String memberGallery(String member_id, Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ws.onlyMemberInformationGalleryJsp(member_id);
+		
+		HashMap<String, Object> map = list.get(0);
+		
+		logger.info("member_id : {}", member_id);
+		logger.info("memberGallery list : {}", list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("map", map);
+		
+		return "/memberGallery";
+	}
+	
 	//오픈예정 갤러리
 	@RequestMapping(value = "/expectedGallery", method = RequestMethod.GET)
 	public String expectedGallery() {

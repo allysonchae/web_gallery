@@ -303,6 +303,16 @@
 				flag = true;
 			}else if(yearE<yearS){
 				flag = true;
+			}else if(yearE==yearS){
+				if(monthE<monthS){
+					flag = true;
+				}
+
+				if(monthE==monthS){
+					if(dayE<dayS){
+						flag = true;	
+					}
+				}
 			}
 			
 			if(flag){
