@@ -104,7 +104,7 @@ public class PageController {
 
 	//갤러리 페이지
 	@RequestMapping(value = "/galleryDetail", method = RequestMethod.GET)
-	public String galleryDetail(int gallery_seq, Model model) {
+	public String galleryDetail(int gallery_seq, Model model, HttpSession session) {
 
 		logger.info("gallery_seq : {}", gallery_seq);
 
@@ -117,9 +117,13 @@ public class PageController {
 		logger.info("gallery_templete : {}", map.get("GALLERY_TEMPLATE"));
 		String templeteNum = String.valueOf(map.get("GALLERY_TEMPLATE"));
 
-//		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
-//		
-//		model.addAttribute("replylist", replylist);
+		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
+		String nickname = (String)session.getAttribute("loginNickName");
+		logger.info("saldkgjoibe : {}",replylist);
+		
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("gallery_seq", gallery_seq);
+		model.addAttribute("replylist", replylist);
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
 
@@ -295,36 +299,33 @@ public class PageController {
 		return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
 	}
 
-	/**
-	 * 리플 삭제
-	 */
-/*	@RequestMapping(value = "/replyDelete", method = RequestMethod.GET)
+	//댓글 삭제
+	@RequestMapping(value = "/replyDelete", method = RequestMethod.GET)
 	public String deleteReply(ReplyVO reply, HttpSession session) {
-
+		
+		logger.info("asgohorawebf:{}",reply);
+		
 		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
 		String nickname = ws.searchNickname();
 		reply.setMember_nickname(nickname);
 
+		logger.info("asgohorawebf:{}",reply);
 		ws.deleteReply(reply);
-		return "redirect:/galleryDetail?Gallery_seq=" + reply.getId();
+		return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
 	}
-*/
-	/**
-	 * 리플 수정 처리
-	 * 
-	 * @param reply 수정할 리플 정보
-	 *//*
-		@RequestMapping (value="/replyEdit", method=RequestMethod.POST)
-		public String replyEdit(HttpSession session, ReplyVO reply) {
-		
-		//삭제할 리플 정보와 본인 글인지 확인할 로그인아이디
-		String id = (String) session.getAttribute("loginId");
-		reply.setId(id);
-		
-		//리플  수정 처리
-		dao.updateReply(reply);
-		//원래의 글읽기 화면으로 이동 
-		return "redirect:/read?boardnum=" + reply.getBoardnum();
-		}*/
+
+	//댓글 수정
+	@RequestMapping (value="/replyEdit", method=RequestMethod.POST)
+	public String replyEdit(HttpSession session, ReplyVO reply) {
+
+	//삭제할 리플 정보와 본인 글인지 확인할 로그인아이디
+	String id = (String) session.getAttribute("loginID");
+	reply.setMember_id(id);
+
+	//리플  수정 처리
+	ws.updateReply(reply);
+	//원래의 글읽기 화면으로 이동 
+	return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
+	}
 
 }

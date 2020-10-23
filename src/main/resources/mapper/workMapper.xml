@@ -178,6 +178,7 @@
 		select
 			reply_seq
 			,gallery_seq
+			,member_id
 			,member_nickname
 			,to_char(reply_indate, 'YYYY-MM-DD') as reply_indate
 			,reply_text
@@ -189,14 +190,25 @@
 			reply_seq desc
 	</select>
 	
-	<!-- <delete id="deleteReply" parameterType="reply">
+	<delete id="deleteReply" parameterType="reply">
 		delete
 		from
 			reply
 		where
 			reply_seq = #{reply_seq}
 			and member_id = #{member_id}
-	</delete> -->
+	</delete>
+	
+	<!-- 리플 수정 -->
+	<update id="updateReply" parameterType="reply">
+		update
+			reply
+		set
+			reply_text = #{reply_text}
+		where
+			reply_seq = #{reply_seq}
+			and member_id = #{member_id}
+	</update>
 
 
 </mapper>
