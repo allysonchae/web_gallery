@@ -1,5 +1,6 @@
 package com.proj.web.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.proj.web.dao.MemberDAO;
 import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.ReplyVO;
 
 @Service
 public class MemberService {
@@ -46,6 +48,25 @@ public class MemberService {
 			page = "redirect:/member/memberLoginPage";
 		}
 		return page;
+	}
+	
+	public boolean loginCheck(String id, String pw) {
+		
+		System.out.println("login체크들어옴");
+		
+		MemberVO loginCheck = dao.memberSelectOne(id);
+		boolean flag = false;
+		
+		if(loginCheck != null && pw.equals(loginCheck.getMember_pw())){
+			System.out.println("로그인 성공");
+			flag = true;
+		}
+		
+		if(!flag) {
+			System.out.println("로그인 실패");
+		}
+		
+		return flag;
 	}
 
 	public int nicknameCheck(String member_nickname) {

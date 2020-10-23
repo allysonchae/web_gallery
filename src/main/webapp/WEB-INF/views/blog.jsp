@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,7 +10,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DJoz | Template</title>
+    <title>Onex</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,7 +35,7 @@
 </head>
 
 <body>
-	 <!-- Page Preloder -->
+    <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -61,7 +60,7 @@
                                         <li><a href="/service">이용안내</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="/gallery">Gallery</a>
+                                <li><a href="/gallery">Gallery</a>
                                 	<ul class="dropdown">
                                         <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
@@ -69,11 +68,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
-                                <li><a href="/myPage">My Pages</a>
+                                <li class="active"><a href="/myPage">My Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 전시회</a></li>
-                                        <li><a href="/message/directMessage">쪽지함</a></li>
+										<li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
@@ -102,18 +101,19 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Gallery</span>
+                        <span>Blog</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Breadcrumb End -->
-    <!-- Discography Section Begin -->
-    <section class="discography spad">
+	
+	<!-- Blog Section Begin -->
+    <section class="blog spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+            	<div class="col-lg-12">
                     <div class="section-title center-title">
                         <h2>My Gallery</h2>
                         <h1>My Gallery</h1>
@@ -122,7 +122,6 @@
                 </div>
             </div>
             
-         		
             <div class="row">
             	<c:forEach items="${list }" var="list" varStatus="status">
 	                <div class="col-lg-4 col-md-6 col-sm-6">
@@ -152,7 +151,7 @@
             </div>
         </div>
     </section>
-    <!-- Discography Section End -->
+    <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
@@ -169,14 +168,13 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>Onex@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 col-md-6">
                     <div class="footer__social">
-                        <h2>DJoz</h2>
                         <div class="footer__social__links">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -187,7 +185,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6">
                     <div class="footer__newslatter">
-                        <h4>Stay With me</h4>
+                        <h4>Contact Us</h4>
                         <form action="#">
                             <input type="text" placeholder="Email">
                             <button type="submit"><i class="fa fa-send-o"></i></button>

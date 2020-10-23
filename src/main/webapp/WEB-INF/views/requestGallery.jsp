@@ -150,7 +150,7 @@
 			<tr>
 				<td style="text-align: center;">작품 개수</td>
 				<td colspan="2" style="text-align: center;">
-					<select onchange="addTd(value);">
+					<select id="countCheck" onchange="addTd(value);">
 						<option value="0">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -200,9 +200,9 @@
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
 						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text' id='checkName' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
-						rowItem += "<textarea id='checkDescription' name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
 						rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 						rowItem += "</tr>"
@@ -218,9 +218,9 @@
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
 						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
 						rowItem += "<td style='text-align: center;'>"
-						rowItem += "<input type='text' id='checkName' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
+						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
-						rowItem += "<textarea id='checkDescription' name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
+						rowItem += "<textarea name='work_description' style='width: 500px; height: 200px;' placeholder='please enter the description'></textarea>"
 						rowItem += "<br><br>"
 						rowItem += "<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
 						rowItem += "</tr>"
@@ -265,29 +265,95 @@
 			var title = document.getElementById('checkTitle').value;
 			var start = document.getElementById('checkStart').value;
 			var end = document.getElementById('checkEnd').value;
+			var count = document.getElementById('countCheck').value;
 			var chkRadio = document.getElementsByName('gallery_template');
 			var name = document.getElementsByName('work_name');
 			var description = document.getElementsByName('work_description');
-			var cnt = 0;
+			var image = document.getElementsByName('upload');
+
+			var date = new Date(); 
+			var year = date.getFullYear(); 
+			var month = new String(date.getMonth()+1); 
+			var day = new String(date.getDate()); 
+
+			var yearS = Number(start.substr(0,4)); // 입력한 값의 0~4자리까지 (연) 
+			var monthS = Number(start.substr(5,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월) 
+			var dayS = Number(start.substr(8)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+
+			var yearE = Number(end.substr(0,4)); // 입력한 값의 0~4자리까지 (연) 
+			var monthE = Number(end.substr(5,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월) 
+			var dayE = Number(end.substr(8)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
 			
+			var cnt = 0;
+
+			//전시회명 입력 여부
+			if(title==""){
+				alert("전시회명을 입력해주세요.");
+				return false;
+			}
+
+			//날짜 유효성 검사
+			var flag = false;
+
+			if(yearS<year || yearE<year){
+				flag = true;
+			}else if(monthS<month || monthE<month){
+				flag = true;
+			}else if(dayS<day || dayE<day){
+				flag = true;
+			}else if(yearE<yearS){
+				flag = true;
+			}
+			
+			if(flag){
+				alert("입력한 날짜 형식이 틀렸습니다.");
+				return false;
+			}
+
+			//템플릿 선택 여부
 			for(var i=0 ; i<chkRadio.length ; i++){
 				if(chkRadio[i].checked == true){ 
 					cnt++;
 				}
 			}
-
+			
 			if(cnt<1){
 				alert("전시회 템플릿을 선택해주세요.");
+				return false;
 			}
 
-			alert(title);
-			alert(start);
-			alert(end);
-			alert(name);
-			alert(description);
+			//작품 여부 검사
+			if(count==0){
+				alert("작품 등록을 해주세요.");
+				return false;
+			}
 
+			//작품명 입력 여부
+			for(var i=0 ; i<name.length ; i++){
+				if(name[i].value==""){
+					alert(i+1+"번째 작품의 작품명을 입력해주세요.");
+					return false;
+				}
+			}
 
-			return false;
+			//작품내용 입력 여부
+			for(var i=0 ; i<description.length ; i++){
+				if(description[i].value==""){
+					alert(i+1+"번째 작품의 작품내용을 입력해주세요.");
+					return false;
+				}
+			}
+
+			//사진 여부 검사
+			for(var i=0 ; i<image.length ; i++){
+				if(image[i].value==""){
+					alert(i+1+"번째 작품 사진을 등록해주세요.");
+					return false;
+				}
+			}
+
+			alert("성공적으로 등록이 되었습니다.");
+			return true;
 		}
 	</script>
 	
