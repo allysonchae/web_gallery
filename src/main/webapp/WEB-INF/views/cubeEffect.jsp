@@ -212,6 +212,19 @@
   </style>
 
   <script type="text/javascript">
+
+	$(function() {
+	  
+	  $(".menu-link").click(function(e) {
+	    e.preventDefault();
+	    
+	    $(".menu-overlay").toggleClass("open");
+	    $(".menu").toggleClass("open");
+
+	  });
+	    
+	});
+	
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
   	  	
