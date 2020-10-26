@@ -117,37 +117,31 @@
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="skills__content">
-                        <div class="section-title">
-                            <h2>Our Service</h2>
-                            <h1>This is what we do</h1>
+                        <div class="section-title" style="font-size: 30px; color: white; font-weight: bold;">
+                            	공간의 제약을 받지 않고 <br>
+                            	저희가 제공하는 가상공간 <br>
+                            	전시관을 이용하여 <br>
+                            	자유롭게 자신의 작품을 <br>
+                            	소개해보세요
+                            <h1>ONEX</h1>
                         </div>
-                        <p>전문가와 취미 상관없이 ~~~</p>
                         <div class="skill__bar__item">
-                            <p>For Everyone</p>
                             <div id="bar1" class="barfiller">
-                                <span class="tip"></span>
-                                <span class="fill" data-percentage="95"></span>
                             </div>
                         </div>
                         <div class="skill__bar__item">
-                            <p>Use Midi</p>
                             <div id="bar2" class="barfiller">
-                                <span class="tip"></span>
-                                <span class="fill" data-percentage="85"></span>
                             </div>
                         </div>
                         <div class="skill__bar__item">
-                            <p>Remix and mash up</p>
                             <div id="bar3" class="barfiller">
-                                <span class="tip"></span>
-                                <span class="fill" data-percentage="98"></span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
-                    <div class="skills__video set-bg" data-setbg="/resources/img/skill-video.jpg">
-                        <a href="https://www.youtube.com/watch?v=S19UcWdOA-I?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                    <div class="skills__video set-bg" data-setbg="/resources/img/video.PNG">
+                        <a href="https://www.https://www.youtube.com/watch?v=HEbSVOl_FqM" class="play-btn video-popup"><i class="fa fa-play"></i></a>
                     </div>
                 </div>
             </div>
@@ -161,19 +155,46 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="about__pic">
-                        <img src="/resources/img/about/about.png" alt="">
+                        <img src="/resources/img/about/about.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="about__text">
                         <div class="section-title">
-                            <h2>나의 모든 재능을 선보이다</h2>
+                            <h2>ONEX's Ideology</h2>
                         </div>
-                        <p>아무튼 좋은 말</p>
+                        <br>
+                        <br>
+                        <p style="font-size: 18px;">제공하는 가상공간의 전시관을 이용하여 자유롭게 자신의 작품을 <br>
+                        							소개할 수 있는 환경을 제공하는 것을 목표로 하고 있습니다.<br>
+                        							또한 프로가 아닌 아마추어를 대상으로 하여 다재다능한 일반인 또는 아마추어 작가에게 자신의 작품을 전시할 수 있는 기회를 주고 자신의 작품을<br>
+            									         판매할 수 있는 공간도 마련함으로써 온라인 전시를<br>
+            									         활성화하고 많은 사람들이 예술작품을 쉽게 접할 수 있도록 하는 것이<br>
+            									    ONEX의 목표입니다.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- About Services Section Begin -->
+    <section class="about-services spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-title">
+                        <h3>이용 방법</h3>
+                        <h1>how to use</h1>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <img src="/resources/img/gallery_how.jpg" alt="">
+                    </div>
+                </div>
+            </div>
     </section>
     <!-- About Section End -->
 
@@ -240,27 +261,27 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-1.jpg" alt="">
-                            <img src="/resources/img/about/ap-2.jpg" alt="">
+                            <img src="/resources/img/about/ap-11.jpg" alt="">
+                            <img src="/resources/img/about/ap-22.jpg" alt="">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-3.jpg" alt="">
+                            <img src="/resources/img/about/ap-33.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-4.jpg" alt="">
+                            <img src="/resources/img/about/ap-44.jpg" alt="">
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-5.jpg" alt="">
+                            <img src="/resources/img/about/ap-55.jpg" alt="">
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-6.jpg" alt="">
+                            <img src="/resources/img/about/ap-66.jpg" alt="">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-7.jpg" alt="">
+                            <img src="/resources/img/about/ap-77.jpg" alt="">
                         </div>
                     </div>
                 </div>
