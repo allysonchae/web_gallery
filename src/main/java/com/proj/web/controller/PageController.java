@@ -32,6 +32,7 @@ import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
 import com.proj.web.service.MemberService;
@@ -46,231 +47,301 @@ public class PageController {
 	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 
 	private String uploadPath = "/boardTest";
-	
+
 	@Autowired
 	private CalendarService cs;
 	@Autowired
 	private InformationService is;
 	@Autowired
 	private WorkService ws;
-	
+
 	@Autowired
 	private MemberService service;
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "/index";
 	}
-	
+
 	//공지사항
-	@RequestMapping(value="/info",method=RequestMethod.GET)
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String info(Model model) {
-		
+
 		ArrayList<InformationVO> list = is.selectAllInformation();
 
 		logger.info("list: {}", list);
-		
+
 		model.addAttribute("list", list);
-		
+
 		return "/info";
 	}
-	
+
 	//이용안내
-	@RequestMapping(value="/service",method=RequestMethod.GET)
+	@RequestMapping(value = "/service", method = RequestMethod.GET)
 	public String about() {
 		return "/service";
 	}
-	
+
 	//현재 오픈된 갤러리
-	@RequestMapping(value="/gallery",method=RequestMethod.GET)
+	@RequestMapping(value = "/gallery", method = RequestMethod.GET)
 	public String gallery(Model model, HttpServletResponse response) {
-		
+
 		ArrayList<HashMap<String, Object>> pList = ws.presentGalleryJsp();
 		ArrayList<HashMap<String, Object>> fList = ws.futureGalleryJsp();
-		
-		logger.info("pList : {}",pList);
-		logger.info("fList : {}",fList);
-		
-		model.addAttribute("pList",pList);
-		model.addAttribute("fList",fList);
-		
+
+		logger.info("pList : {}", pList);
+		logger.info("fList : {}", fList);
+
+		model.addAttribute("pList", pList);
+		model.addAttribute("fList", fList);
+
 		return "/gallery";
 	}
-	
+
 	//갤러리 페이지
 	@RequestMapping(value = "/galleryDetail", method = RequestMethod.GET)
-	public String galleryDetail(int gallery_seq, Model model) {
-		
+	public String galleryDetail(int gallery_seq, Model model, HttpSession session) {
+
 		logger.info("gallery_seq : {}", gallery_seq);
-		
+
 		ArrayList<HashMap<String, Object>> list = ws.selectGalleryOne(gallery_seq);
-		logger.info("list : {}",list);
-		
+		logger.info("list : {}", list);
+
 		HashMap<String, Object> map = list.get(0);
 		logger.info("map : {}",map);
 		
 		logger.info("gallery_templete : {}", map.get("GALLERY_TEMPLATE"));
 		String templeteNum = String.valueOf(map.get("GALLERY_TEMPLATE"));
+
+		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
+		String nickname = (String)session.getAttribute("loginNickName");
+		logger.info("saldkgjoibe : {}",replylist);
 		
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("gallery_seq", gallery_seq);
+		model.addAttribute("replylist", replylist);
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
-		
-		if(templeteNum.equals("1")) return "/cubeEffect";
-		else if(templeteNum.equals("2")) return "/coverflowEffect";
-		
+
+		if (templeteNum.equals("1"))
+			return "/cubeEffect";
+		else if (templeteNum.equals("2"))
+			return "/coverflowEffect";
+
 		return "/FlipEffect";
 	}
-	
+
 	@RequestMapping(value = "/workDescription", method = RequestMethod.GET)
 	public String workDescription(int work_seq, int id, Model model) {
-		
+
 		logger.info("work_seq : {}", work_seq);
-		logger.info("id : {}" , id);
-		
+		logger.info("id : {}", id);
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("work_seq", work_seq);
-		
+
 		WorkVO work = ws.selectWorkOne(map);
-		
+
 		logger.info("work : {}", work);
-		
+
 		model.addAttribute("work", work);
 		model.addAttribute("work_seq", work_seq);
 		model.addAttribute("id", id);
-		
+
 		return "/workDescription";
 	}
-	
+
 	@RequestMapping(value = "/presentGallery", method = RequestMethod.GET)
 	public String presentGallery(Model model) {
-		
+
 		ArrayList<HashMap<String, Object>> pList = ws.presentGalleryJsp();
-		
-		logger.info("pList : {}",pList);
-		
-		model.addAttribute("pList",pList);
-		
+
+		logger.info("pList : {}", pList);
+
+		model.addAttribute("pList", pList);
+
 		return "/presentGallery";
 	}
-	
+
 	@RequestMapping(value = "/futureGallery", method = RequestMethod.GET)
 	public String futureGallery(Model model) {
-		
+
 		ArrayList<HashMap<String, Object>> fList = ws.futureGalleryJsp();
-		
-		logger.info("fList : {}",fList);
-		model.addAttribute("fList",fList);
-		
+
+		logger.info("fList : {}", fList);
+		model.addAttribute("fList", fList);
+
 		return "/futureGallery";
+	}
+
+	@RequestMapping(value = "/memberGallery", method = RequestMethod.GET)
+	public String memberGallery(String member_id, Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ws.onlyMemberInformationGalleryJsp(member_id);
+		
+		HashMap<String, Object> map = list.get(0);
+		
+		logger.info("member_id : {}", member_id);
+		logger.info("memberGallery list : {}", list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("map", map);
+		
+		return "/memberGallery";
 	}
 	
 	//오픈예정 갤러리
-	@RequestMapping(value="/expectedGallery",method=RequestMethod.GET)
+	@RequestMapping(value = "/expectedGallery", method = RequestMethod.GET)
 	public String expectedGallery() {
 		return "/expectedGallery";
 	}
-	
-	@RequestMapping(value="/requestGallery",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/requestGallery", method = RequestMethod.GET)
 	public String requestGallery() {
 		return "/requestGallery";
 	}
-	
-	@RequestMapping(value="/community",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/community", method = RequestMethod.GET)
 	public String community() {
 		return "/community";
 	}
-	
+
 	//이벤트 예정달력확인
-	@RequestMapping(value="/calender",method=RequestMethod.GET)
+	@RequestMapping(value = "/calender", method = RequestMethod.GET)
 	public String tours() {
 		return "/calender";
 	}
-	
+
 	//캘린더에 모든 일정 전송
 	@ResponseBody
 	@RequestMapping(value = "/gallerySchedule", method = RequestMethod.POST)
-	public ArrayList<GalleryVO> gallerySchedule(){
-		
+	public ArrayList<GalleryVO> gallerySchedule() {
+
 		ArrayList<GalleryVO> list = cs.gallerySelectAll();
 
 		return list;
 	}
-	
+
 	//캘린더에서 특정 이밴트 클리 시 닉네임 캘린더jsp로 전송
 	@ResponseBody
 	@RequestMapping(value = "/getSchedule", method = RequestMethod.POST)
 	public String getSchedule(String info) {
-		
+
 		logger.info(info);
-		
+
 		int id = Integer.parseInt(info);
 		GalleryVO gallery = cs.gallerySelectOne(id);
-		
+
 		MemberVO member = cs.nickNameFind(gallery.getMember_id());
 		String nickName = member.getMember_nickname();
-		
+
 		return nickName;
 	}
-	
+
 	/*
 	 * //로그인
 	 * 
 	 * @RequestMapping(value="/login",method=RequestMethod.GET) public String
 	 * login() { return "/login"; }
 	 */
-	
-	
+
 	/*
 	 * //쪽지함
 	 * 
 	 * @RequestMapping(value="/directMessage",method=RequestMethod.GET) public
 	 * String blog_details() { return "/directMessage"; }
 	 */
-	
+
 	//내 정보
-	@RequestMapping(value="/myPage",method=RequestMethod.GET)
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String contact(HttpSession session, Model model) {
-		String member_id = (String)session.getAttribute("loginID");
-		String member_nickname = (String)session.getAttribute("loginNickName");
+		String member_id = (String) session.getAttribute("loginID");
+		String member_nickname = (String) session.getAttribute("loginNickName");
 		HashMap<String, String> hash = new HashMap<String, String>();
-		
+
 		hash = service.memberSelectOneAll(member_id);
 		model.addAttribute("hash", hash);
 		model.addAttribute("loginNickName", member_nickname);
-		
+
 		return "/myPage";
 	}
-	
+
 	@RequestMapping(value = "/blog", method = RequestMethod.GET)
 	public String blog(Model model) {
-		
+
 		ArrayList<HashMap<String, Object>> list = ws.selectMyGallery();
-		
+
 		logger.info("mygallery list : {} ", list);
 		model.addAttribute("list", list);
-		
+
 		return "/blog";
 	}
-	
+
 	@RequestMapping(value = "/viewOpenCover", method = RequestMethod.GET)
 	public String openCube() {
 		return "viewOpenCover";
 	}
-	
+
 	@RequestMapping(value = "/viewOpenCube", method = RequestMethod.GET)
 	public String viewOpenCube() {
 		return "viewOpenCube";
 	}
-	
+
 	@RequestMapping(value = "/viewOpenFlip", method = RequestMethod.GET)
 	public String viewOpenFlip() {
 		return "viewOpenFlip";
 	}
-	
-	
+
+	/**
+	 * 리플 저장 처리
+	 */
+	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
+	public String replyWrite(ReplyVO reply, HttpSession session, Model model) {
+
+		//세션에서 로그인한 사용자의 아이디를 읽어서 Reply객체의 작성자 정보에 세팅
+		String nickname = ws.searchNickname();
+		reply.setMember_nickname(nickname);
+		logger.info("컨트롤러 reply : {}", reply);
+
+		//리플 정보를 DB에 저장
+		ws.insertReply(reply);
+
+		//읽던 게시글로 되돌아 감
+		return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
+	}
+
+	//댓글 삭제
+	@RequestMapping(value = "/replyDelete", method = RequestMethod.GET)
+	public String deleteReply(ReplyVO reply, HttpSession session) {
+		
+		logger.info("asgohorawebf:{}",reply);
+		
+		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
+		String nickname = ws.searchNickname();
+		reply.setMember_nickname(nickname);
+
+		logger.info("asgohorawebf:{}",reply);
+		ws.deleteReply(reply);
+		return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
+	}
+
+	//댓글 수정
+	@RequestMapping (value="/replyEdit", method=RequestMethod.POST)
+	public String replyEdit(HttpSession session, ReplyVO reply) {
+
+	//삭제할 리플 정보와 본인 글인지 확인할 로그인아이디
+	String id = (String) session.getAttribute("loginID");
+	reply.setMember_id(id);
+
+	//리플  수정 처리
+	ws.updateReply(reply);
+	//원래의 글읽기 화면으로 이동 
+	return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
+	}
+
 }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
 @Repository
@@ -58,19 +60,6 @@ public class WorkDAO {
 		}
 
 		return cnt;
-	}
-	
-	public ArrayList<HashMap<String, Object>> workRead(){
-		WorkMapper wm = ss.getMapper(WorkMapper.class);
-		ArrayList<HashMap<String, Object>> list = null;
-
-		try {
-			list = wm.workRead();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
 	}
 	
 	public ArrayList<GalleryVO> gallerySelectAll(){
@@ -132,6 +121,8 @@ public class WorkDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		logger.info("테스트 가져온 map : {}",map);
 		
 		return map;
 		
@@ -198,5 +189,64 @@ public class WorkDAO {
 		
 	}
 
+	public int insertReply(ReplyVO reply) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = 0;
+		try {
+			cnt = wm.insertReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	public ArrayList<ReplyVO> getReplyList(int gallery_seq) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<ReplyVO> list = null;		
+		try {
+			list = wm.getReplyList(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	
+	public int deleteReply(ReplyVO reply) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt =0;
+		try {
+			cnt = wm.deleteReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	public void updateReply(ReplyVO reply) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		try {
+			wm.updateReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id){
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<HashMap<String, Object>> list = null;
+		
+		try {
+			list = wm.onlyMemberInformationGalleryJsp(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
 
 }

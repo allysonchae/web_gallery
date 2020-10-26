@@ -198,7 +198,7 @@
 						rowItem += "<td style='text-align: center;'>작품명 및 설명</td>"
 						rowItem += "<td style='text-align: center;'>"
 						rowItem += "<div class='preview' style='border: 1px solid; width: 500px; height: 255px;'></div><br>"
-						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;' /></td>"
+						rowItem += "<input type='file' name='upload' accept='image/*' onchange='previewImage(this,"+ i +")' style='width: 130px;'/></td>"
 						rowItem += "<td style='text-align: center;'>"
 						rowItem += "<input type='text' name='work_name' style='width: 500px;' placeholder='please enter the title'>"
 						rowItem += "<br><br>"
@@ -303,6 +303,16 @@
 				flag = true;
 			}else if(yearE<yearS){
 				flag = true;
+			}else if(yearE==yearS){
+				if(monthE<monthS){
+					flag = true;
+				}
+
+				if(monthE==monthS){
+					if(dayE<dayS){
+						flag = true;	
+					}
+				}
 			}
 			
 			if(flag){
@@ -353,7 +363,6 @@
 			}
 
 			alert("성공적으로 등록이 되었습니다.");
-			
 			return true;
 		}
 	</script>

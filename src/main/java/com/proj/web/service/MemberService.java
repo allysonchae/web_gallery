@@ -1,5 +1,6 @@
 package com.proj.web.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.proj.web.dao.MemberDAO;
 import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.ReplyVO;
 
 @Service
 public class MemberService {

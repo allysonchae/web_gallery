@@ -34,8 +34,9 @@
 
 	#calendar{
 		margin:0 auto;
-		width:800px;
+		width:1200px;
 		color: black;
+		height: 720px;
 	}
 	
 	#header{

@@ -19,6 +19,7 @@ import com.proj.web.dao.WorkDAO;
 import com.proj.web.util.FileService;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.MemberVO;
+import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
 @Service
@@ -40,9 +41,12 @@ public class WorkService {
 	
 	public String galleryWrite(GalleryVO gallery, ArrayList<WorkVO> workList, MultipartFile[] upload) {
 
-		logger.info("gallery : {}", gallery);
 		String memberID = (String) session.getAttribute("loginID");
 		gallery.setMember_id(memberID);
+		String member_nickName = (String)session.getAttribute("loginNickName");
+		gallery.setMember_nickname(member_nickName);
+		
+		logger.info("gallery : {}", gallery);
 		
 		int result = dao.galleryWrite(gallery);
 		int cnt = dao.gallery_Seq()-1;
@@ -56,7 +60,6 @@ public class WorkService {
 					String savedfile = FileService.saveFile(upload[i], uploadPath);
 					work.setWork_savedFileName(savedfile);
 					work.setWork_originalFileName(upload[i].getOriginalFilename());
-				
 					work.setId(cnt);
 					System.out.println(i+1 +"번째 서비스 저장 : work"+ work);
 					dao.workWrite(work);
@@ -79,14 +82,6 @@ public class WorkService {
 	}
 	
 	
-	//모든 전시회 가저오기
-	public ArrayList<HashMap<String, Object>> workRead(){
-
-		ArrayList<HashMap<String, Object>> list = dao.workRead();
-
-		return list;
-	}
-	
 	//전시회 하나 가져오기
 	public ArrayList<HashMap<String, Object>> selectGalleryOne(int gallery_seq) {
 		
@@ -100,24 +95,6 @@ public class WorkService {
 		return dao.selectWorkOne(map);
 		
 	}
-	
-	
-	//현재 진행중인 작품 파일 가져오기
-	public ArrayList<WorkVO> workPresent(){
-		
-		ArrayList<WorkVO> persentWork = new ArrayList<WorkVO>();
-		ArrayList<Integer> list = se.presentGallerySeqNum();
-		
-		for(int i = 0 ; i < list.size() ; i++) {
-			int id = list.get(i);
-			WorkVO work = dao.presentWork(id);
-			persentWork.add(work);
-		}
-		
-		return persentWork;
-		
-	}
-	
 	
 	//현재 진행중인 갤러리 가져오기
 	public ArrayList<GalleryVO> presentGallery(){
@@ -139,7 +116,9 @@ public class WorkService {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 		ArrayList<Integer> idList = se.presentGallerySeqNum();
 		
+		
 		for(int i = 0 ; i < idList.size() ; i++) {
+			System.out.println(i+"번쨰 가져오기");
 			list.add(dao.informationGalleryJsp(idList.get(i)));
 		}
 		
@@ -255,10 +234,38 @@ public class WorkService {
 		return dao.selectMyGallery(member_id);
 		
 	}
+
+	public void insertReply(ReplyVO reply) {
+		String member_id = (String)session.getAttribute("loginID");
+		reply.setMember_id(member_id); 
+		logger.info("서비스 reply:{}", reply);
+		dao.insertReply(reply);
+	}
+
+	public void deleteReply(ReplyVO reply) {
+		String member_id = (String)session.getAttribute("loginID");
+		reply.setMember_id(member_id);
+		dao.deleteReply(reply);
+	}
+	
+	public ArrayList<ReplyVO> listReply(int gallery_seq) {
+		ArrayList<ReplyVO> list = dao.getReplyList(gallery_seq);
+		return list;
+	}
 	
 	public int deleteGallery(int gallery_seq) {
-		
 		return dao.deleteGallery(gallery_seq);
+	}
+
+	public void updateReply(ReplyVO reply) {
+		dao.updateReply(reply);
+	}
+	
+	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id){
+		
+		ArrayList<HashMap<String, Object>> list = dao.onlyMemberInformationGalleryJsp(member_id);
+		
+		return list;
 		
 	}
 	
