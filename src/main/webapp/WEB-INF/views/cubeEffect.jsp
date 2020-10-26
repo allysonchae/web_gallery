@@ -390,7 +390,7 @@ body {
   
   
   <!-- Swiper -->
-  <div class="swiper-container">
+  <div class="swiper-container" style="position: relative; top: 250px;">
     <div class="swiper-wrapper">
 	    <c:forEach items="${list }" var="list" varStatus="status">
 	      <div class="swiper-slide">
@@ -406,61 +406,64 @@ body {
   
   <br><br>
   
-  <section class="event spad" style="text-align: -webkit-center; margin-top: 400px;">
-  	<div class="container">
-  	
-  		<table class="type05">
-  			<c:forEach var="reply" items="${replylist}">
-			    <tr>
-			        <th scope="row" class="replyid">
-			        	<b>${reply.member_nickname}</b>
-			        </th>
-	
-			        <td scope="row" class="replytext">
-						${reply.reply_text}
-					</td>
-					
-					<td class="replybutton">
-						${reply.reply_indate }
-					</td>
-					
-					<td class="replybutton">
-						<c:if test="${sessionScope.loginID == reply.member_id}">
-							[<a href="javascript:replyEditForm(${reply.reply_seq}, ${gallery_seq}, '${reply.reply_text}')">수정</a>]
-							[<a href="javascript:replyDelete(${reply.reply_seq}, ${gallery_seq})">삭제</a>]
-						</c:if>
-					</td>
-			    </tr>
-			    
-			    <tr>
-					<!-- 리플 수정 폼이 나타날 위치 -->
-					<td class="white" colspan="4"><div id="div${reply.reply_seq}"></div></td>
-				</tr>
-		    </c:forEach>
-		    <!-- 리플 작성 폼 시작 -->
-			<c:if test="${loginID != null}">
-				<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
-					<tr>
-						<th scope="row" class="replyid">
-							${nickname }
-						</th>
-						<td scope="row" class="replytext" colspan="2">
-							<input type="hidden" name="id" value="${gallery_seq}">
-							<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+  <section class="event spad" style="text-align: -webkit-center; margin-top: 300px;">
+  	<c:if test="${replylist.isEmpty()!=true }">
+	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px;">
+	  		<table class="type05">
+	  			<c:forEach var="reply" items="${replylist}">
+				    <tr>
+				        <th scope="row" class="replyid">
+				        	<b>${reply.member_nickname}</b>
+				        </th>
+		
+				        <td scope="row" class="replytext">
+							${reply.reply_text}
 						</td>
-						<td>
-							<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
+						
+						<td class="replybutton">
+							${reply.reply_indate }
 						</td>
+						
+						<td class="replybutton">
+							<c:if test="${sessionScope.loginID == reply.member_id}">
+								[<a href="javascript:replyEditForm(${reply.reply_seq}, ${gallery_seq}, '${reply.reply_text}')">수정</a>]
+								[<a href="javascript:replyDelete(${reply.reply_seq}, ${gallery_seq})">삭제</a>]
+							</c:if>
+						</td>
+				    </tr>
+				    
+				    <tr>
+						<!-- 리플 수정 폼이 나타날 위치 -->
+						<td class="white" colspan="4"><div id="div${reply.reply_seq}"></div></td>
 					</tr>
-				</form>
-				
-			</c:if>
-			<!-- /리플 작성 폼 끝 -->
-		    
+			    </c:forEach>
+			</table>
+	  	</div>
+  	</c:if>
+  	<div style="padding: 15px; width: 1123px;">
+  	<table class="container">
+   		<!-- 리플 작성 폼 시작 -->
+		<c:if test="${loginID != null}">
+			<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
+				<tr>
+					<th scope="row" class="replyid" style="font-size: x-large;">
+						${nickname }
+					</th>
+					<td scope="row" class="replytext" colspan="2" style="text-align: -webkit-center;">
+						<input type="hidden" name="id" value="${gallery_seq}">
+						<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+					</td>
+					<td>
+						<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
+					</td>
+				</tr>
+			</form>
+		</c:if>
+		<!-- /리플 작성 폼 끝 -->
 		</table>
+	</div>
   		
-  	</div>
-  </section>
+	</section>
   <br><br><br>
   
 
