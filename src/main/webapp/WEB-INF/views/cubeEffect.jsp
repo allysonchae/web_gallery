@@ -42,7 +42,7 @@
       margin-top: -150px;
     }
 
-    .F {
+    .swiper-slide {
       background-position: center;
       background-size: cover;
     }
