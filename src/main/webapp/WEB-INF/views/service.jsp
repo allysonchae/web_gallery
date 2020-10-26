@@ -140,8 +140,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
-                    <div class="skills__video set-bg" data-setbg="/resources/img/skill-video.jpg">
-                        <a href="https://www.youtube.com/watch?v=S19UcWdOA-I?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                    <div class="skills__video set-bg" data-setbg="/resources/img/video.PNG">
+                        <a href="https://www.https://www.youtube.com/watch?v=HEbSVOl_FqM" class="play-btn video-popup"><i class="fa fa-play"></i></a>
                     </div>
                 </div>
             </div>
