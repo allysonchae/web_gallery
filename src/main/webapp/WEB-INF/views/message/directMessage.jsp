@@ -43,7 +43,7 @@
 		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
 		var member_nickname = document.getElementById("member_info").value;
 		var room_id = member_nickname + '_' + friend_id;
-		webSocket = new WebSocket("ws://localhost:8888/multiChat.do/" + room_id + "/" + member_nickname + "/" + friend_id);
+		webSocket = new WebSocket("ws://10.10.12.126:8888/multiChat.do/" + room_id + "/" + member_nickname + "/" + friend_id);
 
 		webSocket.onopen = function(event) {alert("웹소켓 연결/ 채팅시작" + " : " + room_id);};
 		webSocket.onmessage = function(event) {output(event.data);};
@@ -193,25 +193,7 @@
     <!-- Chat Box-->
     <div class="col-7 px-0">
       <div class="px-4 py-5 chat-box bg-white" id="chat_logs">
-        <!-- 남이 보낸거-->
-        <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
-          <div class="media-body ml-3">
-            <div class="bg-light rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-muted">받은 메세지</p>
-            </div>
-            <p class="small text-muted">12:00 PM | Aug 13</p>
-          </div>
-        </div>
-
-        <!-- 내가 보낸거 -->
-        <div class="media w-50 ml-auto mb-3">
-          <div class="media-body">
-            <div class="bg-primary rounded py-2 px-3 mb-2">
-              <p class="text-small mb-0 text-white">보낸 메세지</p>
-            </div>
-            <p class="small text-muted">12:00 PM | Aug 13</p>
-          </div>
-        </div>
+        
 
         
 

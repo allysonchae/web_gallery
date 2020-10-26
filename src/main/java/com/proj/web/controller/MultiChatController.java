@@ -24,7 +24,7 @@ import com.proj.web.vo.ChatroomVO;
 // '/multiChat.do'를 제외한, 채팅방 번호와 사용자 이름에 해당하는 뒤쪽 주소는 onOpen 메서드의 매개변수로 전달된다.
 // 동적 주소와 매개변수는 필요에 따라 개수를 늘리거나 줄일 수 있다.
 // 예를 들어, 채팅방 번호 정보가 필요 없으면 주소의 형태는 '/multiChat.do/{member_nickname}'이 되고 onOpen 메서드의 매개변수도 한 개만 작성하면 된다.
-@ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}/{friend_id}", configurator = SpringConfigurator.class)
+@ServerEndpoint(value = "/multiChat.do/{room_id}/{member_nickname}/{friend_id}")
 public class MultiChatController {
 
 	private static final ArrayList<Session> sessionList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class MultiChatController {
 										,@PathParam("friend_id") String friend_id) {
 		logger.info("소켓 열기 실행. 생성된 세션 ID: " + session.getId() + ", 채팅방 번호: " + room_id + ", 사용자 이름: " + member_nickname);
 		
-		int action = 0;
+		/*int action = 0;
 		
 		String[] temp = room_id.split("_");
 		String line = "";
@@ -81,15 +81,20 @@ public class MultiChatController {
 			//방이 있으면?
 			multi.setSession(session, room);
 			logger.info("방이 있었으니 세션에 담아서 열기");
-		}
+		}*/
+		session.getUserProperties().put("room_id", room_id);
+		session.getUserProperties().put("member_nickname", member_nickname);
+
+		// 사용자 정의 속성의 입력이 끝난 세션 객체를 세션 목록에 저장한다.
+		sessionList.add(session);
 	}
 
-	public void setSession(Session session, ChatroomVO room) {
+	/*public void setSession(Session session, ChatroomVO room) {
 		session.getUserProperties().put("room_id", room.getRoom_id());
 		session.getUserProperties().put("member_nickname", room.getMember_nickname());
 
 		sessionList.add(session);
-	}
+	}*/
 	
 	  @OnClose public void onClose(Session session) {
 	logger.info("소켓 닫기 실행. 종료된 세션 ID: " + session.getId());
