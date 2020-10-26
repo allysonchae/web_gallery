@@ -72,7 +72,7 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 전시회</a></li>
-                                        <li><a href="">내 작품 마켓</a></li>
+                                        <li><a href="/myWorkMarket">내 작품 마켓</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
@@ -111,43 +111,6 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Skills Section Begin -->
-    <section class="skills spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 p-0">
-                    <div class="skills__content">
-                        <div class="section-title" style="font-size: 30px; color: white; font-weight: bold;">
-                            	공간의 제약을 받지 않고 <br>
-                            	저희가 제공하는 가상공간 <br>
-                            	전시관을 이용하여 <br>
-                            	자유롭게 자신의 작품을 <br>
-                            	소개해보세요
-                            <h1>ONEX</h1>
-                        </div>
-                        <div class="skill__bar__item">
-                            <div id="bar1" class="barfiller">
-                            </div>
-                        </div>
-                        <div class="skill__bar__item">
-                            <div id="bar2" class="barfiller">
-                            </div>
-                        </div>
-                        <div class="skill__bar__item">
-                            <div id="bar3" class="barfiller">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 p-0">
-                    <div class="skills__video set-bg" data-setbg="/resources/img/video.PNG">
-                        <a href="https://www.https://www.youtube.com/watch?v=HEbSVOl_FqM" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Skills Section End -->
 
     <!-- About Section Begin -->
     <section class="about about--page spad">
@@ -198,61 +161,6 @@
     </section>
     <!-- About Section End -->
 
-    <!-- About Services Section Begin -->
-    <section class="about-services spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title center-title">
-                        <h4>제공하는 서비스</h4>
-                        <h1>Best service</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="about__services__item">
-                        <div class="about__services__item__pic set-bg" data-setbg="/resources/img/services/as-1.jpg">
-                            <div class="icon">
-                                <img src="/resources/img/services/as-icon-1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="about__services__item__text">
-                            <h4>Wedding</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="about__services__item">
-                        <div class="about__services__item__pic set-bg" data-setbg="/resources/img/services/as-2.jpg">
-                            <div class="icon">
-                                <img src="/resources/img/services/as-icon-2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="about__services__item__text">
-                            <h4>Clubs and bar</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="about__services__item">
-                        <div class="about__services__item__pic set-bg" data-setbg="/resources/img/services/as-3.jpg">
-                            <div class="icon">
-                                <img src="/resources/img/services/as-icon-3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="about__services__item__text">
-                            <h4>Corporate events</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About Services Section End -->
     
     <!-- About Pic Begin -->
     <div class="about-pic">
