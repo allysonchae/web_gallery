@@ -2,5 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.proj.web.dao.ChatMapper">
+<insert id="createRoom" parameterType="chat">
+insert into room_lists(
+    room_id
+    ,member_nickname
+    ,room_date
+    )values(
+    #{room_id}
+    ,#{member_nickname}
+    ,sysdate
+    );
+</insert>
+
+<select id="searchRoom" parameterType="String" resultType="chat">
+select
+	room_id
+from
+	room_lists
+where
+	room_id = #{room_id}
+</select>
 
 </mapper>
