@@ -58,9 +58,19 @@
 	function sendMessage() {
 		var message = document.getElementById("message").value;
 		webSocket.send(message);
-		}
-	
+		$("#message").val("");
+	}
 
+
+	/* $(function(){
+      $("input[type=text]").keyup(function(){
+	      alert("hello");
+         
+         if(e.keyCode==13){
+            alert("hello");
+         }
+      }); */
+	
     </script>
 </head>
 
@@ -156,11 +166,12 @@
 
         <div class="messages-box">
           <div class="list-group rounded-0">
-            <div class="list-group-item list-group-item-action active text-white rounded-0" onclick="openSocket()" id="friend_id">
+          <input type="hidden" value="2" id="friend_id">
+            <div class="list-group-item list-group-item-action active text-white rounded-0" onclick="openSocket()">
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Jason.D</h6><small class="small font-weight-bold">25 Dec</small>
+                    <h6 class="mb-0">${member_nickname }</h6><small class="small font-weight-bold">28 Oct</small>
                   </div>
                 </div>
               </div>
@@ -170,7 +181,7 @@
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Oliver</h6><small class="small font-weight-bold">14 Dec</small>
+                    <h6 class="mb-0">test</h6><small class="small font-weight-bold">28 Oct</small>
                   </div>
                 </div>
               </div>
@@ -180,7 +191,7 @@
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
                   <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">Mack</h6><small class="small font-weight-bold">9 Nov</small>
+                    <h6 class="mb-0">test2</h6><small class="small font-weight-bold">28 Oct</small>
                   </div>
                 </div>
               </div>

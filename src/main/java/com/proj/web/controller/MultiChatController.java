@@ -82,7 +82,7 @@ public class MultiChatController {
 			multi.setSession(session, room);
 			logger.info("방이 있었으니 세션에 담아서 열기");
 		}*/
-		session.getUserProperties().put("room_id", room_id);
+		session.getUserProperties().put("room_id", friend_id);
 		session.getUserProperties().put("member_nickname", member_nickname);
 
 		// 사용자 정의 속성의 입력이 끝난 세션 객체를 세션 목록에 저장한다.
@@ -112,7 +112,7 @@ public class MultiChatController {
 			session.getBasicRemote().sendText(
 					"<div class='media w-50 ml-auto mb-3'><div class='media-body'><div class='bg-primary rounded py-2 px-3 mb-2'>"+
 					"<p class='text-small mb-0 text-white'>" + message + "</p></div><p class='small text-muted'>" +
-						"날짜 같은거 " + "</p></div>	</div>");
+						"2020.10.28" + "</p></div>	</div>");
 
 			// 메시지를 보낸 사람의 채팅방 번호와 사용자 이름을 가져온다.
 			String senderRoom_id = (String) session.getUserProperties().get("room_id");
@@ -132,7 +132,7 @@ public class MultiChatController {
 							"<div class='media w-50 mb-3'><img src='https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg' alt='user' width='50' class='rounded-circle'>"+
 							"<div class='media-body ml-3'><div class='bg-light rounded py-2 px-3 mb-2'>"+
 							"<p class='text-small mb-0 text-muted'>" + message +
-							"</p></div><p class='small text-muted'>" + senderMember_nickname + "|" + "얘도 날짜 같은거" + "</p></div></div>");
+							"</p></div><p class='small text-muted'>" + senderMember_nickname + "|" + "2020.10.28" + "</p></div></div>");
 				}
 			}
 
