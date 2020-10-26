@@ -343,7 +343,7 @@
 </div>
 
 <div class="menu-overlay">
-  <h1 class="overlay-info">
+  <h1 class="overlay-info" style="font-family: monospace;">
   	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
   	<div>
 	  	<c:if test="${sessionScope.loginID!=null }">
