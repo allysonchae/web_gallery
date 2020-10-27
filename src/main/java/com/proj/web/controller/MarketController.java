@@ -100,21 +100,14 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/MarketOne", method = RequestMethod.GET)
-	public String MarketOne(int market_seq, int gallery_seq, int work_seq, Model model) {
+	public String MarketOne(int market_seq, Model model) {
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", gallery_seq);
-		map.put("market_seq", market_seq);
-		map.put("work_seq", work_seq);
-		
-		WorkVO work = ws.selectWorkOne(map);
 		MarketVO market = ms.marketOne(market_seq);
 		
+		logger.info("market : {}", market);
+		
 		model.addAttribute("market", market);
-		model.addAttribute("work", work);
-		model.addAttribute("work_seq", work_seq);
-		model.addAttribute("market_seq", market_seq);
-		model.addAttribute("gallery_seq", gallery_seq);
+		
 		return "/MarketOne";
 	}
 	

@@ -31,6 +31,8 @@
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 	
     
     <style type="text/css">
@@ -109,7 +111,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="#"><i class="fa fa-home"></i> Home</a>
+                        <a href="#"><i class="fa fa-home"></i>Home</a>
                         <span>Gallery</span>
                     </div>
                 </div>
@@ -121,11 +123,11 @@
     <section class="discography spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12">	
                     <div class="section-title center-title">
-                        <h2>Market</h2>
-                        <h1>Market</h1>
-                        <h4>마켓</h4>
+                        <h2>Online Market</h2>
+                        <h1>Online Market</h1>
+                        <h4>온라인 마켓</h4>
                     </div>
                 </div>
             </div>
@@ -135,7 +137,7 @@
 	                <div class="col-lg-4 col-md-6 col-sm-6">
 	                    <div class="discography__item">
 	                        <div class="discography__item__pic">
-	                        	<a href="/MarketOne?market_seq=${list.market_seq }&gallery_seq=${list.gallery_seq}&work_seq=${list.work_seq }" data-toggle="lightbox" data-title=" " data-width="1500" data-footer="By ${list.member_nickname }">
+	                        	<a href="/MarketOne?market_seq=${list.market_seq }" data-toggle="lightbox" data-title=" " data-width="1500" data-footer="By ${list.member_nickname }">
 		                            <img src="/download?work_seq=${list.work_seq }&id=${list.gallery_seq }" style="width: 400px; height: 300px;">
 	                        	</a>
 	                        </div>
@@ -146,7 +148,7 @@
 	                    </div>
 	                </div>
                 </c:forEach>
-               
+                
                 <div class="col-lg-12">
                     <div class="pagination__links">
                         <a href="#">1</a>
