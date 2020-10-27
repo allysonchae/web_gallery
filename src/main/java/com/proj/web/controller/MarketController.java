@@ -101,6 +101,7 @@ public class MarketController {
 	
 	@RequestMapping(value = "/MarketOne", method = RequestMethod.GET)
 	public String MarketOne(int market_seq, int gallery_seq, int work_seq, Model model) {
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", gallery_seq);
 		map.put("market_seq", market_seq);

@@ -25,9 +25,8 @@
 		function sum(){
 			var input = document.getElementById("input").value;
 			var price = document.getElementById("price").value;
-			$("#sum_check").text(input*price);
+			$("#sum_check").val(input*price+"원");
 			$("#sum_check").css("color","red");
-			alert(input*price);
 		}
 </script>
 
@@ -47,18 +46,19 @@
 			     				</td>
 			     			</tr>
 			     		</table>
-			     		<table style="width: 500px; font-size: 20px; position: relative; top: 280px; left: 20px;">
+			     		<table style="width: 550px; font-size: 20px; position: relative; top: 280px; left: 20px;">
 			     			<tr>
 			     				<td>
 			     					구매수량:
 			     					<select id="input" onchange="sum()"></select>
 			     				</td>
 			     				<td>
+			     					&nbsp&nbsp
 			     					가격:
-				     				&#8361; ${market.market_price }
+				     				&#8361; ${market.market_price }/1개
 			     				</td>
 			     				<td>
-					     			<div id="sum_check"></div>
+									<input type="text" placeholder="총금액" id="sum_check" style="width:100px;">
 					     		</td>
 			     			</tr>
 			     		</table>

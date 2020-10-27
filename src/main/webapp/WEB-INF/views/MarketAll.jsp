@@ -28,11 +28,10 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+	
     
     <style type="text/css">
     	#member_info{
@@ -41,12 +40,6 @@
     
     </style>
     
-    <script type="text/javascript">
-    	$(document).on('click', '[data-toggle="lightbox"]', function(event) {
-    		event.preventDefault();
-  	      	$(this).ekkoLightbox();
-  	  	});
-  	</script>
 </head>
 
 <body>
@@ -142,7 +135,7 @@
 	                <div class="col-lg-4 col-md-6 col-sm-6">
 	                    <div class="discography__item">
 	                        <div class="discography__item__pic">
-	                        	<a href="/MarketOne?market_seq=${list.market_seq }&gallery_seq=${list.gallery_seq}&work_seq=${list.work_seq }" data-toggle="lightbox" data-width="1500" data-footer="By ${list.member_nickname }">
+	                        	<a href="/MarketOne?market_seq=${list.market_seq }&gallery_seq=${list.gallery_seq}&work_seq=${list.work_seq }" data-toggle="lightbox" data-title=" " data-width="1500" data-footer="By ${list.member_nickname }">
 		                            <img src="/download?work_seq=${list.work_seq }&id=${list.gallery_seq }" style="width: 400px; height: 300px;">
 	                        	</a>
 	                        </div>
@@ -227,6 +220,12 @@
     <script src="/resources/js/jquery.jplayer.min.js"></script>
     <script src="/resources/js/jplayerInit.js"></script>
     
+    <script type="text/javascript">
+    	$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+    		event.preventDefault();
+  	      	$(this).ekkoLightbox();
+  	  	});
+  	</script>
 </body>
 
 </html>

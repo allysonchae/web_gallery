@@ -189,6 +189,7 @@
 			}
 
 			if(confirm(announce+"상기 정보로 작품을 판매 하시겠습니까?")==true){
+				alert("성공적으로 상품 등록이 되었습니다.");
 				return true;
 			}else{
 				return false;
