@@ -64,7 +64,7 @@
                                 	<ul class="dropdown">
                                         <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
-                                        <li><a href="/community">커뮤니티</a></li>
+										<li><a href="">온라인 마켓</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
@@ -72,6 +72,7 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 전시회</a></li>
+                                        <li><a href="/myWorkMarket">내 작품 마켓</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
@@ -113,145 +114,44 @@
     </section>
     <!-- Hero Section End -->
 
-    <!-- Event Section Begin 1-->
-    <section class="event spad">
+     <!-- Skills Section Begin -->
+    <section class="skills spad" style="margin-bottom: 100px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h4>현재 전시중인 갤러리</h4>
+                <div class="col-lg-6 p-0">
+                    <div class="skills__content">
+                        <div class="section-title" style="font-size: 30px; color: white; font-weight: bold;">
+                            	공간의 제약을 받지 않고 <br>
+                            	저희가 제공하는 가상공간 <br>
+                            	전시관을 이용하여 <br>
+                            	자유롭게 자신의 작품을 <br>
+                            	소개해보세요
+                            <h1>ONEX</h1>
+                        </div>
+                        <div class="skill__bar__item">
+                            <div id="bar1" class="barfiller">
+                            </div>
+                        </div>
+                        <div class="skill__bar__item">
+                            <div id="bar2" class="barfiller">
+                            </div>
+                        </div>
+                        <div class="skill__bar__item">
+                            <div id="bar3" class="barfiller">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="event__slider owl-carousel">
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-3.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
+                <div class="col-lg-6 p-0">
+                    <div class="skills__video set-bg" data-setbg="/resources/img/video.PNG">
+                        <a href="https://www.https://www.youtube.com/watch?v=HEbSVOl_FqM" class="play-btn video-popup"><i class="fa fa-play"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Event Section End -->
+    <!-- Skills Section End -->
 
-	<!-- Event Section Begin 2-->
-    <section class="event spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h4>전시 예정 갤러리</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="event__slider owl-carousel">
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-1.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-3.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="event__item">
-                            <div class="event__item__pic set-bg" data-setbg="/resources/img/events/event-2.jpg">
-                                <div class="tag-date">
-                                    <span>Dec 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="event__item__text">
-                                <h4>David Guetta Miami Ultra</h4>
-                                <p><i class="fa fa-map-marker"></i> Funkhaus Berlin, Berlin, Germany</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Event Section End -->
 
     <!-- About Pic Begin(하단에 사진 왕창 들어가는곳) -->
     <div class="about-pic">
@@ -260,27 +160,27 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-1.jpg" alt="">
-                            <img src="/resources/img/about/ap-2.jpg" alt="">
+                          <img src="/resources/img/about/ap-11.jpg" alt="">
+                            <img src="/resources/img/about/ap-22.jpg" alt="">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-3.jpg" alt="">
+                            <img src="/resources/img/about/ap-33.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-4.jpg" alt="">
+                            <img src="/resources/img/about/ap-44.jpg" alt="">
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-5.jpg" alt="">
+                            <img src="/resources/img/about/ap-55.jpg" alt="">
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-6.jpg" alt="">
+                            <img src="/resources/img/about/ap-66.jpg" alt="">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-7.jpg" alt="">
+                            <img src="/resources/img/about/ap-77.jpg" alt="">
                         </div>
                     </div>
                 </div>

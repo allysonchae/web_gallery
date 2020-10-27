@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,7 +36,7 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
+	 <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -60,11 +61,11 @@
                                         <li><a href="/service">이용안내</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="/gallery">Gallery</a>
+                                <li class="active"><a href="/gallery">Gallery</a>
                                 	<ul class="dropdown">
                                         <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
-                                        <li><a href="/community">커뮤니티</a></li>
+										<li><a href="">온라인 마켓</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
@@ -72,11 +73,12 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 전시회</a></li>
+                                        <li><a href="/myWorkMarket">내 작품 마켓</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
                                 <c:choose>
-									<c:when test="${sessionScope.loginNickName != null }">
+									<c:when test="${sessionScope.loginID != null }">
 										<li id="member_info">'${sessionScope.loginNickName }'님</li>
 										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
@@ -101,77 +103,63 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Contact</span>
+                        <span>Gallery</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Breadcrumb End -->
-
-    <!-- Map Begin -->
-    <div class="map">
-        <div class="container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.5524090066037!2d-71.10245469994108!3d42.47980730490846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3748250c43a43%3A0xe1b9879a5e9b6657!2sWinter%20Street%20Public%20Parking%20Lot!5e0!3m2!1sen!2sbd!4v1577299251173!5m2!1sen!2sbd"
-                height="585" style="border:0;" allowfullscreen=""></iframe>
-        </div>
-    </div>
-    <!-- Map End -->
-
-    <!-- Contact Section Begin -->
-    <section class="contact spad">
+    <!-- Discography Section Begin -->
+    <section class="discography spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="contact__address">
-                        <div class="section-title">
-                            <h2>Contact info</h2>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore.</p>
-                        <ul>
-                            <li>
-                                <i class="fa fa-map-marker"></i>
-                                <h5>Address</h5>
-                                <p>Los Angeles Gournadi, 1230 Bariasl</p>
-                            </li>
-                            <li>
-                                <i class="fa fa-phone"></i>
-                                <h5>Hotline</h5>
-                                <span>1-677-124-44227</span>
-                                <span>1-688-356-66889</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope"></i>
-                                <h5>Email</h5>
-                                <p>Support@gamail.com</p>
-                            </li>
-                        </ul>
+                <div class="col-lg-12">
+                    <div class="section-title center-title">
+                        <h2>My Work Market</h2>
+                        <h1>My Work Market</h1>
+                        <h4>내 작품 마켓</h4>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="contact__form">
-                        <div class="section-title">
-                            <h2>Get in touch</h2>
-                        </div>
-                        <p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                            gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                        <form action="#">
-                            <div class="input__list">
-                                <input type="text" placeholder="Name">
-                                <input type="text" placeholder="Email">
-                                <input type="text" placeholder="Website">
-                            </div>
-                            <textarea placeholder="Comment"></textarea>
-                            <button type="submit" class="site-btn">SEND MESSAGE</button>
-                        </form>
+            </div>
+            
+			<button type="submit" onclick="inputInformation();" class="btn btn-outline-secondary" style="position: relative; left: 1350px; bottom:200px;">
+				판매 정보 입력하기
+			</button>
+         		
+            <div class="row">
+            	<c:forEach items="${list }" var="list" varStatus="status">
+	                <div class="col-lg-4 col-md-6 col-sm-6">
+	                    <div class="discography__item">
+	                        <div class="discography__item__pic">
+	                            <img src="/download?work_seq=${list.WORK_SEQ }&id=${list.GALLERY_SEQ }" style="width: 100px; height: 300px;">
+	                        </div>
+	                        <div class="discography__item__text">
+								<input type="checkbox" class="work" style="width:30px; height: 30px;" value="${list.WORK_SEQ }"><h3>${list.WORK_NAME }</h3>
+	                        </div>
+	                    </div>
+	                </div>
+                </c:forEach>
+               
+                <div class="col-lg-12">
+                    <div class="pagination__links">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">Next</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Contact Section End -->
+    <!-- Discography Section End -->
+    
+    <script type="text/javascript">
+    	function inputInformation(){
+			var work = document.getElementsByClassName("work").value;
+			alert(work);
+        }
+    </script>
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
@@ -188,13 +176,14 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>Onex@gmail.com</h6>
+                                <h6>DJ.Music@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 col-md-6">
                     <div class="footer__social">
+                        <h2>DJoz</h2>
                         <div class="footer__social__links">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -205,7 +194,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6">
                     <div class="footer__newslatter">
-                        <h4>Contact Us</h4>
+                        <h4>Stay With me</h4>
                         <form action="#">
                             <input type="text" placeholder="Email">
                             <button type="submit"><i class="fa fa-send-o"></i></button>

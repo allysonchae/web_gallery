@@ -58,6 +58,7 @@ public class WorkService {
 				WorkVO work = workList.get(i);
 				if (!upload[i].isEmpty()) {
 					String savedfile = FileService.saveFile(upload[i], uploadPath);
+					work.setMember_id(memberID);
 					work.setWork_savedFileName(savedfile);
 					work.setWork_originalFileName(upload[i].getOriginalFilename());
 					work.setId(cnt);
@@ -116,9 +117,8 @@ public class WorkService {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 		ArrayList<Integer> idList = se.presentGallerySeqNum();
 		
-		
 		for(int i = 0 ; i < idList.size() ; i++) {
-			System.out.println(i+"번쨰 가져오기");
+			System.out.println(i+"번째 가져오기");
 			list.add(dao.informationGalleryJsp(idList.get(i)));
 		}
 		
@@ -269,4 +269,10 @@ public class WorkService {
 		
 	}
 	
+	public ArrayList<HashMap<String, Object>> selectMyWork(){
+		
+		String member_id = (String) session.getAttribute("loginID");
+		
+		return dao.selectMyWork(member_id);
+	}
 }

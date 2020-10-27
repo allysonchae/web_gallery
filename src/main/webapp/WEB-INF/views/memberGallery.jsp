@@ -11,7 +11,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DJoz | Template</title>
+    <title>Onex</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -65,7 +65,7 @@
                                 	<ul class="dropdown">
                                         <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
-                                        <li><a href="/community">커뮤니티</a></li>
+										<li><a href="">온라인 마켓</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
@@ -73,6 +73,7 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 전시회</a></li>
+                                        <li><a href="/myWorkMarket">내 작품 마켓</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>

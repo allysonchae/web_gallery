@@ -10,7 +10,6 @@
         	,title
         	,"start"
         	,"end"
-        	,gallery_indate
         	,gallery_template
         	,member_nickname
 		)values(
@@ -19,7 +18,6 @@
 			,#{title}
 			,#{start}
 			,#{end}
-			,sysdate
 			,#{gallery_template}
 			,#{member_nickname}
 		)
@@ -33,6 +31,7 @@
 		    ,work_savedFileName
 		    ,work_name
 		    ,work_description
+		    ,member_id
 		)values(
 		    #{work_seq}
 		    ,#{id}
@@ -40,6 +39,7 @@
 		    ,#{work_savedFileName}
 		    ,#{work_name}
 		    ,#{work_description}
+		    ,#{member_id}
 		)
 	</insert>
 
@@ -60,6 +60,21 @@
 		from
     		gallery
 	</select>	
+	
+	<select id="selectMyWork" parameterType="String" resultType="hashmap">
+		select
+		    w.work_seq
+		    ,w.gallery_seq
+		    ,w.work_name
+		    ,w.work_description
+		    ,m.member_id
+		from
+		    work w, member m
+		where
+		    w.member_id = m.member_id
+		and
+		    m.member_id = #{member_id}
+	</select>
 	
 	<select id="presentGallery" parameterType="int" resultType="gallery">
 		select

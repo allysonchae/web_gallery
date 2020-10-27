@@ -248,5 +248,18 @@ public class WorkDAO {
 		
 	}
 	
-
+	public ArrayList<HashMap<String, Object>> selectMyWork(String member_id){
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<HashMap<String, Object>> list = null;
+		
+		try {
+			list = wm.selectMyWork(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
 }

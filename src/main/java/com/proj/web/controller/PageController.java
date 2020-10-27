@@ -54,7 +54,6 @@ public class PageController {
 	private InformationService is;
 	@Autowired
 	private WorkService ws;
-
 	@Autowired
 	private MemberService service;
 
@@ -250,13 +249,6 @@ public class PageController {
 	 * login() { return "/login"; }
 	 */
 
-	/*
-	 * //쪽지함
-	 * 
-	 * @RequestMapping(value="/directMessage",method=RequestMethod.GET) public
-	 * String blog_details() { return "/directMessage"; }
-	 */
-
 	//내 정보
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String contact(HttpSession session, Model model) {
@@ -342,6 +334,18 @@ public class PageController {
 	ws.updateReply(reply);
 	//원래의 글읽기 화면으로 이동 
 	return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
+	}
+	
+	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
+	public String myWorkMarket(Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ws.selectMyWork();
+		
+		logger.info("list : {}",list);
+		
+		model.addAttribute("list", list);
+		
+		return "/myWorkMarket";
 	}
 
 }

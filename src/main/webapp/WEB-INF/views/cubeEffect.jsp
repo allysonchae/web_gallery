@@ -95,6 +95,7 @@
 	table.type05 td {
 	    width: 350px;
 	    padding: 10px;
+	    vertical-align: top;
 	    border-bottom: 1px solid #ccc;
 	}
 	.replybutton{
@@ -223,7 +224,6 @@
 	.overlay-info {
 	  text-align: center;
 	  color: #111825;
-	}
 	
   </style>
 
@@ -239,7 +239,6 @@
 	  });
 	    
 	});
-	
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
 
@@ -333,7 +332,7 @@
 	}
   </script>
   
-  <title>WORK</title>
+  <title>Onex</title>
 </head>
 
 <body>
@@ -388,7 +387,7 @@
   
   
   <!-- Swiper -->
-  <div class="swiper-container">
+  <div class="swiper-container" style="position: relative; top: 250px;">
     <div class="swiper-wrapper">
 	    <c:forEach items="${list }" var="list" varStatus="status">
 	      <div class="swiper-slide">
@@ -462,7 +461,7 @@
 	</div>
   		
 	</section>
-	<br><br><br>
+  <br><br><br>
   
 
   <!-- Swiper JS -->

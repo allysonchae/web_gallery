@@ -341,8 +341,6 @@
 	  </svg>
 	</a>  
  
-
-
 <div class="menu">
   <span class="menu-circle"></span>
   <a href="#" class="menu-link">

@@ -72,7 +72,7 @@
                                 	<ul class="dropdown">
                                         <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
-                                        <li><a href="/community">커뮤니티</a></li>
+										<li><a href="">온라인 마켓</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>
@@ -80,6 +80,7 @@
                                     <ul class="dropdown">
                                         <li><a href="/myPage">내 정보</a></li>
                                         <li><a href="/blog">내 전시회</a></li>
+                                        <li><a href="/myWorkMarket">내 작품 마켓</a></li>
                                         <li><a href="/message/directMessage">쪽지함</a></li>
                                     </ul>
                                 </li>
@@ -148,6 +149,10 @@
             <a href="#">Next</a>
         </div>
     </div>
+    
+    <br>
+    <br>
+    <br>
 	
 	<!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
@@ -191,27 +196,27 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-1.jpg" alt="">
-                            <img src="/resources/img/about/ap-2.jpg" alt="">
+                            <img src="/resources/img/about/ap-11.jpg" alt="">
+                            <img src="/resources/img/about/ap-22.jpg" alt="">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-3.jpg" alt="">
+                            <img src="/resources/img/about/ap-33.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-4.jpg" alt="">
+                            <img src="/resources/img/about/ap-44.jpg" alt="">
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-5.jpg" alt="">
+                            <img src="/resources/img/about/ap-55.jpg" alt="">
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 p-0">
-                            <img src="/resources/img/about/ap-6.jpg" alt="">
+                            <img src="/resources/img/about/ap-66.jpg" alt="">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 p-0">
-                            <img src="/resources/img/about/ap-7.jpg" alt="">
+                            <img src="/resources/img/about/ap-77.jpg" alt="">
                         </div>
                     </div>
                 </div>
