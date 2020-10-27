@@ -275,4 +275,10 @@ public class WorkService {
 		
 		return dao.selectMyWork(member_id);
 	}
+	
+	public WorkVO selectMarketWork(HashMap<String, Object> map) {
+		
+		return dao.selectMarketWork(map);
+		
+	}
 }

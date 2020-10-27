@@ -76,6 +76,8 @@
 		    m.member_id = #{member_id}
 	</select>
 	
+	
+	
 	<select id="presentGallery" parameterType="int" resultType="gallery">
 		select
     		gallery_seq as id
@@ -185,6 +187,20 @@
 		    w.work_seq = 0
 		and
 		    m.member_id = #{member_id}
+	</select>
+	
+	<select id="selectMarketWork" parameterType="hashmap" resultType="work">
+		select
+		    work_seq
+		    ,gallery_seq as id
+		    ,work_name
+		    ,work_description
+		from
+		    work
+		where
+		    gallery_seq = #{gallery_seq}
+		and
+		    work_seq = #{work_seq}
 	</select>
 	
 	<delete id="deleteGallery" parameterType="int">

@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,17 +25,26 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-    
     <style type="text/css">
-    	#member_info{
-    		color:white;	
-    	}
-    
+        table{
+            width: 1000px;
+            height: 500px;
+            margin: auto;  
+        }
+        
+        .templeteView:hover{
+            color: blue;
+            cursor: pointer;
+        }
+        
+        #member_info{
+        	color: white;
+        }
     </style>
 </head>
 
 <body>
-	 <!-- Page Preloder -->
+    <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -61,7 +69,7 @@
                                         <li><a href="/service">이용안내</a></li>
                                     </ul>
                                 </li>
-                                <li class="active"><a href="/gallery">Gallery</a>
+                                <li><a href="/gallery">Gallery</a>
                                 	<ul class="dropdown">
                                         <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
@@ -78,7 +86,7 @@
                                     </ul>
                                 </li>
                                 <c:choose>
-									<c:when test="${sessionScope.loginID != null }">
+									<c:when test="${sessionScope.loginNickName != null }">
 										<li id="member_info">'${sessionScope.loginNickName }'님</li>
 										<li><a href="/logout">LOGOUT</a></li>
 									</c:when>
@@ -95,7 +103,7 @@
         </div>
     </header>
     <!-- Header Section End -->
-
+    
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -103,82 +111,123 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Gallery</span>
+                        <span>Contact</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Breadcrumb End -->
-    <!-- Discography Section Begin -->
-    <section class="discography spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title center-title">
-                        <h2>My Work Market</h2>
-                        <h1>My Work Market</h1>
-                        <h4>내 작품 마켓</h4>
-                    </div>
-                </div>
-            </div>
-            
-         	
-         	<form id="marketForm" action="/marketForm" method="get" onsubmit="return checkCount();">
-				<button type="submit" class="btn btn-outline-secondary" style="position: relative; left: 1350px; bottom:200px;">
-					판매 정보 입력하기
-				</button>
-				
-	            <div class="row">
-	            	<c:forEach items="${list }" var="list" varStatus="status">
-		                <div class="col-lg-4 col-md-6 col-sm-6">
-		                    <div class="discography__item">
-		                        <div class="discography__item__pic">
-		                            <img src="/download?work_seq=${list.WORK_SEQ }&id=${list.GALLERY_SEQ }" style="width: 100px; height: 300px;">
-		                        </div>
-		                        <div class="discography__item__text">
-									<input type="checkbox" name="work" style="width:30px; height: 30px;" value="${list.WORK_SEQ }+${list.GALLERY_SEQ}">
-									<h3>${list.WORK_NAME }</h3>
-		                        </div>
-		                    </div>
-		                </div>
-	                </c:forEach>
-	               
-	                <div class="col-lg-12">
-	                    <div class="pagination__links">
-	                        <a href="#">1</a>
-	                        <a href="#">2</a>
-	                        <a href="#">3</a>
-	                        <a href="#">Next</a>
-	                    </div>
-	                </div>
-	            </div>
-         	</form>
-        </div>
-    </section>
-    <!-- Discography Section End -->
     
-    <script type="text/javascript">
-		function checkCount(){
+	<div style="text-align: center; margin-top: 100px;">
+		<h1>Market Information</h1>
+	</div>
+	
+	<form action="/marketWrite" method="post" onsubmit="return formCheck();">
+		<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px; height: 100px;">
+			<c:forEach items="${list }" var="list" varStatus="status">
+				<input type="hidden" name="work_description" value="${list.work_description }">
+				<tr>
+					<td style="width:100px;">No.${status.count }</td>
+					<td style="text-align: center">
+						<img src="/download?work_seq=${list.work_seq }&id=${list.id }" style="width: 400px; height: 300px;">
+					</td>
+					<td>
+						작품명:
+						<input type="text" name="work_name" value="${list.work_name }" readonly="readonly" style="display: block; margin : 0 auto; width:750px; height:50px;">
+						<br>
+						재고수량:
+						<input type="text" name="market_amount" placeholder="재고수량을 입력해주세요." style="display: block; margin : 0 auto; width:750px; height:50px;">
+						<br>
+						가격:
+						<input type="text" name="market_price" placeholder="가격을 입력해주세요." style="display: block; margin : 0 auto; width:750px; height:50px;">
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<div style="text-align: center; margin-top: 50px;">
+			<button type="submit" class="btn btn-outline-secondary">등록하기</button>
+		</div>
+	</form>
+	
+	<script type="text/javascript">
+		function formCheck(){
+			var amount = document.getElementsByName("market_amount");
+			var price = document.getElementsByName("market_price");
 
-			var work = document.getElementsByName("work");
-			var cnt = 0;
+			for(var i = 0 ; i<amount.length ; i++){
+				if(amount[i].value==""){
+					alert(i+1+"번째 작품의 재고수량을 입력해주세요.");
+					return false;
+				}
 
-			for(var i = 0 ; i<work.length ; i++){
-				if(work[i].checked == true){
-					cnt++;
+				if(price[i].value==""){
+					alert(i+1+"번째 작품의 가격을 입력해주세요.");
+					return false;
 				}
 			}
 
-			if(cnt>5){
-				alert("판매 품목은 5개까지만 선택 가능합니다.");
-				return false;
+			if(confirm("등록된 정보로 작품을 판매 하시겠습니다까?")==true){
+				return true;
 			}
-			
-			return true;
 		}
-    </script>
-    
+	</script>
+	
+	<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
+	
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="contact__address">
+                        <div class="section-title">
+                            <h2>Contact info</h2>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore.</p>
+                        <ul>
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                <h5>Address</h5>
+                                <p>Los Angeles Gournadi, 1230 Bariasl</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <h5>Hotline</h5>
+                                <span>1-677-124-44227</span>
+                                <span>1-688-356-66889</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope"></i>
+                                <h5>Email</h5>
+                                <p>Support@gamail.com</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="contact__form">
+                        <div class="section-title">
+                            <h2>Get in touch</h2>
+                        </div>
+                        <p> 궁굼하신 사항이나 요청사항은 직접 문의해주세요! </p>
+                        <form action="#">
+                            <div class="input__list">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Email">
+                                <input type="text" placeholder="Website">
+                            </div>
+                            <textarea placeholder="Comment"></textarea>
+                            <button type="submit" class="site-btn">SEND MESSAGE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
         <div class="container">
@@ -194,14 +243,13 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>Onex@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 col-md-6">
                     <div class="footer__social">
-                        <h2>DJoz</h2>
                         <div class="footer__social__links">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
@@ -212,7 +260,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6">
                     <div class="footer__newslatter">
-                        <h4>Stay With me</h4>
+                        <h4>Contact Us</h4>
                         <form action="#">
                             <input type="text" placeholder="Email">
                             <button type="submit"><i class="fa fa-send-o"></i></button>

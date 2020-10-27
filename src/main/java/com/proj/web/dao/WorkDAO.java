@@ -262,4 +262,18 @@ public class WorkDAO {
 		return list;
 		
 	}
+	
+	public WorkVO selectMarketWork(HashMap<String, Object> map) {
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		WorkVO work = null;
+		
+		try {
+			work = wm.selectMarketWork(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return work;
+	}
 }

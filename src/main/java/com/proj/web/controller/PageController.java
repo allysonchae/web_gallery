@@ -347,5 +347,31 @@ public class PageController {
 		
 		return "/myWorkMarket";
 	}
-
+	
+	@RequestMapping(value = "/marketForm", method = RequestMethod.GET)
+	public String marketForm(@RequestParam("work") String[]work, Model model) {
+		
+		ArrayList<WorkVO> list = new ArrayList<WorkVO>();
+		
+		for(int i = 0 ; i<work.length ; i++) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			System.out.println("판매할 작품 시퀀스 : "+work[i]);
+			int cnt = work[i].indexOf('+');
+			String work_seqTemp = work[i].substring(0, cnt);
+			String gallery_seqTemp = work[i].substring(cnt+1);
+			int work_seq = Integer.parseInt(work_seqTemp);
+			int gallery_seq = Integer.parseInt(gallery_seqTemp);
+			map.put("work_seq", work_seq);
+			map.put("gallery_seq", gallery_seq);
+			WorkVO workvo = ws.selectMarketWork(map);
+			list.add(workvo);
+		}
+		
+		logger.info("list : {}",list);
+		model.addAttribute("list", list);
+		
+		return "/marketForm";
+		
+	}
+	
 }
