@@ -403,9 +403,9 @@
   
   <br><br>
   
-  <section class="event spad" style="text-align: -webkit-center;">
+  <section class="event spad" style="text-align: -webkit-center; margin-top: 300px;" >
   	<c:if test="${replylist.isEmpty()!=true }">
-	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px;">
+	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px; ">
 	  		<table class="type05">
 	  			<c:forEach var="reply" items="${replylist}">
 				    <tr>
