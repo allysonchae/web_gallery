@@ -105,127 +105,125 @@
 		text-align:-webkit-center;
 	}
 	
-		html {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Helvetica Neue, Arial, sans-serif;
-  overflow: hidden;
-}
-
-/* ------------- */
-.menu {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  height: 46px;
-  width: 46px;
-}
-
-.menu-link {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 1002;
-}
-
-.menu-icon {
-  position: absolute;
-  width: 20px;
-  height: 14px;
-  margin: auto;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 1px;
-}
-
-/* ------------- */
-.menu-line {
-  background-color: #333;
-  height: 2px;
-  width: 100%;
-  border-radius: 2px;
-  position: absolute;
-  left: 0;
-  transition: all 0.25s ease-in-out;
-}
-.menu-line-2 {
-  top: 0;
-  bottom: 0;
-  margin: auto;
-}
-.menu-line-3 {
-  bottom: 0;
-}
-.menu.open .menu-line-1 {
-  transform: translateY(7px) translateY(-50%) rotate(-45deg);
-}
-.menu.open .menu-line-2 {
-  opacity: 0;
-}
-.menu.open .menu-line-3 {
-  transform: translateY(-7px) translateY(50%) rotate(45deg);
-}
-
-/* ------------- */
-.menu-circle {
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(1);
-  z-index: 1000;
-  transition: transform 0.3s ease-in-out;
-}
-.menu:hover .menu-circle {
-  transform: scale(1.5);
-}
-.menu.open .menu-circle {
-  transform: scale(60);
-}
-
-/* ------------- */
-.menu-overlay {
-  background-color: #fff;
-  color: #333;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  text-align: center;
-  transition: opacity 0.2s ease-in-out;
-  z-index: 1001;
-  opacity: 0;
-  visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.menu-overlay.open {
-  opacity: 1;
-  visibility: visible;
-  background: #EEEEEE;
-}
-
-/* ------------- */
-.info {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.overlay-info {
-  text-align: center;
-  color: #111825;
-}
+	html {
+	  margin: 0;
+	  padding: 0;
+	}
 	
+	body {
+	  margin: 0;
+	  padding: 0;
+	  font-family: Helvetica Neue, Arial, sans-serif;
+	  overflow: hidden;
+	}
+	
+	/* ------------- */
+	.menu {
+	  position: absolute;
+	  top: 20px;
+	  left: 20px;
+	  height: 46px;
+	  width: 46px;
+	}
+	
+	.menu-link {
+	  width: 100%;
+	  height: 100%;
+	  position: absolute;
+	  z-index: 1002;
+	}
+	
+	.menu-icon {
+	  position: absolute;
+	  width: 20px;
+	  height: 14px;
+	  margin: auto;
+	  left: 0;
+	  top: 0;
+	  right: 0;
+	  bottom: 1px;
+	}
+	
+	/* ------------- */
+	.menu-line {
+	  background-color: #333;
+	  height: 2px;
+	  width: 100%;
+	  border-radius: 2px;
+	  position: absolute;
+	  left: 0;
+	  transition: all 0.25s ease-in-out;
+	}
+	.menu-line-2 {
+	  top: 0;
+	  bottom: 0;
+	  margin: auto;
+	}
+	.menu-line-3 {
+	  bottom: 0;
+	}
+	.menu.open .menu-line-1 {
+	  transform: translateY(7px) translateY(-50%) rotate(-45deg);
+	}
+	.menu.open .menu-line-2 {
+	  opacity: 0;
+	}
+	.menu.open .menu-line-3 {
+	  transform: translateY(-7px) translateY(50%) rotate(45deg);
+	}
+	
+	/* ------------- */
+	.menu-circle {
+	  background-color: #fff;
+	  width: 100%;
+	  height: 100%;
+	  position: absolute;
+	  border-radius: 50%;
+	  transform: scale(1);
+	  z-index: 1000;
+	  transition: transform 0.3s ease-in-out;
+	}
+	.menu:hover .menu-circle {
+	  transform: scale(1.5);
+	}
+	.menu.open .menu-circle {
+	  transform: scale(60);
+	}
+	
+	/* ------------- */
+	.menu-overlay {
+	  background-color: #fff;
+	  color: #333;
+	  height: 100%;
+	  width: 100%;
+	  position: fixed;
+	  text-align: center;
+	  transition: opacity 0.2s ease-in-out;
+	  z-index: 1001;
+	  opacity: 0;
+	  visibility: hidden;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	}
+	.menu-overlay.open {
+	  opacity: 1;
+	  visibility: visible;
+	  background: #EEEEEE;
+	}
+	
+	/* ------------- */
+	.info {
+	  text-align: center;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	}
+	.overlay-info {
+	  text-align: center;
+	  color: #111825;
 	
   </style>
 
@@ -241,7 +239,6 @@ body {
 	  });
 	    
 	});
-  
   	$(document).ready(function () {
 		  var deleteForm = document.getElementById("deleteForm");
 
@@ -291,8 +288,8 @@ body {
   //리플 쓰기 폼 체크
 	function replyFormCheck() {
 		var reply_text = document.getElementById('reply_text');
-		if (reply_text.value.length < 5) {
-			alert('5자 이상 입력해 주세요');
+		if (reply_text.value.length == 0) {
+			alert("댓글을 입력해 주세요");
 			return false;
 		}
 		return true;			
@@ -406,9 +403,9 @@ body {
   
   <br><br>
   
-  <section class="event spad" style="text-align: -webkit-center; margin-top: 300px;">
+  <section class="event spad" style="text-align: -webkit-center; margin-top: 300px;" >
   	<c:if test="${replylist.isEmpty()!=true }">
-	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px;">
+	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px; ">
 	  		<table class="type05">
 	  			<c:forEach var="reply" items="${replylist}">
 				    <tr>
