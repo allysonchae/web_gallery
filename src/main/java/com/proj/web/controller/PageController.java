@@ -337,27 +337,4 @@ public class PageController {
 	return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
 	}
 	
-	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
-	public String myWorkMarket(Model model) {
-		
-		ArrayList<HashMap<String, Object>> list = ws.selectMyWork();
-		
-		logger.info("list : {}",list);
-		
-		model.addAttribute("list", list);
-		
-		return "/myWorkMarket";
-	}
-	
-	@RequestMapping(value = "/MarketAll", method = RequestMethod.GET)
-	public String MarketAll(Model model) {
-		
-		ArrayList<MarketVO> list = ws.MarketAll();
-		
-		model.addAttribute("list", list);
-		
-		return "/MarketAll";
-		
-	}
-
 }

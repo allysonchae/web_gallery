@@ -270,15 +270,4 @@ public class WorkService {
 		
 	}
 	
-	public ArrayList<HashMap<String, Object>> selectMyWork(){
-		
-		String member_id = (String) session.getAttribute("loginID");
-		
-		return dao.selectMyWork(member_id);
-	}
-
-	public ArrayList<MarketVO> MarketAll() {
-		
-		return dao.MarketAll();
-	}
 }

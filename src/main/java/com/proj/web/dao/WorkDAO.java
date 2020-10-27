@@ -248,33 +248,4 @@ public class WorkDAO {
 		return list;
 		
 	}
-	
-	public ArrayList<HashMap<String, Object>> selectMyWork(String member_id){
-		
-		WorkMapper wm = ss.getMapper(WorkMapper.class);
-		ArrayList<HashMap<String, Object>> list = null;
-		
-		try {
-			list = wm.selectMyWork(member_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-		
-	}
-
-	public ArrayList<MarketVO> MarketAll() {
-
-		WorkMapper wm = ss.getMapper(WorkMapper.class);
-		ArrayList<MarketVO> list = null;
-		
-		try {
-			list = wm.MarketAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
 }
