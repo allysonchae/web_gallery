@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.web.dao.MarketMapper">
+
+	<select id="selectMyWork" parameterType="String" resultType="hashmap">
+		select
+		    w.work_seq
+		    ,w.gallery_seq
+		    ,w.work_name
+		    ,w.work_description
+		    ,m.member_id
+		from
+		    work w, member m
+		where
+		    w.member_id = m.member_id
+		and
+		    m.member_id = #{member_id}
+	</select>
+	
+	<insert id="insertMarket" parameterType="market">
+		insert into market(
+			market_seq
+			,work_seq
+			,gallery_seq
+			,work_name
+			,work_description
+			,member_id 
+			,member_nickname   
+			,market_price 
+			,market_amount 
+		)values(
+			market_seq.nextval
+			,#{work_seq}
+			,#{gallery_seq}
+			,#{work_name}
+			,#{work_description}
+			,#{member_id} 
+			,#{member_nickname}   
+			,#{market_price} 
+			,#{market_amount} 
+			)
+	</insert>
+
+	<select id="MarketAll" resultType="market">
+		select
+			market_seq
+			,work_seq
+			,gallery_seq
+			,work_name
+			,work_description
+			,member_id 
+			,member_nickname   
+			,market_price 
+			,market_amount
+		from
+			market
+		order by
+			market_seq desc
+	</select>
+	
+	<select id="marketOne" resultType="market" parameterType="int">
+		select
+			market_seq
+			,work_seq
+			,gallery_seq
+			,work_name
+			,work_description
+			,member_id 
+			,member_nickname   
+			,market_price 
+			,market_amount
+		from
+			market
+		where
+			market_seq = #{market_seq}
+	</select>
+
+	<select id="selectMarketWork" parameterType="hashmap" resultType="work">
+		select
+		    work_seq
+		    ,gallery_seq as id
+		    ,work_name
+		    ,work_description
+		from
+		    work
+		where
+		    gallery_seq = #{gallery_seq}
+		and
+		    work_seq = #{work_seq}
+	</select>
+
+
+</mapper>

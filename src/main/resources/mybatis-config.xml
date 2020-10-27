@@ -10,6 +10,7 @@
 		<typeAlias type="com.proj.web.vo.WorkVO" alias="work"/>
 		<typeAlias type="com.proj.web.vo.ChatroomVO" alias="chat"/>
 		<typeAlias type="com.proj.web.vo.ReplyVO" alias="reply"/>
+		<typeAlias type="com.proj.web.vo.MarketVO" alias="market"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
@@ -17,5 +18,6 @@
 		<mapper resource="mapper/informationMapper.xml"/>
 		<mapper resource="mapper/workMapper.xml"/>
 		<mapper resource="mapper/chatMapper.xml"/>
+		<mapper resource="mapper/MarketMapper.xml"/>
 	</mappers>
 </configuration>

@@ -104,10 +104,9 @@
                                 </li>
                                 <li><a href="/gallery">Gallery</a>
                                 	<ul class="dropdown">
-                                        <li><a href="/gallery">현재 오픈 갤러리</a></li>
-                                        <li><a href="/expectedGallery">오픈 예정 갤러리</a></li>
+                                        <li><a href="/gallery">오픈 갤러리</a></li>
                                         <li><a href="/requestGallery">개인 갤러리 신청</a></li>
-                                        <li><a href="/community">커뮤니티</a></li>
+                                        <li><a href="/MarketAll">온라인 마켓</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="/calender">Calender</a></li>

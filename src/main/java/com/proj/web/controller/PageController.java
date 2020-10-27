@@ -31,6 +31,7 @@ import com.proj.web.service.InformationService;
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
+import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
@@ -334,44 +335,6 @@ public class PageController {
 	ws.updateReply(reply);
 	//원래의 글읽기 화면으로 이동 
 	return "redirect:/galleryDetail?gallery_seq=" + reply.getId();
-	}
-	
-	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
-	public String myWorkMarket(Model model) {
-		
-		ArrayList<HashMap<String, Object>> list = ws.selectMyWork();
-		
-		logger.info("list : {}",list);
-		
-		model.addAttribute("list", list);
-		
-		return "/myWorkMarket";
-	}
-	
-	@RequestMapping(value = "/marketForm", method = RequestMethod.GET)
-	public String marketForm(@RequestParam("work") String[]work, Model model) {
-		
-		ArrayList<WorkVO> list = new ArrayList<WorkVO>();
-		
-		for(int i = 0 ; i<work.length ; i++) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			System.out.println("판매할 작품 시퀀스 : "+work[i]);
-			int cnt = work[i].indexOf('+');
-			String work_seqTemp = work[i].substring(0, cnt);
-			String gallery_seqTemp = work[i].substring(cnt+1);
-			int work_seq = Integer.parseInt(work_seqTemp);
-			int gallery_seq = Integer.parseInt(gallery_seqTemp);
-			map.put("work_seq", work_seq);
-			map.put("gallery_seq", gallery_seq);
-			WorkVO workvo = ws.selectMarketWork(map);
-			list.add(workvo);
-		}
-		
-		logger.info("list : {}",list);
-		model.addAttribute("list", list);
-		
-		return "/marketForm";
-		
 	}
 	
 }

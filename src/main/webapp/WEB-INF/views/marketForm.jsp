@@ -127,6 +127,8 @@
 		<table id="galleryTable" class="table table-bordered" style=" margin-top: 100px; width: 1200px; height: 100px;">
 			<c:forEach items="${list }" var="list" varStatus="status">
 				<input type="hidden" name="work_description" value="${list.work_description }">
+				<input type="hidden" name="work_seq" value="${list.work_seq }">
+				<input type="hidden" name="gallery_seq" value="${list.id }">
 				<tr>
 					<td style="width:100px;">No.${status.count }</td>
 					<td style="text-align: center">
