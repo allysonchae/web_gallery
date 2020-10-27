@@ -335,7 +335,7 @@ body {
 	}
   </script>
   
-  <title>WORK</title>
+  <title>Onex</title>
 </head>
 
 <body>

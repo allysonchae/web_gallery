@@ -11,7 +11,7 @@
     <meta name="keywords" content="DJoz, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DJoz | Template</title>
+    <title>Onex</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -123,20 +123,19 @@
                 </div>
             </div>
             
+			<button type="submit" onclick="inputInformation();" class="btn btn-outline-secondary" style="position: relative; left: 1350px; bottom:200px;">
+				판매 정보 입력하기
+			</button>
          		
             <div class="row">
-            	<c:forEach items="${pList }" var="pList" varStatus="status">
+            	<c:forEach items="${list }" var="list" varStatus="status">
 	                <div class="col-lg-4 col-md-6 col-sm-6">
 	                    <div class="discography__item">
-	                      	<a href="/galleryDetail?gallery_seq=${pList.GALLERY_SEQ }" >
-		                        <div class="discography__item__pic">
-		                            <img src="/download?work_seq=${pList.WORK_SEQ }&id=${pList.GALLERY_SEQ }" style="width: 100px; height: 300px;">
-		                        </div>
-	                        </a>
+	                        <div class="discography__item__pic">
+	                            <img src="/download?work_seq=${list.WORK_SEQ }&id=${list.GALLERY_SEQ }" style="width: 100px; height: 300px;">
+	                        </div>
 	                        <div class="discography__item__text">
-                            	<h4>${pList.TITLE }</h4>
-	                            <h4>${pList.MEMBER_NICKNAME }</h4>
-	                            <h4>~ ${pList.end }</h4>
+								<input type="checkbox" class="work" style="width:30px; height: 30px;" value="${list.WORK_SEQ }"><h3>${list.WORK_NAME }</h3>
 	                        </div>
 	                    </div>
 	                </div>
@@ -154,6 +153,13 @@
         </div>
     </section>
     <!-- Discography Section End -->
+    
+    <script type="text/javascript">
+    	function inputInformation(){
+			var work = document.getElementsByClassName("work").value;
+			alert(work);
+        }
+    </script>
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">

@@ -54,7 +54,6 @@ public class PageController {
 	private InformationService is;
 	@Autowired
 	private WorkService ws;
-
 	@Autowired
 	private MemberService service;
 
@@ -338,7 +337,13 @@ public class PageController {
 	}
 	
 	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
-	public String myWorkMarket() {
+	public String myWorkMarket(Model model) {
+		
+		ArrayList<HashMap<String, Object>> list = ws.selectMyWork();
+		
+		logger.info("list : {}",list);
+		
+		model.addAttribute("list", list);
 		
 		return "/myWorkMarket";
 	}

@@ -44,4 +44,6 @@ public interface WorkMapper {
 	public void updateReply(ReplyVO reply);
 	
 	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id);
+	
+	public ArrayList<HashMap<String, Object>> selectMyWork(String member_id);
 }
