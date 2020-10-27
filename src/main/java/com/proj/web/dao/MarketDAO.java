@@ -58,4 +58,27 @@ public class MarketDAO {
 			
 			return work;
 		}
+
+		public void insertMarket(MarketVO market) {
+			
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			
+			try {
+				mm.insertMarket(market);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		public MarketVO marketOne(int market_seq) {
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			MarketVO market = new MarketVO();
+			try {
+				market = mm.marketOne(market_seq);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return market;
+		}
 }

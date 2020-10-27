@@ -14,4 +14,8 @@ public interface MarketMapper {
 
 	WorkVO selectMarketWork(HashMap<String, Object> map);
 
+	void insertMarket(MarketVO market);
+
+	MarketVO marketOne(int market_seq);
+
 }

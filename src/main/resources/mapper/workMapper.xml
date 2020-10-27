@@ -61,21 +61,6 @@
     		gallery
 	</select>	
 	
-	<select id="selectMyWork" parameterType="String" resultType="hashmap">
-		select
-		    w.work_seq
-		    ,w.gallery_seq
-		    ,w.work_name
-		    ,w.work_description
-		    ,m.member_id
-		from
-		    work w, member m
-		where
-		    w.member_id = m.member_id
-		and
-		    m.member_id = #{member_id}
-	</select>
-	
 	<select id="presentGallery" parameterType="int" resultType="gallery">
 		select
     		gallery_seq as id
