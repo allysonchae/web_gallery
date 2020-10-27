@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.proj.web.dao.WorkDAO;
 import com.proj.web.util.FileService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
@@ -274,5 +275,10 @@ public class WorkService {
 		String member_id = (String) session.getAttribute("loginID");
 		
 		return dao.selectMyWork(member_id);
+	}
+
+	public ArrayList<MarketVO> MarketAll() {
+		
+		return dao.MarketAll();
 	}
 }

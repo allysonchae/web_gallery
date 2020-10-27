@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
@@ -261,5 +262,19 @@ public class WorkDAO {
 		
 		return list;
 		
+	}
+
+	public ArrayList<MarketVO> MarketAll() {
+
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<MarketVO> list = null;
+		
+		try {
+			list = wm.MarketAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

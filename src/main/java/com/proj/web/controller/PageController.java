@@ -31,6 +31,7 @@ import com.proj.web.service.InformationService;
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
+import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
@@ -346,6 +347,17 @@ public class PageController {
 		model.addAttribute("list", list);
 		
 		return "/myWorkMarket";
+	}
+	
+	@RequestMapping(value = "/MarketAll", method = RequestMethod.GET)
+	public String MarketAll(Model model) {
+		
+		ArrayList<MarketVO> list = ws.MarketAll();
+		
+		model.addAttribute("list", list);
+		
+		return "/MarketAll";
+		
 	}
 
 }

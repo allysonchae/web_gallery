@@ -76,6 +76,11 @@
 		    m.member_id = #{member_id}
 	</select>
 	
+	<select id="MarketAll" resultType="market">
+		select
+			
+	</select>
+	
 	<select id="presentGallery" parameterType="int" resultType="gallery">
 		select
     		gallery_seq as id
