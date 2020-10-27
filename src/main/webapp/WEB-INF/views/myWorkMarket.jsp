@@ -125,9 +125,6 @@
             
          	
          	<form id="marketForm" action="/marketForm" method="get" onsubmit="return checkCount();">
-				<button type="submit" class="btn btn-outline-secondary" style="position: relative; left: 1350px; bottom:200px;">
-					판매 정보 입력하기
-				</button>
 				
 	            <div class="row">
 	            	<c:forEach items="${list }" var="list" varStatus="status">
@@ -143,6 +140,7 @@
 		                    </div>
 		                </div>
 	                </c:forEach>
+
 	               
 	                <div class="col-lg-12">
 	                    <div class="pagination__links">
@@ -153,6 +151,10 @@
 	                    </div>
 	                </div>
 	            </div>
+	            
+				<div style="text-align: center; margin-top: 50px;">
+					<button type="submit" class="btn btn-outline-secondary">판매 정보 등록하기</button>
+				</div>
          	</form>
         </div>
     </section>
