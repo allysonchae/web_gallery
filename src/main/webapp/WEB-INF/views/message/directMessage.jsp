@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/message.css" type="text/css">
+    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     
     <style type="text/css">
     	#member_info{
@@ -34,25 +35,23 @@
     
     </style>
    <!-- 채팅 웹 소켓 --> 
-    <script type="text/javascript">
+   <script type="text/javascript">
 	var webSocket;
-
 	
 	function openSocket() {
-		var friend_id = document.getElementById("friend_id").value;
-		/* 사용자 ID + 상대방 ID 가 채팅방 고유 이름(room_id) */
-		var member_nickname = document.getElementById("member_info").value;
-		var room_id = member_nickname + '_' + friend_id;
-		webSocket = new WebSocket("ws://10.10.12.126:8888/multiChat.do/" + room_id + "/" + member_nickname + "/" + friend_id);
+		
+		webSocket = new WebSocket("ws://172.30.1.38:8888/multiChat.do");
 
-		webSocket.onopen = function(event) {alert("웹소켓 연결/ 채팅시작" + " : " + room_id);};
+		webSocket.onopen = function(event) {output("채팅시작");};
 		webSocket.onmessage = function(event) {output(event.data);};
-		}
+		webSocket.onclose = function(event) {output("채팅종료");};
+		
+	}
 
 	/* 컨트롤러에서 출력해주는 메세지 */
 	function output(message){
 		document.getElementById("chat_logs").innerHTML += message + "<br>";
-		}
+	}
 
 	/* 컨트롤러 쪽으로 보내는 메세지 */
 	function sendMessage() {
@@ -61,22 +60,21 @@
 		$("#message").val("");
 	}
 
+	$(function(){
+		$("#message").keydown(function(key) {
+			if (key.keyCode == 13) {
+				sendMessage();
+			}
+		});
+	});
 
-	/* $(function(){
-      $("input[type=text]").keyup(function(){
-	      alert("hello");
-         
-         if(e.keyCode==13){
-            alert("hello");
-         }
-      }); */
-	
     </script>
 </head>
 
 <body>
 
 	<input type="hidden" id="member_info" value="${sessionScope.loginNickName }">
+	<input type="hidden" value="${member_nickname }" id="friend_id">
 	
     <!-- Page Preloder -->
     <div id="preloder">
@@ -165,7 +163,6 @@
 
         <div class="messages-box">
           <div class="list-group rounded-0">
-          <input type="hidden" value="2" id="friend_id">
             <div class="list-group-item list-group-item-action active text-white rounded-0" onclick="openSocket()">
               <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-4">
@@ -176,26 +173,6 @@
               </div>
             </div>
 
-            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">test</h6><small class="small font-weight-bold">28 Oct</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-
-            <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-              <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
-                <div class="media-body ml-4">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h6 class="mb-0">test2</h6><small class="small font-weight-bold">28 Oct</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-
           </div>
         </div>
       </div>
@@ -203,10 +180,7 @@
     <!-- Chat Box-->
     <div class="col-7 px-0">
       <div class="px-4 py-5 chat-box bg-white" id="chat_logs">
-        
-
-        
-
+			
       </div>
       <!-- 여기까지 채팅 영역  -->
 
@@ -272,7 +246,6 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script src="/resources/js/jquery.nicescroll.min.js"></script>
