@@ -473,7 +473,7 @@
   
   <br><br>
   
-  <section class="event spad" style="text-align: -webkit-center;">
+  <section class="event spad" style="text-align: -webkit-center; padding-top: 250px;">
   	<c:if test="${replylist_5.isEmpty()!=true }">
 		<input type="hidden" value="${replylist }" id="replylist">
 		<input type="hidden" value="${gallery_seq }" id="gallery_seq">
