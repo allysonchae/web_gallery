@@ -39,6 +39,8 @@ public interface WorkMapper {
 	public int insertReply(ReplyVO reply);
 
 	public ArrayList<ReplyVO> getReplyList(int gallery_seq);
+
+	public ArrayList<ReplyVO> getReplyList_5(int gallery_seq);
 	
 	public int deleteReply(ReplyVO reply);
 

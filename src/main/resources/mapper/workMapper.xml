@@ -196,6 +196,24 @@
 			)
 	</insert>
 	
+	<select id="getReplyList_5" resultType="reply" parameterType="int">
+		select
+			reply_seq
+			,gallery_seq
+			,member_id
+			,member_nickname
+			,to_char(reply_indate, 'YYYY-MM-DD') as reply_indate
+			,reply_text
+		from
+			reply
+		where
+			gallery_seq = #{id}
+		and
+            rownum <![CDATA[ < ]]>  6
+		order by
+			reply_seq asc
+	</select>
+	
 	<select id="getReplyList" resultType="reply" parameterType="int">
 		select
 			reply_seq
@@ -209,7 +227,7 @@
 		where
 			gallery_seq = #{id}
 		order by
-			reply_seq desc
+			reply_seq asc
 	</select>
 	
 	<delete id="deleteReply" parameterType="reply">

@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -119,11 +120,14 @@ public class PageController {
 
 		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
 		String nickname = (String)session.getAttribute("loginNickName");
+		ArrayList<ReplyVO> replylist_5 = ws.listReply_5(gallery_seq);
 		logger.info("saldkgjoibe : {}",replylist);
+		logger.info("컨트롤러 5555555 : {}",replylist_5);
+		model.addAttribute("replylist_5", replylist_5);
+		model.addAttribute("replylist", replylist);
 		
 		model.addAttribute("nickname", nickname);
 		model.addAttribute("gallery_seq", gallery_seq);
-		model.addAttribute("replylist", replylist);
 		model.addAttribute("map", map);
 		model.addAttribute("list", list);
 
@@ -134,6 +138,16 @@ public class PageController {
 
 		return "/FlipEffect";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/replylist", method = RequestMethod.GET)
+	public ArrayList<ReplyVO> replylist(int gallery_seq) {
+		
+		ArrayList<ReplyVO> replylist = ws.listReply(gallery_seq);
+		
+		return replylist;
+	}
+	
 
 	@RequestMapping(value = "/workDescription", method = RequestMethod.GET)
 	public String workDescription(int work_seq, int id, Model model) {

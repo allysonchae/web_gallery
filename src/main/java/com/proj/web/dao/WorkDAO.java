@@ -212,6 +212,18 @@ public class WorkDAO {
 		
 		return list;
 	}
+
+	public ArrayList<ReplyVO> getReplyList_5(int gallery_seq) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		ArrayList<ReplyVO> list = null;		
+		try {
+			list = wm.getReplyList_5(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 	public int deleteReply(ReplyVO reply) {

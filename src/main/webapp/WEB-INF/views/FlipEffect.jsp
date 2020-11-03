@@ -8,7 +8,6 @@
 <title>WORK</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -296,9 +295,11 @@
 		//해당 리플번호를 붙여 생성한 <div>태그에 접근
 		var div = document.getElementById("div"+reply_seq);
 		
-		var str = '<form name="editForm' + reply_seq + '" action="replyEdit" method="post">';
+		var str = '<form name="editForm' + reply_seq + '" action="replyEdit" method="post" style="padding-bottom: 10px; padding-top: 10px;">';
 		str += '<input type="hidden" name="reply_seq" value="'+reply_seq+'">';
 		str += '<input type="hidden" name="id" value="'+gallery_seq+'">';
+		str += '&nbsp;';
+		str += '수정';
 		str += '&nbsp;';
 		str += '<input type="text" name="reply_text" value="' + reply_text + '" style="width:530px;">';
 		str += '&nbsp;';
@@ -327,10 +328,90 @@
 			location.href='replyDelete?reply_seq=' + reply_seq + '&id=' + gallery_seq;
 		}
 	}
+
+
+	function replylist(){
+	    var arr;
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/replylist',
+	        type:'get',
+	        data:{
+					gallery_seq : $("#gallery_seq").val()
+			},
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+	        	arr = resp;
+	        }
+	    });
+	    
+	    return arr;
+	}
+	
+
+
+	//스크롤
+	$(document).ready(function () {
+		
+		var list = replylist();
+		console.log(list);
+		var i=5;
+
+		$('#scroll_div').scroll(function(){
+			var rt = $('#reply_tb').height();
+			var sd = $('#scroll_div').scrollTop();
+			var div = document.getElementById('reply_height');
+			
+			if((rt-sd)==159){
+				if(i!=list.length){
+					var member_nickname = list[i].member_nickname;
+					var reply_text = list[i].reply_text;
+					var reply_indate = list[i].reply_indate;
+					var member_id = list[i].member_id;
+					var reply_seq = list[i].reply_seq;
+					var gallery_seq = document.getElementById('gallery_seq').value;
+					var login = document.getElementById('login').value;
+					var loginID = '${sessionScope.loginID}';
+					i++;
+					
+					var	rowItem = "<tr id='reply_height'>";
+					rowItem += "<th scope='row' class='replyid'>";
+					rowItem += "<b>"+member_nickname+"</b>";
+					rowItem += "</th>";
+					rowItem += "<td scope='row' class='replytext'>";
+					rowItem += reply_text;
+					rowItem += "</td>";
+					rowItem += "<td class='replybutton'>";
+					rowItem += reply_indate;
+					rowItem += "</td>";
+					rowItem += "<td class='replybutton'>";
+					if(loginID == member_id){
+						rowItem += "[<a href='javascript:replyEditForm("+reply_seq+", "+gallery_seq+", "+reply_text+")'>수정</a>]";
+						rowItem += "[<a href='javascript:replyDelete("+reply_seq+", "+gallery_seq+")'>삭제</a>]";
+					};
+					rowItem += "</td>";
+					rowItem += "</tr>";
+					rowItem += "<tr id='reply_update'>";
+					rowItem += "<td class='white' colspan='4' style='padding-left: 150px; padding-bottom: 0; padding-top: 0;'><div id='div"+reply_seq+"'></div></td>";
+					rowItem += "</tr>";
+							
+					$("#reply_tb").append(rowItem);
+				}
+			}
+		});
+	});
+	
+	
+	
   </script>
 </head>
 
 <body>
+	<input type="hidden" id="login" value="${sessionScope.loginID }">
+
   <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
 	  <input type="hidden" value="${map.ID }" name="gallery_seq">
   </form>
@@ -393,11 +474,13 @@
   <br><br>
   
   <section class="event spad" style="text-align: -webkit-center;">
-  	<c:if test="${replylist.isEmpty()!=true }">
-	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px;">
-	  		<table class="type05">
-	  			<c:forEach var="reply" items="${replylist}">
-				    <tr>
+  	<c:if test="${replylist_5.isEmpty()!=true }">
+		<input type="hidden" value="${replylist }" id="replylist">
+		<input type="hidden" value="${gallery_seq }" id="gallery_seq">
+	  	<div class="container" style="overflow-x:hidden; overflow-y:scroll; height:200px;" id="scroll_div">
+	  		<table class="type05" id="reply_tb">
+	  			<c:forEach var="reply" items="${replylist_5}">
+				    <tr id="reply_height">
 				        <th scope="row" class="replyid">
 				        	<b>${reply.member_nickname}</b>
 				        </th>
@@ -417,27 +500,26 @@
 							</c:if>
 						</td>
 				    </tr>
-				    
-				    <tr>
-						<!-- 리플 수정 폼이 나타날 위치 -->
-						<td class="white" colspan="4"><div id="div${reply.reply_seq}"></div></td>
-					</tr>
+					    <tr id="reply_update">
+							<!-- 리플 수정 폼이 나타날 위치 -->
+							<td class="white" colspan="4" style="padding-left: 150px; padding-bottom: 0; padding-top: 0;"><div id="div${reply.reply_seq}"></div></td>
+						</tr>
 			    </c:forEach>
 			</table>
 	  	</div>
   	</c:if>
-  	<div style="padding: 15px; width: 1123px;">
-  	<table class="container">
+  	<div style="width: 1140px;">
+  	<table class="type05">
    		<!-- 리플 작성 폼 시작 -->
 		<c:if test="${loginID != null}">
 			<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
 				<tr>
-					<th scope="row" class="replyid" style="font-size: x-large;">
+					<th style="font-size: x-large;">
 						${nickname }
 					</th>
-						<td scope="row" class="replytext" colspan="2" style="text-align: -webkit-center;">
+					<td style="text-align: -webkit-center;">
 						<input type="hidden" name="id" value="${gallery_seq}">
-						<input type="text" name="reply_text" id="reply_text" style="width:850px; height:100px;" />
+						<input type="text" name="reply_text" id="reply_text" style="width:600px; height:100px;" />
 					</td>
 					<td>
 						<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />

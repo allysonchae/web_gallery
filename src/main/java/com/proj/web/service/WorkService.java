@@ -253,6 +253,11 @@ public class WorkService {
 		ArrayList<ReplyVO> list = dao.getReplyList(gallery_seq);
 		return list;
 	}
+
+	public ArrayList<ReplyVO> listReply_5(int gallery_seq) {
+		ArrayList<ReplyVO> list = dao.getReplyList_5(gallery_seq);
+		return list;
+	}
 	
 	public int deleteGallery(int gallery_seq) {
 		return dao.deleteGallery(gallery_seq);
