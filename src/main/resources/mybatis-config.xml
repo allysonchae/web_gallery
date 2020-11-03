@@ -11,6 +11,7 @@
 		<typeAlias type="com.proj.web.vo.ChatroomVO" alias="chat"/>
 		<typeAlias type="com.proj.web.vo.ReplyVO" alias="reply"/>
 		<typeAlias type="com.proj.web.vo.MarketVO" alias="market"/>
+		<typeAlias type="com.proj.web.vo.LikeVO" alias="like"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>

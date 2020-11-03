@@ -19,11 +19,13 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.proj.web.service.CalendarService;
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.LikeVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.WorkVO;
 
@@ -104,6 +106,60 @@ public class WorkController {
 		ws.deleteGallery(gallery_seq);
 		
 		return "redirect:/";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/likeCount", method = RequestMethod.GET)
+	public int likeCount(int gallery_seq) {
+		
+		int cnt = ws.likeCount(gallery_seq);
+		
+		return cnt;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/plusLike" , method = RequestMethod.GET)
+	public void plusLike(int gallery_seq) {
+		
+		logger.info("gallery_seq 플러스 : {}", gallery_seq);
+		
+		ws.plusLike(gallery_seq);
+		
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/minusLike" , method = RequestMethod.GET)
+	public void minusLike(int gallery_seq) {
+		
+		logger.info("gallery_seq 마이너스 : {}", gallery_seq);
+		
+		ws.minusLike(gallery_seq);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/onLike" , method = RequestMethod.GET)
+	public void onLike(LikeVO like) {
+		
+		ws.onLike(like);
+		
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/offLike" , method = RequestMethod.GET)
+	public void offLike(LikeVO like) {
+		
+		ws.offLike(like);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/likeCheck" , method = RequestMethod.GET)
+	public int likeCheck(LikeVO like) {
+		
+		return ws.likeCheck(like);
 		
 	}
 	

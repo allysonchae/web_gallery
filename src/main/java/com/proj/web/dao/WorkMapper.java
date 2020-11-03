@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Param;
 
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.LikeVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
@@ -47,4 +48,16 @@ public interface WorkMapper {
 	public void updateReply(ReplyVO reply);
 	
 	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id);
+	
+	public void plusLike(int gallery_seq);
+	
+	public void minusLike(int gallery_seq);
+
+	public int likeCount(int gallery_seq);
+
+	public void onLike(LikeVO like);
+	
+	public void offLike(LikeVO like);
+	
+	public int likeCheck(LikeVO like);
 }
