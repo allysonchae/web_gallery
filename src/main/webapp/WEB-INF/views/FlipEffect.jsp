@@ -15,6 +15,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
@@ -44,8 +47,7 @@
      
      .header{
 		text-align: center;
-		padding-top: 50px;
-		font-family: cursive;
+		padding-top: 80px;
 	} 
 	
 	*, ::after, ::before {
@@ -219,6 +221,7 @@
 	  text-align: center;
 	  color: #111825;
 	}
+	
 	
   </style>
   
