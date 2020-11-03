@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+
 <title>Onex</title>
 <style type="text/css">
 	#con{
@@ -22,12 +21,29 @@
 			}
 		});
 
+		function comma(num){
+		    var len, point, str; 
+		       
+		    num = num + ""; 
+		    point = num.length % 3 ;
+		    len = num.length; 
+		   
+		    str = num.substring(0, point); 
+		    while (point < len) { 
+		        if (str != "") str += ","; 
+		        str += num.substring(point, point + 3); 
+		        point += 3; 
+		    } 
+		     
+		    return str;
+		 
+		}
+
 		function sum(){
 			var input = document.getElementById("input").value;
-			var price = document.getElementById("price").value;
-			$("#sum_check").text(input*price);
+			var price = comma(input*document.getElementById("price").value);
+			$("#sum_check").val(price+"원");
 			$("#sum_check").css("color","red");
-			alert(input*price);
 		}
 </script>
 
@@ -36,29 +52,30 @@
 	<div class="wrap">
 		<table>
 			<tr>
-				<td><img src="/download?work_seq=${work_seq }&id=${gallery_seq }" style="width: 800px; height: 550px;"></td>
+				<td><img src="/download?work_seq=${market.work_seq }&id=${market.gallery_seq }" style="width: 800px; height: 550px;"></td>
 				<td style="padding-top: 0px; padding-bottom: 200px;">
 				    <h1 style="text-align: center; width: 700px; height: 100px;  font-size: 50px;">${market.work_name }</h1>
 			     	<div class="contents" id="con">
 			     		<table style="margin-left: 100px; width: 520px;">
 			     			<tr>
 			     				<td style="font-size: 40px; width: 800px;">
-			     					<div style="text-align:center;">${work.work_description }</div>
+			     					<div style="text-align:center;">${market.work_description }</div>
 			     				</td>
 			     			</tr>
 			     		</table>
-			     		<table style="width: 500px; font-size: 20px; position: relative; top: 280px; left: 20px;">
+			     		<table style="width: 550px; font-size: 20px; position: relative; top: 280px; left: 20px;">
 			     			<tr>
 			     				<td>
 			     					구매수량:
 			     					<select id="input" onchange="sum()"></select>
 			     				</td>
 			     				<td>
+			     					&nbsp&nbsp
 			     					가격:
-				     				&#8361; ${market.market_price }
+				     				&#8361; ${market.market_price }/1개
 			     				</td>
 			     				<td>
-					     			<div id="sum_check"></div>
+									<input type="text" placeholder="총금액" id="sum_check" style="width:110px;">
 					     		</td>
 			     			</tr>
 			     		</table>

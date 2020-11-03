@@ -120,7 +120,7 @@
     <!-- Breadcrumb End -->
     
 	<div style="text-align: center; margin-top: 100px;">
-		<h1>Market Information</h1>
+		<h1>Sale Information</h1>
 	</div>
 	
 	<form action="/marketWrite" method="post" onsubmit="return formCheck();">
@@ -142,7 +142,7 @@
 						<input type="text" name="market_amount" placeholder="재고수량을 입력해주세요." style="display: block; margin : 0 auto; width:750px; height:50px;">
 						<br>
 						가격:
-						<input type="text" name="market_price" placeholder="가격을 입력해주세요." style="display: block; margin : 0 auto; width:750px; height:50px;">
+						<input type="text" name="market_price" placeholder="원단위로 입력해주세요." style="display: block; margin : 0 auto; width:750px; height:50px;">
 					</td>
 				</tr>
 			</c:forEach>
@@ -156,21 +156,43 @@
 		function formCheck(){
 			var amount = document.getElementsByName("market_amount");
 			var price = document.getElementsByName("market_price");
+			var name = document.getElementsByName("work_name");
+			var announce = "";
 
 			for(var i = 0 ; i<amount.length ; i++){
+				if(isNaN(amount[i].value)){
+					alert(name[i].value+"의 재고수량 입력 형식이 잘못 되었습니다.");
+					return false;
+				}
+				
+				if(isNaN(price[i].value)){
+					alert(name[i].value+"의 가격 입력 형식이 잘못 되었습니다.");
+					return false;
+				}
+				
 				if(amount[i].value==""){
-					alert(i+1+"번째 작품의 재고수량을 입력해주세요.");
+					alert(name[i].value+"의 재고수량을 입력해주세요.");
 					return false;
 				}
 
 				if(price[i].value==""){
-					alert(i+1+"번째 작품의 가격을 입력해주세요.");
+					alert(name[i].value+"의 가격을 입력해주세요.");
 					return false;
 				}
 			}
 
-			if(confirm("등록된 정보로 작품을 판매 하시겠습니다까?")==true){
+			for(var i = 0 ; i<amount.length ; i++){
+				announce += "작품명:"+name[i].value+"\n";
+				announce += "재고수량:"+amount[i].value+"개\n";
+				announce += "가격:"+price[i].value+"원\n";
+				announce += "\n"
+			}
+
+			if(confirm(announce+"상기 정보로 작품을 판매 하시겠습니까?")==true){
+				alert("성공적으로 상품 등록이 되었습니다.");
 				return true;
+			}else{
+				return false;
 			}
 		}
 	</script>

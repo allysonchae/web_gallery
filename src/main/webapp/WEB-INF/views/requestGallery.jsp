@@ -292,32 +292,31 @@
 				alert("전시회명을 입력해주세요.");
 				return false;
 			}
-
+	
 			//날짜 유효성 검사
 			var flag = false;
 
-			if(yearS<year || yearE<year){
+			if(yearS<year || yearE<year || yearE<yearS ){
 				flag = true;
-			}else if(monthS<month || monthE<month){
-				flag = true;
-			}else if(dayS<day || dayE<day){
-				flag = true;
-			}else if(yearE<yearS){
-				flag = true;
-			}else if(yearE==yearS){
-				if(monthE<monthS){
+			}
+
+			if(yearS==year && yearE==year && yearS==yearE){
+				if(monthS<month || monthE<month || monthE<monthS){
 					flag = true;
 				}
+			}
 
-				if(monthE==monthS){
-					if(dayE<dayS){
-						flag = true;	
+			if(yearS==year && yearE==year && yearS==yearE){
+				if(monthS==month && monthE==month && monthE==monthS){
+					if(dayS<day || dayE<day || dayE<dayS){
+						flag = true;
 					}
 				}
 			}
-			
+				
 			if(flag){
 				alert("입력한 날짜 형식이 틀렸습니다.");
+				flag = false;
 				return false;
 			}
 
