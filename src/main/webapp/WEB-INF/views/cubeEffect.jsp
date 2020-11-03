@@ -410,6 +410,7 @@
 </head>
 
 <body>
+<input type="hidden" id="login" value="${sessionScope.loginID }">
   <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
 	  <input type="hidden" value="${map.ID }" name="gallery_seq">
   </form>

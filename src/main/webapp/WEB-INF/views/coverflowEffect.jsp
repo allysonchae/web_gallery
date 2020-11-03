@@ -369,6 +369,7 @@
 </head>
 
 <body>
+<input type="hidden" id="login" value="${sessionScope.loginID }">
 
 <div class="menu">
   <span class="menu-circle"></span>
