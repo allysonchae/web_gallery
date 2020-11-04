@@ -31,7 +31,21 @@
     		color:white;	
     	}
     
+    	#followerButton{
+			height:100px; 
+			width:200px; 
+			font-size: 30px;
+			margin-bottom: 50px;
+    	}
     </style>
+    
+   <!--  <script type="text/javascript">
+		function followerList(member_id){
+
+			location.href="/followerList?member_id="+member_id;
+			
+		}
+    </script> -->
 </head>
 
 <body>
@@ -109,7 +123,7 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-	
+    
 	<!-- Blog Section Begin -->
     <section class="blog spad">
         <div class="container">
@@ -122,6 +136,90 @@
                     </div>
                 </div>
             </div>
+            
+            <div>
+	       		<button type="button" id="followerButton" class="btn btn-light" onclick="followerList('${sessionScope.loginID }')">
+		            	팔로우<br>${followCnt }
+	       		</button>
+            </div>
+            
+            <!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 id="modal-title">follower</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        <div class="modal-body">
+	          <h5 id="modal-detail">
+	          </h5>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	<!-- Modal end -->
+	
+	<script type="text/javascript">
+		function memberGallery(member_id){
+
+			location.href = "/memberGallery?member_id="+member_id;
+			
+		}
+	
+		function followerList(member_id){
+			var arr;
+			var output = "";
+
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/followerList',
+		        type:'get',
+		        async: false,
+		        data:{
+						member_id : member_id
+			      	},
+		        success:function(resp){
+					console.log(resp);
+		        	arr = resp;
+		        },
+		        error:function(){
+		            alert('에러가 발생했습니다. 다시 시도해 주세요.');
+		        }
+		    });
+
+		    $.each(arr, function(index, item){
+			    output += "<table>"
+			    output += 	"<tr style='height: 50px;''>"
+			    output += 		"<td style='width: 260px;'>"+item.friend_nickname+"</td>"
+			    output += 		"<td>"
+			    output += 			"<button type='button' class='btn btn-outline-info'>쪽지</button>"
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="memberGallery(\'' + item.friend_id + '\')">전시회</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 		"<td>"
+			    output += 			"<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
+			    output += 		"</td>"
+			    output += 	"</tr>"
+			    output += "</table>"
+		   	});
+			
+			$("#modal-detail").html(output);
+	        $("#myModal").modal();
+		}
+	</script>
             
             <div class="row">
             	<c:forEach items="${list }" var="list" varStatus="status">

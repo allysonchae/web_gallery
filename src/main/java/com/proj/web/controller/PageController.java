@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.web.service.CalendarService;
+import com.proj.web.service.FollowService;
 import com.proj.web.service.InformationService;
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
@@ -58,6 +59,8 @@ public class PageController {
 	private WorkService ws;
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private FollowService fs;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -283,8 +286,13 @@ public class PageController {
 
 		ArrayList<HashMap<String, Object>> list = ws.selectMyGallery();
 
+		int followCnt = fs.countFollower();
+		
+		logger.info("follower 수 : {}", followCnt);
 		logger.info("mygallery list : {} ", list);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("followCnt", followCnt);
 
 		return "/blog";
 	}

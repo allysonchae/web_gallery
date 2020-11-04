@@ -1,5 +1,7 @@
 package com.proj.web.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,6 +50,36 @@ public class FollowDAO {
 		}
 		
 		return cnt;
+		
+	}
+	
+	public int countFollower(FollowVO follow) {
+		
+		FollowMapper fm = ss.getMapper(FollowMapper.class);
+		int cnt = 0;
+		
+		try {
+			cnt = fm.countFollower(follow);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+		
+	}
+	
+	public ArrayList<FollowVO> selectFollower(FollowVO follow){
+		
+		FollowMapper fm = ss.getMapper(FollowMapper.class);
+		ArrayList<FollowVO> list = null;
+		
+		try {
+			list = fm.selectFollower(follow);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 		
 	}
 	

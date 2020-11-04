@@ -1,9 +1,12 @@
 package com.proj.web.controller;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +37,7 @@ public class FollowController {
 		fs.deleteFollower(follow);
 		
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/checkFollower", method = RequestMethod.GET)
 	public int checkFollower(FollowVO follow) {
@@ -46,5 +50,20 @@ public class FollowController {
 		
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/followerList" , method = RequestMethod.GET)
+	public ArrayList<FollowVO> followerList(String member_id){
+		
+		logger.info("followerList member_id : {}", member_id);
+
+		FollowVO follow = new FollowVO();
+		
+		follow.setMember_id(member_id);
+		
+		ArrayList<FollowVO> list = fs.selectFollower(follow);
+		
+		logger.info("followerList list : {}", list);
+		
+		return list;
+	}
 }

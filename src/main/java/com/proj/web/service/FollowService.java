@@ -1,10 +1,13 @@
 package com.proj.web.service;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proj.web.dao.FollowDAO;
-import com.proj.web.dao.FollowMapper;
 import com.proj.web.vo.FollowVO;
 
 @Service
@@ -12,6 +15,8 @@ public class FollowService {
 
 	@Autowired
 	private FollowDAO dao;
+	@Autowired
+	private HttpSession session;
 	
 	public void insertFollower(FollowVO follow) {
 		
@@ -30,6 +35,25 @@ public class FollowService {
 		return dao.checkFollower(follow);
 		
 	}
+	
+	public int countFollower() {
+		
+		FollowVO follow = new FollowVO();
+		
+		String member_id = (String)session.getAttribute("loginID");
+		
+		follow.setMember_id(member_id);
+		
+		return dao.countFollower(follow);
+		
+	}
+	
+	public ArrayList<FollowVO> selectFollower(FollowVO follow){
+		
+		return  dao.selectFollower(follow);
+		
+	}
+	
 }
 
 

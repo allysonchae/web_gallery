@@ -41,6 +41,25 @@
 		and
 			follow_type = #{follow_type}
 	</select>
+	
+	<select id="countFollower" parameterType="follow" resultType="int">
+		select
+		    count(*)
+		from
+		    follow
+		where
+		    member_id = #{member_id}
+	</select>
+	
+	<select id="selectFollower" parameterType="follow" resultType="follow"> 
+		select
+			friend_id
+			,friend_nickname
+		from
+			follow
+		where
+			member_id = #{member_id}
+	</select>
 
 
 </mapper>

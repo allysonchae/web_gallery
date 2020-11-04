@@ -164,13 +164,12 @@
 		from
     		gallery g
     		,work w
-    		,member m
 		where
     		g.gallery_seq = w.gallery_seq
 		and
 		    w.work_seq = 0
 		and
-		    m.member_id = #{member_id}
+		    g.member_id = #{member_id}
 	</select>
 	
 	<delete id="deleteGallery" parameterType="int">
