@@ -274,5 +274,22 @@ public class WorkService {
 		return list;
 		
 	}
+
+	public ArrayList<HashMap<String, Object>> listGallery(String searchText, int startRecord, int countPerPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", (String)session.getAttribute("loginID"));
+		map.put("searchText", searchText);
+		ArrayList<HashMap<String, Object>> listGallery = dao.listGallery(map, startRecord, countPerPage);
+		return listGallery;
+	}
+
+	public int getGalTotal(String searchText) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", (String)session.getAttribute("loginID"));
+		map.put("searchText", searchText);
+		int total = dao.getGalTotal(map);
+		return total;
+	}
+
 	
 }

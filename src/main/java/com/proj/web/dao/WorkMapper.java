@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.MarketVO;
@@ -47,4 +48,8 @@ public interface WorkMapper {
 	public void updateReply(ReplyVO reply);
 	
 	public ArrayList<HashMap<String, Object>> onlyMemberInformationGalleryJsp(String member_id);
+
+	public int getGalTotal(HashMap<String, Object> map);
+
+	public ArrayList<HashMap<String, Object>> listGallery(HashMap<String, Object> map, RowBounds rb);
 }

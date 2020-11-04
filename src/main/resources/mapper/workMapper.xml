@@ -163,13 +163,12 @@
 		from
     		gallery g
     		,work w
-    		,member m
 		where
     		g.gallery_seq = w.gallery_seq
 		and
 		    w.work_seq = 0
 		and
-		    m.member_id = #{member_id}
+		    g.member_id = #{member_id}
 	</select>
 	
 	<delete id="deleteGallery" parameterType="int">
@@ -249,6 +248,44 @@
 			reply_seq = #{reply_seq}
 			and member_id = #{member_id}
 	</update>
+	
+	<select id="listGallery" parameterType="hashmap" resultType="hashmap">
+		select 
+			g.gallery_seq as gallery_seq
+		    ,g.member_id as member_id
+		    ,g.title as title
+		    ,w.work_seq as work_seq
+		    ,to_char(g."start",'yyyy-mm-dd') as "start"
+    		,to_char(g."end",'yyyy-mm-dd') as "end"
+		from 
+			gallery g
+    		,work w
+		where 
+			g.gallery_seq = w.gallery_seq
+		and
+			w.work_seq = 0
+		and
+		    g.member_id = #{member_id}
+		<if test="#{searchText} != null">
+		and
+			title like '%' || #{searchText} || '%'
+		</if>
+		order by gallery_seq desc
+	</select>
+	
+	<select id="getGalTotal" parameterType="hashmap" resultType="int">
+		select 
+			count(*)
+		from 
+			gallery
+		where 
+			member_id = #{member_id}
+		<if test="_parameter != null">
+		and
+			title like '%' || #{searchText} || '%'
+		</if>
+		order by gallery_seq desc
+	</select>
 
 
 </mapper>

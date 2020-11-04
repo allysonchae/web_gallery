@@ -50,7 +50,7 @@ public class MarketService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("member_id", (String)session.getAttribute("loginID"));
 		map.put("searchText", searchText);
-			ArrayList<MarketVO> listMarket = dao.listMarket(map, startRecord, countPerPage);
+		ArrayList<MarketVO> listMarket = dao.listMarket(map, startRecord, countPerPage);
 		return listMarket;
 	}
 

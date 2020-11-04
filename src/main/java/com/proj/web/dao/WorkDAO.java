@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -260,4 +261,31 @@ public class WorkDAO {
 		return list;
 		
 	}
+
+	public ArrayList<HashMap<String, Object>> listGallery(HashMap<String, Object> map, int startRecord,
+			int countPerPage) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		RowBounds rb = new RowBounds(startRecord, countPerPage);
+		ArrayList<HashMap<String, Object>> gallerylist = null;
+		try {
+			gallerylist = wm.listGallery(map, rb);
+			logger.info("다오 startRecord{}", startRecord);
+			logger.info("다오 countPerPage{}", countPerPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gallerylist;
+	}
+	
+	public int getGalTotal(HashMap<String, Object> map) {
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int total = 0;
+		try {
+			total = wm.getGalTotal(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
+	}
+
 }

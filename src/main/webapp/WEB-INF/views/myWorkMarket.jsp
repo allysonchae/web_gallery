@@ -158,7 +158,7 @@
 							<!-- 검색폼 -->
 							<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
 								<input type="hidden" name="page" id="page" />
-								제목 : <input type="text"  name="searchText" value="${searchText}" />
+								<input type="text"  name="searchText" value="${searchText}" placeholder="제목"/>
 								<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색">
 							</form>
 	               

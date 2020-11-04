@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.proj.web.service.CalendarService;
 import com.proj.web.service.InformationService;
 import com.proj.web.service.WorkService;
+import com.proj.web.util.PageNavigator;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MarketVO;
@@ -58,6 +59,9 @@ public class PageController {
 	private WorkService ws;
 	@Autowired
 	private MemberService service;
+	
+	final int countPerPage = 6;			//페이지당 글 수
+	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -279,12 +283,21 @@ public class PageController {
 	}
 
 	@RequestMapping(value = "/blog", method = RequestMethod.GET)
-	public String blog(Model model) {
+	public String blog(@RequestParam(value = "page", defaultValue = "1") int page
+						,@RequestParam(value = "searchText", defaultValue = "") String searchText
+						,Model model) {
+		
+		int total = ws.getGalTotal(searchText);
+		logger.info("컨트롤러로 받아온 gallery 개수{}", total);
+		
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		
+		ArrayList<HashMap<String, Object>> gallerylist = ws.listGallery(searchText, navi.getStartRecord(), navi.getCountPerPage());
+		logger.info("컨트롤러로 받아온 gallerylist {}", gallerylist);
 
-		ArrayList<HashMap<String, Object>> list = ws.selectMyGallery();
-
-		logger.info("mygallery list : {} ", list);
-		model.addAttribute("list", list);
+		model.addAttribute("gallerylist", gallerylist);
+		model.addAttribute("navi", navi);
+		model.addAttribute("searchText", searchText);
 
 		return "/blog";
 	}
