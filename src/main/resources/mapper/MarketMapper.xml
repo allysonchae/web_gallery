@@ -3,19 +3,36 @@
 
 <mapper namespace="com.proj.web.dao.MarketMapper">
 
-	<select id="selectMyWork" parameterType="String" resultType="hashmap">
-		select
-		    w.work_seq
-		    ,w.gallery_seq
-		    ,w.work_name
-		    ,w.work_description
-		    ,m.member_id
-		from
-		    work w, member m
-		where
-		    w.member_id = m.member_id
+	<select id="listMarket" parameterType="hashmap" resultType="market">
+		select 
+			work_seq
+		    ,gallery_seq
+		    ,work_name
+		    ,work_description
+		from 
+			work
+		where 
+			member_id = #{member_id}
+		<if test="#{searchText} != null">
 		and
-		    m.member_id = #{member_id}
+			work_name like '%' || #{searchText} || '%'
+		</if>
+		order by gallery_seq desc
+	</select>
+	
+	<!-- 전체 글 개수 (검색 필터링 후) -->
+	<select id="getTotal" parameterType="hashmap" resultType="int">
+		select 
+			count(*)
+		from 
+			work
+		where 
+			member_id = #{member_id}
+		<if test="_parameter != null">
+		and
+			work_name like '%' || #{searchText} || '%'
+		</if>
+		order by gallery_seq desc
 	</select>
 	
 	<insert id="insertMarket" parameterType="market">

@@ -39,6 +39,9 @@
 			<mapping path="/member/findResult" />
 			<mapping path="/member/pwFindResult" />
 			<mapping path="/myPage" />
+			<mapping path="/myWorkMarket" />
+			<mapping path="/message/directMessage" />
+			<mapping path="/requestGallery" />
 			<mapping path="/blog" />
 			<!-- 위의 경로들은 다음의 인터셉터를 경유한다. -->
 			<beans:ref bean="loginInterceptor" />

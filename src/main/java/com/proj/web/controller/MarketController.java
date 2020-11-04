@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proj.web.service.MarketService;
 import com.proj.web.service.WorkService;
+import com.proj.web.util.PageNavigator;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.WorkVO;
 
 @Controller
 public class MarketController {
-
+	
 	final static Logger logger = LoggerFactory.getLogger(MarketController.class);
 	
 	@Autowired
@@ -28,15 +29,27 @@ public class MarketController {
 	@Autowired
 	private WorkService ws;
 	
+	//게시판 관련 상수값들
+	final int countPerPage = 6;			//페이지당 글 수
+	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
 	
 	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
-	public String myWorkMarket(Model model) {
+	public String myWorkMarket(@RequestParam(value = "page", defaultValue = "1") int page
+								,@RequestParam(value = "searchText", defaultValue = "") String searchText
+								,Model model) {
 		
-		ArrayList<HashMap<String, Object>> list = ms.selectMyWork();
+		int total = ms.getTotal(searchText);
+		logger.info("컨트롤러로 받아온 market 전체 {}", total);
 		
-		logger.info("list : {}",list);
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
 		
-		model.addAttribute("list", list);
+		ArrayList<MarketVO> marketlist = ms.listMarket(searchText, navi.getStartRecord(), navi.getCountPerPage());
+		
+		logger.info("컨트롤러 marketlist {}", marketlist);
+		
+		model.addAttribute("marketlist", marketlist);
+		model.addAttribute("navi", navi);
+		model.addAttribute("searchText",searchText);
 		
 		return "/myWorkMarket";
 	}

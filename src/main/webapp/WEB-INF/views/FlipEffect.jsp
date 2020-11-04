@@ -507,31 +507,28 @@
 			    </c:forEach>
 			</table>
 	  	</div>
+	  	<div class="container" style="height:200px;">
+			<table class="type05">
+				<c:if test="${loginID != null}">
+					<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
+						<tr id="reply_height">
+							<th style="font-size: x-large;" scope="row" class="replyid">
+								${nickname }
+							</th>
+							<td style="text-align: -webkit-center; width: 750px;">
+								<input type="hidden" name="id" value="${gallery_seq}">
+								<input type="text" name="reply_text" id="reply_text" style="width:750px; height:100px;" />
+							</td>
+							<td style="width: 160px;">
+								<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
+							</td>
+						</tr>
+					</form>
+				</c:if>
+			</table>
+			</div>
   	</c:if>
-  	<div style="width: 1140px;">
-  	<table class="type05">
-   		<!-- 리플 작성 폼 시작 -->
-		<c:if test="${loginID != null}">
-			<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
-				<tr>
-					<th style="font-size: x-large;">
-						${nickname }
-					</th>
-					<td style="text-align: -webkit-center;">
-						<input type="hidden" name="id" value="${gallery_seq}">
-						<input type="text" name="reply_text" id="reply_text" style="width:600px; height:100px;" />
-					</td>
-					<td>
-						<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
-					</td>
-				</tr>
-			</form>
-		</c:if>
-		<!-- /리플 작성 폼 끝 -->
-		</table>
-	</div>
-  		
-	</section>
+		</section>
 	<br><br><br>
 
   <!-- Swiper JS -->

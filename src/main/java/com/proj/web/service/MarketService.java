@@ -22,13 +22,6 @@ public class MarketService {
 	@Autowired
 	private MarketDAO dao;
 	
-	public ArrayList<HashMap<String, Object>> selectMyWork(){
-		
-		String member_id = (String) session.getAttribute("loginID");
-		
-		return dao.selectMyWork(member_id);
-	}
-	
 	public ArrayList<MarketVO> MarketAll() {
 		
 		return dao.MarketAll();
@@ -51,6 +44,22 @@ public class MarketService {
 	public MarketVO marketOne(int market_seq) {
 		MarketVO market = dao.marketOne(market_seq);
 		return market;
+	}
+
+	public ArrayList<MarketVO> listMarket(String searchText, int startRecord, int countPerPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", (String)session.getAttribute("loginID"));
+		map.put("searchText", searchText);
+			ArrayList<MarketVO> listMarket = dao.listMarket(map, startRecord, countPerPage);
+		return listMarket;
+	}
+
+	public int getTotal(String searchText) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", (String)session.getAttribute("loginID"));
+		map.put("searchText", searchText);
+		int total = dao.getTotal(map);
+		return total;
 	}
 	
 }

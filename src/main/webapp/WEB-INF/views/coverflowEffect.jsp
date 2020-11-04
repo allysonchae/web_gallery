@@ -19,6 +19,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 <style type="text/css">
+	body {
+      background: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 300px;
+      height: 300px;
+      padding: 50px;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+    }
+     
+     .header{
+		text-align: center;
+		padding-top: 50px;
+		font-family: cursive;
+	} 
+	
+	*, ::after, ::before {
+     box-sizing: content-box;
+	}
+
 	#delete:hover{
 		cursor:pointer;
 	}

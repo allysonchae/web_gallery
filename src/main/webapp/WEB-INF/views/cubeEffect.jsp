@@ -17,12 +17,6 @@
 
   <!-- Demo styles -->
   <style>
-    html,
-    body {
-      position: relative;
-      height: 100%;
-    }
-
     body {
       background: #fff;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -45,6 +39,8 @@
     .swiper-slide {
       background-position: center;
       background-size: cover;
+      width: 300px;
+      height: 300px;
     }
     
     #header{
@@ -53,10 +49,8 @@
 		font-family: cursive;
 	} 
 	
-	#trash{
-		position: relative;
-		top:730px;
-		left:1650px;
+	*, ::after, ::before {
+     box-sizing: content-box;
 	}
 	
 	#delete:hover{
