@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proj.web.service.MarketService;
-import com.proj.web.service.WorkService;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.WorkVO;
 
@@ -24,10 +23,6 @@ public class MarketController {
 	
 	@Autowired
 	private MarketService ms;
-	
-	@Autowired
-	private WorkService ws;
-	
 	
 	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
 	public String myWorkMarket(Model model) {

@@ -12,7 +12,9 @@
 		<typeAlias type="com.proj.web.vo.ReplyVO" alias="reply"/>
 		<typeAlias type="com.proj.web.vo.MarketVO" alias="market"/>
 		<typeAlias type="com.proj.web.vo.LikeVO" alias="like"/>
+		<typeAlias type="com.proj.web.vo.FollowVO" alias="follow"/>
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml"/>
 		<mapper resource="mapper/calendarMapper.xml"/>
@@ -20,5 +22,6 @@
 		<mapper resource="mapper/workMapper.xml"/>
 		<mapper resource="mapper/chatMapper.xml"/>
 		<mapper resource="mapper/MarketMapper.xml"/>
+		<mapper resource="mapper/followMapper.xml"/>
 	</mappers>
 </configuration>
