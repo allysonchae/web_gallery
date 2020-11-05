@@ -175,6 +175,7 @@
 	<!-- Modal end -->
 	
 	<input type="hidden" value="${sessionScope.loginID }" id="loginId">
+	<input type="hidden" value="${sessionScope.loginNickName }" id="loginNickname">
 	
 	<script type="text/javascript">
 		function memberGallery(member_id){
@@ -187,6 +188,7 @@
 
 		function plusFriend(friend_id,friend_nickname,index){
 			var followerCnt;
+			var loginNickname = document.getElementById("loginNickname").value;
 			var loginId = document.getElementById("loginId").value;
 			var indexButton = "#changeButton"+index;
 			var minusButton = '<button type="button" class="btn btn-danger" onClick="minusFriend(\'' + friend_id + '\'\,\''+ friend_nickname+'\'\,'+index+')"><i class="fa fa-minus"></i></button>'
@@ -198,6 +200,7 @@
 		        type:'get',
 		        data:{
 		        		member_id : loginId
+		        		,member_nickname : loginNickname
 		        		,friend_id : friend_id
 		        		,friend_nickname : friend_nickname
 		        		,follow_type : 1
