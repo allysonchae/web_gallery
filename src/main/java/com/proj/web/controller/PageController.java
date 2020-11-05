@@ -31,6 +31,7 @@ import com.proj.web.service.CalendarService;
 import com.proj.web.service.FollowService;
 import com.proj.web.service.InformationService;
 import com.proj.web.service.WorkService;
+import com.proj.web.vo.FollowVO;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MarketVO;
@@ -285,14 +286,16 @@ public class PageController {
 	public String blog(Model model) {
 
 		ArrayList<HashMap<String, Object>> list = ws.selectMyGallery();
-
-		int followCnt = fs.countFollower();
 		
-		logger.info("follower 수 : {}", followCnt);
+		int followerCnt = fs.countFollower();
+		int followingCnt = fs.countFollowing();
+		
+		logger.info("follower 수 : {}", followerCnt);
 		logger.info("mygallery list : {} ", list);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("followCnt", followCnt);
+		model.addAttribute("followerCnt", followerCnt);
+		model.addAttribute("followingCnt", followingCnt);
 
 		return "/blog";
 	}

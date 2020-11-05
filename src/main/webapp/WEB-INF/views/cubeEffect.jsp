@@ -608,7 +608,7 @@
 		
 	}
 
-	function insertFollow(member_id, friend_id, friend_nickname){
+	function insertFollow(member_id, friend_id, friend_nickname, member_nickname){
 		var button = document.getElementById('overMenu3');
 		
 		if(followFlag){
@@ -630,6 +630,7 @@
 		        type:'get',
 		        data:{
 		        		member_id : member_id
+		        		,member_nickname : member_nickname
 		        		,friend_id : friend_id
 		        		,friend_nickname : friend_nickname
 		        		,follow_type : 1
@@ -709,7 +710,7 @@
   	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
   	<div>
 	  	<c:if test="${sessionScope.loginID!=null && sessionScope.loginID != map.MEMBER_ID}">
-		 	<a href="javascript:insertFollow('${sessionScope.loginID }','${map.MEMBER_ID}','${map.MEMBER_NICKNAME}')" id="overMenu3" style="color:black; text-decoration:none;">팔로우</a><br>
+		 	<a href="javascript:insertFollow('${sessionScope.loginID }','${map.MEMBER_ID}','${map.MEMBER_NICKNAME}','${sessionScope.loginNickName }')" id="overMenu3" style="color:black; text-decoration:none;">팔로우</a><br>
 		  	<a href="/message/directMessage?member_nickname=${map.MEMBER_NICKNAME }" id="overMenu1" style="color:black;text-decoration:none;">쪽지보내기</a><br>
 	  	</c:if>
 	 	<a href="/memberGallery?member_id=${map.MEMBER_ID }" id="overMenu2" style="color:black;text-decoration:none;">${map.MEMBER_NICKNAME }님의 전시회</a><br>

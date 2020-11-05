@@ -68,13 +68,13 @@ public class FollowDAO {
 		
 	}
 	
-	public ArrayList<FollowVO> selectFollower(FollowVO follow){
+	public ArrayList<FollowVO> followerList(FollowVO follow){
 		
 		FollowMapper fm = ss.getMapper(FollowMapper.class);
 		ArrayList<FollowVO> list = null;
 		
 		try {
-			list = fm.selectFollower(follow);
+			list = fm.followerList(follow);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,4 +83,33 @@ public class FollowDAO {
 		
 	}
 	
+	public ArrayList<FollowVO> followingList(FollowVO follow){
+		
+		FollowMapper fm = ss.getMapper(FollowMapper.class);
+		ArrayList<FollowVO> list = null;
+		
+		try {
+			list = fm.followingList(follow);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	public int countFollowing(FollowVO follow) {
+		
+		FollowMapper fm = ss.getMapper(FollowMapper.class);
+		int cnt = 0;
+		
+		try {
+			cnt = fm.countFollowing(follow);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+		
+	}
 }

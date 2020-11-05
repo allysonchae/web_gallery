@@ -48,9 +48,27 @@ public class FollowService {
 		
 	}
 	
-	public ArrayList<FollowVO> selectFollower(FollowVO follow){
+	public ArrayList<FollowVO> followerList(FollowVO follow){
 		
-		return  dao.selectFollower(follow);
+		return  dao.followerList(follow);
+		
+	}
+	
+	public ArrayList<FollowVO> followingList(FollowVO follow){
+		
+		return dao.followingList(follow);
+		
+	}
+	
+	public int countFollowing() {
+		
+		FollowVO follow = new FollowVO();
+		
+		String member_id = (String)session.getAttribute("loginID");
+		
+		follow.setMember_id(member_id);
+		
+		return dao.countFollowing(follow);
 		
 	}
 	
