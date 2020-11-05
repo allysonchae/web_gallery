@@ -14,6 +14,10 @@ public interface FollowMapper {
 	
 	public int countFollower(FollowVO follow);
 	
-	public ArrayList<FollowVO> selectFollower(FollowVO follow);
+	public ArrayList<FollowVO> followerList(FollowVO follow);
+	
+	public ArrayList<FollowVO> followingList(FollowVO follow);
+	
+	public int countFollowing(FollowVO follow);
 	
 }

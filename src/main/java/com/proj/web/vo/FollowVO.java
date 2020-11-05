@@ -6,6 +6,7 @@ import lombok.Data;
 public class FollowVO {
 
 	private String member_id;
+	private String member_nickname; 
 	private String friend_id;
 	private String friend_nickname;
 	private int follow_type;

@@ -26,6 +26,8 @@ public class FollowController {
 	@RequestMapping(value = "/insertFollow", method = RequestMethod.GET)
 	public void insertFollower(FollowVO follow) {
 		
+		logger.info("insert follow : {}", follow);
+		
 		fs.insertFollower(follow);
 		
 	}
@@ -72,10 +74,18 @@ public class FollowController {
 		
 		follow.setMember_id(member_id);
 		
-		ArrayList<FollowVO> list = fs.selectFollower(follow);
+		ArrayList<FollowVO> list = fs.followerList(follow);
 		
 		logger.info("followerList list : {}", list);
 		
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/followingList" , method = RequestMethod.GET)
+	public ArrayList<FollowVO> followingList(FollowVO follow){
+		
+		return fs.followingList(follow);
+		
 	}
 }

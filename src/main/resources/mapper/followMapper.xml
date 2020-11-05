@@ -7,11 +7,13 @@
 		insert into
 		    follow (
 		        member_id
+		        ,member_nickname
 		        ,friend_id
 		        ,friend_nickname
 		        ,follow_type
 		    ) values (
 		        #{member_id}
+		        ,#{member_nickname}
 		        ,#{friend_id}
 		        ,#{friend_nickname}
 		        ,#{follow_type}
@@ -51,7 +53,7 @@
 		    member_id = #{member_id}
 	</select>
 	
-	<select id="selectFollower" parameterType="follow" resultType="follow"> 
+	<select id="followerList" parameterType="follow" resultType="follow"> 
 		select
 			friend_id
 			,friend_nickname
@@ -59,6 +61,25 @@
 			follow
 		where
 			member_id = #{member_id}
+	</select>
+	
+	<select id="followingList" parameterType="follow" resultType="follow">
+		select
+		    member_id
+		    ,member_nickname
+		from
+		    follow
+		where
+		    friend_id = #{member_id}
+	</select>
+	
+	<select id="countFollowing" parameterType="follow" resultType="int">
+		select
+			count(*)
+		from
+		    follow
+		where
+		    friend_id = #{member_id}
 	</select>
 
 

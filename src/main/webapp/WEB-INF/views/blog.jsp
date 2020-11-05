@@ -35,7 +35,15 @@
 			height:100px; 
 			width:200px; 
 			font-size: 30px;
-			margin-bottom: 50px;
+    	}
+    	
+    	#followingButton{
+    		height:100px; 
+			width:200px; 
+			font-size: 30px;
+			position: relative;
+			left: 230px;
+    		bottom: 100px;
     	}
     </style>
 </head>
@@ -131,19 +139,26 @@
             
             <div>
 	       		<button type="button" id="followerButton" class="btn btn-light" onclick="followerList('${sessionScope.loginID }')">
-		            	팔로우<br>
-		            	<div id="changeFollower">${followCnt }</div>
+		            	팔로워<br>
+		            	<div id="changeFollower">${followerCnt }</div>
+	       		</button>
+            </div>
+            
+            <div>
+	       		<button type="button" id="followingButton" class="btn btn-light" onclick="followingList('${sessionScope.loginID }')">
+		            	팔로잉<br>
+		            	<div id="changeFollowing">${followingCnt }</div>
 	       		</button>
             </div>
             
             <!-- Modal -->
-	  <div class="modal fade" id="myModal" role="dialog">
+	  <div class="modal fade" id="followerModal" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
-	          <h4 id="modal-title">follow</h4>
+	          <h4 id="modal-title"></h4>
 	          <button type="button" class="close" data-dismiss="modal">×</button>
 	        </div>
 	        <div class="modal-body">
@@ -305,9 +320,55 @@
 			    output += 	"</tr>"
 			    output += "</table>"
 		   	});
-			
+
+			$("#modal-title").html("follower");
 			$("#modal-detail").html(output);
-	        $("#myModal").modal();
+	        $("#followerModal").modal();
+		}
+		
+		function followingList(member_id){
+			var arr;
+			var output = "";
+
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/followingList',
+		        type:'get',
+		        async: false,
+		        data:{
+						member_id : member_id
+			      	},
+		        success:function(resp){
+					console.log(resp);
+		        	arr = resp;
+		        },
+		        error:function(){
+		            alert('에러가 발생했습니다. 다시 시도해 주세요.');
+		        }
+		    });
+
+		    $.each(arr, function(index, item){
+			    output += "<table>"
+			    output += 	"<tr style='height: 50px;'>"
+			    output += 		"<td style='width: 310px;'>"+item.member_nickname+"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="directMessage(\'' + item.member_nickname + '\')">쪽지</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="memberGallery(\'' + item.member_id + '\')">전시회</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 	"</tr>"
+			    output += "</table>"
+		   	});
+
+		    $("#modal-title").html("following");
+			$("#modal-detail").html(output);
+	        $("#followerModal").modal();
 		}
 	</script>
             
