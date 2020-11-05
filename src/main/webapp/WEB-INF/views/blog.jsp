@@ -38,14 +38,6 @@
 			margin-bottom: 50px;
     	}
     </style>
-    
-   <!--  <script type="text/javascript">
-		function followerList(member_id){
-
-			location.href="/followerList?member_id="+member_id;
-			
-		}
-    </script> -->
 </head>
 
 <body>
@@ -139,7 +131,8 @@
             
             <div>
 	       		<button type="button" id="followerButton" class="btn btn-light" onclick="followerList('${sessionScope.loginID }')">
-		            	팔로우<br>${followCnt }
+		            	팔로우<br>
+		            	<div id="changeFollower">${followCnt }</div>
 	       		</button>
             </div>
             
@@ -150,7 +143,7 @@
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
-	          <h4 id="modal-title">follower</h4>
+	          <h4 id="modal-title">follow</h4>
 	          <button type="button" class="close" data-dismiss="modal">×</button>
 	        </div>
 	        <div class="modal-body">
@@ -166,11 +159,108 @@
 	  </div>
 	<!-- Modal end -->
 	
+	<input type="hidden" value="${sessionScope.loginID }" id="loginId">
+	
 	<script type="text/javascript">
 		function memberGallery(member_id){
-
 			location.href = "/memberGallery?member_id="+member_id;
-			
+		}
+
+		function directMessage(member_nickname){
+			location.href = "/message/directMessage?member_nickname="+member_nickname;
+		}
+
+		function plusFriend(friend_id,friend_nickname,index){
+			var followerCnt;
+			var loginId = document.getElementById("loginId").value;
+			var indexButton = "#changeButton"+index;
+			var minusButton = '<button type="button" class="btn btn-danger" onClick="minusFriend(\'' + friend_id + '\'\,\''+ friend_nickname+'\'\,'+index+')"><i class="fa fa-minus"></i></button>'
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/insertFollow',
+		        type:'get',
+		        data:{
+		        		member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+				async: false,
+		        success:function(){
+	
+		        }
+		    });
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/countFollower',
+		        type:'get',
+		        data:{
+			        	member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+		        async: false,
+		        success:function(resp){
+					console.log(resp);
+					followerCnt = resp;
+		        }
+		    });
+
+			$("#changeFollower").html(followerCnt);
+			$(indexButton).empty();
+			$(indexButton).append(minusButton);
+
+		}
+
+		function minusFriend(friend_id,friend_nickname,index){
+			var followerCnt;
+			var loginId = document.getElementById("loginId").value;
+			var indexButton = "#changeButton"+index;
+			var plusButton = '<button type="button" class="btn btn-primary" onClick="plusFriend(\'' + friend_id + '\'\,\''+ friend_nickname + '\'\,' + index + ')"><i class="fa fa-plus"></i></button>';
+						
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/deleteFollower',
+		        type:'get',
+		        data:{
+		        		member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+				async: false,
+		        success:function(){
+	
+		        }
+		    });
+		    
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/countFollower',
+		        type:'get',
+		        data:{
+			        	member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+		        async: false,
+		        success:function(resp){
+					console.log(resp);
+					followerCnt = resp;
+		        }
+		    });
+
+			$("#changeFollower").html(followerCnt);
+			$(indexButton).empty();
+			$(indexButton).append(plusButton);		    
 		}
 	
 		function followerList(member_id){
@@ -197,10 +287,10 @@
 
 		    $.each(arr, function(index, item){
 			    output += "<table>"
-			    output += 	"<tr style='height: 50px;''>"
+			    output += 	"<tr style='height: 50px;'>"
 			    output += 		"<td style='width: 260px;'>"+item.friend_nickname+"</td>"
 			    output += 		"<td>"
-			    output += 			"<button type='button' class='btn btn-outline-info'>쪽지</button>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="directMessage(\'' + item.friend_nickname + '\')">쪽지</button>'
 			    output += 		"</td>"
 			    output += 		"<td style='width:10px;'>"
 			    output += 		"</td>"
@@ -209,8 +299,8 @@
 			    output += 		"</td>"
 			    output += 		"<td style='width:10px;'>"
 			    output += 		"</td>"
-			    output += 		"<td>"
-			    output += 			"<button type='button' class='btn btn-danger' onclick='minusTd();'><i class='fa fa-minus'></i></button>"
+			    output += 		"<td id='changeButton"+index+"'>"
+			    output += 			'<button type="button" class="btn btn-danger" onClick="minusFriend(\'' + item.friend_id + '\'\,\''+item.friend_nickname+'\'\,'+index+')"><i class="fa fa-minus"></i></button>'
 			    output += 		"</td>"
 			    output += 	"</tr>"
 			    output += "</table>"

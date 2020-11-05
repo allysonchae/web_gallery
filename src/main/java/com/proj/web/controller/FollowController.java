@@ -51,6 +51,18 @@ public class FollowController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/countFollower", method = RequestMethod.GET)
+	public int countFollower(FollowVO follow) {
+		
+		int cnt = fs.countFollower();
+		
+		logger.info("follower : {}", cnt);
+		
+		return cnt;
+		
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/followerList" , method = RequestMethod.GET)
 	public ArrayList<FollowVO> followerList(String member_id){
 		

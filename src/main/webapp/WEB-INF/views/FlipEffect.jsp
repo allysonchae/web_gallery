@@ -474,7 +474,31 @@
 
 	    return cnt;
 	}
-	
+
+	function checkFollower(member_id, friend_id, friend_nickname){
+		var cnt;
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/checkFollower',
+	        type:'get',
+	        data:{
+		        	member_id : member_id
+	        		,friend_id : friend_id
+	        		,friend_nickname : friend_nickname
+	        		,follow_type : 1
+			},
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+				cnt = resp;
+	        }
+	    });
+
+	    return cnt;
+
+	}
 
 
 	//스크롤
