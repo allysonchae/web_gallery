@@ -155,33 +155,32 @@
 				</div>
          	</form>
 
-							<!-- 검색폼 -->
-							<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
-								<input type="hidden" name="page" id="page" />
-								<input type="text"  name="searchText" value="${searchText}" placeholder="제목"/>
-								<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색">
-							</form>
+			<!-- 검색폼 -->
+			<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
+				<input type="hidden" name="page" id="page" />
+				<input type="text"  name="searchText" value="${searchText}" placeholder="제목"/>
+				<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색">
+			</form>
+			<!-- 검색 끝 -->
 	               
-	                <div class="col-lg-12">
-	                    <div class="pagination__links">
-	                        <!-- 페이지 이동 부분 -->                      
-							<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
-							<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+	        <div class="col-lg-12">
+	        	<div class="pagination__links">
+	            	<!-- 페이지 이동 부분 -->                      
+					<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+					<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+					
+					<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
+						<c:if test="${counter == navi.currentPage}"><b></c:if>
+						<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+						<c:if test="${counter == navi.currentPage}"></b></c:if>
+					</c:forEach>
+					&nbsp;&nbsp;
+					<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
+					<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
 						
-							<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
-								<c:if test="${counter == navi.currentPage}"><b></c:if>
-									<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
-								<c:if test="${counter == navi.currentPage}"></b></c:if>
-							</c:forEach>
-							&nbsp;&nbsp;
-							<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
-							<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
-						
-						<!-- /페이지 이동 끝 -->
-						
-						<!-- /검색폼 --> 
-	                    </div>
-	                </div>
+					<!-- /페이지 이동 끝 -->
+    		</div>
+		</div>
     </section>
     <!-- Discography Section End -->
     

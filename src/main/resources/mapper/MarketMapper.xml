@@ -106,6 +106,38 @@
 		and
 		    work_seq = #{work_seq}
 	</select>
+	
+	<select id="getMarketTotal" parameterType="string" resultType="int">
+		select 
+			count(*)
+		from 
+			market
+		<if test="_parameter != null">
+		where
+			work_name like '%' || #{searchText} || '%'
+		</if>
+		order by market_seq desc
+	</select>
+	
+	<select id="marketlistAll" parameterType="string" resultType="market">
+		select 
+			market_seq
+			,work_seq
+			,gallery_seq
+			,work_name
+			,work_description
+			,member_id 
+			,member_nickname   
+			,market_price 
+			,market_amount
+		from 
+			market
+		<if test="_parameter != null">
+		where
+			work_name like '%' || #{searchText} || '%'
+		</if>
+		order by market_seq desc
+	</select>
 
 
 </mapper>

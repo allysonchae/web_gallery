@@ -30,7 +30,7 @@ public class MarketController {
 	private WorkService ws;
 	
 	//게시판 관련 상수값들
-	final int countPerPage = 6;			//페이지당 글 수
+	final int countPerPage = 9;			//페이지당 글 수
 	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
 	
 	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
@@ -55,11 +55,21 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/MarketAll", method = RequestMethod.GET)
-	public String MarketAll(Model model) {
+	public String MarketAll(@RequestParam(value = "page", defaultValue = "1") int page
+							,@RequestParam(value = "searchText", defaultValue = "") String searchText
+							,Model model) {
 		
-		ArrayList<MarketVO> list = ms.MarketAll();
+		int total = ms.getMarketTotal(searchText);
+		logger.info("컨트롤러 market 전체 개수 {}", total);
 		
-		model.addAttribute("list", list);
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		
+		ArrayList<MarketVO> marketlistAll = ms.marketlistAll(searchText, navi.getStartRecord(), navi.getCountPerPage());
+		logger.info("컨트롤러 marketlistAll {}", marketlistAll);
+		
+		model.addAttribute("marketlistAll", marketlistAll);
+		model.addAttribute("navi", navi);
+		model.addAttribute("searchText", searchText);
 		
 		return "/MarketAll";
 		

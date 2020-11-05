@@ -96,4 +96,27 @@ public class MarketDAO {
 			}
 			return total;
 		}
+
+		public int getMarketTotal(String searchText) {
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			int total = 0;
+			try {
+				total = mm.getMarketTotal(searchText);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return total;
+		}
+
+		public ArrayList<MarketVO> marketlistAll(String searchText, int startRecord, int countPerPage) {
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			ArrayList<MarketVO> marketlistAll = null;
+			RowBounds rb = new RowBounds(startRecord, countPerPage);
+			try {
+				marketlistAll = mm.marketlistAll(searchText, rb);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return marketlistAll;
+		}
 }

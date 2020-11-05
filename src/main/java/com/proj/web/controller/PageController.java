@@ -60,7 +60,7 @@ public class PageController {
 	@Autowired
 	private MemberService service;
 	
-	final int countPerPage = 6;			//페이지당 글 수
+	final int countPerPage = 9;			//페이지당 글 수
 	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
 
 	/**

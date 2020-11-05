@@ -22,4 +22,8 @@ public interface MarketMapper {
 
 	int getTotal(HashMap<String, Object> map);
 
+	int getMarketTotal(String searchText);
+
+	ArrayList<MarketVO> marketlistAll(String searchText, RowBounds rb);
+
 }

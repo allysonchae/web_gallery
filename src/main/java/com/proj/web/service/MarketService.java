@@ -61,5 +61,15 @@ public class MarketService {
 		int total = dao.getTotal(map);
 		return total;
 	}
+
+	public int getMarketTotal(String searchText) {
+		int total = dao.getMarketTotal(searchText);
+		return total;
+	}
+
+	public ArrayList<MarketVO> marketlistAll(String searchText, int startRecord, int countPerPage) {
+		ArrayList<MarketVO> marketlistAll = dao.marketlistAll(searchText, startRecord, countPerPage);
+		return marketlistAll;
+	}
 	
 }

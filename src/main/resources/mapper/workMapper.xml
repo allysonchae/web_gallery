@@ -286,6 +286,5 @@
 		</if>
 		order by gallery_seq desc
 	</select>
-
-
+	
 </mapper>
