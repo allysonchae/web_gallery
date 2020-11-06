@@ -153,21 +153,13 @@
 		                </div>
 	                </c:forEach>
 	        	</div>
-				<div style="text-align: center; margin-top: 50px; width:165px; contain: size; margin-left: 700px;">
+				<div style="position: absolute; left: 400px; top:350px;">
 					<button type="submit" class="btn btn-outline-secondary">판매 정보 등록하기</button>
 				</div>
          	</form>
 
-			<!-- 검색폼 -->
-			<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
-				<input type="hidden" name="page" id="page" />
-				<input type="text"  name="searchText" value="${searchText}" placeholder="제목"/>
-				<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색">
-			</form>
-			<!-- 검색 끝 -->
-	               
 	        <div class="col-lg-12">
-	        	<div class="pagination__links">
+	        	<div class="pagination__links" style="margin-top: 50px;">
 	            	<!-- 페이지 이동 부분 -->                      
 					<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
 					<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
@@ -182,6 +174,14 @@
 					<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
 						
 					<!-- /페이지 이동 끝 -->
+					
+					<!-- 검색폼 -->
+					<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
+						<input type="hidden" name="page" id="page" />
+						<input type="text"  name="searchText" value="${searchText}" placeholder="제목" style="height: 50px; width:700px; margin-left:160px; margin-top: 100px;margin-bottom: 40px;"/>
+						<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색" style="height: 50px; width:100px;">
+					</form>
+					<!-- 검색 끝 -->
     		</div>
 		</div>
     </section>
@@ -201,6 +201,9 @@
 
 			if(cnt>5){
 				alert("판매 품목은 5개까지만 선택 가능합니다.");
+				return false;
+			}else if(cnt==0){
+				alert("판매 품목을 선택해주세요.");
 				return false;
 			}
 			

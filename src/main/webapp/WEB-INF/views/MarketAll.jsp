@@ -160,15 +160,9 @@
                 </c:forEach>
             </div>
         </div>
-        <!-- 검색폼 -->
-		<form id="pagingForm" method="get" action="MarketAll" style="text-align: center;">
-			<input type="hidden" name="page" id="page" />
-			<input type="text"  name="searchText" value="${searchText}" placeholder="제목"/>
-			<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색">
-		</form>
 	               
 	    <div class="col-lg-12">
-	    	<div class="pagination__links">
+	    	<div class="pagination__links" style="margin-top: 50px;">
 	        	<!-- 페이지 이동 부분 -->                      
 				<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
 				<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
@@ -180,10 +174,16 @@
 				&nbsp;&nbsp;
 				<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
 				<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
-						
 				<!-- /페이지 이동 끝 -->
-						
+		 
+		        <!-- 검색폼 -->
+				<form id="pagingForm" method="get" action="MarketAll" style="text-align: center;">
+					<input type="hidden" name="page" id="page" />
+					<input type="text"  name="searchText" value="${searchText}" placeholder="제목" style="height: 50px; width:700px; margin-top: 100px;margin-bottom: 40px;"/>
+					<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색" style="height: 50px; width:100px;">
+				</form>		
 				<!-- /검색폼 --> 
+				
 	    	</div>
 		</div>
     </section>
