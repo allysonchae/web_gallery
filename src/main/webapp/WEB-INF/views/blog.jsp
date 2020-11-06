@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     
     <style type="text/css">
     	#member_info{
@@ -225,7 +226,6 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script src="/resources/js/jquery.nicescroll.min.js"></script>

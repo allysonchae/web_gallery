@@ -41,7 +41,10 @@
 	    	page.value = currentPage;
 	    	form.submit();
 	    }
-    </script>
+
+	</script>
+    
+    
 </head>
 
 <body>

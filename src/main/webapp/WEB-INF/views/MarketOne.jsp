@@ -75,7 +75,7 @@
 				     				&#8361; ${market.market_price }/1개
 			     				</td>
 			     				<td>
-									<input type="text" placeholder="총금액" id="sum_check" style="width:110px;">
+									<input type="text" placeholder="총금액" id="sum_check" style="width:110px;" readonly="readonly">
 					     		</td>
 			     			</tr>
 			     		</table>
