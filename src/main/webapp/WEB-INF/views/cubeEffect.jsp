@@ -9,6 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <script type="text/javascript" src="/resources/jquery-3.5.1.min.js"></script>
 
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -45,8 +48,7 @@
     
     #header{
 		text-align: center;
-		padding-top: 50px;
-		font-family: cursive;
+		padding-top: 80px;
 	} 
 	
 	*, ::after, ::before {
@@ -218,10 +220,19 @@
 	.overlay-info {
 	  text-align: center;
 	  color: #111825;
+	}
 	
+	#likeButton:hover{
+		cursor: pointer;
+	}
   </style>
 
   <script type="text/javascript">
+  var flag = true;
+  var followFlag = true;
+  var deleteForm = document.getElementById("deleteForm");
+	
+  
 	$(function() {
 	  
 	  $(".menu-link").click(function(e) {
@@ -233,8 +244,46 @@
 	  });
 	    
 	});
+	
   	$(document).ready(function () {
-		  var deleteForm = document.getElementById("deleteForm");
+		  var friend_id = document.getElementById('id').value;
+		  var friend_nickname = document.getElementById('nickname').value;
+		  var member_id = document.getElementById('login').value;
+		  var buttonFollow = document.getElementById('overMenu3');
+  		  var cntFollower = checkFollower(member_id, friend_id ,friend_nickname);
+
+  		  var cnt = likeCheck();
+		  var button = document.getElementById('likeButton');
+
+		  
+		  if(cnt==1){
+				button.style.color = 'red';
+				flag = false;
+		  }
+
+		  if(cntFollower==1){
+			  buttonFollow.style.color = "white";
+			  
+			  $('#overMenu3').mouseenter(function () {
+					$(this).css("color","black");
+		      });
+	
+			  $('#overMenu3').mouseleave(function () {
+					$(this).css("color","white");
+		      });
+
+			  followFlag = false;
+		  }else{
+			  buttonFollow.style.color = "black";
+			  
+			  $('#overMenu3').mouseenter(function () {
+					$(this).css("color","white");
+		      });
+	
+			  $('#overMenu3').mouseleave(function () {
+					$(this).css("color","black");
+		      });
+	      }
 
 		  $('#overMenu1').mouseenter(function () {
 				$(this).css("color","white");
@@ -251,7 +300,7 @@
 		  $('#overMenu2').mouseleave(function () {
 				$(this).css("color","black");
 	      });
-
+	      
 		  $('#x').mouseenter(function () {
 				$(this).css("color","red");
 	      });
@@ -345,8 +394,113 @@
 	    
 	    return arr;
 	}
-	
 
+	function likeCount(){
+		var cnt;
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/likeCount',
+	        type:'get',
+	        data:{
+	        		gallery_seq : $("#gallery_num").val()
+			},
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+				cnt = resp;
+	        }
+	    });
+	    
+	    return cnt;
+
+	}
+
+	function onLike(){
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/onLike',
+	        type:'get',
+	        data:{
+		        	member_id : $("#login").val()
+	        		,gallery_seq : $("#gallery_num").val()
+			},
+	        async: false,
+	        success:function(){
+
+	        }
+	    });
+	    
+	}
+
+	function offLike(){
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/offLike',
+	        type:'get',
+	        data:{
+		        	member_id : $("#login").val()
+	        		,gallery_seq : $("#gallery_num").val()
+			},
+	        async: false,
+	        success:function(){
+		        
+	        }
+	    });
+	    
+	}
+	
+	function likeCheck(){
+		var cnt;
+		    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/likeCheck',
+	        type:'get',
+	        data:{
+		        	member_id : $("#login").val()
+	        		,gallery_seq : $("#gallery_num").val()
+			},
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+				cnt = resp;
+	        }
+	    });
+
+	    return cnt;
+	}
+
+	function checkFollower(member_id, friend_id, friend_nickname){
+		var cnt;
+	    
+	    $.ajax({
+	        contentType:'application/json',
+	        dataType:'json',
+	        url:'/checkFollower',
+	        type:'get',
+	        data:{
+		        	member_id : member_id
+	        		,friend_id : friend_id
+	        		,friend_nickname : friend_nickname
+	        		,follow_type : 1
+			},
+	        async: false,
+	        success:function(resp){
+				console.log(resp);
+				cnt = resp;
+	        }
+	    });
+
+	    return cnt;
+
+	}
 
 	//스크롤
 	$(document).ready(function () {
@@ -398,6 +552,121 @@
 			}
 		});
 	});
+
+	function colorChange(){
+		var button = document.getElementById('likeButton');
+		
+		if(flag){
+			button.style.color = 'red';
+			flag = false;
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/plusLike',
+		        type:'get',
+		        data:{
+		        		gallery_seq : $("#gallery_num").val()
+				},
+				async: false,
+		        success:function(){
+			        
+		        }
+		    });
+		    
+			var cnt = likeCount();
+			onLike();
+		    $("#likeCount").html(cnt+"Like");
+		}else{
+			button.style.color = 'A483F5';
+			flag = true;
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/minusLike',
+		        type:'get',
+		        data:{
+		        		gallery_seq : $("#gallery_num").val()
+				},
+				async: false,
+		        success:function(){
+
+		        }
+		    });
+			
+			var cnt = likeCount();
+			offLike();
+			$("#likeCount").html(cnt+"Like");
+		}
+		
+	}
+
+	function insertFollow(member_id, friend_id, friend_nickname, member_nickname){
+		var button = document.getElementById('overMenu3');
+		
+		if(followFlag){
+			button.style.color = "white";
+			followFlag = false;
+
+			$('#overMenu3').mouseenter(function () {
+				$(this).css("color","black");
+	        });
+
+		    $('#overMenu3').mouseleave(function () {
+				$(this).css("color","white");
+	        });
+			
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/insertFollow',
+		        type:'get',
+		        data:{
+		        		member_id : member_id
+		        		,member_nickname : member_nickname
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+				async: false,
+		        success:function(){
+	
+		        }
+		    });
+			
+		}else{
+			button.style.color = "black";
+			followFlag = true;
+
+			$('#overMenu3').mouseenter(function () {
+				$(this).css("color","white");
+	        });
+
+		    $('#overMenu3').mouseleave(function () {
+				$(this).css("color","black");
+	        });
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/deleteFollower',
+		        type:'get',
+		        data:{
+		        		member_id : member_id
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+				async: false,
+		        success:function(){
+	
+		        }
+		    });
+
+		}
+
+	}
   </script>
   
   <title>Onex</title>
@@ -405,17 +674,13 @@
 
 <body>
 <input type="hidden" id="login" value="${sessionScope.loginID }">
+<input type="hidden" id="gallery_num" value="${map.ID }">
+<input type="hidden" id="id" value="${map.MEMBER_ID}">
+<input type="hidden" id="nickname" value="${map.MEMBER_NICKNAME}">
+
   <form id="deleteForm" action="/deleteGallery" method="get" onsubmit="return deleteCheck();">
 	  <input type="hidden" value="${map.ID }" name="gallery_seq">
   </form>
-  
-  
-	 <%-- <c:if test="${sessionScope.loginID==map.MEMBER_ID }">
-		  <svg id="trash" width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-top: 15px;">
-				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-				<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-		  </svg>
-	 </c:if> --%>
 
 	<a href="/gallery"> 
 		<svg id="x" width="60px" height="60px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -424,21 +689,22 @@
 	</a>
 	
 	<div class="menu">
-  <span class="menu-circle"></span>
-  <a href="#" class="menu-link">
-    <span class="menu-icon">
-      <span class="menu-line menu-line-1"></span>
-      <span class="menu-line menu-line-2"></span>
-      <span class="menu-line menu-line-3"></span>
-    </span>
-  </a>
-</div>
+	  <span class="menu-circle"></span>
+	  <a href="#" class="menu-link">
+	    <span class="menu-icon">
+	      <span class="menu-line menu-line-1"></span>
+	      <span class="menu-line menu-line-2"></span>
+	      <span class="menu-line menu-line-3"></span>
+	    </span>
+	  </a>
+	</div>
 
 <div class="menu-overlay">
   <h1 class="overlay-info" style="font-family: monospace;">
   	<!-- 여기에 메뉴버튼 눌렀을 때 꾸미기 -->
   	<div>
-	  	<c:if test="${sessionScope.loginID!=null }">
+	  	<c:if test="${sessionScope.loginID!=null && sessionScope.loginID != map.MEMBER_ID}">
+		 	<a href="javascript:insertFollow('${sessionScope.loginID }','${map.MEMBER_ID}','${map.MEMBER_NICKNAME}','${sessionScope.loginNickName }')" id="overMenu3" style="color:black; text-decoration:none;">팔로우</a><br>
 		  	<a href="/message/directMessage?member_nickname=${map.MEMBER_NICKNAME }" id="overMenu1" style="color:black;text-decoration:none;">쪽지보내기</a><br>
 	  	</c:if>
 	 	<a href="/memberGallery?member_id=${map.MEMBER_ID }" id="overMenu2" style="color:black;text-decoration:none;">${map.MEMBER_NICKNAME }님의 전시회</a><br>
@@ -472,7 +738,7 @@
   
   <br><br>
   
-  <section class="event spad" style="text-align: -webkit-center;">
+  <section class="event spad" style="text-align: -webkit-center; padding-top: 250px;">
   	<c:if test="${replylist_5.isEmpty()!=true }">
 		<input type="hidden" value="${replylist }" id="replylist">
 		<input type="hidden" value="${gallery_seq }" id="gallery_seq">
@@ -513,7 +779,7 @@
 		<c:if test="${loginID != null}">
 			<form id="replyform" action="/replyWrite" method="post" onSubmit="return replyFormCheck();" style="text-align:-webkit-left;">
 				<tr>
-					<th style="font-size: x-large;">
+					<th style="font-size: x-large; padding-top: 40px;">
 						${nickname }
 					</th>
 					<td style="text-align: -webkit-center;">
@@ -522,6 +788,16 @@
 					</td>
 					<td>
 						<input type="submit" value="확인" style="width:150px; height:100px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;" />
+					</td>
+					<td>
+						<svg id="likeButton" onclick="colorChange();" width="60px" height="60px" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: A483F5; margin-left: 30px; margin-top: 20px;">
+  							<path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+						</svg>
+					</td>
+					<td style="padding-top: 50px;">
+						<span id="likeCount">
+							${map.GALLERY_LIKE }Like
+						</span>
 					</td>
 				</tr>
 			</form>

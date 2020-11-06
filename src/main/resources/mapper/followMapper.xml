@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.proj.web.dao.FollowMapper">
+
+	<insert id="insertFollower" parameterType="follow">
+		insert into
+		    follow (
+		        member_id
+		        ,member_nickname
+		        ,friend_id
+		        ,friend_nickname
+		        ,follow_type
+		    ) values (
+		        #{member_id}
+		        ,#{member_nickname}
+		        ,#{friend_id}
+		        ,#{friend_nickname}
+		        ,#{follow_type}
+		    )
+	</insert>
+	
+	<delete id="deleteFollower" parameterType="follow">
+		delete from
+			follow
+		where
+			member_id = #{member_id}
+		and
+			friend_id = #{friend_id}
+		and
+			follow_type = #{follow_type}
+	</delete>
+	
+	<select id="checkFollower" parameterType="follow" resultType="int">
+		select
+			count(*)
+		from
+			follow
+		where
+			member_id = #{member_id}
+		and
+			friend_nickname = #{friend_nickname} 
+		and
+			follow_type = #{follow_type}
+	</select>
+	
+	<select id="countFollower" parameterType="follow" resultType="int">
+		select
+		    count(*)
+		from
+		    follow
+		where
+		    member_id = #{member_id}
+	</select>
+	
+	<select id="followerList" parameterType="follow" resultType="follow"> 
+		select
+			friend_id
+			,friend_nickname
+		from
+			follow
+		where
+			member_id = #{member_id}
+	</select>
+	
+	<select id="followingList" parameterType="follow" resultType="follow">
+		select
+		    member_id
+		    ,member_nickname
+		from
+		    follow
+		where
+		    friend_id = #{member_id}
+	</select>
+	
+	<select id="countFollowing" parameterType="follow" resultType="int">
+		select
+			count(*)
+		from
+		    follow
+		where
+		    friend_id = #{member_id}
+	</select>
+
+
+</mapper>

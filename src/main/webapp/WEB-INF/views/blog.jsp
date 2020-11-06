@@ -32,6 +32,20 @@
     		color:white;	
     	}
     
+    	#followerButton{
+			height:100px; 
+			width:200px; 
+			font-size: 30px;
+    	}
+    	
+    	#followingButton{
+    		height:100px; 
+			width:200px; 
+			font-size: 30px;
+			position: relative;
+			left: 230px;
+    		bottom: 100px;
+    	}
     </style>
     
     <script type="text/javascript">
@@ -119,7 +133,7 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-	
+    
 	<!-- Blog Section Begin -->
     <section class="blog spad">
         <div class="container">
@@ -132,6 +146,244 @@
                     </div>
                 </div>
             </div>
+            
+            <div>
+	       		<button type="button" id="followerButton" class="btn btn-light" onclick="followerList('${sessionScope.loginID }')">
+		            	팔로워<br>
+		            	<div id="changeFollower">${followerCnt }</div>
+	       		</button>
+            </div>
+            
+            <div>
+	       		<button type="button" id="followingButton" class="btn btn-light" onclick="followingList('${sessionScope.loginID }')">
+		            	팔로잉<br>
+		            	<div id="changeFollowing">${followingCnt }</div>
+	       		</button>
+            </div>
+            
+            <!-- Modal -->
+	  <div class="modal fade" id="followerModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 id="modal-title"></h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        <div class="modal-body">
+	          <h5 id="modal-detail">
+	          </h5>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	<!-- Modal end -->
+	
+	<input type="hidden" value="${sessionScope.loginID }" id="loginId">
+	<input type="hidden" value="${sessionScope.loginNickName }" id="loginNickname">
+	
+	<script type="text/javascript">
+		function memberGallery(member_id){
+			location.href = "/memberGallery?member_id="+member_id;
+		}
+
+		function directMessage(member_nickname){
+			location.href = "/message/directMessage?member_nickname="+member_nickname;
+		}
+
+		function plusFriend(friend_id,friend_nickname,index){
+			var followerCnt;
+			var loginNickname = document.getElementById("loginNickname").value;
+			var loginId = document.getElementById("loginId").value;
+			var indexButton = "#changeButton"+index;
+			var minusButton = '<button type="button" class="btn btn-danger" onClick="minusFriend(\'' + friend_id + '\'\,\''+ friend_nickname+'\'\,'+index+')"><i class="fa fa-minus"></i></button>'
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/insertFollow',
+		        type:'get',
+		        data:{
+		        		member_id : loginId
+		        		,member_nickname : loginNickname
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+				async: false,
+		        success:function(){
+	
+		        }
+		    });
+
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/countFollower',
+		        type:'get',
+		        data:{
+			        	member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+		        async: false,
+		        success:function(resp){
+					console.log(resp);
+					followerCnt = resp;
+		        }
+		    });
+
+			$("#changeFollower").html(followerCnt);
+			$(indexButton).empty();
+			$(indexButton).append(minusButton);
+
+		}
+
+		function minusFriend(friend_id,friend_nickname,index){
+			var followerCnt;
+			var loginId = document.getElementById("loginId").value;
+			var indexButton = "#changeButton"+index;
+			var plusButton = '<button type="button" class="btn btn-primary" onClick="plusFriend(\'' + friend_id + '\'\,\''+ friend_nickname + '\'\,' + index + ')"><i class="fa fa-plus"></i></button>';
+						
+			$.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/deleteFollower',
+		        type:'get',
+		        data:{
+		        		member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+				async: false,
+		        success:function(){
+	
+		        }
+		    });
+		    
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/countFollower',
+		        type:'get',
+		        data:{
+			        	member_id : loginId
+		        		,friend_id : friend_id
+		        		,friend_nickname : friend_nickname
+		        		,follow_type : 1
+				},
+		        async: false,
+		        success:function(resp){
+					console.log(resp);
+					followerCnt = resp;
+		        }
+		    });
+
+			$("#changeFollower").html(followerCnt);
+			$(indexButton).empty();
+			$(indexButton).append(plusButton);		    
+		}
+	
+		function followerList(member_id){
+			var arr;
+			var output = "";
+
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/followerList',
+		        type:'get',
+		        async: false,
+		        data:{
+						member_id : member_id
+			      	},
+		        success:function(resp){
+					console.log(resp);
+		        	arr = resp;
+		        },
+		        error:function(){
+		            alert('에러가 발생했습니다. 다시 시도해 주세요.');
+		        }
+		    });
+
+		    $.each(arr, function(index, item){
+			    output += "<table>"
+			    output += 	"<tr style='height: 50px;'>"
+			    output += 		"<td style='width: 260px;'>"+item.friend_nickname+"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="directMessage(\'' + item.friend_nickname + '\')">쪽지</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="memberGallery(\'' + item.friend_id + '\')">전시회</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 		"<td id='changeButton"+index+"'>"
+			    output += 			'<button type="button" class="btn btn-danger" onClick="minusFriend(\'' + item.friend_id + '\'\,\''+item.friend_nickname+'\'\,'+index+')"><i class="fa fa-minus"></i></button>'
+			    output += 		"</td>"
+			    output += 	"</tr>"
+			    output += "</table>"
+		   	});
+
+			$("#modal-title").html("follower");
+			$("#modal-detail").html(output);
+	        $("#followerModal").modal();
+		}
+		
+		function followingList(member_id){
+			var arr;
+			var output = "";
+
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/followingList',
+		        type:'get',
+		        async: false,
+		        data:{
+						member_id : member_id
+			      	},
+		        success:function(resp){
+					console.log(resp);
+		        	arr = resp;
+		        },
+		        error:function(){
+		            alert('에러가 발생했습니다. 다시 시도해 주세요.');
+		        }
+		    });
+
+		    $.each(arr, function(index, item){
+			    output += "<table>"
+			    output += 	"<tr style='height: 50px;'>"
+			    output += 		"<td style='width: 310px;'>"+item.member_nickname+"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="directMessage(\'' + item.member_nickname + '\')">쪽지</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 		"<td>"
+			    output += 			'<button type="button" class="btn btn-outline-info" onClick="memberGallery(\'' + item.member_id + '\')">전시회</button>'
+			    output += 		"</td>"
+			    output += 		"<td style='width:10px;'>"
+			    output += 		"</td>"
+			    output += 	"</tr>"
+			    output += "</table>"
+		   	});
+
+		    $("#modal-title").html("following");
+			$("#modal-detail").html(output);
+	        $("#followerModal").modal();
+		}
+	</script>
             
             <div class="row">
             	<c:forEach items="${gallerylist }" var="list" varStatus="status">

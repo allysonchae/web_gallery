@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.proj.web.service.WorkService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.LikeVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
@@ -288,4 +289,82 @@ public class WorkDAO {
 		return total;
 	}
 
+	
+	public void plusLike(int gallery_seq) {
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		
+		try {
+			wm.plusLike(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void minusLike(int gallery_seq) {
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		
+		try {
+			wm.minusLike(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public int likeCount(int gallery_seq) {
+
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = 0;
+		
+		try {
+			cnt = wm.likeCount(gallery_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+		
+	}
+
+	public void onLike(LikeVO like) {
+
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		
+		try {
+			wm.onLike(like);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void offLike(LikeVO like) {
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		
+		try {
+			wm.offLike(like);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public int likeCheck(LikeVO like) {
+		
+		WorkMapper wm = ss.getMapper(WorkMapper.class);
+		int cnt = 0;
+		
+		try {
+			cnt = wm.likeCheck(like);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+		
+	}
 }

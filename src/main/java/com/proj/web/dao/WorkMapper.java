@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.LikeVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
@@ -52,4 +53,16 @@ public interface WorkMapper {
 	public int getGalTotal(HashMap<String, Object> map);
 
 	public ArrayList<HashMap<String, Object>> listGallery(HashMap<String, Object> map, RowBounds rb);
+	
+	public void plusLike(int gallery_seq);
+	
+	public void minusLike(int gallery_seq);
+
+	public int likeCount(int gallery_seq);
+
+	public void onLike(LikeVO like);
+	
+	public void offLike(LikeVO like);
+	
+	public int likeCheck(LikeVO like);
 }

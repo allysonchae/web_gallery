@@ -28,9 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.web.service.CalendarService;
+import com.proj.web.service.FollowService;
 import com.proj.web.service.InformationService;
 import com.proj.web.service.WorkService;
 import com.proj.web.util.PageNavigator;
+import com.proj.web.vo.FollowVO;
 import com.proj.web.vo.GalleryVO;
 import com.proj.web.vo.InformationVO;
 import com.proj.web.vo.MarketVO;
@@ -39,7 +41,6 @@ import com.proj.web.vo.ReplyVO;
 import com.proj.web.vo.WorkVO;
 
 import com.proj.web.service.MemberService;
-import com.proj.web.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
@@ -62,6 +63,9 @@ public class PageController {
 	
 	final int countPerPage = 9;			//페이지당 글 수
 	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
+	
+	@Autowired
+	private FollowService fs;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -298,6 +302,14 @@ public class PageController {
 		model.addAttribute("gallerylist", gallerylist);
 		model.addAttribute("navi", navi);
 		model.addAttribute("searchText", searchText);
+		
+		int followerCnt = fs.countFollower();
+		int followingCnt = fs.countFollowing();
+		
+		logger.info("follower 수 : {}", followerCnt);
+		
+		model.addAttribute("followerCnt", followerCnt);
+		model.addAttribute("followingCnt", followingCnt);
 
 		return "/blog";
 	}

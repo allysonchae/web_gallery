@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.proj.web.dao.WorkDAO;
 import com.proj.web.util.FileService;
 import com.proj.web.vo.GalleryVO;
+import com.proj.web.vo.LikeVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.MemberVO;
 import com.proj.web.vo.ReplyVO;
@@ -291,5 +292,41 @@ public class WorkService {
 		return total;
 	}
 
+	
+	public void plusLike(int gallery_seq) {
+		
+		dao.plusLike(gallery_seq);
+		
+	}
+	
+	public void minusLike(int gallery_seq) {
+		
+		dao.minusLike(gallery_seq);
+		
+	}
+
+	public int likeCount(int gallery_seq) {
+
+		return dao.likeCount(gallery_seq);
+		
+	}
+
+	public void onLike(LikeVO like) {
+
+		dao.onLike(like);
+		
+	}
+
+	public void offLike(LikeVO like) {
+		
+		dao.offLike(like);
+		
+	}
+	
+	public int likeCheck(LikeVO like) {
+		
+		return dao.likeCheck(like);
+		
+	}
 	
 }

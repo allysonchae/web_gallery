@@ -129,6 +129,7 @@
 		    ,g.member_id as member_id
 		    ,w.work_name as work_name
 		    ,g.member_nickname as member_nickname
+		    ,g.gallery_like as gallery_like
 		from
 		    gallery g, work w
 		where
@@ -287,4 +288,64 @@
 		order by gallery_seq desc
 	</select>
 	
+	<select id="likeCount" parameterType="int" resultType="int">
+		select
+			gallery_like
+		from
+		    gallery
+		where
+		    gallery_seq = #{gallery_seq}
+	</select>
+	
+
+	<update id="plusLike" parameterType="int">
+		update
+    		gallery
+		set
+    		gallery_like = gallery_like + 1
+		where
+    		gallery_seq = #{gallery_seq}
+	</update>
+	
+	
+	<update id="minusLike" parameterType="int">
+		update
+    		gallery
+		set
+    		gallery_like = gallery_like - 1
+		where
+    		gallery_seq = #{gallery_seq}
+	</update>
+	
+	<insert id="onLike" parameterType="like">
+		insert into 
+		    like_check(
+		        member_id
+		        ,gallery_seq
+		    )values(
+				#{member_id}
+		        ,#{gallery_seq}
+		    )
+	</insert>
+	
+	<delete id="offLike" parameterType="like">
+		delete from
+		    like_check
+		where
+		    member_id = #{member_id}
+		and
+		    gallery_seq = #{gallery_seq}
+	</delete>
+	
+	<select id="likeCheck" parameterType="like" resultType="int">
+		select
+		    count(*)
+		from
+		    like_check
+		where
+		    member_id = #{member_id}
+		and
+		    gallery_seq = #{gallery_seq}
+	</select>
+
 </mapper>
