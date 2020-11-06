@@ -373,8 +373,6 @@
 			    output += 		"<td>"
 			    output += 			'<button type="button" class="btn btn-outline-info" onClick="memberGallery(\'' + item.member_id + '\')">전시회</button>'
 			    output += 		"</td>"
-			    output += 		"<td style='width:10px;'>"
-			    output += 		"</td>"
 			    output += 	"</tr>"
 			    output += "</table>"
 		   	});
