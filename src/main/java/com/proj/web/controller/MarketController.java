@@ -106,10 +106,15 @@ public class MarketController {
 							,@RequestParam("gallery_seq")int[]gallery_seq
 							,@RequestParam("work_name")String[]work_name
 							,@RequestParam("market_amount")String[]market_amount
-							,@RequestParam("market_price")String[]market_price) {
+							,@RequestParam("market_price")String[]market_price
+							,@RequestParam("height")String[]height
+							,@RequestParam("width")String[]width) {
 		
 		for(int i=0; i<work_seq.length;i++) {
 			MarketVO market = new MarketVO();
+			String market_size = height[i] + "X" + width[i];
+			
+			market.setMarket_size(market_size);
 			market.setWork_description(work_description[i]);
 			market.setWork_seq(work_seq[i]);
 			market.setGallery_seq(gallery_seq[i]);

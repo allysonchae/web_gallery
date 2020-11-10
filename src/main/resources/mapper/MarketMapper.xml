@@ -45,7 +45,8 @@
 			,member_id 
 			,member_nickname   
 			,market_price 
-			,market_amount 
+			,market_amount
+			,market_size 
 		)values(
 			market_seq.nextval
 			,#{work_seq}
@@ -55,7 +56,8 @@
 			,#{member_id} 
 			,#{member_nickname}   
 			,#{market_price} 
-			,#{market_amount} 
+			,#{market_amount}
+			,#{market_size}
 			)
 	</insert>
 
@@ -87,6 +89,7 @@
 			,member_nickname   
 			,market_price 
 			,market_amount
+			,market_size
 		from
 			market
 		where

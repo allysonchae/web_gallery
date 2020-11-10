@@ -65,6 +65,11 @@
 			     		</table>
 			     		<table style="width: 550px; font-size: 20px; position: relative; top: 280px; left: 20px;">
 			     			<tr>
+								<td>
+									크기:${market.market_size }
+								</td>
+							</tr>			     			
+			     			<tr>
 			     				<td>
 			     					구매수량:
 			     					<select id="input" onchange="sum()"></select>
@@ -81,7 +86,6 @@
 			     		</table>
 			     		<input type="hidden" id="price" value="${market.market_price }">
 						<input type="button" value="구매하기" style="width:150px; position:relative; left:550px; top:220px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
-			     		<%-- <h3 style="width:700px;">${work.work_description }</h3> --%>	
 			     	</div>
 	        	</td>
 			</tr>

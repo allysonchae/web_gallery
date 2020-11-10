@@ -14,5 +14,6 @@ public class MarketVO {
 	private String member_nickname;
 	private String market_price;
 	private String market_amount;
+	private String market_size;
 	
 }

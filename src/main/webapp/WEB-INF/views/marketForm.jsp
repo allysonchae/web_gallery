@@ -132,11 +132,15 @@
 				<tr>
 					<td style="width:100px;">No.${status.count }</td>
 					<td style="text-align: center">
-						<img src="/download?work_seq=${list.work_seq }&id=${list.id }" style="width: 400px; height: 300px;">
+						<img src="/download?work_seq=${list.work_seq }&id=${list.id }" style="width: 400px; height: 360px;">
 					</td>
 					<td>
 						작품명:
-						<input type="text" name="work_name" value="${list.work_name }" readonly="readonly" style="display: block; margin : 0 auto; width:750px; height:50px;">
+						<input type="text" name="work_name" value="${list.work_name }" readonly="readonly" style="display: block; margin : 0 auto; width:750px; height:50px;"><br>
+						크기:
+						<div style="display: block;">
+							<input type="text" name="height" placeholder="세로" style="margin : 0 auto; width:354px; height:50px;"> &nbsp; x &nbsp; <input type="text" name="width" placeholder="가로" style="margin : 0 auto; width:354px; height:50px;"> 
+						</div>
 						<br>
 						재고수량:
 						<input type="text" name="market_amount" placeholder="재고수량을 입력해주세요." style="display: block; margin : 0 auto; width:750px; height:50px;">
@@ -157,8 +161,11 @@
 			var amount = document.getElementsByName("market_amount");
 			var price = document.getElementsByName("market_price");
 			var name = document.getElementsByName("work_name");
+			var height = document.getElementsByName("height");
+			var width  = document.getElementsByName("width");
 			var announce = "";
 
+			
 			for(var i = 0 ; i<amount.length ; i++){
 				if(isNaN(amount[i].value)){
 					alert(name[i].value+"의 재고수량 입력 형식이 잘못 되었습니다.");
@@ -169,7 +176,17 @@
 					alert(name[i].value+"의 가격 입력 형식이 잘못 되었습니다.");
 					return false;
 				}
-				
+
+				if(isNaN(height[i].value)){
+					alert(name[i].value+"의 작품 규격 사이즈의 형식이 잘못 되었습니다.");
+					return false;
+				}
+
+				if(isNaN(width[i].value)){
+					alert(name[i].value+"의 작품 규격 사이즈의 형식이 잘못 되었습니다.");
+					return false;
+				}
+
 				if(amount[i].value==""){
 					alert(name[i].value+"의 재고수량을 입력해주세요.");
 					return false;
@@ -179,12 +196,23 @@
 					alert(name[i].value+"의 가격을 입력해주세요.");
 					return false;
 				}
+				
+				if(height[i].value==""){
+					alert(name[i].value+"의 작품 규격 사이즈를 입력해주세요.");
+					return false;
+				}
+
+				if(width[i].value==""){
+					alert(name[i].value+"의 작품 규격 사이즈를 입력해주세요.");
+					return false;
+				}
 			}
 
 			for(var i = 0 ; i<amount.length ; i++){
 				announce += "작품명:"+name[i].value+"\n";
 				announce += "재고수량:"+amount[i].value+"개\n";
 				announce += "가격:"+price[i].value+"원\n";
+				announce += "작품 규격:"+height[i].value+" X "+width[i].value+"\n";
 				announce += "\n"
 			}
 
