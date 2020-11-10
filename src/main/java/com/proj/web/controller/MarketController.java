@@ -139,4 +139,14 @@ public class MarketController {
 		return "/MarketOne";
 	}
 	
+	@RequestMapping(value = "/myWorkSellRecord", method = RequestMethod.GET)
+	public String myWorkSellRecord(Model model) {
+		
+		ArrayList<MarketVO> list = ms.myWorkSellRecord();
+		
+		model.addAttribute("list", list);
+		
+		return "/myWorkSellRecord";
+	}
+	
 }

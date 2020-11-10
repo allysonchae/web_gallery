@@ -72,4 +72,12 @@ public class MarketService {
 		return marketlistAll;
 	}
 	
+	public ArrayList<MarketVO> myWorkSellRecord(){
+		
+		String member_id = (String)session.getAttribute("loginID");
+		
+		return dao.myWorkSellRecord(member_id);
+		
+	}
+	
 }

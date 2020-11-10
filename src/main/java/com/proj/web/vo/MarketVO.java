@@ -8,6 +8,7 @@ public class MarketVO {
 	private int market_seq;
 	private int gallery_seq;
 	private int work_seq;
+	private int sell_state;
 	private String work_name;
 	private String work_description;
 	private String member_id;

@@ -119,4 +119,19 @@ public class MarketDAO {
 			}
 			return marketlistAll;
 		}
+		
+		public ArrayList<MarketVO> myWorkSellRecord(String member_id){
+			
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			ArrayList<MarketVO> list = null;
+			
+			try {
+				list = mm.myWorkSellRecord(member_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+			
+		}
 }

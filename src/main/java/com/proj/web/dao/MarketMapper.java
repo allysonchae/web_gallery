@@ -10,20 +10,22 @@ import com.proj.web.vo.WorkVO;
 
 public interface MarketMapper {
 
-	ArrayList<MarketVO> MarketAll();
-
-	WorkVO selectMarketWork(HashMap<String, Object> map);
-
-	void insertMarket(MarketVO market);
-
-	MarketVO marketOne(int market_seq);
-
-	ArrayList<MarketVO> listMarket(HashMap<String, Object> map, RowBounds rb);
-
-	int getTotal(HashMap<String, Object> map);
-
-	int getMarketTotal(String searchText);
-
-	ArrayList<MarketVO> marketlistAll(String searchText, RowBounds rb);
+	 public ArrayList<MarketVO> MarketAll();
+	 
+	 public WorkVO selectMarketWork(HashMap<String, Object> map);
+	 
+	 public void insertMarket(MarketVO market);
+	 
+	 public MarketVO marketOne(int market_seq);
+	 
+	 public ArrayList<MarketVO> listMarket(HashMap<String, Object> map, RowBounds rb);
+	 
+	 public int getTotal(HashMap<String, Object> map);
+	 
+	 public int getMarketTotal(String searchText);
+	 
+	 public ArrayList<MarketVO> marketlistAll(String searchText, RowBounds rb);
+	 
+	 public ArrayList<MarketVO> myWorkSellRecord(String member_id);
 
 }

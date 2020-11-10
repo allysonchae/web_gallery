@@ -33,18 +33,6 @@
     	}
     
     </style>
-    
-    <script type="text/javascript">
-	    function pagingFormSubmit(currentPage) {
-	    	var form = document.getElementById('pagingForm');
-	    	var page = document.getElementById('page');
-	    	page.value = currentPage;
-	    	form.submit();
-	    }
-
-	</script>
-    
-    
 </head>
 
 <body>
@@ -128,106 +116,46 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title center-title">
-                        <h2>My Work Market</h2>
-                        <h1>My Work Market</h1>
-                        <h4>내 작품 마켓</h4>
+                        <h2>sales history</h2>
+                        <h1>sales history</h1>
+                        <h4>판매이력</h4>
                     </div>
                 </div>
             </div>
             
-			<div>
-				<button type="button" onclick="myWorkSellRecord();" class="btn btn-outline-secondary" style="position: absolute; left: 1350px; top:350px;">
-					판매이력
-				</button>
-            </div>
-            
-            <div>
-				<button type="button" class="btn btn-outline-secondary" style="position: absolute; left: 1450px; top:350px;">
-					구매이력
-				</button>
-            </div>
-            
-         	<form id="marketForm" action="/marketForm" method="get" onsubmit="return checkCount();">
-				
-	            <div class="row">
-	            	<c:forEach items="${marketlist }" var="list" varStatus="status">
-		                <div class="col-lg-4 col-md-6 col-sm-6">
-		                    <div class="discography__item">
-		                        <div class="discography__item__pic">
+         		
+            <div class="row">
+            	<c:forEach items="${list }" var="list" varStatus="status">
+	                <div class="col-lg-4 col-md-6 col-sm-6">
+	                    <div class="discography__item">
+	                        <div class="discography__item__pic">
+	                      		<a href="/galleryDetail?gallery_seq=${list.gallery_seq }" >
 		                            <img src="/download?work_seq=${list.work_seq }&id=${list.gallery_seq }" style="width: 100px; height: 300px;">
-		                        </div>
-		                        <div class="discography__item__text">
-									<input type="checkbox" name="work" style="width:30px; height: 30px;" value="${list.work_seq }+${list.gallery_seq}">
-									<h3>${list.work_name }</h3>
-		                        </div>
-		                    </div>
-		                </div>
-	                </c:forEach>
-	        	</div>
-				<div style="position: absolute; left: 400px; top:350px;">
-					<button type="submit" class="btn btn-outline-secondary">판매 정보 등록하기</button>
-				</div>
-         	</form>
-
-	        <div class="col-lg-12">
-	        	<div class="pagination__links" style="margin-top: 50px;">
-	            	<!-- 페이지 이동 부분 -->                      
-					<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
-					<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
-					
-					<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
-						<c:if test="${counter == navi.currentPage}"><b></c:if>
-						<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
-						<c:if test="${counter == navi.currentPage}"></b></c:if>
-					</c:forEach>
-					&nbsp;&nbsp;
-					<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
-					<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
-						
-					<!-- /페이지 이동 끝 -->
-					
-					<!-- 검색폼 -->
-					<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
-						<input type="hidden" name="page" id="page" />
-						<input type="text"  name="searchText" value="${searchText}" placeholder="제목" style="height: 50px; width:700px; margin-left:160px; margin-top: 100px;margin-bottom: 40px;"/>
-						<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색" style="height: 50px; width:100px;">
-					</form>
-					<!-- 검색 끝 -->
-    		</div>
-		</div>
+	                        	</a>
+	                        </div>
+	                        <div class="discography__item__text">
+                            	<h4>${list.work_name }</h4>
+                            	<h4>${list.market_size }</h4>
+								<h4>${list.market_amount }개</h4>                            	
+								<h4>&#8361; ${list.market_price }</h4>
+	                        </div>
+	                    </div>
+	                </div>
+                </c:forEach>
+               
+                <div class="col-lg-12">
+                    <div class="pagination__links">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- Discography Section End -->
-    
-    <script type="text/javascript">
-		function myWorkSellRecord(){
 
-			location.href = "/myWorkSellRecord";
-			
-		}
-    
-		function checkCount(){
-
-			var work = document.getElementsByName("work");
-			var cnt = 0;
-
-			for(var i = 0 ; i<work.length ; i++){
-				if(work[i].checked == true){
-					cnt++;
-				}
-			}
-
-			if(cnt>5){
-				alert("판매 품목은 5개까지만 선택 가능합니다.");
-				return false;
-			}else if(cnt==0){
-				alert("판매 품목을 선택해주세요.");
-				return false;
-			}
-			
-			return true;
-		}
-    </script>
-    
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
         <div class="container">

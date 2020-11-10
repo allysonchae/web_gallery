@@ -141,6 +141,24 @@
 		</if>
 		order by market_seq desc
 	</select>
+	
+	<select id="myWorkSellRecord" parameterType="String" resultType="market">
+		select
+		    market_seq
+			,work_seq
+			,gallery_seq
+			,work_name
+			,work_description
+			,member_id 
+			,member_nickname   
+			,market_price 
+			,market_amount
+			,market_size
+		from
+		    market
+		where
+		    member_id = #{member_id}
+	</select>
 
 
 </mapper>
