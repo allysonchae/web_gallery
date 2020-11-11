@@ -142,7 +142,7 @@
             </div>
             
             <div>
-				<button type="button" class="btn btn-outline-secondary" style="position: absolute; left: 1450px; top:350px;">
+				<button type="button" onclick="myWorkBuyRecord();" class="btn btn-outline-secondary" style="position: absolute; left: 1450px; top:350px;">
 					구매이력
 				</button>
             </div>
@@ -202,6 +202,12 @@
 		function myWorkSellRecord(){
 
 			location.href = "/myWorkSellRecord";
+			
+		}
+
+		function myWorkBuyRecord(){
+
+			location.href = "/myWorkBuyRecord";
 			
 		}
     

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 
+import com.proj.web.vo.BuyVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.WorkVO;
 
@@ -27,5 +28,9 @@ public interface MarketMapper {
 	 public ArrayList<MarketVO> marketlistAll(String searchText, RowBounds rb);
 	 
 	 public ArrayList<MarketVO> myWorkSellRecord(String member_id);
+	 
+	 public void insertBuy(BuyVO buy);
+	 
+	 public void updateAmount(BuyVO buy);
 
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.proj.web.controller.MarketController;
+import com.proj.web.vo.BuyVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.WorkVO;
 
@@ -132,6 +133,30 @@ public class MarketDAO {
 			}
 			
 			return list;
+			
+		}
+		
+		public void insertBuy(BuyVO buy) {
+			
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			
+			try {
+				mm.insertBuy(buy);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		public void updateAmount(BuyVO buy) {
+			
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			
+			try {
+				mm.updateAmount(buy);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 }

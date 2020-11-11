@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proj.web.dao.MarketDAO;
+import com.proj.web.vo.BuyVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.WorkVO;
 
@@ -77,6 +78,17 @@ public class MarketService {
 		String member_id = (String)session.getAttribute("loginID");
 		
 		return dao.myWorkSellRecord(member_id);
+		
+	}
+	
+	public void insertBuy(BuyVO buy) {
+		
+		dao.updateAmount(buy);
+		
+		String member_id = (String)session.getAttribute("loginID");
+		buy.setMember_id(member_id);
+		
+		dao.insertBuy(buy);
 		
 	}
 	

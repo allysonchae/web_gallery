@@ -159,6 +159,39 @@
 		where
 		    member_id = #{member_id}
 	</select>
+	
+	<select id="insertBuy" parameterType="buy">
+		insert into 
+		    buy(
+		        buy_name
+		        ,buy_amount
+		        ,buy_bank
+		        ,buy_account
+		        ,buy_price
+		        ,buy_zipNo
+		        ,buy_address
+		        ,market_seq
+		        ,member_id
+		    )values(
+		    	#{buy_name}
+		    	,#{buy_amount}
+		    	,#{buy_bank}
+		    	,#{buy_account}
+		    	,#{buy_price}
+		    	,#{buy_zipNo}
+		    	,#{buy_address}
+		    	,#{market_seq}
+		    	,#{member_id}
+		    )
+	</select>
 
+	<update id="updateAmount" parameterType="buy">
+		update
+		    market
+		set
+		    market_amount = market_amount - #{buy_amount}
+		where
+		    market_seq = #{market_seq}
+	</update>
 
 </mapper>

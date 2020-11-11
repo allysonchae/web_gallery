@@ -3,6 +3,8 @@ package com.proj.web.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.web.service.MarketService;
 import com.proj.web.service.WorkService;
 import com.proj.web.util.PageNavigator;
+import com.proj.web.vo.BuyVO;
 import com.proj.web.vo.MarketVO;
 import com.proj.web.vo.WorkVO;
 
@@ -132,7 +136,7 @@ public class MarketController {
 		
 		MarketVO market = ms.marketOne(market_seq);
 		
-		logger.info("market : {}", market);
+		logger.info("marketOne : {}", market);
 		
 		model.addAttribute("market", market);
 		
@@ -148,5 +152,39 @@ public class MarketController {
 		
 		return "/myWorkSellRecord";
 	}
+	
+	@RequestMapping(value = "/buyWork", method = RequestMethod.GET)
+	public String buyWork(String buy_amount, String buy_price, int market_seq,String work_name, Model model) {
+		
+		logger.info("buy_amount : {}", buy_amount);
+		logger.info("buy_price : {}", buy_price);
+		logger.info("market_seq : {}", market_seq);
+		logger.info("work_name : {}", work_name);
+		
+		model.addAttribute("buy_amount", buy_amount);
+		model.addAttribute("buy_price", buy_price);
+		model.addAttribute("market_seq", market_seq);
+		model.addAttribute("work_name", work_name);
+		
+		return "/buyWork";
+	}
+	
+	@RequestMapping(value = "/popup/jusoPopup", method = RequestMethod.POST)
+	public String goPopup() {
+		
+		return "/popup/jusoPopup";
+	}
+	
+	
+	 @ResponseBody
+	 @RequestMapping(value = "/insertBuy", method = RequestMethod.GET) 
+	 public void insertBuy(BuyVO buy) {
+	 
+		 logger.info("buy : {}",buy);
+
+		 ms.insertBuy(buy);
+	 
+	 }
+	
 	
 }

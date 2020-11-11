@@ -11,10 +11,11 @@
 		width:300px;	
 	}
 </style>
+
 <script type="text/javascript">
 		$(function(){
 			var amount = document.getElementById("amount").value;
-			
+						
 			for(var i = 0 ; i<=amount ; i++){
 				var rowItem = "<option>"+i+"</option>";
 				$("#input").append(rowItem);
@@ -44,6 +45,22 @@
 			var price = comma(input*document.getElementById("price").value);
 			$("#sum_check").val(price+"원");
 			$("#sum_check").css("color","red");
+		}
+
+		function buyWork(){
+			var buy_amount = document.getElementById("input").value;
+			var buy_price = buy_amount * document.getElementById("price").value;
+			var market_seq = document.getElementById("market_seq").value;
+			var work_name = document.getElementById("work_name").value;
+
+			if(buy_amount==0){
+				alert("구매 개수를 선택해주세요.");
+				return;
+			}
+
+			var page = "/buyWork?buy_amount="+buy_amount+"&buy_price="+buy_price+"&market_seq="+market_seq+"&work_name="+work_name;
+
+			window.open(page,"popup","width=600,height=400"); 
 		}
 </script>
 
@@ -85,13 +102,15 @@
 			     			</tr>
 			     		</table>
 			     		<input type="hidden" id="price" value="${market.market_price }">
-						<input type="button" value="구매하기" style="width:150px; position:relative; left:550px; top:220px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
+						<input type="button" value="구매하기" onclick="buyWork();" style="width:150px; position:relative; left:550px; top:220px; height:80px;background: #7c4df1;opacity: 70%;color:white;border:none;border-radius:10px;">
 			     	</div>
 	        	</td>
 			</tr>
 		</table>
 	</div>
 	<input type="hidden" value="${market.market_amount }" id="amount">
-	
+	<input type="hidden" value="${market.market_seq }" id="market_seq">
+	<input type="hidden" value="${market.work_name }" id="work_name">
+
 </body>
 </html>

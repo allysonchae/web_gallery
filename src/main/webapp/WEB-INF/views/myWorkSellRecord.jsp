@@ -129,9 +129,7 @@
 	                <div class="col-lg-4 col-md-6 col-sm-6">
 	                    <div class="discography__item">
 	                        <div class="discography__item__pic">
-	                      		<a href="/galleryDetail?gallery_seq=${list.gallery_seq }" >
-		                            <img src="/download?work_seq=${list.work_seq }&id=${list.gallery_seq }" style="width: 100px; height: 300px;">
-	                        	</a>
+	                            <img src="/download?work_seq=${list.work_seq }&id=${list.gallery_seq }" style="width: 100px; height: 300px;">
 	                        </div>
 	                        <div class="discography__item__text">
                             	<h4>${list.work_name }</h4>
