@@ -53,7 +53,7 @@
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 		var myForm = document.form;
 		var url = "/popup/jusoPopup";
-		var pop = window.open("","form","toolbal=no, width=570, height=420, directories=no, status=no, scrollbars=yes, resizable=yes"); 
+		var pop = window.open("","form","toolbal=no, width=570, height=600, directories=no, status=no, scrollbars=yes, resizable=yes"); 
 		myForm.action = url;
 		myForm.method = "post";
 		myForm.target = "form";
@@ -81,6 +81,7 @@
 		var roadFullAddr = document.getElementById("roadFullAddr").value;
 		var addrDetail = document.getElementById("addrDetail").value;
 		var market_seq = document.getElementById("market_seq").value;
+		var password = document.getElementById("password").value;
 		
 		if(buy_bank == "direct"){
 			buy_bank = document.getElementById("selboxDirect").value;
@@ -93,6 +94,11 @@
 
 		if(buy_account==""){
 			alert("계좌번호를 입력해주세요.");
+			return;
+		}
+
+		if(password==""){
+			alert("계좌비밀번호를 입력해주세요.");
 			return;
 		}
 
@@ -152,10 +158,10 @@
 			<td style="width: 300px; height: 60px;">결제은행</td>
 			<td>
 				<select id="selbox" onchange="selbox();">
-					<option value="shihan">신한은행</option>
-					<option value="kokmin">국민은행</option>
-					<option value="uri">우리은행</option>
-					<option value="hana">하나은행</option>
+					<option value="신한은행">신한은행</option>
+					<option value="국민은행">국민은행</option>
+					<option value="우리은행">우리은행</option>
+					<option value="하나은행">하나은행</option>
 					<option value="direct">기타(직접입력)</option>
 				</select>
 				&nbsp&nbsp
@@ -166,6 +172,12 @@
 			<td style="width: 300px; height: 60px;">계좌번호</td>
 			<td>
 				<input type="text" id="buy_account">
+			</td>
+		</tr>
+		<tr>
+			<td>계좌비밀번호</td>
+			<td>
+				<input type="text" maxlength="2" style="width: 30px;" id="password">●●
 			</td>
 		</tr>
 		<tr>

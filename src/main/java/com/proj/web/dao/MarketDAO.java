@@ -159,4 +159,18 @@ public class MarketDAO {
 			}
 			
 		}
+		
+		public ArrayList<HashMap<String, Object>> selectBuy(String member_id){
+			
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			ArrayList<HashMap<String, Object>> list = null;
+			
+			try {
+				list = mm.selectBuy(member_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
 }

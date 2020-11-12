@@ -185,6 +185,18 @@ public class MarketController {
 		 ms.insertBuy(buy);
 	 
 	 }
+	 
+	 @RequestMapping(value = "/myWorkBuyRecord", method = RequestMethod.GET)
+	 public String myWorkBuyRecord(Model model) {
+		 
+		 ArrayList<HashMap<String, Object>> list = ms.selectBuy();
+		 
+		 logger.info("myworkbuyrecord : {} ", list);
+		 
+		 model.addAttribute("list", list);
+		 
+		 return "/myWorkBuyRecord";
+	 }
 	
 	
 }

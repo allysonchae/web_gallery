@@ -32,5 +32,7 @@ public interface MarketMapper {
 	 public void insertBuy(BuyVO buy);
 	 
 	 public void updateAmount(BuyVO buy);
-
+	 
+	 public ArrayList<HashMap<String, Object>> selectBuy(String member_id);
+	 
 }

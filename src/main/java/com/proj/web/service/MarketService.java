@@ -92,4 +92,12 @@ public class MarketService {
 		
 	}
 	
+	public ArrayList<HashMap<String, Object>> selectBuy(){
+		
+		String member_id = (String)session.getAttribute("loginID");
+		
+		return dao.selectBuy(member_id);
+		
+	}
+	
 }

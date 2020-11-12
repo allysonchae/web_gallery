@@ -193,5 +193,26 @@
 		where
 		    market_seq = #{market_seq}
 	</update>
+	
+	<select id="selectBuy" parameterType="String" resultType="hashmap">
+		select
+		    b.buy_name as buy_name
+		    ,b.buy_amount as buy_amount
+		    ,b.buy_bank as buy_bank
+		    ,b.buy_account as buy_account
+		    ,b.buy_price as buy_price
+		    ,b.buy_zipno as buy_zipno
+		    ,b.buy_address as buy_address
+		    ,b.market_seq as market_seq
+		    ,m.gallery_seq as gallery_seq
+		    ,m.work_seq as work_seq
+		from
+		    buy b, market m
+		where
+		    b.market_seq = m.market_seq
+		and
+		    b.member_id = #{member_id}
+	</select>
+	
 
 </mapper>

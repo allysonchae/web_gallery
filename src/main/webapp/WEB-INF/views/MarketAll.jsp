@@ -43,6 +43,22 @@
     </style>
     
     <script type="text/javascript">
+		$(function(){
+			var market_amount = document.getElementsByName("market_amount");
+
+			for(var i = 0 ; i<market_amount.length ; i++){
+				if(market_amount[i].value==0){
+					var inputId = "#input"+(i+1);
+					$(inputId).css("color","red");
+					$(inputId).append("품절");
+				}else{
+					var inputId = "#input"+(i+1);
+					$(inputId).append(market_amount[i].value+"개");
+				}
+			}
+
+		});
+    
 	    function pagingFormSubmit(currentPage) {
 	    	var form = document.getElementById('pagingForm');
 	    	var page = document.getElementById('page');
@@ -143,6 +159,7 @@
          		
             <div class="row">
             	<c:forEach items="${marketlistAll }" var="list" varStatus="status">
+            		<input type="hidden" value="${list.market_amount }" name="market_amount">
 	                <div class="col-lg-4 col-md-6 col-sm-6">
 	                    <div class="discography__item">
 	                        <div class="discography__item__pic">
@@ -152,8 +169,10 @@
 	                        </div>
 	                        <div class="discography__item__text">
 	                        	<h3>${list.work_name }</h3>
+	                        	<h3><div id="input${status.count }"></div></h3>
+	                        	<h3>&#8361; ${list.market_price }</h3>
+	                        	<br><br>
 	                        	<h4>판매자  ${list.member_nickname }</h4>
-	                        	<h4>&#8361; ${list.market_price }</h4>
 	                        </div>
 	                    </div>
 	                </div>

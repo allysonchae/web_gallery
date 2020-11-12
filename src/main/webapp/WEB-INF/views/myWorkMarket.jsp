@@ -164,7 +164,7 @@
 		                </div>
 	                </c:forEach>
 	        	</div>
-				<div style="position: absolute; left: 400px; top:350px;">
+				<div style="position: absolute; left: 350px; top:350px;">
 					<button type="submit" class="btn btn-outline-secondary">판매 정보 등록하기</button>
 				</div>
          	</form>
