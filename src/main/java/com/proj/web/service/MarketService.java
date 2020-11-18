@@ -99,5 +99,11 @@ public class MarketService {
 		return dao.selectBuy(member_id);
 		
 	}
+
+	public void saleStop(int market_seq) {
+
+		dao.saleStop(market_seq);
+		
+	}
 	
 }

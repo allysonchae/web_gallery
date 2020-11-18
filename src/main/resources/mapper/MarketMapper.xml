@@ -47,6 +47,7 @@
 			,market_price 
 			,market_amount
 			,market_size 
+			,sale_state
 		)values(
 			market_seq.nextval
 			,#{work_seq}
@@ -58,7 +59,8 @@
 			,#{market_price} 
 			,#{market_amount}
 			,#{market_size}
-			)
+			,#{sale_state}
+		)
 	</insert>
 
 	<select id="MarketAll" resultType="market">
@@ -74,6 +76,8 @@
 			,market_amount
 		from
 			market
+		where
+    		sale_state = 1
 		order by
 			market_seq desc
 	</select>
@@ -115,8 +119,10 @@
 			count(*)
 		from 
 			market
-		<if test="_parameter != null">
 		where
+    		sale_state = 1
+		<if test="_parameter != null">
+		and
 			work_name like '%' || #{searchText} || '%'
 		</if>
 		order by market_seq desc
@@ -135,8 +141,10 @@
 			,market_amount
 		from 
 			market
-		<if test="_parameter != null">
 		where
+    		sale_state = 1
+		<if test="_parameter != null">
+		and
 			work_name like '%' || #{searchText} || '%'
 		</if>
 		order by market_seq desc
@@ -154,6 +162,7 @@
 			,market_price 
 			,market_amount
 			,market_size
+			,sale_state
 		from
 		    market
 		where
@@ -213,6 +222,15 @@
 		and
 		    b.member_id = #{member_id}
 	</select>
+	
+	<update id="saleStop" parameterType="int">
+		update
+			market
+		set
+			sale_state = 2
+		where
+			market_seq = #{market_seq}	
+	</update>
 	
 
 </mapper>

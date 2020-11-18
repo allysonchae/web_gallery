@@ -173,4 +173,16 @@ public class MarketDAO {
 			
 			return list;
 		}
+
+		public void saleStop(int market_seq) {
+
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			
+			try {
+				mm.saleStop(market_seq);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 }

@@ -15,5 +15,6 @@ public class MarketVO {
 	private String market_price;
 	private String market_amount;
 	private String market_size;
+	private int sale_state; //0또는 1 1이면 판매중
 	
 }

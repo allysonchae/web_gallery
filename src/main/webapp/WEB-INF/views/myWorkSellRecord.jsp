@@ -31,7 +31,10 @@
     	#member_info{
     		color:white;	
     	}
-    
+    	
+    	.change:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -136,9 +139,24 @@
                             	<h4>${list.market_size }</h4>
 								<h4>${list.market_amount }개</h4>                            	
 								<h4>&#8361; ${list.market_price }</h4>
+								<h4>
+									<c:choose>
+										<c:when test="${list.sale_state==1 }">
+											<div class="change" id="change${status.count-1 }" onclick="saleStop(${status.count-1},${list.market_seq})">판매중</div>
+										</c:when>
+										<c:when test="${list.sale_state==2 }">
+											판매중단
+										</c:when>
+										<c:otherwise>
+											판매완료
+										</c:otherwise>
+									</c:choose>
+								</h4>
 	                        </div>
 	                    </div>
 	                </div>
+					<input type="hidden" value="${list.market_seq }" name="market_seq">
+					<input type="hidden" value="${list.sale_state }" name="sale_state">
                 </c:forEach>
                
                 <div class="col-lg-12">
@@ -153,6 +171,49 @@
         </div>
     </section>
     <!-- Discography Section End -->
+    
+    <script src="/resources/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+	    $(function(){
+
+			$(".change").mouseenter(function(){
+				$(this).css("color","red");
+				$(this).html("판매중단");
+			});
+
+			$(".change").mouseleave(function(){
+				$(this).css("color","black");
+				$(this).html("판매중");
+			});
+				
+	     });
+
+
+	     function saleStop(cnt,num){
+
+			var changeId = document.getElementById("change"+cnt);
+	    	 
+	    	 $.ajax({
+	 	        contentType:'application/json',
+	 	        dataType:'json',
+	 	        url:'/saleStop',
+	 	        type:'get',
+	 	        data:{
+	 					market_seq : num
+	 			},
+	 	        async: false,
+	 	        success:function(){
+
+	 	        },
+	 	    });
+
+		 	alert("판매가 중단되었습니다.");
+		 	
+			var str = "판매중단"
+			$(changeId).replaceWith(str);
+		 	
+		 }
+    </script>
 
     <!-- Footer Section Begin -->
     <footer class="footer footer--normal spad set-bg" data-setbg="/resources/img/footer-bg.png">
@@ -200,7 +261,6 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script src="/resources/js/jquery.nicescroll.min.js"></script>

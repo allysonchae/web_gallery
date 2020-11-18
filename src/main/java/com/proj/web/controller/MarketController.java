@@ -118,6 +118,7 @@ public class MarketController {
 			MarketVO market = new MarketVO();
 			String market_size = height[i] + "X" + width[i];
 			
+			market.setSale_state(1);
 			market.setMarket_size(market_size);
 			market.setWork_description(work_description[i]);
 			market.setWork_seq(work_seq[i]);
@@ -196,6 +197,14 @@ public class MarketController {
 		 model.addAttribute("list", list);
 		 
 		 return "/myWorkBuyRecord";
+	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value = "/saleStop", method = RequestMethod.GET)
+	 public void saleStop(int market_seq) {
+		 
+		 ms.saleStop(market_seq);
+		 
 	 }
 	
 	
