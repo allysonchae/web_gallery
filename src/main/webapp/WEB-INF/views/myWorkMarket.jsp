@@ -61,20 +61,22 @@
     
     	$(function(){
 
+			var searchText = document.getElementById("text").value;
 			var flag = true;
-    		var list = marketWorkList();
+    		var list = marketWorkList(searchText);
 		    var i = 6;
 		    var j = 12;
 		    var rowitem="";
-			
+
+		    if(list.length<7){
+				flag = false;
+			}
 		    
 			//스크롤 창의 끝(scroll) == 문서 높이(document) - 브라우저창높이(window)
 		    $(window).scroll(function() {
 		        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 			        if(flag){
-				        
 						for(; i<j ; i++){
-	
 							var work_seq = list[i].work_seq;
 							var gallery_seq = list[i].gallery_seq;
 							var work_name = list[i].work_name;
@@ -100,8 +102,6 @@
 
 					rowitem += '<div id="inputItem"></div>';
 
-					console.log(rowitem);
-			        
 			        $("#inputItem").replaceWith(rowitem);
 			        j += 6;
 			        rowitem = "";
@@ -109,10 +109,8 @@
 		    });
        	})
     
-	    function pagingFormSubmit(currentPage) {
+	    function pagingFormSubmit() {
 	    	var form = document.getElementById('pagingForm');
-	    	var page = document.getElementById('page');
-	    	page.value = currentPage;
 	    	form.submit();
 	    }
 
@@ -247,9 +245,8 @@
 	        	<div class="pagination__links" style="">
 					<!-- 검색폼 -->
 					<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
-						<input type="hidden" name="page" id="page" />
-						<input type="text"  name="searchText" value="${searchText}" placeholder="제목" style="height: 50px; width:700px; margin-left:160px; margin-top: 100px;margin-bottom: 40px;"/>
-						<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색" style="height: 50px; width:100px;">
+						<input type="text" id="text"  name="searchText" value="${searchText }"  placeholder="제목" style="height: 50px; width:700px; margin-left:160px; margin-top: 100px;margin-bottom: 40px;"/>
+						<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit()" value="검색" style="height: 50px; width:100px;">
 					</form>
 					<!-- 검색 끝 -->
     			</div>

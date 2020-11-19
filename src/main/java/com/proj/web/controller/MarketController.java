@@ -42,12 +42,22 @@ public class MarketController {
 								@RequestParam(value = "searchText", defaultValue = "") String searchText
 								,Model model) {
 		
-		ArrayList<MarketVO> marketlist_6 = ms.listMarket_6(searchText);
+		ArrayList<MarketVO> marketlist = ms.listMarket(searchText);
+		ArrayList<MarketVO> marketlist_6 = new ArrayList<MarketVO>();
 		
-		logger.info("피이지 들어갈 시 marketlist_6 {}", marketlist_6);
-		logger.info("피이지 들어갈 시 marketlist_6 수 {}", marketlist_6.size());
+		if(marketlist.size()<7) {
+			marketlist_6 = marketlist;
+		}else{
+			for(int i = 0 ; i < 6 ; i++) {
+				marketlist_6.add(marketlist.get(i));
+			}
+		}
+		
+		logger.info("페이지 들어갈 시 marketlist_6 {}", marketlist_6);
+		logger.info("페이지 들어갈 시 marketlist_6 수 {}", marketlist_6.size());
 		
 		model.addAttribute("marketlist_6", marketlist_6);
+		model.addAttribute("searchText", searchText);
 		
 		return "/myWorkMarket";
 	}
