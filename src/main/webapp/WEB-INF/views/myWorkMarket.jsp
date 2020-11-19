@@ -34,7 +34,74 @@
     
     </style>
     
+    <script src="/resources/js/jquery-3.5.1.min.js"></script>
+    
     <script type="text/javascript">
+	    function marketWorkList(searchText){
+		    var arr;
+		    
+		    $.ajax({
+		        contentType:'application/json',
+		        dataType:'json',
+		        url:'/marketWorkList',
+		        type:'get',
+		        data:{
+		        	searchText : searchText
+				},
+		        async: false,
+		        success:function(resp){
+					console.log(resp);
+		        	arr = resp;
+		        }
+		    });
+		    
+		    return arr;
+		}
+
+    
+    	$(function(){
+
+        	var list = marketWorkList();
+		    var i = 6;
+		    var j = 12;
+		    var rowitem="";
+			
+		    
+			//스크롤 창의 끝(scroll) == 문서 높이(document) - 브라우저창높이(window)
+		    $(window).scroll(function() {
+		        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+			        if(list.length > i){
+				        
+						for(; i<j ; i++){
+							var work_seq = list[i].work_seq;
+							var gallery_seq = list[i].gallery_seq;
+							var work_name = list[i].work_name;
+
+							rowitem += 			'<div class="col-lg-4 col-md-6 col-sm-6">';
+					        rowitem += 	    		'<div class="discography__item">';
+					        rowitem += 	    			'<div class="discography__item__pic">';
+					        rowitem +=      				'<img src="/download?work_seq='+work_seq+'&id='+gallery_seq+'" style="width: 100px; height: 300px;">';
+					        rowitem +=      			'</div>';
+					        rowitem +=      			'<div class="discography__item__text">';
+							rowitem +=	  					'<input type="checkbox" name="work" style="width:30px; height: 30px;" value="'+work_seq +'+'+ gallery_seq+'">';
+							rowitem +=	    				'<h3>'+work_name+'</h3>'
+				            rowitem +=      			'</div>'
+				            rowitem +=      		'</div>'
+				            rowitem +=      	'</div>'
+						}
+
+						rowitem += '<div id="inputItem"></div>';
+
+						console.log(rowitem);
+				        
+				        $("#inputItem").replaceWith(rowitem);
+				        j += 6;
+				        rowitem = "";
+			        }
+				}
+		    });
+       	})
+    
 	    function pagingFormSubmit(currentPage) {
 	    	var form = document.getElementById('pagingForm');
 	    	var page = document.getElementById('page');
@@ -148,9 +215,8 @@
             </div>
             
          	<form id="marketForm" action="/marketForm" method="get" onsubmit="return checkCount();">
-				
 	            <div class="row">
-	            	<c:forEach items="${marketlist }" var="list" varStatus="status">
+	            	<c:forEach items="${marketlist_6 }" var="list" varStatus="status">
 		                <div class="col-lg-4 col-md-6 col-sm-6">
 		                    <div class="discography__item">
 		                        <div class="discography__item__pic">
@@ -163,6 +229,7 @@
 		                    </div>
 		                </div>
 	                </c:forEach>
+	            	<div id="inputItem"></div>
 	        	</div>
 				<div style="position: absolute; left: 350px; top:350px;">
 					<button type="submit" class="btn btn-outline-secondary">판매 정보 등록하기</button>
@@ -170,22 +237,7 @@
          	</form>
 
 	        <div class="col-lg-12">
-	        	<div class="pagination__links" style="margin-top: 50px;">
-	            	<!-- 페이지 이동 부분 -->                      
-					<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
-					<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
-					
-					<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
-						<c:if test="${counter == navi.currentPage}"><b></c:if>
-						<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
-						<c:if test="${counter == navi.currentPage}"></b></c:if>
-					</c:forEach>
-					&nbsp;&nbsp;
-					<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
-					<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
-						
-					<!-- /페이지 이동 끝 -->
-					
+	        	<div class="pagination__links" style="">
 					<!-- 검색폼 -->
 					<form id="pagingForm" method="get" action="myWorkMarket" style="text-align: center; padding-right: 185px;">
 						<input type="hidden" name="page" id="page" />
@@ -193,7 +245,9 @@
 						<input type="button" class="btn btn-outline-secondary" onclick="pagingFormSubmit(1)" value="검색" style="height: 50px; width:100px;">
 					</form>
 					<!-- 검색 끝 -->
-    		</div>
+    			</div>
+			</div>
+			
 		</div>
     </section>
     <!-- Discography Section End -->
@@ -280,7 +334,6 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/resources/js/jquery-3.5.1.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <script src="/resources/js/jquery.magnific-popup.min.js"></script>
     <script src="/resources/js/jquery.nicescroll.min.js"></script>

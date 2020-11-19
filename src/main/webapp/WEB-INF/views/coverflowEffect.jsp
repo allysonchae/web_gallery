@@ -32,7 +32,6 @@
     }
 
     .swiper-container {
-      width: 300px;
       height: 300px;
       padding: 50px;
     }

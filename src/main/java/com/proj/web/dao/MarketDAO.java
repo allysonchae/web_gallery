@@ -74,12 +74,23 @@ public class MarketDAO {
 			return market;
 		}
 
-		public ArrayList<MarketVO> listMarket(HashMap<String, Object> map, int startRecord, int countPerPage) {
+		public ArrayList<MarketVO> listMarket(HashMap<String, Object> map) {
 			MarketMapper mm = ss.getMapper(MarketMapper.class);
-			RowBounds rb = new RowBounds(startRecord, countPerPage);
 			ArrayList<MarketVO> marketlist = null;
 			try {
-				marketlist = mm.listMarket(map, rb);
+				marketlist = mm.listMarket(map);
+				logger.info("다오에서 받은 market 정보 {}", marketlist);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return marketlist;
+		}
+		
+		public ArrayList<MarketVO> listMarket_6(HashMap<String, Object> map) {
+			MarketMapper mm = ss.getMapper(MarketMapper.class);
+			ArrayList<MarketVO> marketlist = null;
+			try {
+				marketlist = mm.listMarket_6(map);
 				logger.info("다오에서 받은 market 정보 {}", marketlist);
 			} catch (Exception e) {
 				e.printStackTrace();

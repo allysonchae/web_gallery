@@ -20,6 +20,25 @@
 		order by gallery_seq desc
 	</select>
 	
+	<select id="listMarket_6" parameterType="hashmap" resultType="market">
+		select 
+			work_seq
+		    ,gallery_seq
+		    ,work_name
+		    ,work_description
+		from 
+			work
+		where
+			member_id = #{member_id}
+		and
+            rownum <![CDATA[ < ]]>  7
+		<if test="#{searchText} != null">
+		and
+			work_name like '%' || #{searchText} || '%'
+		</if>
+		order by gallery_seq desc
+	</select>
+	
 	<!-- 전체 글 개수 (검색 필터링 후) -->
 	<select id="getTotal" parameterType="hashmap" resultType="int">
 		select 

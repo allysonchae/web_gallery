@@ -19,7 +19,9 @@ public interface MarketMapper {
 	 
 	 public MarketVO marketOne(int market_seq);
 	 
-	 public ArrayList<MarketVO> listMarket(HashMap<String, Object> map, RowBounds rb);
+	 public ArrayList<MarketVO> listMarket(HashMap<String, Object> map);
+	 
+	 public ArrayList<MarketVO> listMarket_6(HashMap<String, Object> map);
 	 
 	 public int getTotal(HashMap<String, Object> map);
 	 

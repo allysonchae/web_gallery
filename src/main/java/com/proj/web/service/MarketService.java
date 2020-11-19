@@ -47,11 +47,19 @@ public class MarketService {
 		return market;
 	}
 
-	public ArrayList<MarketVO> listMarket(String searchText, int startRecord, int countPerPage) {
+	public ArrayList<MarketVO> listMarket(String searchText) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("member_id", (String)session.getAttribute("loginID"));
 		map.put("searchText", searchText);
-		ArrayList<MarketVO> listMarket = dao.listMarket(map, startRecord, countPerPage);
+		ArrayList<MarketVO> listMarket = dao.listMarket(map);
+		return listMarket;
+	}
+	
+	public ArrayList<MarketVO> listMarket_6(String searchText) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", (String)session.getAttribute("loginID"));
+		map.put("searchText", searchText);
+		ArrayList<MarketVO> listMarket = dao.listMarket_6(map);
 		return listMarket;
 	}
 

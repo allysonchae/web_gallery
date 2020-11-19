@@ -38,24 +38,32 @@ public class MarketController {
 	final int pagePerGroup = 5;				//페이지 이동 링크를 표시할 페이지 수
 	
 	@RequestMapping(value = "/myWorkMarket", method = RequestMethod.GET)
-	public String myWorkMarket(@RequestParam(value = "page", defaultValue = "1") int page
-								,@RequestParam(value = "searchText", defaultValue = "") String searchText
+	public String myWorkMarket(
+								@RequestParam(value = "searchText", defaultValue = "") String searchText
 								,Model model) {
 		
-		int total = ms.getTotal(searchText);
-		logger.info("컨트롤러로 받아온 market 전체 {}", total);
+		ArrayList<MarketVO> marketlist_6 = ms.listMarket_6(searchText);
+		ArrayList<MarketVO> marketlist = ms.listMarket(searchText);
 		
-		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		logger.info("컨트롤러 marketlist {}", marketlist);
+		logger.info("컨드롤러 marketlist_6{}", marketlist_6);
 		
-		ArrayList<MarketVO> marketlist = ms.listMarket(searchText, navi.getStartRecord(), navi.getCountPerPage());
+		model.addAttribute("marketlist", marketlist);
+		model.addAttribute("marketlist_6", marketlist_6);
+		
+		return "/myWorkMarket";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/marketWorkList", method = RequestMethod.GET)
+	public ArrayList<MarketVO> marketWorkList(@RequestParam(value = "searchText", defaultValue = "") String searchText) {
+		
+		ArrayList<MarketVO> marketlist = ms.listMarket(searchText);
 		
 		logger.info("컨트롤러 marketlist {}", marketlist);
 		
-		model.addAttribute("marketlist", marketlist);
-		model.addAttribute("navi", navi);
-		model.addAttribute("searchText",searchText);
+		return marketlist;
 		
-		return "/myWorkMarket";
 	}
 	
 	@RequestMapping(value = "/MarketAll", method = RequestMethod.GET)
