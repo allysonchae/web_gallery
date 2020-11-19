@@ -132,6 +132,8 @@
 
 	    alert("성공적으로 구매가 완료되었습니다.");
 
+	    window.opener.location='/MarketAll';
+	    
 		window.close();
 
 	}
