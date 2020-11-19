@@ -43,12 +43,10 @@ public class MarketController {
 								,Model model) {
 		
 		ArrayList<MarketVO> marketlist_6 = ms.listMarket_6(searchText);
-		ArrayList<MarketVO> marketlist = ms.listMarket(searchText);
 		
-		logger.info("컨트롤러 marketlist {}", marketlist);
-		logger.info("컨드롤러 marketlist_6{}", marketlist_6);
+		logger.info("피이지 들어갈 시 marketlist_6 {}", marketlist_6);
+		logger.info("피이지 들어갈 시 marketlist_6 수 {}", marketlist_6.size());
 		
-		model.addAttribute("marketlist", marketlist);
 		model.addAttribute("marketlist_6", marketlist_6);
 		
 		return "/myWorkMarket";
@@ -60,7 +58,8 @@ public class MarketController {
 		
 		ArrayList<MarketVO> marketlist = ms.listMarket(searchText);
 		
-		logger.info("컨트롤러 marketlist {}", marketlist);
+		logger.info("ajex marketlist 데이터 수 {}",marketlist.size());
+		logger.info("ajex marketlist {}", marketlist);
 		
 		return marketlist;
 		

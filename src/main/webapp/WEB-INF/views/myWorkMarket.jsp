@@ -61,7 +61,8 @@
     
     	$(function(){
 
-        	var list = marketWorkList();
+			var flag = true;
+    		var list = marketWorkList();
 		    var i = 6;
 		    var j = 12;
 		    var rowitem="";
@@ -70,13 +71,14 @@
 			//스크롤 창의 끝(scroll) == 문서 높이(document) - 브라우저창높이(window)
 		    $(window).scroll(function() {
 		        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-			        if(list.length > i){
+			        if(flag){
 				        
 						for(; i<j ; i++){
+	
 							var work_seq = list[i].work_seq;
 							var gallery_seq = list[i].gallery_seq;
 							var work_name = list[i].work_name;
-
+	
 							rowitem += 			'<div class="col-lg-4 col-md-6 col-sm-6">';
 					        rowitem += 	    		'<div class="discography__item">';
 					        rowitem += 	    			'<div class="discography__item__pic">';
@@ -88,16 +90,21 @@
 				            rowitem +=      			'</div>'
 				            rowitem +=      		'</div>'
 				            rowitem +=      	'</div>'
+	
+				            if(list.length-1 == i){
+								flag = false;
+								break;
+					        }
 						}
-
-						rowitem += '<div id="inputItem"></div>';
-
-						console.log(rowitem);
-				        
-				        $("#inputItem").replaceWith(rowitem);
-				        j += 6;
-				        rowitem = "";
 			        }
+
+					rowitem += '<div id="inputItem"></div>';
+
+					console.log(rowitem);
+			        
+			        $("#inputItem").replaceWith(rowitem);
+			        j += 6;
+			        rowitem = "";
 				}
 		    });
        	})
